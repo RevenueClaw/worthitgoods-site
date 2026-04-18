@@ -1,22 +1,15 @@
 #!/usr/bin/env bash
-# Build script for Cloudflare Pages
+# Build script for WorthItGoods - generates pages from data and deploys to _site/
 
-# Create output directory
-mkdir -p _site
+set -e
 
-# Copy all necessary assets
-cp -r index.html _site/
-cp -r style.css _site/
-cp -r main.js _site/
+echo "Generating product pages..."
+python3 generate-site.py
 
-# Copy image directory if exists
-if [ -d "images" ]; then
-    cp -r images _site/
-fi
+echo "Copying assets..."
+mkdir -p _site/images
+cp -r index.html style.css main.js sitemap.xml _site/ 2>/dev/null || true
+cp -r images/* _site/images/ 2>/dev/null || true
 
-# Copy sitemap if exists
-if [ -f "sitemap.xml" ]; then
-    cp sitemap.xml _site/
-fi
-
-echo "Build complete. Files copied to _site/ directory."
+echo "Build complete. _site/ ready for deployment."
+ls -la _site/
