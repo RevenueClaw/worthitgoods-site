@@ -4,8 +4,10 @@
 # Create output directory
 mkdir -p _site
 
-# Copy all files to output directory
-cp -r *.html *.css *.js _site/
+# Copy all necessary assets
+cp -r index.html _site/
+cp -r style.css _site/
+cp -r main.js _site/
 
 # Copy image directory if exists
 if [ -d "images" ]; then
