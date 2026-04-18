@@ -1,0 +1,29 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build
+      run: |
+        chmod +x build.sh
+        ./build.sh
+        
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        accountId: efaf97171dcd88f293223723c7e04cf7
+        apiToken: ${{ secrets.CF_PAGES_TOKEN }}
+        projectName: worthitgoods-site
+        directory: _site
+        verbose: true
+
+    - name: Notify deployment
+      run: |
+        echo "Deployment to Cloudflare Pages completed successfully!"
