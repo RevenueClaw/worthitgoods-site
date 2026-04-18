@@ -169,7 +169,10 @@ for p in products:
     desc_short = p['description'][:160] + '...'
     badges_html = ''.join([f'<span class="badge">{b}</span>' for b in p.get('badges', [])])
     reviews_count = 150 + len(products) * 10
-    benefit1, benefit2, benefit3 = [s + '.' for s in p['description'].split('. ')[:3]]
+    sentences = p['description'].split('. ')[:3]
+benefit1 = sentences[0] + '.' if len(sentences) > 0 else p['description'][:100] + '.'
+benefit2 = sentences[1] + '.' if len(sentences) > 1 else 'High-quality and reliable.'
+benefit3 = sentences[2] + '.' if len(sentences) > 2 else 'Customer favorite with great reviews.'
     free_shipping = 'Yes' if 'Free Shipping' in p.get('badges', []) else 'No'
     
     detail_content = detail_template.format(
