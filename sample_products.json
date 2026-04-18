@@ -1,74 +1,56 @@
-[
-  {
-    "id": "p001",
-    "title": "Wireless Noise-Canceling Headphones",
-    "description": "Premium headphones with active noise cancellation and 30-hour battery life.",
-    "price": 199.99,
-    "currency": "USD",
-    "image": "images/headphones.jpg",
-    "affiliate_url": "https://example-merchant.com/headphones?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p002",
-    "title": "Smart Air Purifier",
-    "description": "HEPA air purifier for allergens and dust, WiFi enabled.",
-    "price": 249.99,
-    "currency": "USD",
-    "image": "images/air-purifier.jpg",
-    "affiliate_url": "https://example-merchant.com/air-purifier?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p003",
-    "title": "Ergonomic Office Chair",
-    "description": "Mesh back chair with lumbar support and adjustable height.",
-    "price": 149.99,
-    "currency": "USD",
-    "image": "images/office-chair.jpg",
-    "affiliate_url": "https://example-merchant.com/chair?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p004",
-    "title": "Portable SSD 1TB",
-    "description": "Fast external SSD with USB-C connectivity.",
-    "price": 119.99,
-    "currency": "USD",
-    "image": "images/ssd.jpg",
-    "affiliate_url": "https://example-merchant.com/ssd?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p005",
-    "title": "Yoga Mat Pro",
-    "description": "High-density non-slip yoga mat, 7mm thickness.",
-    "price": 39.99,
-    "currency": "USD",
-    "image": "images/yoga-mat.jpg",
-    "affiliate_url": "https://example-merchant.com/yoga-mat?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p006",
-    "title": "IQOS Heated Tobacco Kit",
-    "description": "Heat-Not-Burn tobacco alternative with sleek design.",
-    "price": 79.99,
-    "currency": "USD",
-    "image": "images/iqos.jpg",
-    "affiliate_url": "https://example-merchant.com/iqos?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p007",
-    "title": "AirPods Pro 2",
-    "description": "Active noise cancellation, spatial audio, MagSafe charging case.",
-    "price": 249.99,
-    "currency": "USD",
-    "image": "images/airpods.jpg",
-    "affiliate_url": "https://example-merchant.com/airpods-pro2?tracking_id=affiliateseoagent-20"
-  },
-  {
-    "id": "p008",
-    "title": "Instant Pot Duo 7-in-1",
-    "description": "Pressure cooker, slow cooker, rice cooker, and more.",
-    "price": 99.99,
-    "currency": "USD",
-    "image": "images/instant-pot.jpg",
-    "affiliate_url": "https://example-merchant.com/instant-pot?tracking_id=affiliateseoagent-20"
-  }
+[{
+  "id": "p001",
+  "title": "Retro Gaming Controller Stress Relief Shirt",
+  "description": "8-bit pixel art NES controller design with "Press Start to Win Life" slogan. High-quality fabric, adjustable fit. Perfect for gamers and stress relievers.",
+  "price": 24.99,
+  "currency": "USD",
+  "image": "images/pixel-controller.jpg",
+  "affiliate_url": "https://amzn.to/retro-controller-2026"
+},
+{
+  "id": "p002",
+  "title": "Custom Family Tree Silhouette Mug",
+  "description": "Personalized mug with a family tree silhouette design. Add up to 6 names to the branches for a unique gift.",
+  "price": 12.99,
+  "currency": "USD",
+  "image": "images/family-mug.jpg",
+  "affiliate_url": "https://example-merchant.com/family-mug?tracking_id=wgfamily-2026"
+},
+{
+  "id": "p003",
+  "title": "Eco-Friendly Reusable Water Bottle",
+  "description": "Leak-proof stainless steel bottle with "Choose Reusable" slogan. BPA-free and dishwasher safe.",
+  "price": 19.99,
+  "currency": "USD",
+  "image": "images/water-bottle.jpg",
+  "affiliate_url": "https://example-merchant.com/reusable-bottle?tracking_id=wgreusable-2026"
+},
+{
+  "id": "p004",
+  "title": "Vintage Arcade Cabinet Poster",
+  "description": "Retro neon aesthetics with "GAME OVER TO STRESS" artwork. Perfect for gaming dens or office motivation.",
+  "price": 19.99,
+  "currency": "USD",
+  "image": "images/arcade-poster.jpg",
+  "affiliate_url": "https://example-merchant.com/arcade-poster?tracking_id=wgarcade-2026"
+},
+{
+  "id": "p005",
+  "title": "Pet Portrait Keychain",
+  "description": "Customizable keychain with your pet's silhouette and "My Best Friend" text. Great for pet lovers.",
+  "price": 8.99,
+  "currency": "USD",
+  "image": "images/pet-keychain.jpg",
+  "affiliate_url": "https://example-merchant.com/pet-keychain?tracking_id=wgpet-2026"
+},
+...
+]{
+  "id": "p024",
+  "title": "Smart Cat Feeder Dispenser",
+  "description": "WiFi-enabled automatic cat food dispenser with portion control. Reduces food waste by 30%.",
+  "price": 59.99,
+  "currency": "USD",
+  "image": "images/cat-feeder.jpg",
+  "affiliate_url": "https://example-merchant.com/cat-feeder?tracking_id=wgcat-2026"
+}]
 ]
