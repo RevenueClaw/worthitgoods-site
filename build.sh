@@ -1,47 +1,30 @@
 #!/bin/bash
 set -e
 
-echo "Starting build..."
+echo "=== WorthItGoods Aggressive Build ==="
 
-# Create output directory
 rm -rf _site
 mkdir -p _site/images
-mkdir -p _site
 
-# Copy all static assets
-cp -r images/* _site/images/ 2>/dev/null || true
+echo "Copying images..."
+cp images/* _site/images/
+NUM_IMAGES=$(ls _site/images/*.jpg 2>/dev/null | wc -l)
+if [ "$NUM_IMAGES" -ne 10 ]; then
+  echo "ERROR: Expected 10 images, got $NUM_IMAGES"
+  exit 1
+fi
+echo "Copied $NUM_IMAGES images OK"
+
 cp style.css _site/
 cp main.js _site/
-cp index.html _site/ # we'll make index.html self-contained
+cp index.html _site/
 
-echo "Assets copied."
-
-# If index.html is missing or broken, create a minimal working one with the grid
-if [ ! -s _site/index.html ] || ! grep -q "products-grid" _site/index.html; then
- echo "Creating simple index.html with grid..."
- cat > _site/index.html << 'EOF'
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>WorthItGoods - Products Worth Buying</title>
- <link rel="stylesheet" href="style.css">
-</head>
-<body>
- <header>
- <h1>Worth It Goods</h1>
- <p>Curated products that are actually worth it</p>
- </header>
-
- <div class="products-grid">
- <!-- PLACEHOLDER CARDS START -->
- </div>
-
- <script src="main.js"></script>
-</body>
-</html>
-EOF
+if ! grep -q "hero" _site/index.html || ! grep -q "products-grid" _site/index.html || ! grep -q "cta" _site/index.html; then
+  echo "ERROR: index.html missing premium elements"
+  exit 1
 fi
 
-echo "Build completed successfully."
+echo "Build SUCCESS. _site contents:"
+ls -la _site/
+ls -la _site/images/ | head -5
+echo "Deploy-ready."
