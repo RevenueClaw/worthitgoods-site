@@ -31,7 +31,7 @@ function generateGridHTML(products) {
         </div>
         <p class="price">${product.currency} ${product.price.toLocaleString()}</p>
         <p class="teaser">${product.description.substring(0, 100)}...</p>
-        <a href="product-${slugify(product.title)}.html" class="cta">View Details</a>
+        <a href="${product.affiliate_url}" class="cta" target="_blank" rel="nofollow noopener">Shop on Amazon</a>
       </div>
     </div>
   `).join('\n');
@@ -230,13 +230,7 @@ let indexHTML = `<!DOCTYPE html>
 
 fs.writeFileSync(path.join(siteDir, 'index.html'), indexHTML);
 
-// Generate detail pages
-products.forEach((product, index) => {
-  const related = products.filter(p => p.id !== product.id);
-  const detailHTML = generateDetailHTML(product, related);
-  const slug = slugify(product.title);
-  fs.writeFileSync(path.join(siteDir, `product-${slug}.html`), detailHTML);
-});
+// No detail pages - all on homepage
 
 // Copy assets
 ['style.css', 'main.js', 'sitemap.xml'].forEach(file => {
