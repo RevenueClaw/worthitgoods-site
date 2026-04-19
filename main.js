@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderLanding(products);
   } catch (error) {
     console.error('Failed to load products:', error);
-    document.querySelector('.products-grid').innerHTML = '<p style="text-align: center; padding: 2rem;">Products temporarily unavailable. Please refresh the page.</p>';
+    // Static fallback: Do not overwrite grid
   }
 });
 
