@@ -1,29 +1,9 @@
 // Dynamic product renderer for WorthItGoods
 // Loads sample_products.json, renders 24 products grid, search/filter, detail view via ?id=
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const response = await fetch('sample_products.json');
-    const products = await response.json();
-    
-    // Check for detail view
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    
-    if (productId) {
-      const product = products.find(p => p.id === productId);
-      if (product) {
-        renderDetail(product, products);
-        return;
-      }
-    }
-    
-    renderLanding(products);
-  } catch (error) {
-    console.error('Failed to load products:', error);
-    // Static fallback: Do not overwrite grid
-  }
-});
+// JS disabled for landing page to prevent grid overwrite
+// Detail pages use static HTML only - no dynamic fetch needed
+console.log('WorthItGoods: Static site loaded.');
 
 function renderLanding(products) {
   document.title = 'WorthIt Goods - Curated Premium Products';
