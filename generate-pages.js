@@ -22,7 +22,7 @@ function generateGridHTML(products) {
   return products.map(product => `
     <div class="product-card" data-category="${product.category || 'general'}" data-id="${product.id}">
       <div class="image-wrapper">
-        <img src="${product.image || 'images/placeholder.jpg'}" alt="${product.title}" loading="lazy">
+        <img src="${product.image || 'images/placeholder.jpg'}" alt="${product.title}" loading="lazy" class="product-image" style="object-fit: cover; width: 100%; height: 220px;">
       </div>
       <div class="content">
         <h3>${product.title}</h3>
