@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const productsDataPath = 'sample_products.json';
+const productsDataPath = 'data/sample_products.json';
 const siteDir = '_site';
 const templateDir = 'templates'; // Optional, for now inline templates
 

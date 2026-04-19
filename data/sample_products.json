@@ -6,7 +6,7 @@
     "price": 249,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71SrRv6Y4qL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0CHX1W1F2?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0CHX1W1F2?tag=affiliateseoagent-20",
     "rating": 4.8,
     "category": "Electronics",
     "badges": ["Bestseller", "Free Shipping"]
@@ -18,7 +18,7 @@
     "price": 49.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61qU1n7clzL._AC_SL1000_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09B8V1M7T?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09B8V1M7T?tag=affiliateseoagent-20",
     "rating": 4.7,
     "category": "Smart Home",
     "badges": ["Bestseller"]
@@ -30,7 +30,7 @@
     "price": 49.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/51IPVScImEL._AC_SL1000_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B08XVYZ1Y8?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B08XVYZ1Y8?tag=affiliateseoagent-20",
     "rating": 4.7,
     "category": "Electronics",
     "badges": ["Free Shipping"]
@@ -42,7 +42,7 @@
     "price": 99.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61Xz9Y3Y4zL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09N6ZBK4N?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09N6ZBK4N?tag=affiliateseoagent-20",
     "rating": 4.5,
     "category": "Smart Home",
     "badges": ["Bestseller"]
@@ -54,7 +54,7 @@
     "price": 399,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0D4B5V5L1?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0D4B5V5L1?tag=affiliateseoagent-20",
     "rating": 4.8,
     "category": "Wearables",
     "badges": ["Premium"]
@@ -66,7 +66,7 @@
     "price": 14.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61t3oG3q8eL._AC_SX425_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B07D5J6L3Q?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B07D5J6L3Q?tag=affiliateseoagent-20",
     "rating": 4.6,
     "category": "Smart Home",
     "badges": ["Free Shipping"]
@@ -78,7 +78,7 @@
     "price": 34.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71U3q5o5a2L._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B084BQ5V1Q?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B084BQ5V1Q?tag=affiliateseoagent-20",
     "rating": 4.4,
     "category": "Security",
     "badges": []
@@ -90,7 +90,7 @@
     "price": 39.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61eKjq9qKIL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B07D8K3Z3D?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B07D8K3Z3D?tag=affiliateseoagent-20",
     "rating": 4.3,
     "category": "Office",
     "badges": ["Free Shipping"]
@@ -102,7 +102,7 @@
     "price": 27.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71c9ml1nYOL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B01LXL4U2C?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B01LXL4U2C?tag=affiliateseoagent-20",
     "rating": 4.5,
     "category": "Office",
     "badges": []
@@ -114,7 +114,7 @@
     "price": 14.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61c9ml1nYOL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B08GYG6M6K?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B08GYG6M6K?tag=affiliateseoagent-20",
     "rating": 4.6,
     "category": "Storage",
     "badges": ["Free Shipping"]
@@ -126,7 +126,7 @@
     "price": 19.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71SrRv6Y4qL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B01JIWQPMW?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B01JIWQPMW?tag=affiliateseoagent-20",
     "rating": 4.6,
     "category": "Electronics",
     "badges": []
@@ -138,7 +138,7 @@
     "price": 49.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/51IPVScImEL._AC_SL1000_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B08XJMF5Z3?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B08XJMF5Z3?tag=affiliateseoagent-20",
     "rating": 4.7,
     "category": "Electronics",
     "badges": ["Bestseller"]
@@ -150,7 +150,7 @@
     "price": 129,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61Xz9Y3Y4zL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09C1V2Q8S?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09C1V2Q8S?tag=affiliateseoagent-20",
     "rating": 4.5,
     "category": "Smart Home",
     "badges": ["Premium"]
@@ -162,7 +162,7 @@
     "price": 35.98,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0916MLNQG?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0916MLNQG?tag=affiliateseoagent-20",
     "rating": 4.4,
     "category": "Security",
     "badges": ["Free Shipping"]
@@ -174,7 +174,7 @@
     "price": 139.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61t3oG3q8eL._AC_SX425_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0B8N8J4ZJ?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0B8N8J4ZJ?tag=affiliateseoagent-20",
     "rating": 4.5,
     "category": "Tablets",
     "badges": []
@@ -186,7 +186,7 @@
     "price": 199.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71U3q5o5a2L._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0D2S5H6S6?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0D2S5H6S6?tag=affiliateseoagent-20",
     "rating": 4.6,
     "category": "Security",
     "badges": ["Premium"]
@@ -198,7 +198,7 @@
     "price": 399.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61eKjq9qKIL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09XS7SYX8?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09XS7SYX8?tag=affiliateseoagent-20",
     "rating": 4.8,
     "category": "Electronics",
     "badges": ["Premium"]
@@ -210,7 +210,7 @@
     "price": 599,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71c9ml1nYOL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09J4G1Z8K?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09J4G1Z8K?tag=affiliateseoagent-20",
     "rating": 4.4,
     "category": "Home",
     "badges": ["Premium"]
@@ -222,7 +222,7 @@
     "price": 189.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61c9ml1nYOL._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0CFPJPG5K?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0CFPJPG5K?tag=affiliateseoagent-20",
     "rating": 4.7,
     "category": "Reading",
     "badges": ["Bestseller"]
@@ -234,7 +234,7 @@
     "price": 349.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71SrRv6Y4qL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B01M6Y3K3S?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B01M6Y3K3S?tag=affiliateseoagent-20",
     "rating": 4.5,
     "category": "Home",
     "badges": ["Premium"]
@@ -246,7 +246,7 @@
     "price": 149.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61qU1n7clzL._AC_SL1000_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09S3L7Z3Z?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09S3L7Z3Z?tag=affiliateseoagent-20",
     "rating": 4.4,
     "category": "Security",
     "badges": []
@@ -258,7 +258,7 @@
     "price": 199.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B09ZJ2X5ZJ?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B09ZJ2X5ZJ?tag=affiliateseoagent-20",
     "rating": 4.3,
     "category": "Electronics",
     "badges": []
@@ -270,7 +270,7 @@
     "price": 129.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/61Xz9Y3Y4zL._AC_SL1500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B08C8V7J4L?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B08C8V7J4L?tag=affiliateseoagent-20",
     "rating": 4.4,
     "category": "Security",
     "badges": ["Free Shipping"]
@@ -282,7 +282,7 @@
     "price": 34.99,
     "currency": "USD",
     "image": "https://m.media-amazon.com/images/I/71U3q5o5a2L._AC_SX679_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0B9D9R3B7?tag=worthitgoods-20",
+    "affiliate_url": "https://www.amazon.com/dp/B0B9D9R3B7?tag=affiliateseoagent-20",
     "rating": 4.6,
     "category": "Electronics",
     "badges": ["Bestseller", "Free Shipping"]
