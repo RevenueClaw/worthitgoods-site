@@ -68,11 +68,14 @@ body {
 }
 
 .product-card { 
-  background: white; 
-  border-radius: var(--radius); 
-  overflow: hidden; 
-  box-shadow: var(--shadow); 
-  transition: transform 0.3s, box-shadow 0.3s; 
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 380px;
 }
 
 .product-card:hover { 
@@ -88,15 +91,20 @@ body {
 
 .product-card img { 
   width: 100%; 
-  height: 100%; 
-  object-fit: contain; 
-  object-position: center; 
+  height: 260px; 
+  object-fit: contain !important; 
+  object-position: center top; 
   transition: transform 0.4s; 
+  display: block;
 }
 
 .product-card:hover img { transform: scale(1.05); }
 
-.product-info { padding: 1.2rem; }
+.product-info { 
+  padding: 1.2rem;
+  background: white;
+  min-height: 120px;
+}
 
 .badges { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
 
@@ -144,16 +152,23 @@ h3 { font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.3; }
   margin-bottom: 0.8rem; 
 }
 
-.cta { 
-  display: block; 
-  padding: 0.8rem 1.5rem; 
-  background: var(--clr-primary); 
-  color: white; 
-  text-align: center; 
-  border-radius: var(--radius); 
-  text-decoration: none; 
-  font-weight: 600; 
-  transition: all 0.3s; 
+.cta, .buy-button {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, var(--clr-primary), #2575fc) !important;
+  color: white !important;
+  text-align: center;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(106,17,203,0.3);
+  margin-top: auto;
+}
+.cta:hover, .buy-button:hover {
+  background: linear-gradient(135deg, #5a0ca3, #1e5fc4) !important;
+  transform: translateY(-2px);
 }
 
 .cta:hover { background: #5a0ca3; transform: translateY(-2px); }

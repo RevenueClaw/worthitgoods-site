@@ -10,6 +10,6 @@
 ### Amazon PA-API / Creators API (New)
 - Application ID: vhicklegar011-20.oracleclaw
 - LWA Client ID:REDACTED
-- 
+- LWA Client Secret:REDACTED
 - Version: 3.1
 - Associate Tag: vhicklegar011-20

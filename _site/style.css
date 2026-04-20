@@ -68,11 +68,14 @@ body {
 }
 
 .product-card { 
-  background: white; 
-  border-radius: var(--radius); 
-  overflow: hidden; 
-  box-shadow: var(--shadow); 
-  transition: transform 0.3s, box-shadow 0.3s; 
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 380px;
 }
 
 .product-card:hover { 
@@ -88,15 +91,20 @@ body {
 
 .product-card img { 
   width: 100%; 
-  height: 100%; 
-  object-fit: contain; 
-  object-position: center; 
+  height: 260px; 
+  object-fit: contain !important; 
+  object-position: center top; 
   transition: transform 0.4s; 
+  display: block;
 }
 
 .product-card:hover img { transform: scale(1.05); }
 
-.product-info { padding: 1.2rem; }
+.product-info { 
+  padding: 1.2rem;
+  background: white;
+  min-height: 120px;
+}
 
 .badges { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
 
