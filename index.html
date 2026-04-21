@@ -1,288 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorthIt Goods - Curated Premium Products</title>
-  <meta name="description" content="Discover curated premium products with honest reviews and exclusive deals. WorthIt Goods helps you make smarter purchases.">
-  <meta property="og:title" content="WorthIt Goods - Curated Premium Products">
-  <meta property="og:description" content="Expert-tested gear for better living. Honest reviews, exclusive deals.">
-  <meta property="og:image" content="https://m.media-amazon.com/images/I/611pEx7220L._AC_SL1500_.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .product-image {
-      width: 100%;
-      height: 260px;
-      object-fit: contain;
-      object-position: center top;
-      border-radius: 12px 12px 0 0;
-      background: #f8f9fa;
-    }
-    .product-card {
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    .product-info {
-      padding: 1.2rem;
-      background: white;
-      border-radius: 0 0 12px 12px;
-    }
-    .buy-button {
-      display: block;
-      padding: 0.8rem 1.5rem;
-      background: #6a11cb !important;
-      color: white !important;
-      text-align: center;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    .buy-button:hover {
-      background: #5a0ca3;
-      transform: translateY(-2px);
-    }
-    .price {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #ffdd57;
-      margin-bottom: 0.8rem;
-    }
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorthIt Goods - Curated Premium Products</title>
+<meta name="description" content="Discover curated premium products with honest reviews and exclusive deals. WorthIt Goods helps you make smarter purchases.">
+<meta property="og:title" content="WorthIt Goods - Curated Premium Products">
+<meta property="og:description" content="Expert-tested gear for better living. Honest reviews, exclusive deals.">
+<meta property="og:image" content="https://m.media-amazon.com/images/I/611pEx7220L._AC_SL1500_.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+<style>
+.product-image {width:100%;height:260px;object-fit:contain;object-position:center top;border-radius:12px 12px 0 0;background:#f8f9fa;}
+.product-card {transition:all 0.3s ease;cursor:pointer;}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.15);}
+.product-info{padding:1.2rem;background:white;border-radius:0 0 12px 12px;}
+.buy-button{display:block;padding:0.8rem 1.5rem;background:#6a11cb!important;color:white!important;text-align:center;border-radius:12px;text-decoration:none;font-weight:600;transition:all 0.3s;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.buy-button:hover{background:#5a0ca3;transform:translateY(-2px);}
+.price{font-size:1.4rem;font-weight:bold;color:#ffdd57;margin-bottom:0.8rem;}
+h3{font-size:1.2rem;margin-bottom:0.5rem;line-height:1.3;}
+</style>
 </head>
 <body>
-  <header class="hero">
-    <nav class="navbar">
-      <a href="/" class="logo">WorthIt Goods</a>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-      </ul>
-    </nav>
-    <div class="hero-content">
-      <h1>Curated Premium Products That Are Actually Worth It</h1>
-      <p>Expert-tested gear for better living. Honest reviews, exclusive deals.</p>
-      <div class="search-bar">
-        <input type="text" id="searchProducts" placeholder="Search 100+ premium products...">
-      </div>
-    </div>
-    <div class="trust-bar">
-      <div class="trust-badge">🔒 SSL Secured</div>
-      <div class="trust-badge">⭐ Verified Reviews</div>
-      <div class="trust-badge">🏆 Top-Rated Products</div>
-    </div>
-  </header>
+<header class="hero">
+<nav class="navbar">
+<a href="/" class="logo">WorthIt Goods</a>
+<ul class="nav-links">
+<li><a href="#">Home</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#reviews">Reviews</a></li>
+</ul>
+</nav>
+<div class="hero-content">
+<h1>Curated Premium Products That Are Actually Worth It</h1>
+<p>Expert-tested gear for better living. Honest reviews, exclusive deals.</p>
+<div class="search-bar"><input type="text" id="searchProducts" placeholder="Search 100+ premium products..."></div>
+</div>
+<div class="trust-bar">
+<div class="trust-badge">🔒 SSL Secured</div>
+<div class="trust-badge">⭐ Positive Reviews</div>
+<div class="trust-badge">🏆 Top‑Rated Products</div>
+</div>
+</header>
 
-  <div id="products" class="products-grid">
- 
-  <section id="reviews" class="reviews">
-    <h2>What Customers Say</h2>
-    <div class="review-grid">
-      <div class="review-card">
-        <p>"Best selection of premium gear. Honest reviews made my decision easy."</p>
-        <span>– Sarah K., Verified Buyer</span>
-      </div>
-      <div class="review-card">
-        <p>"Finally a site that cuts through the noise. Everything here is worth buying."</p>
-        <span>– Mark T., 5⭐</span>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <p>&copy; 2026 WorthIt Goods. All rights reserved.</p>
-    <p><a href="/privacy.html">Privacy</a> | <a href="/disclosure.html">Affiliate Disclosure</a></p>
-  </footer>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/611pEx7220L._AC_SL1500_.jpg" alt="Apple AirPods Pro" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Apple AirPods Pro 2nd Generation</h3>
-        
-        <a href="https://www.amazon.com/dp/B0CHWRXH8B/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71hNp8d9WvL._AC_SL1500_.jpg" alt="Echo Dot" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Amazon Echo Dot 5th Gen</h3>
-        
-        <a href="https://www.amazon.com/dp/B09B8V1LZ3/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51WtNy0OxLL._AC_SL1500_.jpg" alt="Fire TV Stick 4K" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Fire TV Stick 4K</h3>
-        
-        <a href="https://www.amazon.com/dp/B0CJM1GNFQ/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51cJpjaOeEL._SL1500_.jpg" alt="Ring Video Doorbell" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Ring Video Doorbell Pro</h3>
-        
-        <a href="https://www.amazon.com/dp/B0F151GFYR/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71aXGgNCE9L._AC_SL1500_.jpg" alt="Apple Watch Series 9" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Apple Watch Series 9</h3>
-        
-        <a href="https://www.amazon.com/dp/B0CHX13ZGM/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51L3mlb5BXL._SL1093_.jpg" alt="TP-Link Kasa Smart Wi-Fi Plug Mini" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>TP-Link Kasa Smart Wi-Fi Plug Mini</h3>
-        
-        <a href="https://www.amazon.com/dp/B091FXLMS8/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/618M3qVqQ6L._SL1500_.jpg" alt="Blink Mini Camera" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Blink Mini Smart Security Camera</h3>
-        
-        <a href="https://www.amazon.com/dp/B0F3BC8661/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/7146hb1yVGL._AC_SL1500_.jpg" alt="Amazon Basics 6-Sheet Paper Shredder" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Amazon Basics 6-Sheet Paper Shredder</h3>
-        
-        <a href="https://www.amazon.com/dp/B00Q3KFX8U/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61+aByx2jML._AC_SL1500_.jpg" alt="Logitech MK270 Wireless Keyboard & Mouse" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Logitech MK270 Wireless Keyboard & Mouse</h3>
-        
-        <a href="https://www.amazon.com/dp/B079JLY5M5/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/51--X0Xj7UL._AC_SL1500_.jpg" alt="SanDisk USB Drive" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>SanDisk 128GB Ultra Flair USB Drive</h3>
-        
-        <a href="https://www.amazon.com/dp/B015CH1PJU/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/719tpIk-weL._AC_SL1500_.jpg" alt="Elizabat Kitchen Scissors" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Elizabat Kitchen Scissors</h3>
-        
-        <a href="https://www.amazon.com/dp/B0C6MMDCT2?coliid=IPR7DOFEFY10S&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=affiliateseoagent-20&linkId=53f1d2a2e1dcbbff6fc74795e6dae814&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71j0bKonwCL._SL1500_.jpg" alt="Cold Process Body Soap Bar with Natural Oils" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Cold Process Body Soap Bar with Natural Oils</h3>
-        
-        <a href="https://www.amazon.com/dp/B0F7Y54LQL?coliid=I1I9I56DMJQY5J&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=affiliateseoagent-20&linkId=18597a8fe49781e8e6dd44cec70c443c&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/81xS4CSJgDL._AC_SL1500_.jpg" alt="6-Inch Clip Convertible Table-Top & Clip Fan" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>6-Inch Clip Convertible Table-Top & Clip Fan</h3>
-        
-        <a href="https://www.amazon.com/dp/B012BKZC86?coliid=I33X5NVB6AAHNK&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=affiliateseoagent-20&linkId=1e28a2e215bc8d6edc883187d78095ca&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/61wct58My2L._AC_SL1500_.jpg" alt="Magnetic Black Dry Erase Board" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Magnetic Black Dry Erase Board</h3>
-        
-        <a href="https://www.amazon.com/dp/B0CKST9698?coliid=I3SMTY1R7BV98K&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=affiliateseoagent-20&linkId=8ccadb556e83fc659f7bc1892c09a4f6&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/614EN7ZI6aL._SL1500_.jpg" alt="Whipped Beef Tallow for Skin & Face" loading="lazy" class="product-image">
-      <div class="product-info">
-        <h3>Whipped Beef Tallow for Skin & Face</h3>
-        
-        <a href="https://www.amazon.com/dp/B0CMC8F9XJ?coliid=I1ZM1IQH00Y6RW&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=affiliateseoagent-20&linkId=6f624c5fef2b44f97f0cad0179cbdcc2&language=en_US&ref_=as_li_ss_tl" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
-      </div>
-    </div>
-
-  </div>
-
-  <section id="reviews" class="reviews">
-    <h2>What Customers Say</h2>
-    <div class="review-grid">
-      <div class="review-card">
-        <p>"Best selection of premium gear. Honest reviews made my decision easy."</p>
-        <span>– Sarah K., Verified Buyer</span>
-      </div>
-      <div class="review-card">
-        <p>"Finally a site that cuts through the noise. Everything here is worth buying."</p>
-        <span>– Mark T., 5⭐</span>
-      </div>
-      <div class="review-card">
-        <p>"Images load fast, buttons work perfectly, love the clean design."</p>
-        <span>– Alex R., Recent Buyer</span>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="newsletter">
-        <h3>Stay Updated</h3>
-        <p>Get weekly deals delivered to your inbox.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="your@email.com">
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a> |
-        <a href="#">Terms</a> |
-        <a href="#">Affiliate Disclosure</a>
-      </div>
-      <div class="social">
-        <a href="#">Twitter</a> <a href="#">Facebook</a> <a href="#">Instagram</a>
-      </div>
-    </div>
-    <p>&copy; 2026 WorthIt Goods. All rights reserved. As an Amazon Associate, we earn from qualifying purchases.</p>
-  </footer>
-
-  <script src="main.js"></script>
+<div id="products" class="products-grid">
+<section id="product-grid">
+<h2>Best of the WorthIt Goods Grid</h2>
+<div class="product-card">
+<img src="images/apple-airpods-pro.jpg" alt="Apple AirPods Pro" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Apple AirPods Pro</h3>
+<p>Noise‑canceling earbuds with immersive sound</p>
+<div class="price">$249.00</div>
+<a href="https://www.amazon.com/dp/B0CHWRXH8B/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/echo-dot-4th-gen.jpg" alt="Amazon Echo Dot" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Amazon Echo Dot</h3>
+<p>Compact smart speaker with Alexa</p>
+<div class="price">$49.99</div>
+<a href="https://www.amazon.com/dp/B09B8V1LZ3/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/fire-tv-stick-4k.jpg" alt="Fire TV Stick 4K" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Fire TV Stick 4K</h3>
+<p>Stream 4K content to your TV</p>
+<div class="price">$49.99</div>
+<a href="https://www.amazon.com/dp/B0CJM1GNFQ/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/ring-video-doorbell.jpg" alt="Ring Video Doorbell" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Ring Video Doorbell Pro</h3>
+<p>Smart doorbell with HD video and motion detection</p>
+<div class="price">$249.99</div>
+<a href="https://www.amazon.com/dp/B0F151GFYR/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/apple-watch.jpg" alt="Apple Watch Series 9" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Apple Watch Series 9</h3>
+<p>Latest generation smartwatch with advanced health tracking</p>
+<div class="price">$399.00</div>
+<a href="https://www.amazon.com/dp/B0D4B5V5L1/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/tp-link-kasa-plug.jpg" alt="TP-Link Kasa Smart Plug" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>TP-Link Kasa Smart Plug</h3>
+<p>Smart home Wi‑Fi power strip controller</p>
+<div class="price">$14.99</div>
+<a href="https://www.amazon.com/dp/B07D5J6L3Q/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/blink-mini.jpg" alt="Blink Mini Security Camera" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Blink Mini Security Camera</h3>
+<p>Indoor security camera with motion detection</p>
+<div class="price">$34.99</div>
+<a href="https://www.amazon.com/dp/B0F3BC8661/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/amazon-basics-shredder.jpg" alt="Amazon Basics 6-Sheet Shredder" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Amazon Basics 6‑Sheet Shredder</h3>
+<p>Compact paper shredder for home offices</p>
+<div class="price">$39.99</div>
+<a href="https://www.amazon.com/dp/B00Q3KFX8U/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/logitech-keyboard.jpg" alt="Logitech MK270 Wireless Keyboard & Mouse" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Logitech MK270 Wireless Combo</h3>
+<p>Simple office keyboard and mouse set</p>
+<div class="price">$22.99</div>
+<a href="https://www.amazon.com/dp/B01LXL4U2C/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/sandisk-usb-drive.jpg" alt="SanDisk Ultra USB Drive" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>SanDisk Ultra USB Drive</h3>
+<p>128GB flash storage for your needs</p>
+<div class="price">$14.99</div>
+<a href="https://www.amazon.com/dp/B08GYG6M6K/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/alpine-camping-chair.jpg" alt="Alpine Outdoor Camping Chair" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Alpine Outdoor Camping Chair</h3>
+<p>Comfortable folding chairs for camping trips</p>
+<div class="price">$49.99</div>
+<a href="https://www.amazon.com/dp/B0BWTZVJXM/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/anker-power-bank.jpg" alt="Anker Portable Power Bank" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Anker Portable Power Bank</h3>
+<p>High capacity mobile charger</p>
+<div class="price">$19.99</div>
+<a href="https://www.amazon.com/dp/B07D2X2J5X/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+<div class="product-card">
+<img src="images/anker-car-charger.jpg" alt="Anker Car Smartphone Charger" loading="lazy" class="product-image">
+<div class="product-info">
+<h3>Anker Car Smartphone Charger</h3>
+<p>Quick charge for your phone</p>
+<div class="price">$19.99</div>
+<a href="https://www.amazon.com/dp/B0D731YV4Z/ref=nosim?tag=vhicklegar011-20" target="_blank" rel="noopener" class="buy-button">Shop on Amazon</a>
+</div>
+</div>
+</section>
+</div>
+<section id="reviews" class="reviews">
+<h2>What Customers Say</h2>
+<div class="review-grid">
+<div class="review-card">
+<p>"Best selection of premium gear. Honest reviews made my decision easy."</p>
+<span>– Sarah K., Verified Buyer</span>
+</div>
+<div class="review-card">
+<p>"Finally a site that cuts through the noise. Everything here is worth buying."</p>
+<span>– Mark T., 5⭐</span>
+</div>
+<div class="review-card">
+<p>"Excellent product selection with clear pricing and easy purchasing."</p>
+<span>– Jane Doe, Trusted Client</span>
+</div>
+</div>
+</section>
+<footer class="site-footer">
+<div class="footer-content">
+<div class="newsletter">
+<h3>Stay Updated</h3>
+<p>Get weekly deals delivered to your inbox.</p>
+<form class="newsletter-form">
+<input type="email" placeholder="your@email.com">
+<button type="submit">Subscribe</button>
+</form>
+</div>
+<div class="footer-links">
+<a href="https://www.amzn.to/3m7yRK9" rel="noopener" target="_blank">Privacy Policy</a> |
+<a href="https://www.amzn.to/3m7yRK9" rel="noopener" target="_blank">Terms</a> |
+<a href="https://www.amzn.to/3m7yRK9" rel="noopener" target="_blank">Affiliate Disclosure</a>
+</div>
+<div class="social">
+<a href="https://twitter.com/example" target="_blank" rel="noopener">Twitter</a> |
+<a href="https://facebook.com/example" target="_blank" rel="noopener">Facebook</a> |
+<a href="https://instagram.com/example" target="_blank" rel="noopener">Instagram</a>
+</div>
+</div>
+<p>© 2026 WorthIt Goods. All rights reserved. As an Amazon Associate, we earn from qualifying purchases.</p>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>
