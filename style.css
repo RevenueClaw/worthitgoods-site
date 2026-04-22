@@ -57,7 +57,7 @@ delete-this-line-if-placeholder
 }
 
 /* FIXED PRODUCT GRID & IMAGES */
-.products-grid { 
+#product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns on desktop */
   gap: 1.5rem;
@@ -66,8 +66,8 @@ delete-this-line-if-placeholder
   margin: 0 auto;
 }
 
-@media (max-width: 768px) { 
-  .products-grid { 
+@media (max-width: 768px) {
+  #product-grid {
     grid-template-columns: 1fr; /* Single column on mobile */
   }
 }
