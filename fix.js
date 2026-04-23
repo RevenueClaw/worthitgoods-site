@@ -1,0 +1,1 @@
+const fs = require('fs'); let data = fs.readFileSync('data/sample_products.json', 'utf8'); data = data.replace(/\"affiliate_url\": \"([^\"]+)\"/g, '\"affiliate_url\": \"$1\",'); fs.writeFileSync('data/sample_products.json', data); console.log('Fixed commas in sample_products.json');

@@ -1,10 +1,6 @@
 #!/bin/bash
 
+# Generate site from data/sample_products.json (34 products)
 rm -rf _site
-mkdir -p _site/images
-cp -r images/* _site/images/ 2>/dev/null || true
-cp style.css _site/
-cp main.js _site/
-cp index.html _site/
-
-echo "Build done."
+node generate-pages.js
+echo "Generated site with $(node -e "console.log(require('./data/sample_products.json').length)") products. Build done."

@@ -1,0 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+const oldPath = path.join(__dirname, 'data', 'sample_products.json');
+const batchPath = path.join(__dirname, 'data', 'batch5.json');
+const old = JSON.parse(fs.readFileSync(oldPath, 'utf8'));
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+const updated = [...old, ...batch];
+fs.writeFileSync(oldPath, JSON.stringify(updated, null, 2));
+console.log(`Merged: ${old.length} + ${batch.length} = ${updated.length} products`);
+fs.unlinkSync(batchPath);
