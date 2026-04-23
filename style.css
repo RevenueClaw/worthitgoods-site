@@ -1,5 +1,43 @@
 /* Premium Affiliate Site CSS - Fixed Grid/Images */
 
+/* === URGENT PRODUCT GRID FIX - MAXIMUM SPECIFICITY === */
+section#product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 2rem !important;
+  padding: 2rem 0 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+section#product-grid > .product-card {
+  display: block !important; /* Ensure cards don't break the grid */
+}
+
+/* Desktop: Force 3 columns */
+@media (min-width: 1024px) {
+  section#product-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  section#product-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* Fallback rule */
+#product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
