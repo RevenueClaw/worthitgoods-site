@@ -26,10 +26,7 @@ function generateGridHTML(products) {
       </div>
       <div class="content">
         <h3>${product.title}</h3>
-        <div class="badges">
-          ${product.badges ? product.badges.map(b => `<span class="badge">${b}</span>`).join('') : ''}
-        </div>
-        <p class="price">${product.currency} ${product.price.toLocaleString()}</p>
+
         <p class="teaser">${product.description.substring(0, 100)}...</p>
         <a href="${product.affiliate_url}" class="cta" target="_blank" rel="nofollow noopener">Shop on Amazon</a>
       </div>
