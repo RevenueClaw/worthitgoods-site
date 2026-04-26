@@ -4,12 +4,14 @@ const path = require('path');
 const productsDataPath = 'data/sample_products.json';
 const siteDir = '_site';
 
-if (!fs.existsSync(siteDir)) fs.mkdirSync(siteDir, { recursive: true });
+if (!fs.existsSync(siteDir)) {
+    fs.mkdirSync(siteDir, { recursive: true });
+}
 
 // Read products
 const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
-// Generate clean index.html
+// Generate index.html with improved product images
 const indexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,13 +23,41 @@ const indexHTML = `<!DOCTYPE html>
         * { box-sizing: border-box; margin:0; padding:0; }
         body { font-family: system-ui, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
         
-        .hero { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; text-align: center; padding: 100px 20px 80px; }
-        .hero h1 { font-size: 2.9rem; margin-bottom: 16px; line-height: 1.1; }
-        .hero p { font-size: 1.35rem; max-width: 720px; margin: 0 auto 30px; opacity: 0.95; }
-        .cta-button { background: white; color: var(--dark); padding: 16px 36px; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; font-size: 1.1rem; }
+        .hero { 
+            background: linear-gradient(135deg, #1e40af, #3b82f6); 
+            color: white; 
+            text-align: center; 
+            padding: 100px 20px 80px; 
+        }
+        .hero h1 { 
+            font-size: 2.9rem; 
+            margin-bottom: 16px; 
+            line-height: 1.1; 
+        }
+        .hero p { 
+            font-size: 1.35rem; 
+            max-width: 720px; 
+            margin: 0 auto 30px; 
+            opacity: 0.95; 
+        }
+        .cta-button { 
+            background: white; 
+            color: var(--dark); 
+            padding: 16px 36px; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 1.1rem; 
+        }
 
         .products-section { padding: 70px 20px; }
-        .section-title { text-align: center; font-size: 2.4rem; margin-bottom: 45px; color: var(--dark); }
+        .section-title { 
+            text-align: center; 
+            font-size: 2.4rem; 
+            margin-bottom: 45px; 
+            color: var(--dark); 
+        }
 
         .products-grid {
             display: grid;
@@ -37,6 +67,7 @@ const indexHTML = `<!DOCTYPE html>
             margin: 0 auto;
         }
 
+        /* === IMPROVED PRODUCT IMAGE STYLING === */
         .product-card {
             background: white;
             border-radius: 16px;
@@ -47,11 +78,50 @@ const indexHTML = `<!DOCTYPE html>
             height: 100%;
             transition: all 0.3s ease;
         }
-        .product-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.18); }
-        .product-card img { width: 100%; height: 235px; object-fit: cover; }
-        .content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .content h3 { font-size: 1.3rem; margin-bottom: 12px; line-height: 1.3; }
-        .content p { color: #555; margin-bottom: 20px; flex-grow: 1; font-size: 0.98rem; }
+        .product-card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.18); 
+        }
+
+        .product-card .image-wrapper {
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            overflow: hidden;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .content { 
+            padding: 20px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .content h3 { 
+            font-size: 1.3rem; 
+            margin-bottom: 12px; 
+            line-height: 1.3; 
+        }
+        .content p { 
+            color: #555; 
+            margin-bottom: 20px; 
+            flex-grow: 1; 
+            font-size: 0.98rem; 
+        }
         .cta {
             background: var(--accent);
             color: white;
@@ -65,7 +135,13 @@ const indexHTML = `<!DOCTYPE html>
         }
         .cta:hover { background: #15803d; }
 
-        footer { background: #1f2937; color: #ccc; text-align: center; padding: 50px 20px 40px; font-size: 0.95rem; }
+        footer { 
+            background: #1f2937; 
+            color: #ccc; 
+            text-align: center; 
+            padding: 50px 20px 40px; 
+            font-size: 0.95rem; 
+        }
     </style>
 </head>
 <body>
@@ -80,19 +156,22 @@ const indexHTML = `<!DOCTYPE html>
         <h2 class="section-title">Our Latest Worth-It Picks</h2>
         <div class="products-grid">
             ${products.map(p => `
-            <div class="product-card">
-                <img src="${p.image}" alt="${p.title}">
-                <div class="content">
-                    <h3>${p.title}</h3>
-                    <p>${p.description}</p>
-                    <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="${p.image}" alt="${p.title}">
+                    </div>
+                    <div class="content">
+                        <h3>${p.title}</h3>
+                        <p>${p.description}</p>
+                        <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                    </div>
                 </div>
-            </div>`).join('')}
+            `).join('')}
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 WorthIt Goods. All rights reserved.</p>
+        <p>© 2026 WorthIt Goods. All rights reserved.</p>
         <p>As an Amazon Associate, I earn from qualifying purchases. This does not affect the price you pay.</p>
     </footer>
 
@@ -100,4 +179,4 @@ const indexHTML = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(path.join(siteDir, 'index.html'), indexHTML);
-console.log(`Generated site with ${products.length} products. Clean top-tier layout complete.`);
+console.log('Generated site with ' + products.length + ' products. Clean top-tier layout complete.');
