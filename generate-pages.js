@@ -101,8 +101,9 @@ const indexHTML = `<!DOCTYPE html>
             transition: transform 0.4s ease;
         }
 
+        /* Slightly stronger hover zoom - smooth and natural */
         .product-card:hover img {
-            transform: scale(1.04);
+            transform: scale(1.07);
         }
 
         .content { 
