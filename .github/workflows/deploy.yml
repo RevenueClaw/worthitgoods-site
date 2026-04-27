@@ -2,28 +2,37 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Build
-      run: |
-        chmod +x build.sh
-        ./build.sh
-        
-    - name: Deploy to Cloudflare Pages
-      uses: cloudflare/pages-action@v1
-      with:
-        accountId: efaf97171dcd88f293223723c7e04cf7
-        apiToken: ${{ secrets.CF_PAGES_TOKEN }}
-        projectName: worthitgoods-site
-        directory: _site
-        verbose: true
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Notify deployment
-      run: |
-        echo "Deployment to Cloudflare Pages completed successfully!"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Build site
+        run: |
+          cd "${{ github.workspace }}"
+          ./build.sh
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./_site --project-name=worthitgoods-site --branch=main
