@@ -8,10 +8,8 @@ if (!fs.existsSync(siteDir)) {
     fs.mkdirSync(siteDir, { recursive: true });
 }
 
-// Read products
 const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
-// Generate improved index.html
 const indexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,77 +17,19 @@ const indexHTML = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods • Products Actually Worth Buying</title>
     <style>
-        :root {
-            --accent: #16a34a;
-            --dark: #1f2937;
-            --light: #f8fafc;
-        }
+        :root { --accent: #16a34a; --dark: #1f2937; }
         * { box-sizing: border-box; margin:0; padding:0; }
-        body { 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
-            line-height: 1.6; 
-            color: #333; 
-            background: var(--light); 
-        }
+        body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
         
-        /* Hero - Stronger & More Branded */
-        .hero { 
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white; 
-            text-align: center; 
-            padding: 120px 20px 100px; 
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://picsum.photos/id/1077/2000/1200') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 780px;
-            margin: 0 auto;
-        }
-        .hero h1 { 
-            font-size: 3.1rem; 
-            margin-bottom: 18px; 
-            line-height: 1.05;
-            font-weight: 700;
-        }
-        .hero p { 
-            font-size: 1.4rem; 
-            max-width: 680px; 
-            margin: 0 auto 32px; 
-            opacity: 0.95;
-        }
-        .cta-button { 
-            background: white; 
-            color: var(--dark); 
-            padding: 16px 40px; 
-            border-radius: 50px; 
-            font-weight: 700; 
-            text-decoration: none; 
-            display: inline-block; 
-            font-size: 1.15rem; 
-            transition: all 0.3s;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
+        .hero { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; padding: 120px 20px 100px; position: relative; overflow: hidden; }
+        .hero-content { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+        .hero h1 { font-size: 3.1rem; margin-bottom: 18px; line-height: 1.05; font-weight: 700; }
+        .hero p { font-size: 1.4rem; max-width: 680px; margin: 0 auto 32px; opacity: 0.95; }
+        .cta-button { background: white; color: var(--dark); padding: 16px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.15rem; transition: all 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
         .products-section { padding: 80px 20px; }
-        .section-title { 
-            text-align: center; 
-            font-size: 2.5rem; 
-            margin-bottom: 50px; 
-            color: var(--dark); 
-        }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--dark); }
 
         .products-grid {
             display: grid;
@@ -99,7 +39,6 @@ const indexHTML = `<!DOCTYPE html>
             margin: 0 auto;
         }
 
-        /* Product Cards - Unchanged from your approved version */
         .product-card {
             background: white;
             border-radius: 16px;
@@ -110,10 +49,7 @@ const indexHTML = `<!DOCTYPE html>
             height: 100%;
             transition: all 0.3s ease;
         }
-        .product-card:hover { 
-            transform: translateY(-12px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.18); 
-        }
+        .product-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.18); }
 
         .product-card .image-wrapper {
             height: 260px;
@@ -132,10 +68,7 @@ const indexHTML = `<!DOCTYPE html>
             object-fit: contain;
             transition: transform 0.4s ease;
         }
-
-        .product-card:hover img {
-            transform: scale(1.07);
-        }
+        .product-card:hover img { transform: scale(1.07); }
 
         .content { 
             padding: 22px; 
@@ -143,17 +76,42 @@ const indexHTML = `<!DOCTYPE html>
             display: flex; 
             flex-direction: column; 
         }
-        .content h3 { 
-            font-size: 1.32rem; 
-            margin-bottom: 12px; 
-            line-height: 1.3; 
+        .content h3 { font-size: 1.32rem; margin-bottom: 12px; line-height: 1.3; }
+        
+        /* Short description shown by default */
+        .short-desc {
+            color: #555;
+            margin-bottom: 18px;
+            flex-grow: 1;
+            font-size: 0.97rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .content p { 
-            color: #555; 
-            margin-bottom: 22px; 
-            flex-grow: 1; 
-            font-size: 0.97rem; 
+
+        /* Full enhanced description - hidden until toggled */
+        .full-desc {
+            display: none;
+            color: #444;
+            font-size: 0.97rem;
+            line-height: 1.65;
+            margin-bottom: 18px;
         }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        .toggle-btn:hover { text-decoration: underline; }
+
         .cta {
             background: var(--accent);
             color: white;
@@ -167,36 +125,7 @@ const indexHTML = `<!DOCTYPE html>
         }
         .cta:hover { background: #15803d; }
 
-        /* Footer */
-        footer { 
-            background: #1f2937; 
-            color: #aaa; 
-            text-align: center; 
-            padding: 60px 20px 40px; 
-        }
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            text-align: left;
-        }
-        .footer-col h4 {
-            color: white;
-            margin-bottom: 12px;
-        }
-        footer a {
-            color: #aaa;
-            text-decoration: none;
-        }
-        footer a:hover { color: #60a5fa; }
-
-        .copyright {
-            border-top: 1px solid #374151;
-            padding-top: 25px;
-            font-size: 0.9rem;
-        }
+        footer { background: #1f2937; color: #aaa; text-align: center; padding: 60px 20px 40px; }
     </style>
 </head>
 <body>
@@ -219,7 +148,17 @@ const indexHTML = `<!DOCTYPE html>
                     </div>
                     <div class="content">
                         <h3>${p.title}</h3>
-                        <p>${p.description}</p>
+                        
+                        <!-- Short preview -->
+                        <p class="short-desc">${p.description.substring(0, 220)}...</p>
+                        
+                        <!-- Full enhanced description -->
+                        <p class="full-desc">${p.description}</p>
+                        
+                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                            Why It’s Worth It →
+                        </button>
+                        
                         <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                     </div>
                 </div>
@@ -228,29 +167,12 @@ const indexHTML = `<!DOCTYPE html>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>WorthIt Goods</h4>
-                <p>Curated recommendations for products that genuinely improve daily life.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <p><a href="#products">All Products</a></p>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <p><a href="#">Privacy</a></p>
-                <p><a href="#">Affiliate Disclosure</a></p>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>© 2026 WorthIt Goods. All rights reserved.</p>
-            <p>As an Amazon Associate, I earn from qualifying purchases. Prices and availability are subject to change.</p>
-        </div>
+        <p>© 2026 WorthIt Goods. All rights reserved.</p>
+        <p>As an Amazon Associate, I earn from qualifying purchases. This does not affect the price you pay.</p>
     </footer>
 
 </body>
 </html>`;
 
 fs.writeFileSync(path.join(siteDir, 'index.html'), indexHTML);
-console.log('Generated site with ' + products.length + ' products. Improved hero + polish applied.');
+console.log('Generated site with ' + products.length + ' products. Enhanced descriptions now collapsible.');
