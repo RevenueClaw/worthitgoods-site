@@ -1,15 +1,1 @@
-### Amazon Associates (WorthItGoods)
-- Store ID: vhicklegar011-20  
-- Tracking ID: vhicklegar011-20
-
-### Affiliate API Keys
-#### Partnerize
-- User Application Key: p3tew145y3tag41n
-- User API Key: QXwVEic9
-
-### Amazon PA-API / Creators API (New)
-- Application ID: vhicklegar011-20.oracleclaw
-- LWA Client ID:REDACTED
-- LWA Client Secret:REDACTED
-- Version: 3.1
-- Associate Tag: vhicklegar011-20
+### Amazon Associates (WorthItGoods)\n- Store ID: vhicklegar011-20  \n- Tracking ID: vhicklegar011-20\n\n### Affiliate API Keys\n#### Partnerize\n- User Application Key: p3tew145y3tag41n\n- User API Key: QXwVEic9\n\n### Amazon PA-API / Creators API (New)\n- Application ID: vhicklegar011-20.oracleclaw\n- LWA Client ID:REDACTED\n- LWA Client Secret:REDACTED\n- Version: 3.1\n- Associate Tag: vhicklegar011-20\n\n**Note:** Ingested to swarm memory 2026-04-27. Use for traffic/SEO agent.
