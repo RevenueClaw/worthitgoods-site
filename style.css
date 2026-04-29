@@ -13,13 +13,18 @@ body {
 }
 
 header {
+    padding: 0.5rem 1rem !important;
+    min-height: auto !important;
     background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
     color: white;
-    padding: 0.6rem 1rem !important;
 }
 header nav {
-    padding: 0.5rem 0 !important;
-    min-height: auto !important;
+    padding: 0.4rem 0 !important;
+    min-height: 50px !important;
+}
+header .logo, header ul {
+    margin: 0 !important;
+    padding: 0 !important;
 }
     position: sticky;
     top: 0;
