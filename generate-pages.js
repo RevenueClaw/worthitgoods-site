@@ -16,6 +16,7 @@ const indexHTML = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods • Products Actually Worth Buying</title>
+    <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }
         * { box-sizing: border-box; margin:0; padding:0; }
@@ -131,6 +132,15 @@ const indexHTML = `<!DOCTYPE html>
 </head>
 <body>
 
+    <header>
+      <nav>
+        <a href="/" class="logo">WorthItGoods</a>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
     <div class="hero">
         <div class="hero-content">
             <h1>WorthIt Goods</h1>
