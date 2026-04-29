@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorthIt Goods • Products Actually Worth Buying</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1 style="text-align:center; padding:40px 20px; background:#f0f0f0;">WorthIt Goods</h1>
-    
-    <!-- This is where the generated grid lives -->
-    <section id="products" style="padding:40px 20px; max-width:1200px; margin:0 auto;">
-        <!-- GENERATED CONTENT FROM build.sh GOES HERE -->
-    </section>
-</body>
-</html>
+---
+layout: default
+title: WorthItGoods – Products Actually Worth Buying
+---
+<div class="hero">
+  <div class="hero-content">
+    <h1>WorthIt Goods</h1>
+    <p>Honest, hand-picked products that actually deliver.</p>
+  </div>
+</div>
+<section class="products-section">
+  <h2 class="section-title">Latest Worth-It Picks</h2>
+  {% include product-grid.liquid %}
+</section>

@@ -1,0 +1,24 @@
+title: WorthItGoods
+description: Curated products worth buying – honest reviews, Amazon affiliate links.
+url: https://worthitgoods.com
+baseurl: ""
+paginate: 10
+permalink: /blog/:year/:month/:day/:title.html
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

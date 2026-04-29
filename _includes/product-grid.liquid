@@ -1,0 +1,29 @@
+{% assign products = site.data.products %}
+<div class="products-grid">
+  {% for product in products limit: 50 %}
+  <div class="product-card">
+    <div class="image-wrapper">
+      <img src="{{ product.image }}" alt="{{ product.title }}">
+    </div>
+    <div class="content">
+      <h3>{{ product.title }}</h3>
+      <p class="short-desc">{{ product.description | truncate: 220 }}...</p>
+      <p class="full-desc" style="display: none;">{{ product.description }}</p>
+      <button class="toggle-btn" onclick="toggleDesc(this)">Why It’s Worth It →</button>
+      <a href="{{ product.affiliate_url }}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<script>
+function toggleDesc(btn) {
+  const fullDesc = btn.parentElement.querySelector('.full-desc');
+  if (fullDesc.style.display === 'block') {
+    fullDesc.style.display = 'none';
+    btn.textContent = 'Why It’s Worth It →';
+  } else {
+    fullDesc.style.display = 'block';
+    btn.textContent = 'Show less ↑';
+  }
+}
+</script>
