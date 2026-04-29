@@ -4,8 +4,13 @@
 rm -rf _site
 node generate-pages.js
 
-# === NEW: Copy the latest style.css into _site so changes take effect ===
+# Copy style
 cp style.css _site/
 
-echo "Generated site with $(node -e "console.log(require('./data/sample_products.json').length)") products. Clean top-tier layout complete."
-echo "Build done. (style.css copied to _site)"
+# Copy blog
+mkdir -p _site/blog
+cp blog.html _site/
+cp blog/*.html _site/blog/
+
+find _site -name '*.html' | head -5
+echo "\nBuild done. Toggles + 5 blog posts ready."

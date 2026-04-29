@@ -84,8 +84,9 @@ const indexHTML = `<!DOCTYPE html>
             margin-bottom: 18px;
             flex-grow: 1;
             font-size: 0.97rem;
+            min-height: 6em;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -150,7 +151,7 @@ const indexHTML = `<!DOCTYPE html>
                         <h3>${p.title}</h3>
                         
                         <!-- Short preview -->
-                        <p class="short-desc">${p.description.substring(0, 220)}...</p>
+                        <p class="short-desc">${p.description.substring(0, 180).replace(/\n/g, ' ').trim()}...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">${p.description}</p>
