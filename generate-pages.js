@@ -20,10 +20,11 @@ const indexHTML = `<!DOCTYPE html>
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
     <meta property="og:description" content="Hand-picked products that are actually worth it. Honest reviews, comparisons, and buying advice.">
-    <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+    <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="WorthItGoods - Honest Curated Products Worth Buying">
+    <meta property="og:image:alt" content="WorthItGoods - Honest Curated Products Worth Buying (Updated 2026-04-30 12:28 EDT)">
+    <!-- FORCE COMMIT: OG image cache bust via alt/timestamp -->
     <meta property="og:url" content="https://www.worthitgoods.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="WorthItGoods">
@@ -32,7 +33,7 @@ const indexHTML = `<!DOCTYPE html>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
     <meta name="twitter:description" content="Hand-picked products that are actually worth it.">
-    <meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+    <meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
 
     <link rel="stylesheet" href="/style.css">
     <style>
