@@ -12,9 +12,9 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 const categorizeProduct = (title, blurb, desc) => {
   const text = (title + ' ' + (blurb || '') + ' ' + (desc || '')).toLowerCase();
-  if (['kitchen', 'measure', 'jar', 'spatula', 'salt', 'soap', 'towel', 'scissor', 'cook', 'pantry', 'utensil', 'clean', 'knife electric', 'tallow beef', 'dish'].some(kw => text.includes(kw))) return 'kitchen';
-  if (['gift', 'box', 'mug', 'vase', 'journal', 'coaster', 'keepsake', 'chess', 'card', 'sock', 'bowl', 'pickle', 'chicken'].some(kw => text.includes(kw))) return 'homegifts';
-  if (['watch', 'lamp', 'cable', 'backpack', 'light neck', 'smart', 'charger', 'tech'].some(kw => text.includes(kw))) return 'techfitness';
+  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag/i)) return 'kitchen';
+  if (text.match(/\b(gift|keepsake|box|mug|vase|journal|coaster|chess|pickle|chicken|bowl)\b/i) && !text.match(/soap|towel|kitchen/i)) return 'homegifts';
+  if (text.match(/\b(watch|smartwatch|lamp|cable|backpack|light\s+neck|charger|garmin|apple\s+watch)\b/i)) return 'techfitness';
   if (['tool bag', 'multitool', 'emergency kit', 'borescope', 'socket', 'survival', 'army knife', 'briefcase'].some(kw => text.includes(kw))) return 'outdoorsurvival';
   return 'general';
 };
@@ -41,7 +41,7 @@ const parseProductDetails = (p) => {
     if (consMatch) cons = consMatch[1].trim();
   }
   if (desc.includes('Best for')) {
-    const bestMatch = desc.match(/Best for[:\\s]*([\\s\\S]*?)(?=\\[|$)/);
+    const bestMatch = desc.match(/Best for[:\s]*([\s\S]*?)(?=\[|$)/i);
     if (bestMatch) bestFor = bestMatch[1].trim();
   }
 
