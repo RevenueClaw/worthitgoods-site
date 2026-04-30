@@ -63,11 +63,21 @@ const categoryBlogs = [
   { slug: '2026-04-29-top-gifts-home', title: 'Top Home Gifts Worth Buying in 2026', category: 'homegifts', desc: 'Decorative keepsakes and home joys.', introPara1: "Gifts blending beauty and utility.", introPara2: "Handcrafted, practical picks.", introPara3: "Perfect for gifting." },
   { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
   { slug: '2026-04-29-outdoor-survival-essentials', title: 'Outdoor Survival Essentials 2026', category: 'outdoorsurvival', desc: 'Multitools, kits for trails.', introPara1: "Light, reliable outdoor gear.", introPara2: "EDC and emergency ready.", introPara3: "Gear up." },
-  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10 Latest Picks', category: 'kitchen', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." }
+  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', category: 'kitchen', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." },
+  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Latest Batch 12 arrivals: wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fresh drops blending fun, utility, geek chic.", introPara2: "Hand-picked for humor, prep, adventures.", introPara3: "Immediate upgrades." }
 ];
 
 categoryBlogs.forEach(blog => {
-  const catProds = products
+  let catProds;
+  if (blog.category === 'batch12') {
+    catProds = products.slice(0,5).map(p => ({...p, cat: 'batch12'})).map(parseProductDetails);
+  } else {
+    catProds = products
+      .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description)}))
+      .filter(p => p.cat === blog.category)
+      .slice(0,5)
+      .map(parseProductDetails);
+  }
     .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description)}))
     .filter(p => p.cat === blog.category)
     .slice(0,5)
@@ -79,12 +89,15 @@ categoryBlogs.forEach(blog => {
   }
 
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
+  if (blog.category === 'batch12') {
+    advice = `Batch 12 brings variety: Lead with the Funny Stemless Wine Glass for cheeky gatherings, Coleman Cooler for trail/picnic prep, PCB Coasters for geek tables, Heat Wave Sunglasses for festivals, Deiss Zester for kitchen precision. Mix fun/utility; dishwasher-safe where possible, store dry. Perfect starters for home/outdoor/party kits.`;
+  } else if
   if (blog.category === 'techfitness') {
     advice = `Kick off your fitness tech upgrade with the ${catProds[0].name} – it's the all-in-one powerhouse for heart rate, steps, sleep, and notifications without forcing subscriptions. Runners, grab the ${catProds[1]?.name || 'Garmin Forerunner 265'} next for precise GPS tracking and training insights. Skip cables or lamps here; focus on wearables. Pro tips: Match your phone OS (Apple for iPhone, Garmin for Android), verify 24+ hour battery from reviews, ensure comfy fit. These keep you motivated year-round without buyer's remorse.`;
   } else if (blog.category === 'outdoorsurvival') {
     advice = `Whether you're hitting the trails or prepping for the unexpected, start with the ${catProds[0]?.name || 'multitool'} as your everyday carry essential—it's compact and packs multiple tools for quick fixes on the go. Add the Coleman Snap N Go Cooler for collapsible storage on camping trips or picnics, keeping drinks/ice cold without bulk. Include the Victorinox Tinker Swiss Army Knife for precise cutting and the 14-in-1 Survival Kit for fire/shelter basics. Prioritize lightweight, rust-resistant gear. Practice deploying, store dry, pack layers. Stay prepared—safely.`;
   }
-  const conclusion = `There you have it – ${catProds.length} no-nonsense ${blog.category.toUpperCase()} standouts that punch above their weight in durability and smarts. We've filtered the hype for real-world winners. Dive into the full 50+ product grid for more categories, or drop a comment: what's your must-have? Level up today.`;
+  const conclusion = `There you have it – ${catProds.length} no-nonsense ${blog.category === 'batch12' ? 'BATCH12' : blog.category.toUpperCase()} standouts that punch above their weight in durability and smarts. We've filtered the hype for real-world winners. Dive into the full 50+ product grid for more categories, or drop a comment: what's your must-have? Level up today.`;
 
   const intro = `<p>${blog.introPara1}</p><p>${blog.introPara2}</p>${blog.introPara3 ? `<p>${blog.introPara3}</p>` : ''}`;
 
