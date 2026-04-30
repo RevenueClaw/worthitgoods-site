@@ -70,18 +70,14 @@ const categoryBlogs = [
 categoryBlogs.forEach(blog => {
   let catProds;
   if (blog.category === 'batch12') {
-    catProds = products.slice(0,5).map(p => ({...p, cat: 'batch12'})).map(parseProductDetails);
+    catProds = products.slice(0,5).map(parseProductDetails);
   } else {
     catProds = products
-      .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description)}))
+      .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
       .filter(p => p.cat === blog.category)
       .slice(0,5)
       .map(parseProductDetails);
   }
-    .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description)}))
-    .filter(p => p.cat === blog.category)
-    .slice(0,5)
-    .map(parseProductDetails);
 
   if (catProds.length === 0) {
     console.log(`Skipping ${blog.slug}: no ${blog.category} products`);
@@ -91,7 +87,7 @@ categoryBlogs.forEach(blog => {
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
   if (blog.category === 'batch12') {
     advice = `Batch 12 brings variety: Lead with the Funny Stemless Wine Glass for cheeky gatherings, Coleman Cooler for trail/picnic prep, PCB Coasters for geek tables, Heat Wave Sunglasses for festivals, Deiss Zester for kitchen precision. Mix fun/utility; dishwasher-safe where possible, store dry. Perfect starters for home/outdoor/party kits.`;
-  } else if
+  }
   if (blog.category === 'techfitness') {
     advice = `Kick off your fitness tech upgrade with the ${catProds[0].name} – it's the all-in-one powerhouse for heart rate, steps, sleep, and notifications without forcing subscriptions. Runners, grab the ${catProds[1]?.name || 'Garmin Forerunner 265'} next for precise GPS tracking and training insights. Skip cables or lamps here; focus on wearables. Pro tips: Match your phone OS (Apple for iPhone, Garmin for Android), verify 24+ hour battery from reviews, ensure comfy fit. These keep you motivated year-round without buyer's remorse.`;
   } else if (blog.category === 'outdoorsurvival') {
