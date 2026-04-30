@@ -64,13 +64,16 @@ const categoryBlogs = [
   { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
   { slug: '2026-04-29-outdoor-survival-essentials', title: 'Outdoor Survival Essentials 2026', category: 'outdoorsurvival', desc: 'Multitools, kits for trails.', introPara1: "Light, reliable outdoor gear.", introPara2: "EDC and emergency ready.", introPara3: "Gear up." },
   { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', category: 'kitchen', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." },
-  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Latest Batch 12 arrivals: wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fresh drops blending fun, utility, geek chic.", introPara2: "Hand-picked for humor, prep, adventures.", introPara3: "Immediate upgrades." }
+  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
+  { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', category: 'batch13', desc: 'Batch 13: Can mustaches, turbo fans, meat tenderizers, plate frames, wash mitts.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." }
 ];
 
 categoryBlogs.forEach(blog => {
   let catProds;
-  if (blog.category === 'batch12') {
+  if (blog.category === 'batch13') {
     catProds = products.slice(0,5).map(parseProductDetails);
+  } else if (blog.category === 'batch12') {
+    catProds = products.slice(5,10).map(parseProductDetails);
   } else {
     catProds = products
       .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
@@ -85,8 +88,10 @@ categoryBlogs.forEach(blog => {
   }
 
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
-  if (blog.category === 'batch12') {
-    advice = `Batch 12 brings variety: Lead with the Funny Stemless Wine Glass for cheeky gatherings, Coleman Cooler for trail/picnic prep, PCB Coasters for geek tables, Heat Wave Sunglasses for festivals, Deiss Zester for kitchen precision. Mix fun/utility; dishwasher-safe where possible, store dry. Perfect starters for home/outdoor/party kits.`;
+  if (blog.category === 'batch13') {
+    advice = `Batch 13 showcases quirky winners: Novelty Can Mustache Clip for party laughs, Portable Handheld Turbo Fan for instant cooling, KitchenAid Meat Tenderizer for grill prep, Silicone License Plate Frames to kill rattles, Chemical Guys Chenille Wash Mitts for swirl-free cars. Versatile fun/practical; clip easy, fans recharge, mitts rinse. Build kits for events/drives.`;
+  } else if (blog.category === 'batch12') {
+    advice = `Batch 12 variety: Funny Stemless Wine Glass for cheeky nights, Coleman Snap N Go Cooler for trails, PCB Circuit Coasters for tech tables, Heat Wave Lazer Sunglasses for raves, Deiss PRO Zester for chefs. Fun/utility mix; store dry, dishwasher ok. Home/party/outdoor starters.`;
   }
   if (blog.category === 'techfitness') {
     advice = `Kick off your fitness tech upgrade with the ${catProds[0].name} – it's the all-in-one powerhouse for heart rate, steps, sleep, and notifications without forcing subscriptions. Runners, grab the ${catProds[1]?.name || 'Garmin Forerunner 265'} next for precise GPS tracking and training insights. Skip cables or lamps here; focus on wearables. Pro tips: Match your phone OS (Apple for iPhone, Garmin for Android), verify 24+ hour battery from reviews, ensure comfy fit. These keep you motivated year-round without buyer's remorse.`;
