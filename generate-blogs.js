@@ -108,8 +108,23 @@ categoryBlogs.forEach(blog => {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${blog.title} - WorthIt Goods</title>
-<link rel="stylesheet" href="/style.css">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="${blog.title}">
+<meta property="og:description" content="${blog.desc}">
+<meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+<meta property="og:url" content="https://www.worthitgoods.com/blog/${blog.slug}.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="WorthItGoods">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${blog.title}">
+<meta name="twitter:description" content="${blog.desc}">
+<meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+
 <meta name="description" content="${blog.desc}">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header><nav><a href="/" class="logo">WorthItGoods</a><ul><li><a href="/">Home</a></li><li><a href="/blog.html">Blog</a></li></ul></nav></header>

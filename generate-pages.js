@@ -16,6 +16,21 @@ const indexHTML = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods • Products Actually Worth Buying</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
+    <meta property="og:description" content="Hand-picked products that are actually worth it. Honest reviews, comparisons, and buying advice.">
+    <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+    <meta property="og:url" content="https://www.worthitgoods.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WorthItGoods">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
+    <meta name="twitter:description" content="Hand-picked products that are actually worth it.">
+    <meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+
     <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }
