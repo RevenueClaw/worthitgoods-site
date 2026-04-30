@@ -16,48 +16,118 @@ const indexHTML = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods • Products Actually Worth Buying</title>
+    <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }
         * { box-sizing: border-box; margin:0; padding:0; }
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
         
-        header { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 1.5rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        nav a:hover { color: #00d4ff; }
+        .hero { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; height: 45vh !important; min-height: 300px !important; padding: 2rem 1rem !important; position: relative; overflow: hidden; }
+        .hero-content { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+        .hero h1 { font-size: 3.1rem; margin-bottom: 18px; line-height: 1.05; font-weight: 700; }
+        .hero p { font-size: 1.4rem; max-width: 680px; margin: 0 auto 32px; opacity: 0.95; }
+        .cta-button { background: white; color: var(--dark); padding: 16px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.15rem; transition: all 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+        .products-section { padding: 80px 20px; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--dark); }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+            gap: 32px;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.18); }
+
+        .product-card .image-wrapper {
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            overflow: hidden;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover img { transform: scale(1.07); }
+
+        .content { 
+            padding: 22px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .content h3 { font-size: 1.32rem; margin-bottom: 12px; line-height: 1.3; }
         
-        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1077/1920/1080') center/cover no-repeat; height: 90vh; min-height: 600px; display: flex; align-items: center; color: white; text-align: center; }
-        .hero-content { max-width: 800px; margin: 0 auto; padding: 2rem; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1; }
-        .hero p { font-size: 1.4rem; margin-bottom: 2rem; opacity: 0.95; }
-        .cta-button { background: #00d4ff; color: #1a1a1a; padding: 1rem 2.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3); }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4); }
+        /* Short description shown by default */
+        .short-desc {
+            color: #555;
+            margin-bottom: 18px;
+            flex-grow: 1;
+            font-size: 0.97rem;
+            min-height: 6em;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-        .products-section { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        .section-header { text-align: center; margin-bottom: 3rem; }
-        .section-header h2 { font-size: 2.8rem; margin-bottom: 0.5rem; }
-        .section-header p { font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto; }
+        /* Full enhanced description - hidden until toggled */
+        .full-desc {
+            display: none;
+            color: #444;
+            font-size: 0.97rem;
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .product-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; height: 100%; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
-        .product-card .image-wrapper { height: 220px; display: flex; align-items: center; justify-content: center; background-color: #ffffff; overflow: hidden; padding: 12px; border-bottom: 1px solid #f0f0f0; }
-        .product-card img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease; }
-        .product-card:hover img { transform: scale(1.04); }
-        .product-info { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .product-info h3 { font-size: 1.35rem; margin-bottom: 0.75rem; line-height: 1.3; color: #1a1a1a; }
-        .product-info p { color: #666; font-size: 0.95rem; margin-bottom: 1.25rem; flex-grow: 1; }
-        .view-product { background: #1a1a1a; color: white; padding: 0.85rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 600; text-align: center; transition: all 0.3s; margin-top: auto; display: block; }
-        .view-product:hover { background: #00d4ff; color: #1a1a1a; }
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        .toggle-btn:hover { text-decoration: underline; }
 
-        footer { background: #1a1a1a; color: #aaa; padding: 3rem 0 1.5rem; margin-top: 4rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .footer-col h4 { color: white; margin-bottom: 1rem; font-size: 1.1rem; }
-        .footer-col a { color: #aaa; text-decoration: none; display: block; margin-bottom: 0.5rem; }
-        .footer-col a:hover { color: #00d4ff; }
-        .copyright { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #333; font-size: 0.9rem; }
+        .cta {
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 14px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: auto;
+            display: block;
+        }
+        .cta:hover { background: #15803d; }
+
+        footer { background: #1f2937; color: #aaa; text-align: center; padding: 60px 20px 40px; }
     </style>
 </head>
 <body>
@@ -71,7 +141,6 @@ const indexHTML = `<!DOCTYPE html>
         </ul>
       </nav>
     </header>
-
     <div class="hero">
         <div class="hero-content">
             <h1>WorthIt Goods</h1>
@@ -81,24 +150,27 @@ const indexHTML = `<!DOCTYPE html>
     </div>
 
     <section id="products" class="products-section">
-        <div class="section-header">
-            <h2>Our Latest Worth-It Picks</h2>
-            <p>Newest at top – curated for real value.</p>
-        </div>
-        <div class="product-grid">
+        <h2 class="section-title">Our Latest Worth-It Picks</h2>
+        <div class="products-grid">
             ${products.map(p => `
                 <div class="product-card">
                     <div class="image-wrapper">
                         <img src="${p.image}" alt="${p.title}">
                     </div>
-                    <div class="product-info">
+                    <div class="content">
                         <h3>${p.title}</h3>
-                        <p class="short-desc">${p.description.substring(0, 220)}...</p>
-                        <p class="full-desc" style="display: none;">${p.description}</p>
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It's Worth It →' ? 'Show less ↑' : 'Why It's Worth It →';">
-                            Why It's Worth It →
+                        
+                        <!-- Short preview -->
+                        <p class="short-desc">${p.description.substring(0, 180).replace(/\n/g, ' ').trim()}...</p>
+                        
+                        <!-- Full enhanced description -->
+                        <p class="full-desc">${p.description}</p>
+                        
+                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                            Why It’s Worth It →
                         </button>
-                        <a href="${p.affiliate_url}" class="view-product" target="_blank" rel="nofollow">Shop on Amazon</a>
+                        
+                        <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                     </div>
                 </div>
             `).join('')}
@@ -106,20 +178,8 @@ const indexHTML = `<!DOCTYPE html>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>WorthItGoods</h4>
-                <p>Curated products that deliver real value.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="/">Home</a>
-                <a href="/blog.html">Blog</a>
-            </a>
-        </div>
-        <div class="copyright">
-            <p>© 2026 WorthIt Goods. As an Amazon Associate, I earn from qualifying purchases.</p>
-        </div>
+        <p>© 2026 WorthIt Goods. All rights reserved.</p>
+        <p>As an Amazon Associate, I earn from qualifying purchases. This does not affect the price you pay.</p>
     </footer>
 
 </body>

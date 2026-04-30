@@ -13,9 +13,19 @@ body {
 }
 
 header {
+    padding: 0.5rem 1rem !important;
+    min-height: auto !important;
     background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
     color: white;
-    padding: 1.5rem 0;
+}
+header nav {
+    padding: 0.4rem 0 !important;
+    min-height: 50px !important;
+}
+header .logo, header ul {
+    margin: 0 !important;
+    padding: 0 !important;
+}
     position: sticky;
     top: 0;
     z-index: 100;
@@ -55,14 +65,25 @@ nav a:hover {
 }
 
 /* Hero Section */
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/id/1077/1920/1080') center/cover no-repeat;
-    height: 90vh;
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    color: white;
-    text-align: center;
+.hero, .hero-section, section.hero {
+    height: 35vh !important;
+    min-height: 250px !important;
+    padding: 1rem !important;
+    background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 50%, #4ecdc4 100%), url('data:image/svg+xml;base64,...') !important; /* Product collage placeholder or gradient */
+    background-size: cover, auto !important;
+    background-position: center !important;
+}
+.hero h1 {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
 }
 
 .hero-content {
