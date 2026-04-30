@@ -15,7 +15,7 @@ const categorizeProduct = (title, blurb, desc) => {
   if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency/i)) return 'kitchen';
   if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
   if (text.match(/\b(watch|smartwatch|fitness|running|garmin|apple\s+watch|forerunner)\b/i) && !text.match(/\b(cable|charger|backpack|lamp|light\s+neck|emergency|tool|survival|borescope|socket)\b/i)) return 'techfitness';
-  if (['tool bag', 'multitool', 'emergency kit', 'borescope', 'socket', 'survival', 'army knife', 'briefcase', 'knife'].some(kw => text.includes(kw)) && !text.match(/\b(watch|smartwatch|fitness|running|garmin|apple\s+watch|forerunner)\b/i)) return 'outdoorsurvival';
+  if (['multitool', 'emergency kit', 'survival kit', 'survival', 'army knife', 'swiss army'].some(kw => text.includes(kw)) && !text.match(/\b(car|socket|borescope|kitchen|home|fitness|watch|smartwatch|running|garmin|apple\s+watch|forerunner)\b/i)) return 'outdoorsurvival';
   return 'general';
 };
 
@@ -82,7 +82,7 @@ categoryBlogs.forEach(blog => {
   if (blog.category === 'techfitness') {
     advice = `Kick off your fitness tech upgrade with the ${catProds[0].name} – it's the all-in-one powerhouse for heart rate, steps, sleep, and notifications without forcing subscriptions. Runners, grab the ${catProds[1]?.name || 'Garmin Forerunner 265'} next for precise GPS tracking and training insights. Skip cables or lamps here; focus on wearables. Pro tips: Match your phone OS (Apple for iPhone, Garmin for Android), verify 24+ hour battery from reviews, ensure comfy fit. These keep you motivated year-round without buyer's remorse.`;
   } else if (blog.category === 'outdoorsurvival') {
-    advice = `Build your survival kit around the ${catProds[0].name.split(' ')[0].toLowerCase()} – 16 pockets tame tool chaos for contractors or campers. Layer in the ${catProds[1]?.name.split(' ')[0].toLowerCase() || 'multitool pen'} for everyday fixes, Victorinox knife for reliable cuts. Sockets for mechanics, emergency kits for road safety, borescope for hidden inspections. Choose rust-proof, compact gear; test organization for your workflow. Rinse/dry after exposure. EDC ready, adventure proof.`;
+    advice = `Whether you're hitting the trails or prepping for the unexpected, start with the ${catProds[0]?.name || 'multitool'} as your everyday carry essential—it's compact and packs multiple tools for quick fixes on the go. Add the Victorinox Tinker Swiss Army Knife for precise, reliable cutting and its timeless EDC reliability. Round out your kit with the 14-in-1 Survival Kit for comprehensive fire, shelter, and navigation basics. Prioritize lightweight, rust-resistant gear that fits your adventure style. Practice deploying them beforehand, store dry, and always pack layers. These picks keep you prepared without the bulk—stay safe out there.`;
   }
   const conclusion = `There you have it – ${catProds.length} no-nonsense ${blog.category.toUpperCase()} standouts that punch above their weight in durability and smarts. We've filtered the hype for real-world winners. Dive into the full 50+ product grid for more categories, or drop a comment: what's your must-have? Level up today.`;
 
@@ -112,7 +112,7 @@ ${intro}
 <h2>Top Picks</h2>
 ${catProds.map(p => `
 <section class="product-highlight" style="max-width:650px;margin:0 auto 2.5rem auto;padding:1.5rem;border:1px solid #ddd;border-radius:12px;background:#fafafa;box-shadow:0 4px 12px rgba(0,0,0,.05);">
-${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-width:100%;max-height:250px;height:auto;object-fit:contain;display:block;margin:0 auto 1.5rem;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.1);">` : ''}
+${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-width:100%;max-height:280px;height:auto;object-fit:contain;display:block;margin:0 auto 1.5rem;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.1);">` : ''}
 <h2>${p.name}</h2>
 <p class="short" style="font-size:1.1em;font-style:italic;color:#555;margin-bottom:1.5rem;">${p.short}</p>
 <h3 style="color:#ff6b35;">Why It's Worth It</h3>
