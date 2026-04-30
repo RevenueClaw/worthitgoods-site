@@ -12,10 +12,10 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 const categorizeProduct = (title, blurb, desc) => {
   const text = (title + ' ' + (blurb || '') + ' ' + (desc || '')).toLowerCase();
-  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag/i)) return 'kitchen';
-  if (text.match(/\b(gift|keepsake|box|mug|vase|journal|coaster|chess|pickle|chicken|bowl)\b/i) && !text.match(/soap|towel|kitchen/i)) return 'homegifts';
-  if (text.match(/\b(watch|smartwatch|lamp|cable|backpack|light\s+neck|charger|garmin|apple\s+watch)\b/i)) return 'techfitness';
-  if (['tool bag', 'multitool', 'emergency kit', 'borescope', 'socket', 'survival', 'army knife', 'briefcase'].some(kw => text.includes(kw))) return 'outdoorsurvival';
+  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency/i)) return 'kitchen';
+  if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
+  if (text.match(/\b(watch|smartwatch|fitness|running|lamp|smart\s+lamp|cable|backpack|light\s+neck|charger|garmin|apple\s+watch|forerunner)\b/i)) return 'techfitness';
+  if (['tool bag', 'multitool', 'emergency kit', 'borescope', 'socket', 'survival', 'army knife', 'briefcase', 'knife'].some(kw => text.includes(kw))) return 'outdoorsurvival';
   return 'general';
 };
 

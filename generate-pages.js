@@ -22,7 +22,7 @@ const indexHTML = `<!DOCTYPE html>
         * { box-sizing: border-box; margin:0; padding:0; }
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
         
-        .hero { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; padding: 120px 20px 100px; position: relative; overflow: hidden; }
+        .hero { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; text-align: center; height: 45vh !important; min-height: 300px !important; padding: 2rem 1rem !important; position: relative; overflow: hidden; }
         .hero-content { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
         .hero h1 { font-size: 3.1rem; margin-bottom: 18px; line-height: 1.05; font-weight: 700; }
         .hero p { font-size: 1.4rem; max-width: 680px; margin: 0 auto 32px; opacity: 0.95; }
