@@ -10,6 +10,9 @@ cp style.css _site/
 # Generate blogs
 node generate-blogs.js
 
+# Copy assets (css, images, etc.)
+cp -r assets _site/
+
 # Copy blog
 mkdir -p _site/blog
 cp blog.html _site/
