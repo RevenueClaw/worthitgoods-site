@@ -114,7 +114,7 @@ const indexHTML = `<!DOCTYPE html>
             color: #444;
             font-size: 0.97rem;
             line-height: 1.65;
-            margin-bottom: 18px;
+            margin: 1rem 0 18px 0;
         }
 
         .toggle-btn {
