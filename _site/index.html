@@ -92,12 +92,8 @@
             margin-bottom: 18px;
             flex-grow: 1;
             font-size: 0.97rem;
-            min-height: 6em;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            min-height: 4em;
+            line-height: 1.5;
         }
 
         /* Full enhanced description - hidden until toggled */
@@ -167,13 +163,26 @@
                     <div class="content">
                         <h3>Kinetic Sand Ice Cream Treats Playset</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Kinetic Sand Ice Cream Treats Playset sparks kids' creativity with mess-free molding of sundaes, waffles, and cones—perfect pretend kitchen play. Pros: Sensory f...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Make ice cream creations: Kids who enjoy playing kitchen will love mixing, molding & creating their own Kinetic Sand ice cream sundaes, waffles, ice cream cookie sandwiches & ice cream cones</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Kinetic Sand Ice Cream Treats Playset sparks kids' creativity with mess-free molding of sundaes, waffles, and cones—perfect pretend kitchen play. Pros: Sensory fun, no cleanup; Cons: Sand contained. Best for young chefs. [Blurb: Make ice cream...cones]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -188,13 +197,26 @@
                     <div class="content">
                         <h3>Emergency Shart Kit</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Emergency Shart Kit (Doo Doo Disaster Defense) packs 7 essentials in metal case for discreet poop emergencies—undies, wipes, mustaches, bag. Pros: Comprehensive,...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">The Doo Doo Disaster Defense is the most complete Emergency Poop kit, including 7 items: Clean Undies, Wet Wipe Pack, Tissue Pack, Disguise Mustaches, Disposable Bag, Clip On Badge, Instructions to walk you through the dirty work, and a Metal Case for reliable storage.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Emergency Shart Kit (Doo Doo Disaster Defense) packs 7 essentials in metal case for discreet poop emergencies—undies, wipes, mustaches, bag. Pros: Comprehensive, portable; Cons: Novelty. Best for unprepared mishaps. [Blurb: The Doo Doo...storage.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -209,13 +231,26 @@
                     <div class="content">
                         <h3>100W GaN Fast USB C Charger</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: 100W GaN USB-C Charger powers 3 devices fast (laptops/phones)—compact efficiency for travel/desk. Pros: High wattage, multi-port; Cons: Heat under load. Best for...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">100W Power Trio: Charge Fast, Charge Three! 100W for laptops and fast-charging devices simultaneously. Unmatched speed and efficiency.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: 100W GaN USB-C Charger powers 3 devices fast (laptops/phones)—compact efficiency for travel/desk. Pros: High wattage, multi-port; Cons: Heat under load. Best for multi-device users. [Blurb: 100W Power...efficiency.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -230,13 +265,26 @@
                     <div class="content">
                         <h3>Ninja BlendPro Kitchen System</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Ninja BlendPro 1200W system crushes smoothies, chops, purees effortlessly—versatile kitchen powerhouse. Pros: Powerful motor, multi-function; Cons: Bulky. Best f...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">The 1200-watt motor delivers consistent, high-performance and power to handle everyday tasks with ease, from the smoothest smoothies and shakes to even chopping and pureeing.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Ninja BlendPro 1200W system crushes smoothies, chops, purees effortlessly—versatile kitchen powerhouse. Pros: Powerful motor, multi-function; Cons: Bulky. Best for daily blending/prep. [Blurb: The 1200-watt...pureeing.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -251,13 +299,26 @@
                     <div class="content">
                         <h3>Wood Phone Docking Station</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Wood Phone Dock organizes charging + daily essentials stylishly—desk clutter killer. Pros: Aesthetic, functional; Cons: No accessories incl. Best for organized w...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Charge your cell phone and keep your daily-used things at hand; Please note, the accessories shown in the pictures are not included</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Wood Phone Dock organizes charging + daily essentials stylishly—desk clutter killer. Pros: Aesthetic, functional; Cons: No accessories incl. Best for organized workspaces. [Blurb: Charge your...not included]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -272,13 +333,26 @@
                     <div class="content">
                         <h3>Under Armour Undeniable 5.0 Duffle</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Under Armour Undeniable 5.0 Duffle offers padded straps, grab handle, zip pockets, MOLLE—gym/travel durable. Pros: Comfortable carry, organized; Cons: Basic styl...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Removable, padded, HeatGear shoulder strap easily stows away in side pocket, Padded top grab handle Large front zippered organization pocket & molle webbing attachment points</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Under Armour Undeniable 5.0 Duffle offers padded straps, grab handle, zip pockets, MOLLE—gym/travel durable. Pros: Comfortable carry, organized; Cons: Basic style. Best for athletes. [Blurb: Removable...points]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -293,13 +367,26 @@
                     <div class="content">
                         <h3>Souper Cubes Silicone Freezer Molds</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Souper Cubes silicone molds simplify meal prep—portion, freeze, pop out with lids for easy storage. Pros: Leakproof, stackable; Cons: Large sizes. Best for batch...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Spend less time thinking about what you're going to eat and more time enjoying it. Our silicone freezer trays with lids are designed to make meal prep a breeze.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Souper Cubes silicone molds simplify meal prep—portion, freeze, pop out with lids for easy storage. Pros: Leakproof, stackable; Cons: Large sizes. Best for batch cooks. [Blurb: Spend less...breeze.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -314,13 +401,26 @@
                     <div class="content">
                         <h3>GeeekPi Case for Raspberry Pi 5</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: GeeekPi Raspberry Pi 5 Case (Game5Pi) fits 4/8/16GB models—compact protection for projects. Pros: Pi-specific fit; Cons: No PCIe adapter. Best for makers/tinkere...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">his Game5Pi case is Only for Raspberry Pi 5 8GB/4GB/16GB. For Game5Pi Case with N08 PCIe Adapter, please refer to ASIN B0DKHKD7MT.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: GeeekPi Raspberry Pi 5 Case (Game5Pi) fits 4/8/16GB models—compact protection for projects. Pros: Pi-specific fit; Cons: No PCIe adapter. Best for makers/tinkerers. [Blurb: his Game5Pi...B0DKHKD7MT.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -335,13 +435,26 @@
                     <div class="content">
                         <h3>Novelty Can Mustache Clip</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Instant party upgrade with Novelty Can Mustache Clip—turns cans into funny faces for birthdays, BBQs, bachelor parties; reusable icebreaker prop. Pros: Hilarious...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Whether it’s a birthday, bachelor party, BBQ, or themed celebration, this hilarious can mustache brings laughter and memorable moments. A great icebreaker or photo prop that guests will love</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Instant party upgrade with Novelty Can Mustache Clip—turns cans into funny faces for birthdays, BBQs, bachelor parties; reusable icebreaker prop. Pros: Hilarious, easy-clip; Cons: Drink-specific. Best for hosts sparking laughs. [Blurb: Whether it’s a birthday...love]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -356,13 +469,26 @@
                     <div class="content">
                         <h3>Portable Handheld Turbo Fan</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Beat heat anywhere with Portable Handheld Turbo Fan—190g 3-in-1 (handheld/neck/desk), pocketable power for commutes/travel. Pros: Ultra-light, versatile modes; C...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Compact, Versatile & Ultra-portable: Weighing just 190g, this portable fan fits easily into your pocket or bag. With 3-in-1 functionality, it can be handheld, worn around your neck with a lanyard, or set on your desk</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Beat heat anywhere with Portable Handheld Turbo Fan—190g 3-in-1 (handheld/neck/desk), pocketable power for commutes/travel. Pros: Ultra-light, versatile modes; Cons: Battery ~4-6h. Best for hot days on-the-go. [Blurb: Compact...your desk]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -377,13 +503,26 @@
                     <div class="content">
                         <h3>KitchenAid Gourmet Multi Sided Meat Tenderizer</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: KitchenAid Gourmet Meat Tenderizer multi-sides pound/tenderize steaks/roasts fast—'beat your meat' vibe with pro results. Pros: Sturdy stainless, effective; Cons...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Sometimes, you just need to beat your meat.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: KitchenAid Gourmet Meat Tenderizer multi-sides pound/tenderize steaks/roasts fast—'beat your meat' vibe with pro results. Pros: Sturdy stainless, effective; Cons: Manual. Best for grillers/chefs. [Blurb: Sometimes...meat.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -398,13 +537,26 @@
                     <div class="content">
                         <h3>Silicone License Plate Frames</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Silicone License Plate Frames end rattles, weatherproof no-drill grip—quiet ride fix you didn't know needed. Pros: Flexible, durable; Cons: Style limited. Best f...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">This is one of these product you never knew you needed. Eliminate those annoying rattles from your license plate!</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Silicone License Plate Frames end rattles, weatherproof no-drill grip—quiet ride fix you didn't know needed. Pros: Flexible, durable; Cons: Style limited. Best for annoyed drivers. [Blurb: This is one...plate!]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -419,13 +571,26 @@
                     <div class="content">
                         <h3>Chemical Guys Chenille Premium Wash Mitt</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Chemical Guys Chenille Wash Mitts (2-pack) lift dirt swirl-free—ultra-soft microfiber safe for car paint/exteriors. Pros: Scratch-proof, premium; Cons: Rinse aft...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">PREMIUM MICROFIBER WASH MITT (MIC49302) – Set of two ultra-soft chenille microfiber car wash mitts lift and trap dirt for a scratch-free, swirl-free wash, making them safe for all automotive paint finishes and exterior surfaces</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Chemical Guys Chenille Wash Mitts (2-pack) lift dirt swirl-free—ultra-soft microfiber safe for car paint/exteriors. Pros: Scratch-proof, premium; Cons: Rinse after. Best for detailers. [Blurb: PREMIUM...surfaces]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -440,13 +605,26 @@
                     <div class="content">
                         <h3>Funny Stemless Wine Glass</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: This cheeky stemless wine glass is the ultimate conversation starter for your next gathering, boldly printed with 'I love to wrap both my HANDS around it and SWA...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">CONVERSATION STARTER! - Enjoy a relaxing evening with your new favorite stemless wine glass, which reads "I love to wrap both my HANDS around it and SWALLOW" Holds 15 ounces of your favorite white or red vino.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This cheeky stemless wine glass is the ultimate conversation starter for your next gathering, boldly printed with 'I love to wrap both my HANDS around it and SWALLOW'—perfect for wine nights with friends who appreciate humor. Holds 15oz of your favorite red or white, sturdy glassware that's dishwasher-safe and built to last through countless toasts. Pros: Hilarious design, generous size; Cons: Novelty print may not suit formal settings. Best for party hosts and wine lovers adding fun to happy hours. [Blurb: CONVERSATION STARTER!...favorite white or red vino.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -461,13 +639,26 @@
                     <div class="content">
                         <h3>Coleman Snap N Go 45qt Collapsible Hard Cooler</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: The Coleman Snap N Go 45qt cooler innovates with world's first collapsible hard-sided design—shrinks to 1/3 size for effortless storage while keeping leakproof i...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">COLLAPSIBLE: Worlds first collapsible hard-sided cooler* quickly collapses to one-third its open size for easy storage *Leakproof and insulated rigid coolers made from hard plastic such as PP (polypropylene) or PE (polyethylene)</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The Coleman Snap N Go 45qt cooler innovates with world's first collapsible hard-sided design—shrinks to 1/3 size for effortless storage while keeping leakproof insulation for beach days, picnics, or camping. Made from durable PP/PE plastic, holds ice for hours. Pros: Space-saving collapse, rugged build; Cons: Heavy when full. Best for outdoor adventurers needing portable cooling. [Blurb: COLLAPSIBLE: Worlds first...PP (polypropylene) or PE (polyethylene)]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -482,13 +673,26 @@
                     <div class="content">
                         <h3>PCB - Circuit Board Coasters</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Real circuit board coasters bring geeky style to your coffee table—temperature-insensitive, easy-clean for hot/cold drinks, non-slip protection without generic l...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">These great drink coasters are made of real circuit boards. they are absolutely insensitive to temperature and are easy to clean. Perfect for all hot and cold drinks.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Real circuit board coasters bring geeky style to your coffee table—temperature-insensitive, easy-clean for hot/cold drinks, non-slip protection without generic looks. Set of unique, recycled-tech decor. Pros: Authentic tech aesthetic, durable; Cons: Niche appeal. Best for gamers/tech fans. [Blurb: These great drink coasters...hot and cold drinks.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -503,13 +707,26 @@
                     <div class="content">
                         <h3>Heat Wave Visual Lazer Sunglasses</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Revive 90s rave vibes with Heat Wave Visual Lazer sunglasses—holographic lenses for trippy effects at parties/festivals, lightweight friction-fit. Pros: Nostalgi...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Party like it's 1994!</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Revive 90s rave vibes with Heat Wave Visual Lazer sunglasses—holographic lenses for trippy effects at parties/festivals, lightweight friction-fit. Pros: Nostalgic fun, eye-catching; Cons: Fashion-only, not UV protective. Best for partygoers. [Blurb: Party like it's 1994!]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -524,13 +741,26 @@
                     <div class="content">
                         <h3>Deiss PRO Lemon Zester & Heavy Duty Cheese & Vegetable Grater</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Deiss PRO zester/grater shines with razor-sharp stainless blade (rust-proof), ergonomic non-slip handle, curved design for max force—effortless zesting/cheese/ve...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Comfortable to Use & Built to Last ✔ The Hand Grater has a razor-sharp stainless steel blade that won't rust and a comfortable, non-slip handle. Its unique curved sides make it extremely rigid and allow you to apply more force when it's needed.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Deiss PRO zester/grater shines with razor-sharp stainless blade (rust-proof), ergonomic non-slip handle, curved design for max force—effortless zesting/cheese/veggies. Pros: Durable, versatile; Cons: Hand-wash recommended. Best for home chefs. [Blurb: Comfortable to Use...when it's needed.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -545,13 +775,26 @@
                     <div class="content">
                         <h3>Star Wars: Darth Vader - Original Mobile Phone & Gaming Controller Holder</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Bring the Dark Side home with this 8.5-inch Darth Vader PVC statue holder—heavy duty base grips phones/controllers without tipping, perfect desk/gaming setup fan...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">DARTH VADER: It’s time to welcome the Dark Side into your home. 8.5" FIGURE: Heavy duty PVC statue and sturdy base that holds your stuff without tipping over.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Bring the Dark Side home with this 8.5-inch Darth Vader PVC statue holder—heavy duty base grips phones/controllers without tipping, perfect desk/gaming setup fan. Durable for daily use, iconic design sparks joy/conversations. Pros: Sturdy, fun collectible; Cons: Niche Star Wars appeal. Best for fans adding personality to workspaces. [Blurb: DARTH VADER...without tipping over.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -566,13 +809,26 @@
                     <div class="content">
                         <h3>Govee RGBIC Smart Table Lamp</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Govee RGBIC table lamp transforms ambiance with RGBICWW tech for multi-color segments, 500lm brightness (upgraded), and 2700K-6500K whites—app/voice control for...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">RGBICWW Technology & Upgraded Illumination: Enjoy multi-color displays, 500lm brightness (higher than previous models), and adjustable 2700k-6500k warm/cool whites.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Govee RGBIC table lamp transforms ambiance with RGBICWW tech for multi-color segments, 500lm brightness (upgraded), and 2700K-6500K whites—app/voice control for mood lighting/parties. Pros: Versatile colors, bright; Cons: App setup learning curve. Best for smart home enthusiasts. [Blurb: RGBICWW Technology...warm/cool whites.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -587,13 +843,26 @@
                     <div class="content">
                         <h3>Heavy Duty Tool Bag</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: This heavy-duty tool bag's 16 pockets + tape hook organize hammers, screwdrivers, wrenches, etc.—large capacity for pro/DIY kits without chaos. Rugged fabric wit...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Large Capacity: The tool bag has 16 pockets and a tape measure hook, each tool has its rightful organizer pouch, allowing you to neatly store a variety of tools, from hammers and screwdrivers to wrenches, saws, drills, and cordless grinders, etc.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This heavy-duty tool bag's 16 pockets + tape hook organize hammers, screwdrivers, wrenches, etc.—large capacity for pro/DIY kits without chaos. Rugged fabric withstands jobsites. Pros: Ample storage, durable; Cons: Bulky when full. Best for contractors/handymen. [Blurb: Large Capacity...cordless grinders, etc.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -608,13 +877,26 @@
                     <div class="content">
                         <h3>Angled Measuring Cup Set</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Patented angled measuring cups let you read levels from above—no bending/squinting—wedding registry staple for precise baking/cooking. Clear plastic, multiple si...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">It's no wonder these are wedding registry must haves. These liquid measuring cups feature our patented angled surface, allowing you to read measurements from above instead of bending over, squinting, or straining</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Patented angled measuring cups let you read levels from above—no bending/squinting—wedding registry staple for precise baking/cooking. Clear plastic, multiple sizes. Pros: Ergonomic accuracy; Cons: Plastic (not glass feel). Best for bakers/home chefs. [Blurb: It's no wonder...straining.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -629,13 +911,26 @@
                     <div class="content">
                         <h3>Meguiar's Ultimate Wash and Wax</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: Meguiar's Ultimate Wash and Wax cleans/shines/protects in one step—ideal between full waxings for showroom gloss without swirl marks. pH-neutral safe on all pain...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Add Meguiar's Ultimate Wash and Wax to your car wash kit to efficiently clean, shine, and protect your car’s surface in-between regular waxings for a glossier ride that’s always looking its absolute best</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: Meguiar's Ultimate Wash and Wax cleans/shines/protects in one step—ideal between full waxings for showroom gloss without swirl marks. pH-neutral safe on all paints. Pros: 2-in-1 efficiency; Cons: Foam may need rinse aid. Best for car owners maintaining shine. [Blurb: Add Meguiar's...absolute best.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -650,13 +945,26 @@
                     <div class="content">
                         <h3>Apple Watch Series 9</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: The Apple Watch Series 9 elevates daily health tracking with the powerful S9 chip for a superbright display and double-tap gesture—no-touch interaction that's in...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">Your essential companion for a healthy life is now even more powerful. The S9 chip enables a superbright display and a magical new way to quickly and easily interact with your Apple Watch without touching the screen.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The Apple Watch Series 9 elevates daily health tracking with the powerful S9 chip for a superbright display and double-tap gesture—no-touch interaction that's intuitive during workouts or quick checks. Battery lasts all day for active users, with precise heart rate, sleep, and fitness metrics. Pros: Seamless iPhone integration, crash detection; Cons: Premium price, best with ecosystem. Best for iOS users serious about wellness. [Blurb: Your essential companion...screen.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -671,13 +979,26 @@
                     <div class="content">
                         <h3>6 Tools IN ONE Versatile Multitool Pen</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: This 6-in-1 multitool pen packs screwdriver, ruler, level, stylus, and more into a sleek, EDC design—perfect for engineers, DIYers, or quick fixes without toolbo...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">CRANACH multitool pen for engineer,carpenter,etc.Take for your house maintenance.Great for home improvement, electrical, and DIY.Tool pen is an innovative tool which truly a work of art with engineering that combines the daily tools into a multitool to provide endless functions.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 6-in-1 multitool pen packs screwdriver, ruler, level, stylus, and more into a sleek, EDC design—perfect for engineers, DIYers, or quick fixes without toolbox hunts. Engineered art that fits pockets, durable for daily use. Pros: Versatile functions, compact; Cons: Small tools limit heavy tasks. Best for home maintenance and on-the-go pros. [Blurb: CRANACH multitool...endless functions.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -692,13 +1013,26 @@
                     <div class="content">
                         <h3>STEM Magnetic Tiles 70-Piece Set with Idea Book</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: 70-piece magnetic tiles spark STEM creativity with 5 shapes + idea book for endless builds—large capacity for group play or solo projects. Strong magnets ensure...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">70-Piece Large Capacity Set with 5 Geometric Shapes (Squares/Triangles/Rectangles/E-Shapes/Doors) + Idea Book</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: 70-piece magnetic tiles spark STEM creativity with 5 shapes + idea book for endless builds—large capacity for group play or solo projects. Strong magnets ensure stable structures, safe BPA-free plastic. Pros: Educational value, durable; Cons: Storage bag needed. Best for kids 3+ and parents fostering imagination. [Blurb: 70-Piece...Idea Book.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -713,13 +1047,26 @@
                     <div class="content">
                         <h3>1 Gallon Glass Cookie Jars with Lids</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: These 1-gallon glass jars (3.8L) end pantry chaos, fitting 5lb flour/sugar bags for bulk staples like rice/beans—airtight lids keep fresh, clear visibility reduc...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">End Pantry Clutter, Store with Ease: These 1 gallon glass jars with lids (3.8L) fit an entire 5lb bag of flour or sugar. Perfect for bulk rice, beans, pasta, cereal, and snacks, they transform your mess space into a neatly organized pantry.</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: These 1-gallon glass jars (3.8L) end pantry chaos, fitting 5lb flour/sugar bags for bulk staples like rice/beans—airtight lids keep fresh, clear visibility reduces waste. Stackable for organized shelves. Pros: Large capacity, aesthetic; Cons: Heavy when full. Best for bulk buyers transforming messy pantries. [Blurb: End Pantry Clutter...organized pantry.]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -734,13 +1081,26 @@
                     <div class="content">
                         <h3>CRAFTSMAN Shallow Socket, Metric, 1/2-Inch Drive, 10mm, 12-Point</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">Why It's Worth It: It's 11am—do you know where your 10mm socket is? This CRAFTSMAN shallow metric socket (1/2" drive, 12-point) grips tight without slipping, chrome finish resists...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">It's 11am, do you know where your 10mm socket is?</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: It's 11am—do you know where your 10mm socket is? This CRAFTSMAN shallow metric socket (1/2" drive, 12-point) grips tight without slipping, chrome finish resists corrosion for garage reliability. Pros: Secure hold, lifetime warranty; Cons: Single size (buy sets). Best for mechanics tired of lost/frustrated tools. [Blurb: It's 11am...socket is?]</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -755,13 +1115,26 @@
                     <div class="content">
                         <h3>Samhita Handmade Mango Wood Tree of Life Keepsake Box</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This mango wood keepsake box brings a sense of calm and connection to nature into your daily life. The hand-carved Tree of Life engraving, finished with a warm f...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This mango wood keepsake box brings a sense of calm and connection to nature into your daily life. The hand-carved Tree of Life engraving, finished with a warm flame-work effect, gives it a vintage character that feels both timeless and personal. It's an ideal gift for birthdays, engagements, or housewarmings because it balances beauty with meaning—perfect for holding treasured mementos like jewelry, letters, or a small token from a loved one. The natural grain of the wood ages gracefully, so the box becomes even more special over time. While it is primarily a decorative keepsake, its sturdy build ensures your small items are protected. Consider it a quiet, everyday reminder of growth, memory, and the relationships that shape you. Note that as a handcrafted item, minor variations in grain and finish add to its uniqueness rather than detracting from it. Best for someone seeking a meaningful, lasting home accent to cherish memories.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -776,13 +1149,26 @@
                     <div class="content">
                         <h3>Radicaln Marble Salt Cellar with Lid 4"</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 4-inch marble salt cellar is more than a seasoning holder—it’s a small piece of functional art that elevates your table setting. Made from natural stone, it...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 4-inch marble salt cellar is more than a seasoning holder—it’s a small piece of functional art that elevates your table setting. Made from natural stone, it offers long-lasting durability and a cool, smooth touch that feels substantial and reassuring in your hand. The lid keeps salt dry and fresh, which means better flavor control for your cooking. It works beautifully in both everyday and formal settings, complementing kitchen counters or dining tables without demanding attention. While it is primarily decorative, the weight and quality signal that this isn’t a disposable item—it’s built to last through years of meals. If you prefer understated elegance, its neutral tones and clean lines make it an easy fit for most decors. Remember that natural stone can vary in pattern and color, so each piece has its own subtle character. Best for cooks who appreciate both beauty and utility in their kitchen tools.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -797,13 +1183,26 @@
                     <div class="content">
                         <h3>MotoLoot Keychain</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: The MotoLoot keychain is designed to be the kind of small detail that makes your day a little brighter. Its bold, unique design stands out in a crowd, so it’s an...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The MotoLoot keychain is designed to be the kind of small detail that makes your day a little brighter. Its bold, unique design stands out in a crowd, so it’s an easy way to express personality without saying a word—handy at the end of your keys where you’ll see it often. If you ride or drive, bringing this to a meet can spark conversations and help you connect with like-minded people who appreciate distinctive style. The build quality is meant to hold up to daily use, so the keychain stays reliable rather than becoming a short-lived accessory. It’s a practical gift as well, especially for someone who values subtle personalization in their everyday carry. Keep in mind that while the design is eye-catching, it remains compact enough not to get in the way in tight pockets or bags. Best for riders, drivers, and style-minded folks who want a durable conversation starter on their keyring.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -818,13 +1217,26 @@
                     <div class="content">
                         <h3>Garmin Forerunner 265 Running Smartwatch</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: The Forerunner 265 is built for runners and athletes who want reliable, data-rich guidance without unnecessary complexity. The bright AMOLED touchscreen remains...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The Forerunner 265 is built for runners and athletes who want reliable, data-rich guidance without unnecessary complexity. The bright AMOLED touchscreen remains easy to read in direct sunlight, which is a big plus for outdoor workouts, and the traditional button controls give you quick access without navigating touch menus while moving. With up to 13 days in smartwatch mode, you can go days between charges, and up to 20 hours in GPS mode it covers long training sessions without worry. It’s a solid daily driver if you want accurate pace, distance, and heart rate metrics in a lightweight package. Be aware that while the interface is straightforward, some deeper features require time to learn in the Garmin ecosystem. If you’re serious about tracking progress, the level of insight here is worth the investment. Best for dedicated runners and fitness enthusiasts who want actionable metrics without subscription fees.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -839,13 +1251,26 @@
                     <div class="content">
                         <h3>Travel Cable Organizer Pouch Electronic Accessories Carry Case</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This compact travel pouch solves the common problem of tangled cables without adding bulk to your bag. The double-side print with the playful "EVERY CHARGER KNOW...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This compact travel pouch solves the common problem of tangled cables without adding bulk to your bag. The double-side print with the playful "EVERY CHARGER KNOWN TO MANKIND, BUT PROBABLY NOT THE ONE YOU NEED" message adds personality while reminding you that organization is about practicality, not perfection. It’s ideal for frequent travelers or remote workers who need to keep USB-C, Lightning, and micro-USB cables accessible yet contained. The material holds up to regular use and is easy to wipe clean when dust accumulates. While it won’t magically expand to fit every cable you own, it does a great job of reducing clutter. If you prefer a more muted look, consider it a subtle way to keep your setup neater on the go. Best for commuters and digital nomads who want less mess and fewer headaches when packing.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -860,13 +1285,26 @@
                     <div class="content">
                         <h3>Pink Car Emergency Kit</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: A pink emergency kit might seem playful at first, but its contents are serious about keeping you safe on the road. It includes a 10FT jumper cable, first aid kit...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: A pink emergency kit might seem playful at first, but its contents are serious about keeping you safe on the road. It includes a 10FT jumper cable, first aid kit, LED flare, deer whistles, and other essentials—making it a practical companion for unexpected breakdowns. The pink theme can make it easy to spot in your trunk, and it’s a thoughtful gift for new drivers or anyone who spends time behind the wheel. While no kit replaces professional roadside assistance, having these basics within reach can reduce stress during minor incidents. The compact packaging means it doesn’t take up much space, yet it covers the most common roadside needs. Remember to check expiration dates on perishables and recharge any electronics periodically to keep it ready. Best for new drivers, frequent road-trippers, and anyone who wants peace of mind in a compact, easy-to-spot package.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -881,13 +1319,26 @@
                     <div class="content">
                         <h3>Inspection Borescope Camera with 4.3" IPS Screen</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 16.5-foot waterproof borescope camera is a practical tool for inspecting tight or hard-to-reach spaces without needing a phone or Bluetooth device. The 4.3-...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 16.5-foot waterproof borescope camera is a practical tool for inspecting tight or hard-to-reach spaces without needing a phone or Bluetooth device. The 4.3-inch IPS screen gives you a clear view, which is helpful for plumbing, automotive diagnostics, or home maintenance. Because it’s built to be durable and portable, it’s a good long-term purchase if you tackle a variety of inspection tasks. While the cable length is generous, keep in mind that very narrow passages may still require patience to navigate. For DIYers and pros alike, the ability to see what’s happening inside walls or engines can save time and unnecessary disassembly. Regular cleaning of the lens will help maintain image quality over time. Best for hobbyists and professionals who need reliable visual access in confined spaces for maintenance and repair work.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -902,13 +1353,26 @@
                     <div class="content">
                         <h3>Splatypus Jar Spatula</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: The Splatypus jar spatula turns a mundane task—scraping the last bits from a jar—into a satisfying experience. Its flexible, friendly design reaches corners and...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The Splatypus jar spatula turns a mundane task—scraping the last bits from a jar—into a satisfying experience. Its flexible, friendly design reaches corners and curves that rigid spatulas miss, reducing waste and making cooking more efficient. It’s dishwasher-safe and built to handle frequent use, so it’s a small upgrade that pays off in everyday convenience. If you cook with jars often, this tool quickly becomes indispensable. Keep in mind that while it’s sturdy, extremely stubborn residues may still need a soak or gentle scrubbing. It’s a simple product that delivers real, repeatable value. Best for home cooks and bakers who want to get every bit of value from pantry staples without mess or waste.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -923,13 +1387,26 @@
                     <div class="content">
                         <h3>14-in-1 Survival Kit</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 14-in-1 survival kit is thoughtfully designed for outdoor enthusiasts who want practical readiness without carrying multiple tools. It includes essentials f...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 14-in-1 survival kit is thoughtfully designed for outdoor enthusiasts who want practical readiness without carrying multiple tools. It includes essentials for cutting, fire, shelter, and navigation, making it perfect for camping trips, hiking emergencies, or unexpected outdoor situations. While it doesn’t replace specialized training, its compact design and organized layout boost confidence for remote adventures. The multi-functional tools cover basics but may require practice to use efficiently in high-stress moments. Best for hikers, campers, and preppers who value reliable, all-in-one preparedness.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -944,13 +1421,26 @@
                     <div class="content">
                         <h3>Amish Farms Natural Bar Soap 5-Pack</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: These handmade cold-process soap bars deliver a gentle yet effective cleanse without heavy additives found in many commercial bars. Each bar is hand-cut and larg...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: These handmade cold-process soap bars deliver a gentle yet effective cleanse without heavy additives found in many commercial bars. Each bar is hand-cut and large, so they last longer and reduce plastic waste from typical body-wash bottles. The natural oils nourish the skin, making them a good choice for everyday use or for people with sensitive skin. While the scent is subtle rather than strongly scented, some users appreciate the lack of artificial fragrance. Because they come in a 5-pack, you get good value and a reliable supply for your household or as simple, thoughtful gifts. Best for eco-conscious buyers who want simple, skin-friendly cleansing without synthetic extras.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -965,13 +1455,26 @@
                     <div class="content">
                         <h3>Hey, Have You Tried Cheese Dish Towel</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Hey, Have You Tried Cheese Dish Towel offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your nee...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Hey, Have You Tried Cheese Dish Towel offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -986,13 +1489,26 @@
                     <div class="content">
                         <h3>Web Launcher Spider String Shooter</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Web Launcher Spider String Shooter offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Web Launcher Spider String Shooter offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1007,13 +1523,26 @@
                     <div class="content">
                         <h3>LOVEVOOK Travel Backpack</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This LOVEVOOK Travel Backpack offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This LOVEVOOK Travel Backpack offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1028,13 +1557,26 @@
                     <div class="content">
                         <h3>80hr Rechargeable Neck Light</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 80hr Rechargeable Neck Light offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 80hr Rechargeable Neck Light offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1049,13 +1591,26 @@
                     <div class="content">
                         <h3>Victorinox Tinker Swiss Army Knife</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Victorinox Tinker Swiss Army Knife offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Victorinox Tinker Swiss Army Knife offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1070,13 +1625,26 @@
                     <div class="content">
                         <h3>Coffee Mug Gift Set for Dog Lovers</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Coffee Mug Gift Set for Dog Lovers offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Coffee Mug Gift Set for Dog Lovers offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1091,13 +1659,26 @@
                     <div class="content">
                         <h3>12.5 Inch Round Floor Vase</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 12.5 Inch Round Floor Vase offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 12.5 Inch Round Floor Vase offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1112,13 +1693,26 @@
                     <div class="content">
                         <h3>CERAKOTE® Ceramic Trim Coat Kit</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This CERAKOTE® Ceramic Trim Coat Kit offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This CERAKOTE® Ceramic Trim Coat Kit offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1133,13 +1727,26 @@
                     <div class="content">
                         <h3>Traditional Weather Station</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Traditional Weather Station offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Traditional Weather Station offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1154,13 +1761,26 @@
                     <div class="content">
                         <h3>DND Dice Embedded Handmade Beer Glasses</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This DND Dice Embedded Handmade Beer Glasses offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your n...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This DND Dice Embedded Handmade Beer Glasses offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1175,13 +1795,26 @@
                     <div class="content">
                         <h3>Funny Thinking of You Cards</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Funny Thinking of You Cards offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Funny Thinking of You Cards offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1196,13 +1829,26 @@
                     <div class="content">
                         <h3>B-h I Am The Secret Ingredient Dish Towel</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This B-h I Am The Secret Ingredient Dish Towel offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This B-h I Am The Secret Ingredient Dish Towel offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1217,13 +1863,26 @@
                     <div class="content">
                         <h3>T Rex Dinosaur Birthday Card</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This T Rex Dinosaur Birthday Card offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This T Rex Dinosaur Birthday Card offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1238,13 +1897,26 @@
                     <div class="content">
                         <h3>Ceramic Artisan Matte Bowls</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Ceramic Artisan Matte Bowls offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Ceramic Artisan Matte Bowls offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1259,13 +1931,26 @@
                     <div class="content">
                         <h3>Monica's Door</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Monica's Door offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Monica's Door offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1280,13 +1965,26 @@
                     <div class="content">
                         <h3>Cat Socks Cat Gifts</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Cat Socks Cat Gifts offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Cat Socks Cat Gifts offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1301,13 +1999,26 @@
                     <div class="content">
                         <h3>Magnetic Wooden Chess Set</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Magnetic Wooden Chess Set offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Magnetic Wooden Chess Set offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1322,13 +2033,26 @@
                     <div class="content">
                         <h3>Handmade Vintage Leather Journal</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Handmade Vintage Leather Journal offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Handmade Vintage Leather Journal offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1343,13 +2067,26 @@
                     <div class="content">
                         <h3>Emotional Pickle Small Mother’s Day Gift</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: The Emotional Pickle plush is the perfect sentimental gift for Mother's Day, combining cute design with heartfelt symbolism. Hand‑stitched from soft fabric, it f...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: The Emotional Pickle plush is the perfect sentimental gift for Mother's Day, combining cute design with heartfelt symbolism. Hand‑stitched from soft fabric, it features a smiling pickle character that brings a playful smile to any occasion. Its compact size makes it easy to place on a bedside table or shelf, serving as a daily reminder of love and appreciation. While the plush is durable, it should be kept away from sharp objects to avoid tears. This gift stands out because it merges humor with emotional resonance, offering a light‑hearted way to express gratitude. Best for anyone looking for a whimsical yet meaningful Mother's Day present that sparks conversation.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1364,13 +2101,26 @@
                     <div class="content">
                         <h3>Leather briefcase 18 inch laptop messenger bag</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 18-inch laptop messenger bag combines classic style with modern functionality, crafted from premium top‑grain buffalo leather and featuring YKK metal zipper...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 18-inch laptop messenger bag combines classic style with modern functionality, crafted from premium top‑grain buffalo leather and featuring YKK metal zippers for secure, long-lasting use. It’s designed to protect a 15‑inch laptop while keeping everyday essentials organized in dedicated compartments and a front zip pocket. The structured silhouette and rich patina give it a professional look that suits office and travel settings alike. While the minimalist interior keeps weight manageable, consider adding a slim sleeve for extra protection against daily knocks. Best for professionals and students who want a durable, sophisticated carry solution that ages gracefully with proper care.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1385,13 +2135,26 @@
                     <div class="content">
                         <h3>Handmade Crochet Chicken Coasters</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: These cheerful crochet chicken coasters add a playful touch to any kitchen or dining table while protecting surfaces from water rings and heat. Hand‑crafted with...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: These cheerful crochet chicken coasters add a playful touch to any kitchen or dining table while protecting surfaces from water rings and heat. Hand‑crafted with soft, absorbent yarn, each coaster features a friendly chicken design that invites smiles and conversation. The cotton blend is easy to spot‑clean and dries quickly, making it practical for everyday use. Though durable, they’re not heatproof for very hot pans, so a trivet is still recommended for heavy duty protection. Best for anyone who loves quirky, handmade accents that turn ordinary moments into lighthearted ones.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1406,13 +2169,26 @@
                     <div class="content">
                         <h3>South Chicago Packing 100% Pure Wagyu Beef Tallow</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This South Chicago Packing 100% Pure Wagyu Beef Tallow offers excellent value and quality. It's designed to be reliable and functional, making it a great choice...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This South Chicago Packing 100% Pure Wagyu Beef Tallow offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1427,13 +2203,26 @@
                     <div class="content">
                         <h3>NOCO GENIUS5: 5A 6V/12V Smart Battery Charger</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This NOCO GENIUS5: 5A 6V/12V Smart Battery Charger offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This NOCO GENIUS5: 5A 6V/12V Smart Battery Charger offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1448,13 +2237,26 @@
                     <div class="content">
                         <h3>Gorilla Heavy Duty Double Sided Mounting Tape</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Gorilla Heavy Duty Double Sided Mounting Tape offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Gorilla Heavy Duty Double Sided Mounting Tape offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1469,13 +2271,26 @@
                     <div class="content">
                         <h3>Proctor Silex Easy Slice Electric Knife</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Proctor Silex Easy Slice Electric Knife offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your n...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Proctor Silex Easy Slice Electric Knife offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1490,13 +2305,26 @@
                     <div class="content">
                         <h3>Whipped Beef Tallow for Skin & Face</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Whipped Beef Tallow for Skin & Face offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Whipped Beef Tallow for Skin & Face offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1511,13 +2339,26 @@
                     <div class="content">
                         <h3>Magnetic Black Dry Erase Board</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Magnetic Black Dry Erase Board offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Magnetic Black Dry Erase Board offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1532,13 +2373,26 @@
                     <div class="content">
                         <h3>6-Inch Clip Convertible Table-Top & Clip Fan</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This 6-Inch Clip Convertible Table-Top & Clip Fan offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for y...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This 6-Inch Clip Convertible Table-Top & Clip Fan offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1553,13 +2407,26 @@
                     <div class="content">
                         <h3>Cold Process Body Soap Bar with Natural Oils</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Cold Process Body Soap Bar with Natural Oils offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for y...</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Cold Process Body Soap Bar with Natural Oils offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
@@ -1574,13 +2441,26 @@
                     <div class="content">
                         <h3>Elizabat Kitchen Scissors</h3>
                         
-                        <!-- Short preview -->
+                        <!-- Short preview: blurb -->
                         <p class="short-desc">Why It's Worth It: This Elizabat Kitchen Scissors offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs....</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">Why It's Worth It: This Elizabat Kitchen Scissors offers excellent value and quality. It's designed to be reliable and functional, making it a great choice for your needs.</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
