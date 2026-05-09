@@ -22,7 +22,7 @@ const categorizeProduct = (title, blurb, desc) => {
 const parseProductDetails = (p) => {
   const desc = p.description || '';
   let why = `Practical upgrade solving real problems with durability and value for ${p.title.split(' ')[0].toLowerCase()}.`;
-  let pros = `Key strengths: durable build, versatile use from ${p.blurb.substring(0,50)}.`;
+  let pros = `Key strengths: durable build, versatile use from ${(p.blurb || p.title || '').substring(0,50)}.`;
   let cons = `Potential drawbacks: size/weight for ${p.title.split(' ')[0].toLowerCase()}, niche fit.`;
   let bestFor = `Ideal for ${p.category || 'daily tasks'}: ${p.title.split(' ')[0]} users.`;
   let short = (p.blurb || p.title).substring(0, 80) + '...';
@@ -192,4 +192,4 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
   fs.writeFileSync(path.join(siteBlogDir, blog.slug + '.html'), content);
 });
 
-console.log('Generated category-strict blogs with dynamic filtering/parsing. ls -lh blog/*.html');
+console.log('Generated category-strict blogs with dynamic filtering/parsing. ls -lh blog/*.html');// Cache bust Fri May  8 21:40:27 EDT 2026
