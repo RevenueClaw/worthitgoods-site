@@ -81,7 +81,7 @@ categoryBlogs.forEach(blog => {
       catProds = products
         .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
         .filter(p => p.cat === blog.category)
-        .slice(0,15)
+        .slice(0,20)
         .map(parseProductDetails);
     } else {
       catProds = products
