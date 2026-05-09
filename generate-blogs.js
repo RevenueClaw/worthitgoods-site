@@ -12,7 +12,7 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 const categorizeProduct = (title, blurb, desc) => {
   const text = (title + ' ' + (blurb || '') + ' ' + (desc || '')).toLowerCase();
-  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency/i)) return 'kitchen';
+  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency|ninja|blendpro|1200|kinetic|shart|gan|duffle|pi case/i)) return 'kitchen';
   if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
   if (text.match(/\b(watch|smartwatch|fitness|running|garmin|apple\s+watch|forerunner)\b/i) && !text.match(/\b(cable|charger|backpack|lamp|light\s+neck|emergency|tool|survival|borescope|socket)\b/i)) return 'techfitness';
   if (['multitool', 'emergency kit', 'survival kit', 'survival', 'army knife', 'swiss army', 'cooler'].some(kw => text.includes(kw)) && !text.match(/\b(car|socket|borescope|kitchen|home|fitness|watch|smartwatch|running|garmin|apple\s+watch|forerunner)\b/i)) return 'outdoorsurvival';
@@ -22,11 +22,11 @@ const categorizeProduct = (title, blurb, desc) => {
 const parseProductDetails = (p) => {
   const desc = p.description || '';
   let why = `Practical upgrade solving real problems with durability and value for ${p.title.split(' ')[0].toLowerCase()}.`;
-  let pros = `High quality, reliable performance tailored to ${p.category || 'everyday use'}.`;
-  let cons = `Minor limitations in niche uses like extreme conditions.`;
-  let bestFor = `Everyday users and enthusiasts in ${p.category || 'general'}.`;
+  let pros = `Key strengths: durable build, versatile use from ${p.blurb.substring(0,50)}.`;
+  let cons = `Potential drawbacks: size/weight for ${p.title.split(' ')[0].toLowerCase()}, niche fit.`;
+  let bestFor = `Ideal for ${p.category || 'daily tasks'}: ${p.title.split(' ')[0]} users.`;
   let short = (p.blurb || p.title).substring(0, 80) + '...';
-  let vs = `Outperforms generic ${p.title.split(' ')[0].toLowerCase()} alternatives in build quality, features, and longevity.`;
+  let vs = `Beats budget ${p.title.split(' ')[0].toLowerCase()} options in quality, features, longevity.`;
 
   // Parse Why
   const whyMatch = desc.match(/Why It's Worth It[:\s]*([\s\S]*?)(?=Pros:|Cons:|Best for|\[Blurb|$)/i);
