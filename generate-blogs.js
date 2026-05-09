@@ -77,11 +77,19 @@ categoryBlogs.forEach(blog => {
   } else if (blog.category === 'batch12') {
     catProds = products.slice(13,18).map(parseProductDetails);
   } else {
-    catProds = products
-      .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
-      .filter(p => p.cat === blog.category)
-      .slice(0,10)
-      .map(parseProductDetails);
+    if (blog.category === 'kitchen') {
+      catProds = products
+        .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
+        .filter(p => p.cat === blog.category)
+        .slice(0,12)
+        .map(parseProductDetails);
+    } else {
+      catProds = products
+        .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
+        .filter(p => p.cat === blog.category)
+        .slice(0,5)
+        .map(parseProductDetails);
+    }
   }
 
   if (catProds.length === 0) {
