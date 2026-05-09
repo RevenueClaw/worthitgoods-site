@@ -81,12 +81,13 @@ categoryBlogs.forEach(blog => {
       catProds = products
         .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
         .filter(p => p.cat === blog.category)
+        .slice(0,12)
         .map(parseProductDetails);
     } else {
       catProds = products
         .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
         .filter(p => p.cat === blog.category)
-        .slice(0,5)
+        .slice(0,12)
         .map(parseProductDetails);
     }
   }
