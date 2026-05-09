@@ -58,7 +58,7 @@ const parseProductDetails = (p) => {
   };
 };
 
-const categoryBlogs = [
+undefined
   { slug: '2026-04-29-best-kitchen-tools', title: 'Best Kitchen Tools Worth Buying in 2026', category: 'kitchen', desc: 'Curated kitchen essentials for prep, storage, cleaning.', introPara1: "Frustrated by flimsy tools? Durable standouts here.", introPara2: "Ergonomic, easy-clean, chef-approved.", introPara3: "Transform your kitchen." },
   { slug: '2026-04-29-top-gifts-home', title: 'Top Home Gifts Worth Buying in 2026', category: 'homegifts', desc: 'Decorative keepsakes and home joys.', introPara1: "Gifts blending beauty and utility.", introPara2: "Handcrafted, practical picks.", introPara3: "Perfect for gifting." },
   { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
@@ -70,7 +70,7 @@ const categoryBlogs = [
 
 categoryBlogs.forEach(blog => {
   let catProds;
-  if (blog.category === 'batch13') {
+  undefined
     catProds = products.slice(0,5).map(parseProductDetails);
   } else if (blog.category === 'batch12') {
     catProds = products.slice(5,10).map(parseProductDetails);
@@ -88,7 +88,7 @@ categoryBlogs.forEach(blog => {
   }
 
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
-  if (blog.category === 'batch13') {
+  undefined
     advice = `Batch 13 showcases quirky winners: Novelty Can Mustache Clip for party laughs, Portable Handheld Turbo Fan for instant cooling, KitchenAid Meat Tenderizer for grill prep, Silicone License Plate Frames to kill rattles, Chemical Guys Chenille Wash Mitts for swirl-free cars. Versatile fun/practical; clip easy, fans recharge, mitts rinse. Build kits for events/drives.`;
   } else if (blog.category === 'batch12') {
     advice = `Batch 12 variety: Funny Stemless Wine Glass for cheeky nights, Coleman Snap N Go Cooler for trails, PCB Circuit Coasters for tech tables, Heat Wave Lazer Sunglasses for raves, Deiss PRO Zester for chefs. Fun/utility mix; store dry, dishwasher ok. Home/party/outdoor starters.`;
