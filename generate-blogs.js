@@ -12,7 +12,7 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 const categorizeProduct = (title, blurb, desc) => {
   const text = (title + ' ' + (blurb || '') + ' ' + (desc || '')).toLowerCase();
-  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency|ninja|blendpro|1200|kinetic|shart|gan|duffle|pi case/i)) return 'kitchen';
+  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake|zest|grater)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency|ninja|blendpro|1200|kinetic|shart|gan|duffle|pi case|skin|face|whipped|beauty/i)) return 'kitchen';
   if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
   if (text.match(/\b(watch|smartwatch|fitness|running|garmin|apple\s+watch|forerunner)\b/i) && !text.match(/\b(cable|charger|backpack|lamp|light\s+neck|emergency|tool|survival|borescope|socket)\b/i)) return 'techfitness';
   if (['multitool', 'emergency kit', 'survival kit', 'survival', 'army knife', 'swiss army', 'cooler'].some(kw => text.includes(kw)) && !text.match(/\b(car|socket|borescope|kitchen|home|fitness|watch|smartwatch|running|garmin|apple\s+watch|forerunner)\b/i)) return 'outdoorsurvival';
@@ -80,7 +80,7 @@ categoryBlogs.forEach(blog => {
     catProds = products
       .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
       .filter(p => p.cat === blog.category)
-      .slice(0,5)
+      .slice(0,7)
       .map(parseProductDetails);
   }
 
