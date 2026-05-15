@@ -12,8 +12,8 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 const categorizeProduct = (title, blurb, desc) => {
   const text = (title + ' ' + (blurb || '') + ' ' + (desc || '')).toLowerCase();
-  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency/i)) return 'kitchen';
-  if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
+  if (text.match(/\b(kitchen|measure|jar|spatula|salt\s+cellar|scissor|pantry|utensil|tallow|dish\s+towel|measuring\s+cup|cook|chef|bake|zest|grater)\b/i) && !text.match(/soap|towel|gift|watch|darth|star|govee|tool bag|coaster|chicken|keychain|car|emergency|ninja|blendpro|1200|kinetic|shart|gan|duffle|pi case|skin|face|whipped|beauty/i)) return 'kitchen';
+  if (text.match(/\b(gift|keepsake|box|home|mug|vase|journal|coaster|chess|pickle|chicken|bowl|decor|floor|weather|station)\b/i) && !text.match(/soap|towel|kitchen|car|emergency|keychain|outdoor|tool|watch|survival|borescope|socket/i)) return 'homegifts';
   if (text.match(/\b(watch|smartwatch|fitness|running|garmin|apple\s+watch|forerunner)\b/i) && !text.match(/\b(cable|charger|backpack|lamp|light\s+neck|emergency|tool|survival|borescope|socket)\b/i)) return 'techfitness';
   if (['multitool', 'emergency kit', 'survival kit', 'survival', 'army knife', 'swiss army', 'cooler'].some(kw => text.includes(kw)) && !text.match(/\b(car|socket|borescope|kitchen|home|fitness|watch|smartwatch|running|garmin|apple\s+watch|forerunner)\b/i)) return 'outdoorsurvival';
   return 'general';
@@ -21,29 +21,28 @@ const categorizeProduct = (title, blurb, desc) => {
 
 const parseProductDetails = (p) => {
   const desc = p.description || '';
-  let why = 'Practical upgrade solving real problems with durability and value.';
-  let pros = 'High quality, reliable performance.';
-  let cons = 'Minor limitations in niche uses.';
-  let bestFor = 'Everyday users and enthusiasts.';
+  let why = `Practical upgrade solving real problems with durability and value for ${p.title.split(' ')[0].toLowerCase()}.`;
+  let pros = `Key strengths: durable build, versatile use from ${(p.blurb || p.title || '').substring(0,50)}.`;
+  let cons = `Potential drawbacks: size/weight for ${p.title.split(' ')[0].toLowerCase()}, niche fit.`;
+  let bestFor = `Ideal for ${p.category || 'daily tasks'}: ${p.title.split(' ')[0]} users.`;
   let short = (p.blurb || p.title).substring(0, 80) + '...';
-  let vs = 'Better than typical alternatives in function and longevity.';
+  let vs = `Beats budget ${p.title.split(' ')[0].toLowerCase()} options in quality, features, longevity.`;
 
-  if (desc.includes('Why It')) {
-    const whyMatch = desc.match(/Why It's Worth It[:\\s]*([\\s\\S]*?)(?=Pros:|Cons:|Best|$) /);
-    if (whyMatch) why = whyMatch[1].trim();
-  }
-  if (desc.includes('Pros')) {
-    const prosMatch = desc.match(/Pros[:\\s]*([\\s\\S]*?)(?=Cons:|Best|$) /);
-    if (prosMatch) pros = prosMatch[1].trim();
-  }
-  if (desc.includes('Cons')) {
-    const consMatch = desc.match(/Cons[:\\s]*([\\s\\S]*?)(?=Best|$) /);
-    if (consMatch) cons = consMatch[1].trim();
-  }
-  if (desc.includes('Best for')) {
-    const bestMatch = desc.match(/Best for[:\s]*([\s\S]*?)(?=\[|$)/i);
-    if (bestMatch) bestFor = bestMatch[1].trim();
-  }
+  // Parse Why
+  const whyMatch = desc.match(/Why It's Worth It[:\s]*([\s\S]*?)(?=Pros:|Cons:|Best for|\[Blurb|$)/i);
+  if (whyMatch) why = whyMatch[1].trim().replace(/^:\s*/, '');
+
+  // Parse Pros
+  const prosMatch = desc.match(/Pros[:\s]*([\s\S]*?)(?=Cons:|Best for|\[Blurb|$)/i);
+  if (prosMatch) pros = prosMatch[1].trim();
+
+  // Parse Cons
+  const consMatch = desc.match(/Cons[:\s]*([\s\S]*?)(?=Best for|\[Blurb|$)/i);
+  if (consMatch) cons = consMatch[1].trim();
+
+  // Parse Best for
+  const bestMatch = desc.match(/Best for[:\s]*([\s\S]*?)(?=\.|\[Blurb|$)/i);
+  if (bestMatch) bestFor = bestMatch[1].trim();
 
   return {
     name: p.title,
@@ -59,27 +58,38 @@ const parseProductDetails = (p) => {
 };
 
 const categoryBlogs = [
+  { slug: '2026-05-08-batch14-latest-picks', title: 'Batch 14: Newest Worth-It Picks', category: 'batch14', desc: 'Batch 14: Kinetic Sand toys, emergency kits, GaN chargers, Ninja blenders, wood docks, UA duffles, Souper Cubes, Pi cases.', introPara1: "Toys to tech, kitchen to makers.", introPara2: "Fresh vetted variety.", introPara3: "Grab these gems." },
+  { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', category: 'batch13', desc: 'Batch 13: Can mustaches, turbo fans, meat tenderizers, plate frames, wash mitts.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." },
+  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
   { slug: '2026-04-29-best-kitchen-tools', title: 'Best Kitchen Tools Worth Buying in 2026', category: 'kitchen', desc: 'Curated kitchen essentials for prep, storage, cleaning.', introPara1: "Frustrated by flimsy tools? Durable standouts here.", introPara2: "Ergonomic, easy-clean, chef-approved.", introPara3: "Transform your kitchen." },
-  { slug: '2026-04-29-top-gifts-home', title: 'Top Home Gifts Worth Buying in 2026', category: 'homegifts', desc: 'Decorative keepsakes and home joys.', introPara1: "Gifts blending beauty and utility.", introPara2: "Handcrafted, practical picks.", introPara3: "Perfect for gifting." },
+  { slug: '2026-04-29-top-gifts-home', title: 'Top Home Decor & Gifts for Enthusiasts in 2026', category: 'homegifts', desc: 'Decorative keepsakes, vases, weather stations, and home joys.', introPara1: "Gifts and decor blending beauty and utility.", introPara2: "Handcrafted, practical picks for home lovers.", introPara3: "Perfect for gifting or personalizing spaces." },
   { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
   { slug: '2026-04-29-outdoor-survival-essentials', title: 'Outdoor Survival Essentials 2026', category: 'outdoorsurvival', desc: 'Multitools, kits for trails.', introPara1: "Light, reliable outdoor gear.", introPara2: "EDC and emergency ready.", introPara3: "Gear up." },
-  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', category: 'kitchen', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." },
-  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
-  { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', category: 'batch13', desc: 'Batch 13: Can mustaches, turbo fans, meat tenderizers, plate frames, wash mitts.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." }
+  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', category: 'kitchen', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." }
 ];
 
 categoryBlogs.forEach(blog => {
   let catProds;
-  if (blog.category === 'batch13') {
-    catProds = products.slice(0,5).map(parseProductDetails);
+  if (blog.category === 'batch14') {
+    catProds = products.slice(0,8).map(parseProductDetails);
+  } else if (blog.category === 'batch13') {
+    catProds = products.slice(8,13).map(parseProductDetails);
   } else if (blog.category === 'batch12') {
-    catProds = products.slice(5,10).map(parseProductDetails);
+    catProds = products.slice(13,18).map(parseProductDetails);
   } else {
-    catProds = products
-      .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
-      .filter(p => p.cat === blog.category)
-      .slice(0,5)
-      .map(parseProductDetails);
+    if (blog.category === 'kitchen') {
+      catProds = products
+        .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
+        .filter(p => p.cat === blog.category)
+        .slice(0,12)
+        .map(parseProductDetails);
+    } else {
+      catProds = products
+        .map(p => ({...p, cat: categorizeProduct(p.title, p.blurb, p.description) }))
+        .filter(p => p.cat === blog.category)
+        .slice(0,12)
+        .map(parseProductDetails);
+    }
   }
 
   if (catProds.length === 0) {
@@ -88,7 +98,9 @@ categoryBlogs.forEach(blog => {
   }
 
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
-  if (blog.category === 'batch13') {
+  if (blog.category === 'batch14') {
+    advice = `Batch 14 highlights: Kinetic Sand for kid creativity, Emergency Shart Kit for mishap prep, 100W GaN Charger for multi-device power, Ninja BlendPro for kitchen power, Wood Dock for desk org, UA Duffle for gym hauls, Souper Cubes for meal prep, GeeekPi Case for Pi projects. Playful to pro; mess-free, portable, durable. Stock up for family/tech/kitchen.`;
+  } else if (blog.category === 'batch13') {
     advice = `Batch 13 showcases quirky winners: Novelty Can Mustache Clip for party laughs, Portable Handheld Turbo Fan for instant cooling, KitchenAid Meat Tenderizer for grill prep, Silicone License Plate Frames to kill rattles, Chemical Guys Chenille Wash Mitts for swirl-free cars. Versatile fun/practical; clip easy, fans recharge, mitts rinse. Build kits for events/drives.`;
   } else if (blog.category === 'batch12') {
     advice = `Batch 12 variety: Funny Stemless Wine Glass for cheeky nights, Coleman Snap N Go Cooler for trails, PCB Circuit Coasters for tech tables, Heat Wave Lazer Sunglasses for raves, Deiss PRO Zester for chefs. Fun/utility mix; store dry, dishwasher ok. Home/party/outdoor starters.`;
@@ -98,7 +110,7 @@ categoryBlogs.forEach(blog => {
   } else if (blog.category === 'outdoorsurvival') {
     advice = `Whether you're hitting the trails or prepping for the unexpected, start with the ${catProds[0]?.name || 'multitool'} as your everyday carry essential—it's compact and packs multiple tools for quick fixes on the go. Add the Coleman Snap N Go Cooler for collapsible storage on camping trips or picnics, keeping drinks/ice cold without bulk. Include the Victorinox Tinker Swiss Army Knife for precise cutting and the 14-in-1 Survival Kit for fire/shelter basics. Prioritize lightweight, rust-resistant gear. Practice deploying, store dry, pack layers. Stay prepared—safely.`;
   }
-  const conclusion = `There you have it – ${catProds.length} no-nonsense ${blog.category === 'batch12' ? 'BATCH12' : blog.category.toUpperCase()} standouts that punch above their weight in durability and smarts. We've filtered the hype for real-world winners. Dive into the full 50+ product grid for more categories, or drop a comment: what's your must-have? Level up today.`;
+  const conclusion = `There you have it – ${catProds.length} no-nonsense ${blog.category.toUpperCase()} standouts that punch above their weight in durability and smarts. We've filtered the hype for real-world winners. Dive into the full 50+ product grid for more categories, or drop a comment: what's your must-have? Level up today.`;
 
   const intro = `<p>${blog.introPara1}</p><p>${blog.introPara2}</p>${blog.introPara3 ? `<p>${blog.introPara3}</p>` : ''}`;
 
@@ -115,8 +127,8 @@ categoryBlogs.forEach(blog => {
 <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${blog.title} - WorthItGoods (Updated 2026-04-30 12:28 EDT)">
-<meta name="robots" content="index, follow"> <!-- FORCE COMMIT: timestamp for Git diff -->
+<meta property="og:image:alt" content="${blog.title} - WorthItGoods (Updated 2026-05-08)">
+<meta name="robots" content="index, follow">
 <meta property="og:url" content="https://www.worthitgoods.com/blog/${blog.slug}.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="WorthItGoods">
@@ -167,11 +179,11 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
 <a href="${p.affurl}" class="cta" style="display:inline-block;padding:1rem 2rem;background:#ff6b35;color:white;text-decoration:none;border-radius:8px;font-weight:bold;margin-top:1rem;">Shop on Amazon →</a>
 </section>
 `).join('')}
-<div class="section-header" style="max-width:650px;margin:3rem auto 0;padding:1.5rem;background:#f8f9fa;border-radius:12px;"
+<div class="section-header" style="max-width:650px;margin:3rem auto 0;padding:1.5rem;background:#f8f9fa;border-radius:12px;">
 <h2>Buying Advice</h2>
 <p style="line-height:1.6;font-size:1.1em;">${advice}</p>
 </div>
-<div class="section-header" style="max-width:650px;margin:2rem auto 0;padding:1.5rem;background:#e9ecef;border-radius:12px;"
+<div class="section-header" style="max-width:650px;margin:2rem auto 0;padding:1.5rem;background:#e9ecef;border-radius:12px;">
 <h2>Conclusion</h2>
 <p style="line-height:1.6;font-size:1.1em;">${conclusion}</p>
 <a href="/#products" style="font-weight:bold;color:#ff6b35;">← Full Product Grid</a>
@@ -181,10 +193,11 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
 <footer style="margin-top:4rem;padding:2rem;background:#333;color:white;text-align:center;">
 <p>© 2026 WorthIt Goods. Amazon affiliate disclosure: We earn from qualifying purchases.</p>
 </footer>
-</body></html>`;
+</body>
+</html>`;
 
   fs.writeFileSync(path.join(blogDir, blog.slug + '.html'), content);
   fs.writeFileSync(path.join(siteBlogDir, blog.slug + '.html'), content);
 });
 
-console.log('Generated category-strict blogs with dynamic filtering/parsing. ls -lh blog/*.html');
+console.log('Generated category-strict blogs with dynamic filtering/parsing. ls -lh blog/*.html');// Cache bust Fri May  8 21:40:27 EDT 2026

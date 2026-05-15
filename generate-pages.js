@@ -104,12 +104,8 @@ const indexHTML = `<!DOCTYPE html>
             margin-bottom: 18px;
             flex-grow: 1;
             font-size: 0.97rem;
-            min-height: 6em;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            min-height: 4em;
+            line-height: 1.5;
         }
 
         /* Full enhanced description - hidden until toggled */
@@ -118,7 +114,7 @@ const indexHTML = `<!DOCTYPE html>
             color: #444;
             font-size: 0.97rem;
             line-height: 1.65;
-            margin-bottom: 18px;
+            margin: 1rem 0 18px 0;
         }
 
         .toggle-btn {
@@ -179,13 +175,26 @@ const indexHTML = `<!DOCTYPE html>
                     <div class="content">
                         <h3>${p.title}</h3>
                         
-                        <!-- Short preview -->
-                        <p class="short-desc">${p.description.substring(0, 180).replace(/\n/g, ' ').trim()}...</p>
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
                         
                         <!-- Full enhanced description -->
                         <p class="full-desc">${p.description}</p>
                         
-                        <button class="toggle-btn" onclick="this.parentElement.querySelector('.full-desc').style.display = this.parentElement.querySelector('.full-desc').style.display === 'block' ? 'none' : 'block'; this.textContent = this.textContent === 'Why It’s Worth It →' ? 'Show less ↑' : 'Why It’s Worth It →';">
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It’s Worth It →';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less ↑';
+                            }
+                            ">
                             Why It’s Worth It →
                         </button>
                         
