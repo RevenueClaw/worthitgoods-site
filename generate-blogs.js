@@ -70,6 +70,9 @@ const categoryBlogs = [
 
 categoryBlogs.forEach(blog => {
   let catProds;
+  // Get featured image from first product for OG tags
+  let featuredImage = '';
+  
   if (blog.category === 'batch14') {
     catProds = products.slice(0,8).map(parseProductDetails);
   } else if (blog.category === 'batch13') {
@@ -96,6 +99,9 @@ categoryBlogs.forEach(blog => {
     console.log(`Skipping ${blog.slug}: no ${blog.category} products`);
     return;
   }
+  
+  // Use first product image as featured image for OG tags
+  featuredImage = catProds[0]?.image || '';
 
   let advice = `Start with ${catProds[0].name.split(' ')[0]} for core needs; add others for depth. Follow care instructions.`;
   if (blog.category === 'batch14') {
@@ -124,7 +130,7 @@ categoryBlogs.forEach(blog => {
 <!-- Open Graph / Facebook -->
 <meta property="og:title" content="${blog.title}">
 <meta property="og:description" content="${blog.desc}">
-<meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
+<meta property="og:image" content="${featuredImage || 'https://www.worthitgoods.com/assets/og-image-v2.jpg'}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${blog.title} - WorthItGoods (Updated 2026-05-08)">
@@ -137,7 +143,7 @@ categoryBlogs.forEach(blog => {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${blog.title}">
 <meta name="twitter:description" content="${blog.desc}">
-<meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg">
+<meta name="twitter:image" content="${featuredImage || 'https://www.worthitgoods.com/assets/og-image-v2.jpg'}">
 
 <meta name="description" content="${blog.desc}">
 <link rel="stylesheet" href="/style.css">
