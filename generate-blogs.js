@@ -95,14 +95,14 @@ const parseBatchProduct = (p) => {
 };
 
 const categoryBlogs = [
-  { slug: '2026-05-08-batch14-latest-picks', title: 'Batch 14: Newest Worth-It Picks', category: 'batch14', desc: 'Batch 14: Kinetic Sand toys, emergency kits, GaN chargers, Ninja blenders, wood docks, UA duffles, Souper Cubes, Pi cases.', introPara1: "Toys to tech, kitchen to makers.", introPara2: "Fresh vetted variety.", introPara3: "Grab these gems." },
-  { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', category: 'batch13', desc: 'Batch 13: Flashlights, screwdrivers, squishy toys, slushie machines, Pi cases.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." },
-  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
-  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', category: 'batch10', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." },
-  { slug: '2026-04-29-best-kitchen-tools', title: 'Best Kitchen Tools Worth Buying in 2026', category: 'kitchen', desc: 'Curated kitchen essentials for prep, storage, cleaning.', introPara1: "Frustrated by flimsy tools? Durable standouts here.", introPara2: "Ergonomic, easy-clean, chef-approved.", introPara3: "Transform your kitchen." },
-  { slug: '2026-04-29-top-gifts-home', title: 'Top Home Gifts Worth Buying in 2026', category: 'homegifts', desc: 'Decorative keepsakes, coasters, and home joys.', introPara1: "Gifts blending beauty and utility.", introPara2: "Handcrafted, practical picks.", introPara3: "Perfect for gifting." },
-  { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
-  { slug: '2026-04-29-outdoor-survival-essentials', title: 'Outdoor Survival Essentials 2026', category: 'outdoorsurvival', desc: 'Multitools, kits, coolers for trails.', introPara1: "Light, reliable outdoor gear.", introPara2: "EDC and emergency ready.", introPara3: "Gear up." }
+  { slug: '2026-05-08-batch14-latest-picks', title: 'Batch 14: Newest Worth-It Picks', heroSubtitle: 'Fresh drops: From kinetic sand toys to GaN chargers—gear that earns its spot.', category: 'batch14', desc: 'Batch 14: Kinetic Sand toys, emergency kits, GaN chargers, Ninja blenders, wood docks, UA duffles, Souper Cubes, Pi cases.', introPara1: "Toys to tech, kitchen to makers.", introPara2: "Fresh vetted variety.", introPara3: "Grab these gems." },
+  { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', heroSubtitle: 'Curated finds: Tools, toys, and treats sorted by actual usefulness.', category: 'batch13', desc: 'Batch 13: Flashlights, screwdrivers, squishy toys, slushie machines, Pi cases.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." },
+  { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', heroSubtitle: 'Smart picks for parties, trails, and everyday life—vetted and ready.', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
+  { slug: '2026-04-29-batch10-latest-picks', title: 'Batch 10: Latest Worth-It Picks', heroSubtitle: 'Quality arrivals worth adding to cart—no fluff, just function.', category: 'batch10', desc: 'Fresh vetted kitchen/home gems.', introPara1: "New quality arrivals.", introPara2: "Highlights from batch.", introPara3: "Versatile essentials." },
+  { slug: '2026-04-29-best-kitchen-tools', title: 'Best Kitchen Tools Worth Buying in 2026', heroSubtitle: 'Durable, well-designed tools that make cooking less frustrating and more enjoyable.', category: 'kitchen', desc: 'Curated kitchen essentials for prep, storage, cleaning.', introPara1: "Frustrated by flimsy tools? Durable standouts here.", introPara2: "Ergonomic, easy-clean, chef-approved.", introPara3: "Transform your kitchen." },
+  { slug: '2026-04-29-top-gifts-home', title: 'Top Home Gifts Worth Buying in 2026', heroSubtitle: "Thoughtful gifts that blend style with utility—something they'll actually use.", category: 'homegifts', desc: 'Decorative keepsakes, coasters, and home joys.', introPara1: "Gifts blending beauty and utility.", introPara2: "Handcrafted, practical picks.", introPara3: "Perfect for gifting." },
+  { slug: '2026-04-29-tech-fitness-gear', title: 'Top Tech Fitness Gear in 2026', heroSubtitle: 'Smart wearables and gadgets that track progress without draining your wallet.', category: 'techfitness', desc: 'Wearables, lights, organizers—no subs.', introPara1: "Tech for data and motivation.", introPara2: "Long battery, intuitive.", introPara3: "Upgrade routine." },
+  { slug: '2026-04-29-outdoor-survival-essentials', title: 'Outdoor Survival Essentials 2026', heroSubtitle: 'Reliable gear for trails, campsites, and the unexpected—built to last.', category: 'outdoorsurvival', desc: 'Multitools, kits, coolers for trails.', introPara1: "Light, reliable outdoor gear.", introPara2: "EDC and emergency ready.", introPara3: "Gear up." }
 ];
 
 categoryBlogs.forEach(blog => {
@@ -176,6 +176,7 @@ categoryBlogs.forEach(blog => {
 <div class="hero">
 <div class="hero-content">
 <h1>${blog.title}</h1>
+${blog.heroSubtitle ? `<p style="font-size:1.2em;opacity:0.9;margin-top:0.5rem;">${blog.heroSubtitle}</p>` : ''}
 </div>
 </div>
 <article class="products-section">
