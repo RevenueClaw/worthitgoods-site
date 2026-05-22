@@ -9,3 +9,4 @@ Before making **any** changes to products, batches, blog posts, or site structur
 This document contains the exact process, failure modes, checklists, and rules that prevent expensive mistakes and repeated rework.
 
 Do not proceed with product additions or blog posts until you have read and followed that guide.
+2026-05-22T13:20:22-04:00 - Batch 14 products fixed
