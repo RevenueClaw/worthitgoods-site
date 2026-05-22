@@ -121,10 +121,11 @@ nav a:hover {
     content: '';
     display: block;
     width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    height: 4px;
+    background: #fff5e6;
     margin: 2rem auto 0;
     border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 nav {
     max-width: 1200px;
