@@ -101,8 +101,32 @@ def load_existing():
             EXISTING_CACHE = []
     return EXISTING_CACHE
 
+# Product type nouns — shared use of these indicates same product type
+PRODUCT_NOUNS = {
+    'rest', 'spoon', 'cup', 'bowl', 'knife', 'ladle', 'spatula', 'grater', 'zester',
+    'shears', 'skillet', 'mold', 'scale', 'timer', 'board', 'rack', 'holder',
+    'bag', 'pack', 'case', 'hat', 'shirt', 'pants', 'socks', 'gloves',
+    'lamp', 'light', 'fan', 'charger', 'cable', 'stand', 'mount',
+    'tool', 'pouch', 'organizer', 'mat', 'towel', 'kit', 'set', 'caddy',
+    'scoop', 'shooter', 'launcher', 'disc', 'puzzle', 'game',
+    'tumbler', 'mug', 'glass', 'bottle', 'jar', 'container',
+    'blanket', 'pillow', 'plush', 'coaster', 'vase', 'journal',
+    'brush', 'comb', 'mirror', 'tray', 'basket', 'bin',
+    'screwdriver', 'socket', 'wrench', 'hammer', 'level',
+    'camera', 'lens', 'tripod', 'speaker', 'adapter', 'hub', 'dock',
+    'flag', 'banner', 'windsock', 'bunting',
+    'paddleboard', 'hammock', 'cooler', 'lunchbox',
+}
+
+
 def is_duplicate_by_content(title):
-    """Detect if a product is essentially the same as something already on site."""
+    """Detect if a product is essentially the same as something already on site.
+    
+    Logic:
+    - 4+ meaningful common words (no overlap in product noun) -> duplicate
+    - 2+ meaningful common words WITH a shared product noun -> duplicate
+    - Otherwise allow (different product types from same brand are fine)
+    """
     existing = load_existing()
     t = title.lower().strip()
     
@@ -114,26 +138,16 @@ def is_duplicate_by_content(title):
         exist_words = set(et.split())
         common = new_words & exist_words
         
-        stop_words = {"and", "the", "for", "with", "in", "of", "to", "a", "an", "is", "-", "|", ","}
+        stop_words = {"and", "the", "for", "with", "in", "of", "to", "a", "an", "is", "-", "|", ",", "."}
         meaningful = [w for w in common if len(w) > 3 and w not in stop_words]
+        shared_nouns = set(meaningful) & PRODUCT_NOUNS
         
-        # Same brand identified in title
-        new_brand = t.split()[0] if t.split() else ""
-        exist_brand = et.split()[0] if et.split() else ""
-        
-        # 4+ meaningful words in common = likely same product
+        # 4+ shared words without a shared noun = false positive risk (e.g. "stainless steel" matches)
+        # Only flag if also sharing a product type
+        if shared_nouns and len(meaningful) >= 2:
+            return True
         if len(meaningful) >= 4:
             return True
-        
-        # Same brand + same product-type word = likely duplicate
-        if new_brand == exist_brand and len(new_brand) > 3:
-            type_words = {"spoon", "rest", "holder", "tool", "case", "bag", "pack",
-                         "organizer", "mat", "towel", "kit", "set", "cover", "caddy",
-                         "rack", "stand", "clip", "strap", "light", "lamp"}
-            new_types = set(t.split()) & type_words
-            exist_types = set(et.split()) & type_words
-            if new_types & exist_types:
-                return True
     
     return False
 

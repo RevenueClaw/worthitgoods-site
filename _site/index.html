@@ -36,6 +36,30 @@
         .cta-button { background: white; color: var(--dark); padding: 16px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 1.15rem; transition: all 0.3s; }
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 
+        /* Floating hero animation */
+        @keyframes float-up {
+            0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        .hero-float { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+        .hero-float span {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            animation: float-up linear infinite;
+        }
+        .hero-float span:nth-child(1) { width: 60px; height: 60px; left: 10%; animation-duration: 18s; animation-delay: 0s; }
+        .hero-float span:nth-child(2) { width: 30px; height: 30px; left: 25%; animation-duration: 14s; animation-delay: 2s; }
+        .hero-float span:nth-child(3) { width: 80px; height: 80px; left: 40%; animation-duration: 22s; animation-delay: 4s; }
+        .hero-float span:nth-child(4) { width: 20px; height: 20px; left: 55%; animation-duration: 12s; animation-delay: 1s; border-radius: 2px; transform: rotate(45deg); background: rgba(255,255,255,0.06); }
+        .hero-float span:nth-child(5) { width: 45px; height: 45px; left: 70%; animation-duration: 16s; animation-delay: 3s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        .hero-float span:nth-child(6) { width: 25px; height: 25px; left: 85%; animation-duration: 20s; animation-delay: 5s; }
+        .hero-float span:nth-child(7) { width: 50px; height: 50px; left: 50%; animation-duration: 25s; animation-delay: 7s; border-radius: 40% 60% 65% 35% / 40% 45% 55% 60%; }
+        .hero-float span:nth-child(8) { width: 15px; height: 15px; left: 15%; animation-duration: 11s; animation-delay: 6s; border-radius: 2px; transform: rotate(45deg); background: rgba(255,255,255,0.07); }
+
         .products-section { padding: 80px 20px; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--dark); }
 
@@ -145,6 +169,10 @@
       </nav>
     </header>
     <div class="hero">
+        <div class="hero-float">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
         <div class="hero-content">
             <h1>WorthIt Goods</h1>
             <p>Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.</p>
