@@ -50,27 +50,31 @@ const indexHTML = `<!DOCTYPE html>
 
         /* Floating hero animation */
         @keyframes float-up {
-            0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(100%) rotate(0deg) scale(0.5); opacity: 0; }
+            15% { opacity: 0.9; }
+            50% { opacity: 0.7; transform: translateY(50%) rotate(180deg) scale(1); }
+            85% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(0.8); opacity: 0; }
+        }
+        @keyframes sway {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(30px); }
         }
         .hero-float { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; overflow: hidden; z-index: 0; }
         .hero-float span {
             position: absolute;
             display: block;
             border-radius: 50%;
-            background: rgba(255,255,255,0.08);
             animation: float-up linear infinite;
         }
-        .hero-float span:nth-child(1) { width: 60px; height: 60px; left: 10%; animation-duration: 18s; animation-delay: 0s; }
-        .hero-float span:nth-child(2) { width: 30px; height: 30px; left: 25%; animation-duration: 14s; animation-delay: 2s; }
-        .hero-float span:nth-child(3) { width: 80px; height: 80px; left: 40%; animation-duration: 22s; animation-delay: 4s; }
-        .hero-float span:nth-child(4) { width: 20px; height: 20px; left: 55%; animation-duration: 12s; animation-delay: 1s; border-radius: 2px; transform: rotate(45deg); background: rgba(255,255,255,0.06); }
-        .hero-float span:nth-child(5) { width: 45px; height: 45px; left: 70%; animation-duration: 16s; animation-delay: 3s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-        .hero-float span:nth-child(6) { width: 25px; height: 25px; left: 85%; animation-duration: 20s; animation-delay: 5s; }
-        .hero-float span:nth-child(7) { width: 50px; height: 50px; left: 50%; animation-duration: 25s; animation-delay: 7s; border-radius: 40% 60% 65% 35% / 40% 45% 55% 60%; }
-        .hero-float span:nth-child(8) { width: 15px; height: 15px; left: 15%; animation-duration: 11s; animation-delay: 6s; border-radius: 2px; transform: rotate(45deg); background: rgba(255,255,255,0.07); }
+        .hero-float span:nth-child(1) { width: 80px; height: 80px; left: 8%; animation-duration: 14s; animation-delay: 0s; border-radius: 40% 60% 65% 35% / 40% 45% 55% 60%; background: rgba(255,255,255,0.12); }
+        .hero-float span:nth-child(2) { width: 100px; height: 100px; left: 20%; animation-duration: 17s; animation-delay: 1.5s; background: rgba(78,205,196,0.15); }
+        .hero-float span:nth-child(3) { width: 60px; height: 60px; left: 38%; animation-duration: 12s; animation-delay: 3s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; background: rgba(255,255,255,0.1); }
+        .hero-float span:nth-child(4) { width: 120px; height: 120px; left: 55%; animation-duration: 19s; animation-delay: 0.5s; border-radius: 2px; transform: rotate(45deg); background: rgba(255,154,86,0.12); }
+        .hero-float span:nth-child(5) { width: 45px; height: 45px; left: 72%; animation-duration: 11s; animation-delay: 2.5s; background: rgba(255,255,255,0.15); }
+        .hero-float span:nth-child(6) { width: 90px; height: 90px; left: 85%; animation-duration: 16s; animation-delay: 4s; border-radius: 40% 60% 65% 35% / 40% 45% 55% 60%; background: rgba(255,107,107,0.1); }
+        .hero-float span:nth-child(7) { width: 55px; height: 55px; left: 48%; animation-duration: 13s; animation-delay: 6s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; background: rgba(255,255,255,0.08); }
+        .hero-float span:nth-child(8) { width: 30px; height: 30px; left: 15%; animation-duration: 10s; animation-delay: 5s; border-radius: 2px; transform: rotate(45deg); background: rgba(78,205,196,0.2); }
 
         .products-section { padding: 80px 20px; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--dark); }
@@ -192,8 +196,19 @@ const indexHTML = `<!DOCTYPE html>
         </div>
     </div>
 
-    <section id="products" class="products-section">
-        <h2 class="section-title">Our Latest Worth-It Picks</h2>
+    <section id="products" class="products-section" style="padding-top: 20px;">
+
+        <div class="newsletter-section">
+            <h2>Get Worth-It Finds Delivered</h2>
+            <p>New hand-picked products every 2 weeks. No spam, unsubscribe anytime.</p>
+            <form class="newsletter-form" id="wigNewsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div id="newsletterMsg" class="newsletter-msg"></div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 60px;">Our Latest Worth-It Picks</h2>
         <div class="products-grid">
             ${products.map(p => `
                 <div class="product-card">
@@ -231,16 +246,6 @@ const indexHTML = `<!DOCTYPE html>
                 </div>
             `).join('')}
         </div>
-    </section>
-
-    <section class="newsletter-section">
-        <h2>Get Worth-It Finds Delivered</h2>
-        <p>New hand-picked products every week. No spam, unsubscribe anytime.</p>
-        <form class="newsletter-form" id="wigNewsletterForm">
-            <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
-            <button type="submit">Subscribe</button>
-        </form>
-        <div id="newsletterMsg" class="newsletter-msg"></div>
     </section>
 
     <script>
