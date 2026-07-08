@@ -233,6 +233,45 @@ const indexHTML = `<!DOCTYPE html>
         </div>
     </section>
 
+    <section class="newsletter-section">
+        <h2>Get Worth-It Finds Delivered</h2>
+        <p>New hand-picked products every week. No spam, unsubscribe anytime.</p>
+        <form class="newsletter-form" id="wigNewsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletterMsg" class="newsletter-msg"></div>
+    </section>
+
+    <script>
+    document.getElementById('wigNewsletterForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletterEmail').value;
+        const msg = document.getElementById('newsletterMsg');
+        msg.className = 'newsletter-msg';
+        msg.textContent = 'Subscribing...';
+        try {
+            const res = await fetch('http://192.168.4.131:9003/api/newsletter/signup', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email})
+            });
+            const data = await res.json();
+            if (data.success) {
+                msg.className = 'newsletter-msg success';
+                msg.textContent = data.message;
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                msg.className = 'newsletter-msg error';
+                msg.textContent = data.message;
+            }
+        } catch(err) {
+            msg.className = 'newsletter-msg error';
+            msg.textContent = 'Something went wrong. Please try again later.';
+        }
+    });
+    </script>
+
     <footer>
         <p>© 2026 WorthIt Goods. All rights reserved.</p>
         <p>As an Amazon Associate, I earn from qualifying purchases. This does not affect the price you pay.</p>
