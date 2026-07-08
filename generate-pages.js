@@ -10,6 +10,44 @@ if (!fs.existsSync(siteDir)) {
 
 const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
+
+function renderProduct(p) {
+    return `
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="${p.image}" alt="${p.title}">
+                    </div>
+                    <div class="content">
+                        <h3>${p.title}</h3>
+                        
+                        <!-- Short preview: blurb -->
+                        <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
+                        
+                        <!-- Full enhanced description -->
+                        <p class="full-desc">${p.description}</p>
+                        
+                        <button class="toggle-btn" onclick="
+                            const content = this.parentElement;
+                            const short = content.querySelector('.short-desc');
+                            const full = content.querySelector('.full-desc');
+                            if (full.style.display === 'block') {
+                                full.style.display = 'none';
+                                short.style.display = 'block';
+                                this.textContent = 'Why It\u2019s Worth It \u2192';
+                            } else {
+                                full.style.display = 'block';
+                                short.style.display = 'none';
+                                this.textContent = 'Show less \u2191';
+                            }
+                            ">
+                            Why It\u2019s Worth It \u2192
+                        </button>
+                        
+                        <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                    </div>
+                </div>
+            `;
+}
 const indexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +79,7 @@ const indexHTML = `<!DOCTYPE html>
         * { box-sizing: border-box; margin:0; padding:0; }
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
         
-        .hero { background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4, #ff9a56, #4ecdc4); background-size: 400% 400%; color: white; text-align: center; height: 45vh !important; min-height: 300px !important; padding: 2rem 1rem !important; position: relative; overflow: hidden; animation: gradient-shift 12s ease infinite; }
+        .hero { background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4, #ff9a56, #4ecdc4); background-size: 400% 400%; color: white; text-align: center; height: 45vh !important; min-height: 300px !important; padding: 2rem 1rem !important; position: relative; overflow: hidden; animation: gradient-shift 20s ease infinite; }
         .hero-content { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
         .hero h1 { font-size: 3.1rem; margin-bottom: 18px; line-height: 1.05; font-weight: 700; }
         .hero p { font-size: 1.4rem; max-width: 680px; margin: 0 auto 32px; opacity: 0.95; }
@@ -232,7 +270,11 @@ const indexHTML = `<!DOCTYPE html>
         </div>
     </div>
 
-    <section id="products" class="products-section" style="padding-top: 20px;">
+        <section id="products" class="products-section" style="padding-top: 20px;">
+        <h2 class="section-title">Our Latest Worth-It Picks</h2>
+        <div class="products-grid">
+            ${products.slice(0, 12).map(p => renderProduct(p)).join('')}
+        </div>
 
         <div class="newsletter-section">
             <div class="nl-icon">✉</div>
@@ -243,46 +285,11 @@ const indexHTML = `<!DOCTYPE html>
                 <button type="submit">Subscribe</button>
             </form>
             <div id="newsletterMsg" class="newsletter-msg"></div>
-            <div class="nl-guarantee">No spam &middot; Unsubscribe with 1 click &middot; Hand-picked only</div>
+            <div class="nl-guarantee">No spam · Unsubscribe with 1 click · Hand-picked only</div>
         </div>
 
-        <h2 class="section-title" style="margin-top: 60px;">Our Latest Worth-It Picks</h2>
         <div class="products-grid">
-            ${products.map(p => `
-                <div class="product-card">
-                    <div class="image-wrapper">
-                        <img src="${p.image}" alt="${p.title}">
-                    </div>
-                    <div class="content">
-                        <h3>${p.title}</h3>
-                        
-                        <!-- Short preview: blurb -->
-                        <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
-                        
-                        <!-- Full enhanced description -->
-                        <p class="full-desc">${p.description}</p>
-                        
-                        <button class="toggle-btn" onclick="
-                            const content = this.parentElement;
-                            const short = content.querySelector('.short-desc');
-                            const full = content.querySelector('.full-desc');
-                            if (full.style.display === 'block') {
-                                full.style.display = 'none';
-                                short.style.display = 'block';
-                                this.textContent = 'Why It’s Worth It →';
-                            } else {
-                                full.style.display = 'block';
-                                short.style.display = 'none';
-                                this.textContent = 'Show less ↑';
-                            }
-                            ">
-                            Why It’s Worth It →
-                        </button>
-                        
-                        <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
-                    </div>
-                </div>
-            `).join('')}
+            ${products.slice(12).map(p => renderProduct(p)).join('')}
         </div>
     </section>
 
