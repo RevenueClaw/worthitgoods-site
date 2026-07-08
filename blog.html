@@ -35,27 +35,49 @@
             padding: 1rem;
         }
         .newsletter-section {
-            background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4);
-            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            padding: 50px 40px;
             text-align: center;
-            color: white;
+            max-width: 700px;
+            margin: -40px auto 50px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(0,0,0,0.04);
         }
-        .newsletter-section h2 { font-size: 2rem; margin-bottom: 12px; }
-        .newsletter-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .newsletter-form { display: flex; gap: 12px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+        .newsletter-section .nl-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 24px;
+        }
+        .newsletter-section h2 { font-size: 1.6rem; margin-bottom: 8px; color: var(--dark); }
+        .newsletter-section p { font-size: 1rem; color: #6b7280; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .newsletter-form { display: flex; gap: 8px; max-width: 440px; margin: 0 auto; }
         .newsletter-form input[type="email"] {
-            flex: 1; min-width: 240px; padding: 14px 20px; border: none; border-radius: 50px;
-            font-size: 1rem; outline: none;
+            flex: 1; padding: 13px 18px; border: 2px solid #e5e7eb; border-radius: 10px;
+            font-size: 0.95rem; outline: none; transition: border-color 0.2s; font-family: inherit;
         }
+        .newsletter-form input[type="email"]:focus { border-color: #ff6b6b; }
         .newsletter-form button {
-            background: #1f2937; color: white; border: none; padding: 14px 32px;
-            border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer;
-            transition: all 0.3s;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            color: white; border: none; padding: 13px 28px; border-radius: 10px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s; white-space: nowrap; font-family: inherit;
         }
-        .newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
-        .newsletter-msg { margin-top: 16px; font-size: 0.95rem; min-height: 24px; }
-        .newsletter-msg.error { color: #ffd6d6; }
-        .newsletter-msg.success { color: #d4ffd4; }
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.3);
+        }
+        .newsletter-msg { margin-top: 14px; font-size: 0.9rem; min-height: 22px; }
+        .newsletter-msg.error { color: #dc2626; }
+        .newsletter-msg.success { color: #16a34a; }
+        .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
     </style>
 </head>
 <body>
@@ -69,10 +91,6 @@
       </nav>
     </header>
     <div class="hero">
-        <div class="hero-float">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span>
-        </div>
         <div class="hero-content">
             <h1>The WorthIt Goods Journal</h1>
             <p>Thoughtful reviews of products that actually deliver. No sponsored fluff, no affiliate bait—just honest recommendations worth your money.</p>
@@ -218,13 +236,15 @@
 
     <!-- NEWSLETTER SIGNUP - directly after posts, before footer -->
     <section id="newsletter" class="newsletter-section">
-        <h2>Get Worth-It Finds Delivered</h2>
-        <p>New hand-picked products every 2 weeks. No spam, unsubscribe anytime.</p>
+        <div class="nl-icon">✉</div>
+        <h2>Never Miss a Worth-It Find</h2>
+        <p>New hand-picked picks every 2 weeks. Honest reviews, zero hype, unsubscribe anytime.</p>
         <form class="newsletter-form" id="blogNewsletterForm">
             <input type="email" id="blogNlEmail" placeholder="your@email.com" required>
             <button type="submit">Subscribe</button>
         </form>
         <div id="blogNlMsg" class="newsletter-msg"></div>
+        <div class="nl-guarantee">No spam &middot; Unsubscribe with 1 click &middot; Hand-picked only</div>
     </section>
 
 </div></section>

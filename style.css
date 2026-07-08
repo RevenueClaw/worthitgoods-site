@@ -69,7 +69,9 @@ nav a:hover {
     height: auto;
     min-height: 320px;
     padding: 4rem 2rem;
-    background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 50%, #4ecdc4 100%);
+    background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4, #ff9a56, #4ecdc4);
+    background-size: 400% 400%;
+    animation: gradient-shift 12s ease infinite;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,16 +80,25 @@ nav a:hover {
     overflow: hidden;
 }
 
-.hero::before {
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(ellipse at top right, rgba(255, 154, 86, 0.2) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(78, 205, 196, 0.15) 0%, transparent 50%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.06) 55%, transparent 70%);
+    background-size: 200% 100%;
+    animation: light-sweep 8s ease-in-out infinite;
     pointer-events: none;
+}
+
+@keyframes light-sweep {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .hero-content {
