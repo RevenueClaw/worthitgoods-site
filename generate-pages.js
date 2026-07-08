@@ -251,7 +251,7 @@ const indexHTML = `<!DOCTYPE html>
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('http://192.168.4.131:9003/api/newsletter/signup', {
+            const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email})
