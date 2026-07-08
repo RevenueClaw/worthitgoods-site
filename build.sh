@@ -18,6 +18,9 @@ mkdir -p _site/blog
 cp blog.html _site/
 cp blog/*.html _site/blog/
 
+# === Overlay with custom blog post (hand-crafted prose, real product images) ===
+cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
+
 # Copy privacy page
 cp privacy.html _site/
 

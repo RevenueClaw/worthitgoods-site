@@ -6,10 +6,10 @@
     <title>5 Kitchen Tools That Earn Their Counter Space • WorthIt Goods</title>
     <meta name="description" content="No gadgets. No gimmicks. Just five genuinely useful kitchen tools that make cooking better.">
     <meta property="og:title" content="5 Kitchen Tools That Earn Their Counter Space">
-    <meta property="og:description" content="No gadgets. No gimmicks. Five genuinely useful kitchen tools that make cooking better.">
-    <meta property="og:image" content="https://www.worthitgoods.com/assets/wig-kitchen-blog-pin.png">
-    <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="1024">
+    <meta property="og:description" content="No gadgets. No gimmicks. Just five genuinely useful kitchen tools that make cooking better.">
+    <meta property="og:image" content="https://m.media-amazon.com/images/I/71w7jfdY+0L._AC_SL1500_.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html">
     <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
@@ -18,32 +18,86 @@
         :root { --accent: #16a34a; --dark: #1f2937; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: var(--dark); background: #f8fafc; }
-        .blog-header { background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4); color: white; padding: 80px 20px 60px; text-align: center; position: relative; overflow: hidden; }
-        .blog-header h1 { font-size: 2.8rem; max-width: 720px; margin: 0 auto 16px; line-height: 1.1; }
-        .blog-header .meta { font-size: 1rem; opacity: 0.85; }
-        .blog-header .back-link { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; opacity: 0.7; font-size: 0.95rem; }
+        
+        .blog-header {
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4, #ff9a56, #4ecdc4);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
+            color: white; padding: 80px 20px 60px; text-align: center; position: relative; overflow: hidden;
+        }
+        .blog-header::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.06) 55%, transparent 70%);
+            background-size: 200% 100%;
+            animation: light-sweep 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .blog-header h1 { font-size: 2.8rem; max-width: 720px; margin: 0 auto 16px; line-height: 1.1; position: relative; z-index: 1; }
+        .blog-header .meta { font-size: 1rem; opacity: 0.85; position: relative; z-index: 1; }
+        .blog-header .back-link { position: absolute; top: 20px; left: 20px; color: white; text-decoration: none; opacity: 0.7; font-size: 0.95rem; z-index: 1; }
         .blog-header .back-link:hover { opacity: 1; }
+
         .blog-content { max-width: 700px; margin: 0 auto; padding: 50px 20px 80px; }
         .blog-content .intro { font-size: 1.15rem; color: #555; margin-bottom: 50px; }
-        .blog-product { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        
+        .blog-product {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 40px;
+        }
+        .blog-product .image-wrap { height: 260px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 20px; border-bottom: 1px solid #f0f0f0; }
+        .blog-product .image-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .blog-product .info { padding: 24px; }
         .blog-product h2 { font-size: 1.4rem; margin-bottom: 8px; }
-        .blog-product .tag { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 12px; }
+        .blog-product .tag {
+            display: inline-block; background: #e8f5e9; color: #2e7d32;
+            padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 12px;
+        }
         .blog-product p { color: #444; margin-bottom: 16px; }
-        .blog-product .shop-link { display: inline-block; background: var(--dark); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .blog-product .shop-link {
+            display: inline-block; background: var(--dark); color: white;
+            padding: 10px 24px; border-radius: 50px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s;
+        }
         .blog-product .shop-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-        .blog-outro { background: white; border-radius: 16px; padding: 40px; text-align: center; margin: 50px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+        .blog-outro { background: white; border-radius: 16px; padding: 40px; margin: 50px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
         .blog-outro h3 { font-size: 1.6rem; margin-bottom: 12px; }
         .blog-outro p { color: #555; margin-bottom: 24px; }
-        .blog-footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
-        .newsletter-box { background: linear-gradient(135deg, #ff9a56, #ff6b6b, #4ecdc4); color: white; border-radius: 16px; padding: 40px; text-align: center; margin: 50px 0; }
+
+        .newsletter-box {
+            background: white; border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            padding: 40px; text-align: center; margin: 50px 0;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .newsletter-box .nl-icon {
+            width: 56px; height: 56px; background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px; font-size: 24px;
+        }
         .newsletter-box h3 { font-size: 1.4rem; margin-bottom: 8px; }
-        .newsletter-box p { opacity: 0.9; margin-bottom: 20px; font-size: 0.95rem; }
+        .newsletter-box p { color: #6b7280; margin-bottom: 20px; font-size: 0.95rem; }
         .newsletter-box form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
-        .newsletter-box input[type=email] { flex: 1; min-width: 200px; padding: 12px 18px; border: none; border-radius: 50px; font-size: 0.95rem; }
-        .newsletter-box button { background: var(--dark); color: white; border: none; padding: 12px 28px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        .newsletter-box button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .newsletter-box input[type=email] {
+            flex: 1; min-width: 200px; padding: 12px 18px;
+            border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem;
+            outline: none; transition: border-color 0.2s; font-family: inherit;
+        }
+        .newsletter-box input[type=email]:focus { border-color: #ff6b6b; }
+        .newsletter-box button {
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b); color: white;
+            border: none; padding: 12px 28px; border-radius: 10px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;
+        }
+        .newsletter-box button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,107,0.3); }
         .newsletter-box .nl-msg { margin-top: 12px; font-size: 0.9rem; min-height: 20px; }
+        .newsletter-box .nl-msg.error { color: #dc2626; }
+        .newsletter-box .nl-msg.success { color: #16a34a; }
+        .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
+
+        .blog-footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
+        .blog-footer .footer-links { margin-bottom: 18px; }
+        .blog-footer .footer-links a { color: #ff9a56; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -59,63 +113,80 @@
         <p>These five tools have one thing in common: they make cooking genuinely better, not just different. They earn their spot because you reach for them constantly.</p>
 
         <div class="blog-product">
+            <div class="image-wrap">
+                <img src="https://m.media-amazon.com/images/I/41SEgwRnBaL._SL500_.jpg" alt="TrendPlain Glass Olive Oil Sprayer" loading="lazy">
+            </div>
             <div class="info">
                 <span class="tag">Essential</span>
                 <h2>TrendPlain Glass Olive Oil Sprayer</h2>
                 <p>Most oil sprayers are basically perfume atomizers that clog within a month. This one is glass — no plastic leaching into your oil, no chemical taste. It delivers a proper fine mist without dribbling. You use less oil, your food gets coated evenly, and it doesn't feel like a gimmick you'll toss in six months.</p>
                 <p>If you roast vegetables even semi-regularly, this earns its spot immediately.</p>
-                <a href="/" class="shop-link">See on WorthIt Goods →</a>
+                <a href="https://www.amazon.com/dp/B08R6F6Z7Z?tag=vhicklegar011-20" class="shop-link" target="_blank" rel="nofollow">Shop on Amazon →</a>
             </div>
         </div>
 
         <div class="blog-product">
+            <div class="image-wrap">
+                <img src="https://m.media-amazon.com/images/I/31g-vMCVYbL._SL500_.jpg" alt="Angry Mama Microwave Steam Cleaner" loading="lazy">
+            </div>
             <div class="info">
                 <span class="tag">Fun</span>
                 <h2>Angry Mama Microwave Steam Cleaner</h2>
                 <p>It looks ridiculous. A little angry mom-shaped gadget you fill with vinegar water and microwave. But here's the thing — it genuinely works better than scrubbing. The steam loosens baked-on food in minutes, you wipe once, and you're done. No elbow grease, no harsh chemicals.</p>
                 <p>It's a conversation piece and a genuinely useful cleaning hack in one.</p>
-                <a href="/" class="shop-link">See on WorthIt Goods →</a>
+                <a href="https://www.amazon.com/dp/B07PNBPR1M?tag=vhicklegar011-20" class="shop-link" target="_blank" rel="nofollow">Shop on Amazon →</a>
             </div>
         </div>
 
         <div class="blog-product">
+            <div class="image-wrap">
+                <img src="https://m.media-amazon.com/images/I/817vIEf3OYL._AC_SL1500_.jpg" alt="Deiss PRO Lemon Zester & Cheese Grater" loading="lazy">
+            </div>
             <div class="info">
                 <span class="tag">Workhorse</span>
                 <h2>Deiss PRO Lemon Zester & Cheese Grater</h2>
                 <p>Microplanes are great but they have one job. This is a four-sided box grater with a proper zester on one side, and it handles everything — Parmesan, ginger, garlic, citrus — without clogging. The angle is comfortable, it doesn't flex when you put pressure on it, and it cleans up easily.</p>
                 <p>Replace that worn-out grater from college. Future you will thank yourself every pasta night.</p>
-                <a href="/" class="shop-link">See on WorthIt Goods →</a>
+                <a href="https://www.amazon.com/dp/B07T5WQJK2?tag=vhicklegar011-20" class="shop-link" target="_blank" rel="nofollow">Shop on Amazon →</a>
             </div>
         </div>
 
         <div class="blog-product">
+            <div class="image-wrap">
+                <img src="https://m.media-amazon.com/images/I/71w7jfdY+0L._AC_SL1500_.jpg" alt="Angled Measuring Cup Set" loading="lazy">
+            </div>
             <div class="info">
                 <span class="tag">Upgrade</span>
                 <h2>Angled Measuring Cup Set</h2>
                 <p>The measurement markings are on the inside at an angle so you can read them from above without crouching down to eye level. It sounds trivial. It's not. You stop guessing, you stop overfilling, and they pour cleanly without dribbling down the side of the cup.</p>
                 <p>There's a reason these show up on wedding registries — they're one of those small upgrades you never go back from.</p>
-                <a href="/" class="shop-link">See on WorthIt Goods →</a>
+                <a href="https://www.amazon.com/dp/B0000CCY1Y?tag=vhicklegar011-20" class="shop-link" target="_blank" rel="nofollow">Shop on Amazon →</a>
             </div>
         </div>
 
         <div class="blog-product">
+            <div class="image-wrap">
+                <img src="https://m.media-amazon.com/images/I/81cv56sFXbL._AC_SL1500_.jpg" alt="Cocktail Smoker Kit" loading="lazy">
+            </div>
             <div class="info">
                 <span class="tag">Entertaining</span>
-                <h2>Cocktail Smoker Kit</h2>
+                <h2>Cocktail Smoker Kit with Torch – 6 Flavors</h2>
                 <p>Smoked cocktails sound like a bartender flex, but this kit makes it simple at home. A torch, a smoker box, and six wood flavors (cherry, hickory, applewood, and more). You can smoke a Manhattan or an Old Fashioned in about 30 seconds, and it genuinely changes the flavor — richer, deeper, more complex.</p>
                 <p>If you entertain at all, this is the easiest way to impress without needing any actual bartending skill.</p>
-                <a href="/" class="shop-link">See on WorthIt Goods →</a>
+                <a href="https://www.amazon.com/dp/B0BX5YMDDL?tag=vhicklegar011-20" class="shop-link" target="_blank" rel="nofollow">Shop on Amazon →</a>
             </div>
         </div>
 
         <div class="newsletter-box">
-            <h3>Get tools worth buying, every week</h3>
-            <p>New hand-picked finds, honest reviews, and zero hype. No spam, unsubscribe whenever.</p>
+            <div class="nl-icon">✉</div>
+            <h3>Get worth-it finds delivered</h3>
+            <p>New hand-picked picks every 2 weeks. Honest reviews, zero hype, unsubscribe anytime.</p>
             <form id="blogNewsletterForm">
                 <input type="email" id="blogNlEmail" placeholder="your@email.com" required>
                 <button type="submit">Subscribe</button>
             </form>
             <div class="nl-msg" id="blogNlMsg"></div>
+            <div class="nl-guarantee">No spam &middot; Unsubscribe with 1 click &middot; Hand-picked only</div>
         </div>
 
         <div class="blog-outro">
@@ -126,6 +197,12 @@
     </div>
 
     <div class="blog-footer">
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/#products">All Products</a>
+            <a href="/privacy.html">Privacy</a>
+        </div>
         <p>© 2026 WorthIt Goods. As an Amazon Associate, I earn from qualifying purchases.</p>
     </div>
 
@@ -134,6 +211,7 @@
         e.preventDefault();
         const email = document.getElementById('blogNlEmail').value;
         const msg = document.getElementById('blogNlMsg');
+        msg.className = 'nl-msg';
         msg.textContent = 'Subscribing...';
         try {
             const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
@@ -142,8 +220,11 @@
                 body: JSON.stringify({email})
             });
             const data = await res.json();
+            msg.className = data.success ? 'nl-msg success' : 'nl-msg error';
             msg.textContent = data.message;
+            if (data.success) document.getElementById('blogNlEmail').value = '';
         } catch(err) {
+            msg.className = 'nl-msg error';
             msg.textContent = 'Something went wrong. Please try again.';
         }
     });
