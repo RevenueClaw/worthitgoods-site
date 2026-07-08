@@ -7,11 +7,12 @@ Strategy:
   - Query by category with discovery-friendly keywords
   - Filter for high ratings (4.5+) and sufficient reviews (100+)
   - Exclude obvious/boring products (brand-name commodities, consumables)
+  - Skip duplicates (same product type already on site)
   - Generate compelling descriptions and blurbs
   - Output ready for add_batch.sh
 
 Usage:
-  python3 curate_products.py [--count 10] [--categories kitchen,home,tools]
+  python3 curate_products.py [--count 2] [--categories kitchen,home,tools]
 """
 
 import json
@@ -19,12 +20,9 @@ import os
 import sys
 import re
 import time
-import urllib.request
-import urllib.parse
 from pathlib import Path
 from datetime import date
 
-# Add chipradar to path for PAAPI
 sys.path.insert(0, "/home/rock/.openclaw/workspace/chipradar")
 from amazon_creators_api_v1 import AmazonCreatorsAPI
 
@@ -32,7 +30,6 @@ PARTNER_TAG = "vhicklegar011-20"
 OUTPUT_DIR = Path("data")
 OUTPUT_FILE = OUTPUT_DIR / f"curated_batch_{date.today():%Y-%m-%d}.json"
 
-# Categories to search with discovery-friendly keywords
 CURATION_QUERIES = {
     "kitchen": [
         "unique kitchen gadget", "clever kitchen tool", "silicone kitchen accessory",
@@ -61,7 +58,6 @@ CURATION_QUERIES = {
     ],
 }
 
-# Products to exclude (well-known brand commodities people already know about)
 EXCLUDE_TITLE_PATTERNS = [
     r"^Apple\s+",
     r"^Samsung\s+",
@@ -86,89 +82,103 @@ EXCLUDE_TITLE_PATTERNS = [
     r"iRobot\s+",
 ]
 
-# Categories that are "boring" — things people easily find on their own
-# We want products people WOULDN'T naturally stumble on
-EXCLUDE_CATEGORY_KEYWORDS = [
+BORING_KEYWORDS = [
     "batteries", "light bulb", "paper towel", "toilet paper",
     "trash bag", "cleaning supply", "laundry", "diaper",
     "baby wipe", "dog food", "cat food", "vitamin", "supplement",
     "ink cartridge", "toner", "filter replacement",
 ]
 
+EXISTING_CACHE = None
+
+def load_existing():
+    global EXISTING_CACHE
+    if EXISTING_CACHE is None:
+        try:
+            with open("data/sample_products.json") as f:
+                EXISTING_CACHE = json.load(f)
+        except:
+            EXISTING_CACHE = []
+    return EXISTING_CACHE
+
+def is_duplicate_by_content(title):
+    """Detect if a product is essentially the same as something already on site."""
+    existing = load_existing()
+    t = title.lower().strip()
+    
+    for p in existing:
+        et = p.get("title", "").lower().strip()
+        if not et:
+            continue
+        new_words = set(t.split())
+        exist_words = set(et.split())
+        common = new_words & exist_words
+        
+        stop_words = {"and", "the", "for", "with", "in", "of", "to", "a", "an", "is", "-", "|", ","}
+        meaningful = [w for w in common if len(w) > 3 and w not in stop_words]
+        
+        # Same brand identified in title
+        new_brand = t.split()[0] if t.split() else ""
+        exist_brand = et.split()[0] if et.split() else ""
+        
+        # 4+ meaningful words in common = likely same product
+        if len(meaningful) >= 4:
+            return True
+        
+        # Same brand + same product-type word = likely duplicate
+        if new_brand == exist_brand and len(new_brand) > 3:
+            type_words = {"spoon", "rest", "holder", "tool", "case", "bag", "pack",
+                         "organizer", "mat", "towel", "kit", "set", "cover", "caddy",
+                         "rack", "stand", "clip", "strap", "light", "lamp"}
+            new_types = set(t.split()) & type_words
+            exist_types = set(et.split()) & type_words
+            if new_types & exist_types:
+                return True
+    
+    return False
 
 def is_excluded(title, brand=""):
-    """Check if a product should be excluded (too common/known)."""
     t = title.lower()
-    # Check brand-name exclusions
     for pat in EXCLUDE_TITLE_PATTERNS:
         if re.search(pat, title):
             return True
-    # Check boring category keywords
-    for kw in EXCLUDE_CATEGORY_KEYWORDS:
+    for kw in BORING_KEYWORDS:
         if kw in t:
             return True
-    # ASIN patterns (avoid generic products)
     return False
 
-
-def generate_curation_blurb(title, category):
-    """Generate a short blurb for the curated product."""
-    return f"A hand-picked {category} find that delivers real quality without the usual compromises."
-
-
-def generate_curation_description(title, blurb, category):
-    """Generate a proper Why It's Worth It description."""
-    # Remove parenthetical details, numbers, from title for clean analysis
-    t = title.lower()
-    
-    # Category-specific hooks
-    hooks = {
-        "kitchen": " transforms your daily cooking routine with thoughtful design. ",
-        "home": " solves a problem you didn't realize you could fix so simply. ",
-        "tools": " does its job so well you will wonder why you put up with lesser tools. ",
-        "outdoor": " makes time outside more enjoyable without adding complexity. ",
-        "lifestyle": " earns its spot in your daily carry within a week. ",
-        "automotive": " turns a minor frustration into something you no longer think about. ",
-    }
-    
-    hook = hooks.get(category, " stands out from the alternatives in meaningful ways. ")
-    return f"Why It's Worth It: This {title[:40].strip()}{hook}Built from quality materials with attention to detail, it is the kind of thing you reach for again and again. A small upgrade that delivers disproportionate value."
-
-
-def curate_products(count_per_category=5):
-    """Main curation pipeline."""
+def curate_products(count_per_category=2):
     api = AmazonCreatorsAPI(partner_tag=PARTNER_TAG)
     curated = []
     seen_asins = set()
     
     print(f"\n{'='*60}")
     print(f"WorthItGoods — Product Curation Pipeline")
-    print(f"Target: {count_per_category} products per category")
+    print(f"Target: {count_per_category} per category ({count_per_category * 6} total)")
     print(f"{'='*60}\n")
     
     for category, queries in CURATION_QUERIES.items():
-        category_hits = 0
+        hits = 0
         print(f"\n--- {category.upper()} ---")
         
         for query in queries:
-            if category_hits >= count_per_category:
+            if hits >= count_per_category:
                 break
             
-            print(f"  Searching: '{query}'...", end=" ", flush=True)
-            
+            print(f"  '{query}'...", end=" ", flush=True)
             try:
                 results = api.search_items(query, item_count=10)
             except Exception as e:
-                print(f"❌ Error: {e}")
+                print(f"error: {e}")
                 continue
             
             if not results:
                 print("no results")
                 continue
             
-            new_from_query = 0
+            new_count = 0
             for r in results:
-                if category_hits >= count_per_category:
+                if hits >= count_per_category:
                     break
                 
                 asin = r.get("asin", "")
@@ -178,82 +188,65 @@ def curate_products(count_per_category=5):
                 title = r.get("title", "") or ""
                 brand = r.get("brand", "") or ""
                 
-                # Skip excluded
                 if is_excluded(title, brand):
                     continue
+                if is_duplicate_by_content(title):
+                    continue
                 
-                # Skip if no image
                 images = r.get("images", {})
                 primary = images.get("primary", {}) if isinstance(images, dict) else {}
                 large = primary.get("large", {}) if isinstance(primary, dict) else {}
-                image_url = large.get("url", "") if isinstance(large, dict) else ""
-                if not image_url:
+                img = large.get("url", "") if isinstance(large, dict) else ""
+                if not img:
                     continue
-                
-                # Build product entry
-                blurb = generate_curation_blurb(title, category)
-                desc = generate_curation_description(title, blurb, category)
                 
                 product = {
                     "title": title,
-                    "image": image_url,
-                    "description": desc,
-                    "blurb": blurb,
+                    "image": img,
+                    "description": f"(edit me — write genuine why-it-is-worth-it description)",
+                    "blurb": f"(edit me — one-line hook)",
                     "affiliate_url": f"https://www.amazon.com/dp/{asin}?tag={PARTNER_TAG}",
                 }
                 
                 curated.append(product)
                 seen_asins.add(asin)
-                category_hits += 1
-                new_from_query += 1
-                
-                print(f"\n    ✅ {title[:60]}...")
+                hits += 1
+                new_count += 1
+                print(f"\n    ✅ {title[:65]}")
             
-            if new_from_query == 0:
-                print("(no new matches)")
+            if new_count == 0:
+                print("(no new)")
             else:
-                print(f"    ({new_from_query} from this query)")
+                print(f"    +{new_count}")
             
-            time.sleep(0.3)  # Rate limiting
+            time.sleep(0.3)
         
-        print(f"  Category total: {category_hits}")
+        print(f"  total: {hits}")
     
     return curated
 
-
-def save_curated(products):
-    """Save curated products as a batch JSON file."""
+def save(products):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
     with open(OUTPUT_FILE, "w") as f:
         json.dump(products, f, indent=2)
-    
     print(f"\n{'='*60}")
-    print(f"Saved {len(products)} curated products to:")
-    print(f"  {OUTPUT_FILE}")
-    print(f"\nTo merge into site:")
-    print(f"  ./add_batch.sh {OUTPUT_FILE}")
+    print(f"Saved {len(products)} products to {OUTPUT_FILE}")
+    print(f"IMPORTANT: Edit descriptions before merging!")
+    print(f"Then: ./add_batch.sh {OUTPUT_FILE}")
     print(f"{'='*60}")
-    
-    return OUTPUT_FILE
-
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Curate products via PAAPI")
-    parser.add_argument("--count", type=int, default=5,
-                       help="Products per category (default: 5)")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--count", type=int, default=2)
     args = parser.parse_args()
-    
     products = curate_products(count_per_category=args.count)
-    
     if products:
-        save_curated(products)
+        save(products)
         return 0
     else:
-        print("\n❌ No products curated. Check API connection.")
+        print("No products found.")
         return 1
-
 
 if __name__ == "__main__":
     sys.exit(main())
