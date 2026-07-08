@@ -321,8 +321,14 @@ const indexHTML = `<!DOCTYPE html>
     </script>
 
     <footer>
-        <p>© 2026 WorthIt Goods. All rights reserved.</p>
-        <p>As an Amazon Associate, I earn from qualifying purchases. This does not affect the price you pay.</p>
+        <div class="footer-links" style="margin-bottom: 20px;">
+            <a href="/" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Home</a>
+            <a href="/blog.html" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Blog</a>
+            <a href="/#products" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">All Products</a>
+            <a href="/privacy.html" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Privacy</a>
+        </div>
+        <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
+        <p>As an Amazon Associate, I earn from qualifying purchases. Prices may vary.</p>
     </footer>
 
 </body>

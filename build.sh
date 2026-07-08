@@ -18,10 +18,25 @@ mkdir -p _site/blog
 cp blog.html _site/
 cp blog/*.html _site/blog/
 
-# === Overwrite with hand-crafted blog post (prose, newsletter CTA, custom descriptions) ===
-cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
-cp blog/custom-5-kitchen-tools.html blog/2026-07-08-5-kitchen-tools.html
+# Copy privacy page
+cp privacy.html _site/
 
-find _site -name '*.html' | head -5
+# Generate sitemap
+cat > _site/sitemap.xml << 'XML_EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.worthitgoods.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.worthitgoods.com/blog.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.worthitgoods.com/privacy.html</loc><priority>0.3</priority></url>
+XML_EOF
 
-echo "\nBuild done. Toggles + 5 blog posts ready."
+for f in blog/*.html; do
+  slug=$(basename "$f" .html)
+  printf '  <url><loc>https://www.worthitgoods.com/blog/%s</loc><priority>0.7</priority></url>\n' "$slug.html" >> _site/sitemap.xml
+done
+
+echo '</urlset>' >> _site/sitemap.xml
+
+echo "Sitemap: $(grep -c '<url>' _site/sitemap.xml) URLs"
+
+find _site -name '*.html' | wc -l | xargs -I{} echo "{} HTML pages built."
