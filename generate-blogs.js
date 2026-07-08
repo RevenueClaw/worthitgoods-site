@@ -95,6 +95,7 @@ const parseBatchProduct = (p) => {
 };
 
 const categoryBlogs = [
+
   { slug: '2026-05-08-batch14-latest-picks', title: 'Batch 14: Newest Worth-It Picks', heroSubtitle: 'Fresh drops: From kinetic sand toys to GaN chargers—gear that earns its spot.', category: 'batch14', desc: 'Batch 14: Kinetic Sand toys, emergency kits, GaN chargers, Ninja blenders, wood docks, UA duffles, Souper Cubes, Pi cases.', introPara1: "Toys to tech, kitchen to makers.", introPara2: "Fresh vetted variety.", introPara3: "Grab these gems." },
   { slug: '2026-04-30-batch13-latest-picks', title: 'Batch 13: Freshest Worth-It Picks', heroSubtitle: 'Curated finds: Tools, toys, and treats sorted by actual usefulness.', category: 'batch13', desc: 'Batch 13: Flashlights, screwdrivers, squishy toys, slushie machines, Pi cases.', introPara1: "Quirky car/party/kitchen upgrades.", introPara2: "Instant fixes, laughs, clean.", introPara3: "Latest gems." },
   { slug: '2026-04-29-batch12-latest-picks', title: 'Batch 12: Newest Worth-It Picks', heroSubtitle: 'Smart picks for parties, trails, and everyday life—vetted and ready.', category: 'batch12', desc: 'Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.', introPara1: "Fun/utility mix from recent drop.", introPara2: "Party prep, geek tables, trails.", introPara3: "Solid starters." },
