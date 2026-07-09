@@ -35,6 +35,7 @@ XML_EOF
 
 for f in blog/*.html; do
   slug=$(basename "$f" .html)
+  [[ $slug == custom-* ]] && continue
   printf '  <url><loc>https://www.worthitgoods.com/blog/%s</loc><priority>0.7</priority></url>\n' "$slug.html" >> _site/sitemap.xml
 done
 

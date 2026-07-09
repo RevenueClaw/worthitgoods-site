@@ -47,7 +47,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Families, block parties, summer birthdays
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0B44PDCLC?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0B44PDCLC?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -65,7 +65,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Homeowners, porch decorators, yard displays
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B09Z66SHD9?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B09Z66SHD9?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -83,7 +83,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Dog owners, pet parents
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B092DB5CMC?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B092DB5CMC?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -101,7 +101,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Party hosts, event planners, classroom parties
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0F3D12C4W?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0F3D12C4W?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -119,7 +119,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** BBQ hosts, outdoor celebrations, picnics
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0F1Y2KZKG?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0F1Y2KZKG?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -137,7 +137,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Table decorators, car decoration enthusiasts, gift add-on
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0C33D7SGP?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0C33D7SGP?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -155,7 +155,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Kids' parties, family gatherings, outdoor activity favors
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0BY4NPZJF?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0BY4NPZJF?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -173,7 +173,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Families, backyard gatherings, beach trips
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0DS1VPS23?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0DS1VPS23?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -191,7 +191,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Families with kids, interactive table settings
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B09DB5QY2K?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B09DB5QY2K?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -209,7 +209,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Cat owners, pet-friendly households, unique gift
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0D256N87G?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0D256N87G?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -227,7 +227,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** History buffs, humor lovers, conversation-starting gifts
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0B4HBKFRP?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0B4HBKFRP?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -245,7 +245,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Large dog owners, multi-holiday use
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B092DB5CMC?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B092DB5CMC?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -263,7 +263,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Quick party prep, backup supply
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B0B44PDCLC?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B0B44PDCLC?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -281,7 +281,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Full-property decorators, anyone serious about their 4th of July setup
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B09Z66SHD9?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B09Z66SHD9?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 
@@ -299,7 +299,7 @@ categories: [4th-of-july, gifts, summer]
 
 **Ideal for:** Grilling enthusiasts, anyone serious about BBQ
 
-👉 [Buy on Amazon](https://www.amazon.com/dp/B079J4KT8H?linkCode=ll2&tag=worthitgoods-20)
+👉 [Buy on Amazon](https://www.amazon.com/dp/B079J4KT8H?linkCode=ll2&tag=vhicklegar011-20)
 
 ---
 

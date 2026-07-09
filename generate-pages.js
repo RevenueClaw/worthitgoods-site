@@ -11,6 +11,17 @@ if (!fs.existsSync(siteDir)) {
 const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 
+function cleanTitle(title) {
+    if (title.length <= 55) return title;
+    for (const sep of [' \u2013 ', ' \u2014 ', ' - ', ' | ', ' \u2013', ' \u2014']) {
+        const idx = title.indexOf(sep);
+        if (idx > 30 && idx < 100) return title.slice(0, idx).trim();
+    }
+    const comma = title.indexOf(', ', 45);
+    if (comma > 40 && comma < 100) return title.slice(0, comma).trim();
+    return title.slice(0, 55).trim() + '\u2026';
+}
+
 function renderProduct(p) {
     return `
                 <div class="product-card">
@@ -18,7 +29,7 @@ function renderProduct(p) {
                         <img src="${p.image}" alt="${p.title}">
                     </div>
                     <div class="content">
-                        <h3>${p.title}</h3>
+                        <h3>${cleanTitle(p.title)}</h3>
                         
                         <!-- Short preview: blurb -->
                         <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
