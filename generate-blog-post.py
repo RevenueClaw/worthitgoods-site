@@ -25,7 +25,7 @@ THEMES = {
         "title": "Kitchen Essentials That Earn Their Drawer Space",
         "desc": "Real tools that make cooking less frustrating. No unitaskers, no gimmicks.",
         "slug_prefix": "kitchen-essentials",
-        "match": lambda t, b, d: bool(re.search(r'(measur|spatula|grater|zest|kitchen|cook|chef|bake|knife|peeler|cutter|strainer|whisk|bowl|spoon|towel|soap|clean|scrub|squeeze|stor(?:age|e)|organiz|pantry|counter|dish)', (t+' '+b+' '+d).lower())) and not re.search(r'(watch|phone|cable|backpack|survival|flashlight|multitool)', (t+' '+b+' '+d).lower())
+        "match": lambda t, b, d: bool(re.search(r'(measur|spatula|grater|zest|kitchen|cook|chef|bake|knife|peeler|cutter|strainer|whisk|bowl|spoon|towel|soap|clean|scrub|squeeze|stor(?:age|e)|organiz|pantry|counter|dish)', (t+' '+b+' '+d).lower())) and not re.search(r'(watch|phone|cable|backpack|survival|flashlight|multitool|cocktail|smoker|wine|beer|drinkware|flask|barware|can.?holder)', (t+' '+b+' '+d).lower())
     },
     "edc-pocket-gear": {
         "title": "Everyday Carry: Gear You'll Actually Use",
