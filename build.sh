@@ -22,6 +22,7 @@ cp blog/*.html _site/blog/
 cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 
 # Copy privacy page
+cp unsubscribe.html _site/
 cp privacy.html _site/
 
 # Generate sitemap
@@ -31,6 +32,7 @@ cat > _site/sitemap.xml << 'XML_EOF'
   <url><loc>https://www.worthitgoods.com/</loc><priority>1.0</priority></url>
   <url><loc>https://www.worthitgoods.com/blog.html</loc><priority>0.9</priority></url>
   <url><loc>https://www.worthitgoods.com/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority></url>
 XML_EOF
 
 for f in blog/*.html; do

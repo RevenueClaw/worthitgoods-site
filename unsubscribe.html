@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribed · WorthIt Goods</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .unsub-box {
+            max-width: 480px;
+            width: 100%;
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 48px 32px;
+            border: 1px solid #e5e7eb;
+        }
+        .unsub-box h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 12px;
+        }
+        .unsub-box p {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin: 0 0 24px;
+        }
+        .unsub-box .btn-back {
+            display: inline-block;
+            background: #1f2937;
+            color: #fff !important;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 11px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .unsub-box .btn-back:hover {
+            background: #374151;
+        }
+        .unsub-box .small-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #9ca3af;
+            text-decoration: none;
+        }
+        .unsub-box .small-link:hover {
+            color: #6b7280;
+        }
+        .unsub-box .success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .unsub-box .substatus {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="unsub-box">
+        <span class="success-icon">✓</span>
+        <h1>You're unsubscribed</h1>
+        <p>No more emails from WorthIt Goods. We'll keep the door open if you want back.</p>
+        <a href="https://www.worthitgoods.com" class="btn-back">Browse the site →</a>
+        <a href="https://www.worthitgoods.com" class="small-link">worthitgoods.com</a>
+        <div class="substatus" id="status"></div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get('email');
+        const status = document.getElementById('status');
+        if (email) {
+            status.textContent = email.replace(/./g, '•').slice(0, -4) + email.slice(-4);
+        }
+    </script>
+</body>
+</html>
