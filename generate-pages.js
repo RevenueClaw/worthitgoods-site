@@ -22,11 +22,65 @@ function cleanTitle(title) {
     return title.slice(0, 55).trim() + '\u2026';
 }
 
+// ── SEO: JSON-LD Structured Data ────────────────────────────────────────────
+
+function generateProductSchema(products) {
+    // Product schema for every item — enables Google rich results
+    const productSchemas = products.map((p, i) => ({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": p.title,
+        "image": p.image,
+        "description": (p.blurb || p.description).substring(0, 300),
+        "offers": {
+            "@type": "Offer",
+            "url": p.affiliate_url,
+            "availability": "https://schema.org/InStock",
+            "seller": {
+                "@type": "Organization",
+                "name": "Amazon.com"
+            }
+        }
+    }));
+
+    // WebSite schema for site search
+    const siteSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "WorthItGoods",
+        "url": "https://www.worthitgoods.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://www.worthitgoods.com/#products"
+            },
+            "query-input": "required name=search_term_string"
+        },
+        "description": "Curated products actually worth buying. Honest reviews, hand-picked finds."
+    };
+
+    // Organization schema
+    const orgSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "WorthItGoods",
+        "url": "https://www.worthitgoods.com",
+        "description": "Curated product discovery — honest picks, no hype."
+    };
+
+    return `
+<script type="application/ld+json">${JSON.stringify(siteSchema, null, 2)}</script>
+<script type="application/ld+json">${JSON.stringify(orgSchema, null, 2)}</script>
+<script type="application/ld+json">${JSON.stringify(productSchemas, null, 2)}</script>`;
+}
+
+
 function renderProduct(p) {
     return `
                 <div class="product-card">
                     <div class="image-wrapper">
-                        <img src="${p.image}" alt="${p.title}">
+                        <img src="${p.image}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy">
                     </div>
                     <div class="content">
                         <h3>${cleanTitle(p.title)}</h3>
@@ -64,25 +118,26 @@ const indexHTML = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorthIt Goods • Products Actually Worth Buying</title>
+    <title>${products.slice(0, 3).map(p => cleanTitle(p.title)).join(' • ')} — WorthItGoods</title>
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
-    <meta property="og:description" content="Hand-picked products that are actually worth it. Honest reviews, comparisons, and buying advice.">
-    <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="WorthItGoods - Honest Curated Products Worth Buying (Updated 2026-04-30 12:28 EDT)">
-    <!-- FORCE COMMIT: OG image cache bust via alt/timestamp -->
+    <meta property="og:title" content="${products.slice(0, 2).map(p => cleanTitle(p.title)).join(' & ')} — WorthItGoods">
+    <meta property="og:description" content="${products.slice(0, 4).map(p => p.blurb || p.description.substring(0, 80)).join(' | ')}">
+    <meta property="og:image" content="${products[0].image}">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:image:alt" content="${cleanTitle(products[0].title)} — featured worth-it pick on WorthItGoods">
     <meta property="og:url" content="https://www.worthitgoods.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="WorthItGoods">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WorthIt Goods - Honest Curated Products Worth Buying">
-    <meta name="twitter:description" content="Hand-picked products that are actually worth it.">
-    <meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image.jpg?v=20260430">
+    <meta name="twitter:title" content="WorthItGoods — Hand-picked Products Actually Worth Buying">
+    <meta name="twitter:description" content="${products.slice(0, 3).map(p => cleanTitle(p.title)).join(', ')} and more worth-it finds.">
+    <meta name="twitter:image" content="${products[0].image}">
+
+    ${generateProductSchema(products)}
 
     <link rel="stylesheet" href="/style.css">
     <style>
