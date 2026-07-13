@@ -41,7 +41,7 @@ from datetime import date
 sys.path.insert(0, "/home/rock/.openclaw/workspace/chipradar")
 from amazon_creators_api_v1 import AmazonCreatorsAPI
 
-PARTNER_TAG = "vhicklegar011-20"
+PARTNER_TAG = "worthitgoods-20"
 OUTPUT_DIR = Path("data")
 OUTPUT_FILE = OUTPUT_DIR / f"curated_batch_{date.today():%Y-%m-%d}.json"
 
