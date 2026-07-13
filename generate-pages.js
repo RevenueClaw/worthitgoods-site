@@ -139,6 +139,7 @@ const indexHTML = `<!DOCTYPE html>
 
     ${generateProductSchema(products)}
 
+    <meta name="p:domain_verify" content="ca0773faec0aacd987007dc40e6e32f2"/>
     <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }
