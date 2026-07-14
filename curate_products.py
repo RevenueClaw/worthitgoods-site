@@ -39,7 +39,7 @@ from pathlib import Path
 from datetime import date
 
 sys.path.insert(0, "/home/rock/.openclaw/workspace/chipradar")
-from amazon_creators_api_v1 import AmazonCreatorsAPI
+from amazon_creators_api_v3 import AmazonCreatorsAPI
 
 PARTNER_TAG = "worthitgoods-20"
 OUTPUT_DIR = Path("data")
@@ -493,6 +493,7 @@ def curate_products(count_per_category=2):
                     "description": f"(edit me — write genuine why-it-is-worth-it description)",
                     "blurb": f"(edit me — one-line hook)",
                     "affiliate_url": f"https://www.amazon.com/dp/{asin}?tag={PARTNER_TAG}",
+                    "asin": asin,  # kept for enrichment
                 }
                 
                 curated.append(product)
@@ -510,6 +511,45 @@ def curate_products(count_per_category=2):
             time.sleep(0.3)
         
         print(f"  total: {hits}")
+    
+    # ── Enrich with PAAPI data (ratings, reviews, price, features) ──
+    print(f"\n  📊 Enriching {len(curated)} products with PAAPI data...")
+    enriched_asins = [p["asin"] for p in curated if "asin" in p]
+    if enriched_asins:
+        try:
+            enriched_data = api.get_items(enriched_asins)
+            if isinstance(enriched_data, dict):
+                for p in curated:
+                    asin = p.get("asin")
+                    ed = enriched_data.get(asin, {})
+                    if ed and "error" not in ed:
+                        # Price from PAAPI
+                        if ed.get("price"):
+                            p["price"] = ed["price"]
+                        # Rating
+                        reviews = ed.get("customer_reviews", {}) or {}
+                        if reviews.get("star_rating"):
+                            p["rating"] = reviews["star_rating"]
+                        if reviews.get("count"):
+                            p["reviews_count"] = reviews["count"]
+                        # Features
+                        if ed.get("features"):
+                            p["features"] = ed["features"]
+                        # Sales rank
+                        bn = ed.get("browse_node", {}) or {}
+                        if bn.get("sales_rank"):
+                            p["sales_rank"] = bn["sales_rank"]
+                    # Clean up internal ASIN field
+                    del p["asin"]
+            print(f"  ✅ Enriched {len(curated)} products with PAAPI data")
+        except Exception as e:
+            print(f"  ⚠️ Enrichment failed: {e}")
+            # Clean up ASIN fields anyway
+            for p in curated:
+                p.pop("asin", None)
+    else:
+        for p in curated:
+            p.pop("asin", None)
     
     print(f"\n  📊 Fun stats: {len(fun_to_include)} fun products in batch of {len(curated)}")
     return curated

@@ -382,30 +382,42 @@ footer {
 }
 
 /* Color-coded badges */
-.product-badge[data-badge="🔥 Editor's Pick"] {
+.product-badge[data-badge*="Editor"] {
     background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
-.product-badge[data-badge="⚡ Great Value"] {
+.product-badge[data-badge*="Great Value"] {
     background: linear-gradient(135deg, #27ae60, #2ecc71);
 }
-.product-badge[data-badge="💡 Unique Find"] {
+.product-badge[data-badge*="Unique Find"] {
     background: linear-gradient(135deg, #8e44ad, #9b59b6);
 }
-.product-badge[data-badge="🏆 Award Winner"] {
+.product-badge[data-badge*="Award"] {
     background: linear-gradient(135deg, #f39c12, #e67e22);
 }
-.product-badge[data-badge="📦 Compact Design"] {
+.product-badge[data-badge*="Compact"] {
     background: linear-gradient(135deg, #3498db, #2980b9);
 }
-.product-badge[data-badge="🎁 Perfect Gift"] {
+.product-badge[data-badge*="Gift"] {
     background: linear-gradient(135deg, #e91e63, #c2185b);
 }
-.product-badge[data-badge="⭐ Top Rated"] {
+.product-badge[data-badge*="Top Rated"] {
     background: linear-gradient(135deg, #f1c40f, #f39c12);
     color: #1a1a1a;
 }
-.product-badge[data-badge="🔧 Premium Build"] {
+.product-badge[data-badge*="Premium"] {
     background: linear-gradient(135deg, #2c3e50, #7f8c8d);
+}
+.product-badge[data-badge*="Best Seller"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    animation: badge-pulse 2s ease-in-out infinite;
+}
+.product-badge[data-badge*="Budget"] {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+@keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
 }
 
 /* ── Product Card Badge Styles (from generate-pages.js inline) ── */

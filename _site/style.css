@@ -357,3 +357,179 @@ footer {
         font-size: 0.95rem;
     }
 }
+
+/* ── Product Badges ── */
+.product-card.has-badge .image-wrapper {
+    position: relative;
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    z-index: 2;
+    pointer-events: none;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Color-coded badges */
+.product-badge[data-badge*="Editor"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+.product-badge[data-badge*="Great Value"] {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+.product-badge[data-badge*="Unique Find"] {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+.product-badge[data-badge*="Award"] {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+.product-badge[data-badge*="Compact"] {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+.product-badge[data-badge*="Gift"] {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+.product-badge[data-badge*="Top Rated"] {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: #1a1a1a;
+}
+.product-badge[data-badge*="Premium"] {
+    background: linear-gradient(135deg, #2c3e50, #7f8c8d);
+}
+.product-badge[data-badge*="Best Seller"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    animation: badge-pulse 2s ease-in-out infinite;
+}
+.product-badge[data-badge*="Budget"] {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+@keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(231, 76, 60, 0); }
+}
+
+/* ── Product Card Badge Styles (from generate-pages.js inline) ── */
+
+/* ═════════════════════════════════════════════════════════════════════════
+   SEASONAL THEME SYSTEM
+   Activated via data-theme attribute on .hero
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* -- Theme Badge -- */
+.theme-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* -- Seasonal floating decor via pseudo-elements -- */
+.hero[data-theme]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-repeat: repeat;
+    background-size: 80px;
+}
+
+/* ── Back to School ── */
+.hero[data-theme="back_to_school"] {
+    background: linear-gradient(135deg, #2b5876, #4e4376, #f2994a, #f2c94c);
+    background-size: 400% 400%;
+}
+.hero[data-theme="back_to_school"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='0' y='20' font-size='14' opacity='0.5'%3E✏️%3C/text%3E%3Ctext x='45' y='60' font-size='12' opacity='0.3'%3E📐%3C/text%3E%3C/svg%3E");
+}
+.hero[data-theme="back_to_school"] .hero-content::after {
+    background: #f2c94c;
+}
+
+/* ── Fall Essentials ── */
+.hero[data-theme="fall_essentials"] {
+    background: linear-gradient(135deg, #8B4513, #CD853F, #D2691E, #B8860B);
+    background-size: 400% 400%;
+}
+.hero[data-theme="fall_essentials"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='5' y='18' font-size='12' opacity='0.5'%3E🍂%3C/text%3E%3Ctext x='40' y='55' font-size='14' opacity='0.3'%3E🍁%3C/text%3E%3C/svg%3E");
+}
+.hero[data-theme="fall_essentials"] .hero-content::after {
+    background: #FFD700;
+}
+
+/* ── Halloween ── */
+.hero[data-theme="halloween"] {
+    background: linear-gradient(135deg, #0d0221, #2d1b4e, #ff6b35, #e63946);
+    background-size: 400% 400%;
+}
+.hero[data-theme="halloween"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='2' y='18' font-size='14' opacity='0.4'%3E🎃%3C/text%3E%3Ctext x='42' y='58' font-size='12' opacity='0.3'%3E👻%3C/text%3E%3C/svg%3E");
+}
+.hero[data-theme="halloween"] .hero-content::after {
+    background: #e63946;
+}
+.hero[data-theme="halloween"] h1 {
+    text-shadow: 0 0 30px rgba(230, 57, 70, 0.4), 0 2px 20px rgba(0,0,0,0.3);
+}
+
+/* ── Thanksgiving/Hosting ── */
+.hero[data-theme="thanksgiving_host"] {
+    background: linear-gradient(135deg, #5C4033, #8B6914, #D4A76A, #CD853F);
+    background-size: 400% 400%;
+}
+.hero[data-theme="thanksgiving_host"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='5' y='20' font-size='14' opacity='0.4'%3E🦃%3C/text%3E%3Ctext x='40' y='55' font-size='12' opacity='0.3'%3E🍂%3C/text%3E%3C/svg%3E");
+}
+.hero[data-theme="thanksgiving_host"] .hero-content::after {
+    background: #D4A76A;
+}
+
+/* ── Holiday Gift Guide ── */
+.hero[data-theme="holiday_gifts"] {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #c0392b, #f39c12, #27ae60);
+    background-size: 500% 500%;
+    animation: holiday-shimmer 15s ease infinite;
+}
+@keyframes holiday-shimmer {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
+}
+.hero[data-theme="holiday_gifts"]::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='2' y='18' font-size='14' opacity='0.35'%3E🎄%3C/text%3E%3Ctext x='42' y='56' font-size='12' opacity='0.25'%3E🎁%3C/text%3E%3C/svg%3E");
+}
+.hero[data-theme="holiday_gifts"] .hero-content::after {
+    background: linear-gradient(90deg, #c0392b, #f39c12, #27ae60);
+    width: 100px;
+}
+
+/* ── Product card glow for holiday themes ── */
+.hero[data-theme="halloween"] ~ #products .product-card {
+    box-shadow: 0 4px 20px rgba(230, 57, 70, 0.08);
+}
+.hero[data-theme="holiday_gifts"] ~ #products .product-card {
+    box-shadow: 0 4px 20px rgba(192, 57, 43, 0.08);
+}
