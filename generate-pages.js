@@ -105,10 +105,12 @@ function generateProductSchema(products) {
 
 
 function renderProduct(p) {
+    const badge = p.badge ? `<div class="product-badge" data-badge="${p.badge.replace(/"/g, '&quot;')}">${p.badge}</div>` : '';
     return `
-                <div class="product-card">
+                <div class="product-card${p.badge ? ' has-badge' : ''}">
                     <div class="image-wrapper">
                         <img src="${p.image}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy">
+                        ${badge}
                     </div>
                     <div class="content">
                         <h3>${cleanTitle(p.title)}</h3>
@@ -168,6 +170,9 @@ const indexHTML = `<!DOCTYPE html>
     ${generateProductSchema(products)}
 
     <meta name="p:domain_verify" content="ca0773faec0aacd987007dc40e6e32f2"/>
+    <link rel="alternate" type="application/rss+xml" title="WorthIt Goods — Blog RSS Feed" href="https://www.worthitgoods.com/feed.xml" />
+    <!-- Google Search Console: replace with your verification meta tag from search.google.com/search-console -->
+    <!-- <meta name="google-site-verification" content="..." /> -->
     <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }
@@ -420,6 +425,7 @@ const indexHTML = `<!DOCTYPE html>
         <div class="footer-links" style="margin-bottom: 20px;">
             <a href="/" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Home</a>
             <a href="/blog.html" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Blog</a>
+            <a href="/feed.xml" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">RSS Feed</a>
             <a href="/#products" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">All Products</a>
             <a href="/privacy.html" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Privacy</a>
         </div>

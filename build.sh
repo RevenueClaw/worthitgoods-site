@@ -25,6 +25,9 @@ cp style.css _site/
 # Generate blogs
 node generate-blogs.js
 
+# Generate RSS feed
+node generate-rss.js
+
 # Copy assets (css, images, etc.)
 cp -r assets _site/
 
@@ -46,6 +49,7 @@ cat > _site/sitemap.xml << 'XML_EOF'
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.worthitgoods.com/</loc><priority>1.0</priority></url>
   <url><loc>https://www.worthitgoods.com/blog.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.worthitgoods.com/feed.xml</loc><priority>0.8</priority></url>
   <url><loc>https://www.worthitgoods.com/privacy.html</loc><priority>0.3</priority></url>
   <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority></url>
 XML_EOF

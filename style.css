@@ -358,6 +358,58 @@ footer {
     }
 }
 
+/* ── Product Badges ── */
+.product-card.has-badge .image-wrapper {
+    position: relative;
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    z-index: 2;
+    pointer-events: none;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Color-coded badges */
+.product-badge[data-badge="🔥 Editor's Pick"] {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+.product-badge[data-badge="⚡ Great Value"] {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+.product-badge[data-badge="💡 Unique Find"] {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+.product-badge[data-badge="🏆 Award Winner"] {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+.product-badge[data-badge="📦 Compact Design"] {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+.product-badge[data-badge="🎁 Perfect Gift"] {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+.product-badge[data-badge="⭐ Top Rated"] {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: #1a1a1a;
+}
+.product-badge[data-badge="🔧 Premium Build"] {
+    background: linear-gradient(135deg, #2c3e50, #7f8c8d);
+}
+
+/* ── Product Card Badge Styles (from generate-pages.js inline) ── */
+
 /* ═════════════════════════════════════════════════════════════════════════
    SEASONAL THEME SYSTEM
    Activated via data-theme attribute on .hero
