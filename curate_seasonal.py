@@ -17,8 +17,8 @@ Usage:
   python3 curate_seasonal.py --theme dorm_life --count 2 --craft
 
 Available themes:
-  back_to_school, dorm_life, fall_halloween, holiday_gifts,
-  winter_essentials, spring_cleaning, summer_survival, college_grad
+  back_to_school, dorm_life, fall_essentials, halloween, thanksgiving_host,
+  holiday_gifts, winter_essentials, spring_cleaning, summer_survival, college_grad
 
   --count N   products per subcategory (default 2 = ~12 total)
   --craft     also attempt to generate a matching blog post
@@ -182,6 +182,86 @@ SEASONAL_THEMES = {
         "fun_queries": [
             "backyard game fun", "pool float unique", "summer gadget cool",
             "camping gadget clever", "travel essential cool",
+        ],
+    },
+    "fall_essentials": {
+        "label": "Fall Essentials",
+        "emoji": "🍂",
+        "description": "Cozy up — warm throws, comfort food gear, and the best of sweater weather",
+        "subcategories": {
+            "cozy_home": [
+                "cozy blanket throw premium", "scented candle fall",
+                "tea infuser", "coffee mug insulated", "slipper warm comfortable",
+                "humidifier quiet", "soft throw blanket",
+            ],
+            "fall_kitchen": [
+                "apple peeler corer", "pie dish ceramic", "soup thermos insulated",
+                "crock pot small", "baking sheet premium", "pumpkin spice accessory",
+                "cast iron skillet", "gravy boat",
+            ],
+            "outdoor_fall": [
+                "leaf rake ergonomic", "outdoor fire pit portable",
+                "compost bin", "bird feeder", "garden tool ergonomic",
+                "heated blanket", "garage door insulation",
+            ],
+        },
+        "fun_queries": [
+            "unique fall decor", "cozy season gadget", "fall entertaining unique",
+            "clever fall kitchen tool", "cool autumn essential",
+        ],
+    },
+    "halloween": {
+        "label": "Halloween Fun",
+        "emoji": "🎃",
+        "description": "Spooky season gear — decorations, costumes, party games, and treats",
+        "subcategories": {
+            "party_games": [
+                "halloween party game", "card game spooky", "murder mystery game",
+                "party decoration set", "halloween costume accessory",
+            ],
+            "decor_lights": [
+                "halloween decoration unique", "spooky decor indoor",
+                "halloween lights outdoor", "inflatable halloween",
+                "animated halloween prop", "skeleton decoration",
+            ],
+            "treats_candy": [
+                "halloween candy bowl", "pumpkin carving tool kit",
+                "cookie cutter Halloween", "cauldron popcorn bowl",
+                "halloween baking mold", "candy dispenser",
+            ],
+        },
+        "fun_queries": [
+            "funny halloween gift", "quirky Halloween decor", "unique costume accessory",
+            "cool Halloween gadget", "spooky season novelty",
+        ],
+    },
+    "thanksgiving_host": {
+        "label": "Thanksgiving Hosting",
+        "emoji": "🦃",
+        "description": "Everything you need to host a memorable Thanksgiving without the stress",
+        "subcategories": {
+            "cooking_gear": [
+                "turkey roaster pan", "meat thermometer digital", "basting set",
+                "carving knife set", "gravy separator", "roasting rack",
+            ],
+            "serving_entertaining": [
+                "serving platter set", "wine decanter", "cheese board",
+                "gravy boat ceramic", "dinnerware set stoneware",
+                "cloth napkin set", "candle holder",
+            ],
+            "host_gifts": [
+                "host gift unique", "housewarming gift", "wine accessory",
+                "thank you gift", "hostess gift", "bottle opener premium",
+            ],
+            "leftovers_storage": [
+                "food storage container glass", "meal prep container",
+                "leftover organizer", "storage jar airtight",
+                "vacuum sealer", "freezer bag reusable",
+            ],
+        },
+        "fun_queries": [
+            "unique host gift", "funny Thanksgiving kitchen gadget",
+            "clever entertaining tool", "quirky serving piece",
         ],
     },
 }
