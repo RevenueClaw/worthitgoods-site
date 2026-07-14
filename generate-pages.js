@@ -115,6 +115,8 @@ function renderProduct(p) {
                     <div class="content">
                         <h3>${cleanTitle(p.title)}</h3>
                         
+                        ${p.price ? `<div class="price-tag">$${p.price.toFixed(2)}</div>` : ''}
+                        
                         <!-- Short preview: blurb -->
                         <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
                         
@@ -299,6 +301,12 @@ const indexHTML = `<!DOCTYPE html>
             flex-grow: 1; 
             display: flex; 
             flex-direction: column; 
+        }
+        .price-tag {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 10px;
         }
         .content h3 { font-size: 1.32rem; margin-bottom: 12px; line-height: 1.3; }
         
