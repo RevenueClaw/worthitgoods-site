@@ -43,6 +43,9 @@ cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 cp unsubscribe.html _site/
 cp privacy.html _site/
 
+# Google Search Console verification
+cp googlef652381e8198d3b7.html _site/
+
 # Generate sitemap
 cat > _site/sitemap.xml << 'XML_EOF'
 <?xml version="1.0" encoding="UTF-8"?>
