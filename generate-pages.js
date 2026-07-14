@@ -141,10 +141,16 @@ function renderProduct(p) {
                         </button>
                         
                         <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                        <div style="text-align:center;margin-top:8px;">
+                            <a href="#" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
+                                <span style="font-size:0.85rem;">🔔</span> Get Price Alert
+                            </a>
+                        </div>
                     </div>
                 </div>
             `;
 }
+
 const indexHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -427,7 +433,67 @@ const indexHTML = `<!DOCTYPE html>
             msg.textContent = 'Something went wrong. Please try again later.';
         }
     });
+
+    /* ── Price Alert Modal ── */
+    function openPriceAlert(asin, title) {
+        document.getElementById('paModal').style.display = 'flex';
+        document.getElementById('paAsin').value = asin;
+        document.getElementById('paProduct').value = title;
+        document.getElementById('paMsg').textContent = '';
+        document.getElementById('paMsg').className = 'newsletter-msg';
+    }
+    function closePriceAlert() {
+        document.getElementById('paModal').style.display = 'none';
+    }
+    document.getElementById('paForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('paEmail').value.trim();
+        const asin = document.getElementById('paAsin').value;
+        const title = document.getElementById('paProduct').value;
+        const msg = document.getElementById('paMsg');
+        msg.className = 'newsletter-msg';
+        msg.textContent = 'Subscribing...';
+        try {
+            const res = await fetch('http://192.168.4.127:9004/subscribe', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email, asin, product_title: title})
+            });
+            const data = await res.json();
+            if (data.success) {
+                msg.className = 'newsletter-msg success';
+                msg.textContent = data.message || "You're subscribed! We'll email you when the price drops.";
+                document.getElementById('paEmail').value = '';
+            } else {
+                msg.className = 'newsletter-msg error';
+                msg.textContent = data.message || 'Something went wrong.';
+            }
+        } catch(err) {
+            msg.className = 'newsletter-msg error';
+            msg.textContent = 'Service unavailable. Please try again later.';
+        }
+    });
+    // Close modal on backdrop click
+    document.getElementById('paModal').addEventListener('click', function(e) {
+        if (e.target === this) closePriceAlert();
+    });
     </script>
+
+    <!-- ── Price Alert Modal ── -->
+    <div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+      <div style="background:white;border-radius:16px;padding:32px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
+        <button onclick="closePriceAlert()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;">×</button>
+        <h3 style="margin-top:0;margin-bottom:8px;font-size:1.3rem;">🔔 Price Alert</h3>
+        <p style="color:#6b7280;font-size:0.9rem;margin-bottom:16px;">We'll email you when this product's price drops. No spam, unsubscribe anytime.</p>
+        <form id="paForm">
+          <input type="hidden" id="paAsin">
+          <input type="hidden" id="paProduct">
+          <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;margin-bottom:12px;box-sizing:border-box;">
+          <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
+          <div id="paMsg" class="newsletter-msg" style="margin-top:8px;"></div>
+        </form>
+      </div>
+    </div>
 
     <footer>
         <div class="footer-links" style="margin-bottom: 20px;">
