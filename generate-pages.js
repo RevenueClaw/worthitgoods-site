@@ -4,6 +4,34 @@ const path = require('path');
 const productsDataPath = 'data/sample_products.json';
 const siteDir = '_site';
 
+// ── Seasonal Theme Configuration ──────────────────────────────────────────────
+const SEASONAL_THEME = process.env.SEASONAL_THEME || '';
+
+const THEMES = {
+    back_to_school: {
+        badge: '🎒 Back to School Picks',
+        tagline: 'Smart dorm & school essentials that actually make campus life better',
+    },
+    fall_essentials: {
+        badge: '🍂 Fall Essentials',
+        tagline: 'Cozy up — warm throws, comfort food gear, and the best of sweater weather',
+    },
+    halloween: {
+        badge: '🎃 Halloween Fun',
+        tagline: 'Spooky season gear — decorations, costumes, party games, and treats',
+    },
+    thanksgiving_host: {
+        badge: '🦃 Thanksgiving Hosting',
+        tagline: 'Everything you need to host a memorable Thanksgiving without the stress',
+    },
+    holiday_gifts: {
+        badge: '🎁 Holiday Gift Guide',
+        tagline: 'Gifts people actually want — hand-picked for everyone on your list',
+    },
+};
+
+const activeTheme = THEMES[SEASONAL_THEME] || null;
+
 if (!fs.existsSync(siteDir)) {
     fs.mkdirSync(siteDir, { recursive: true });
 }
@@ -327,10 +355,11 @@ const indexHTML = `<!DOCTYPE html>
         </ul>
       </nav>
     </header>
-    <div class="hero">
+    <div class="hero"${activeTheme ? ` data-theme="${SEASONAL_THEME}"` : ''}>
         <div class="hero-content">
+            ${activeTheme ? `<div class="theme-badge">${activeTheme.badge}</div>` : ''}
             <h1>WorthIt Goods</h1>
-            <p>Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.</p>
+            <p>${activeTheme ? activeTheme.tagline : 'Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.'}</p>
             <a href="#products" class="cta-button">Browse Worth-It Picks</a>
         </div>
     </div>

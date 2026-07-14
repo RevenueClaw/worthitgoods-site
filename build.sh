@@ -1,8 +1,23 @@
 #!/bin/bash
 
+# ── Seasonal theme flag ──
+THEME=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --theme)
+            THEME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Usage: $0 [--theme back_to_school|fall_essentials|halloween|thanksgiving_host|holiday_gifts]"
+            exit 1
+            ;;
+    esac
+done
+
 # Generate site from data/sample_products.json
 rm -rf _site
-node generate-pages.js
+SEASONAL_THEME="$THEME" node generate-pages.js
 
 # Copy style
 cp style.css _site/
