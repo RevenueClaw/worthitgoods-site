@@ -39,6 +39,9 @@ cp blog/*.html _site/blog/
 # === Overlay with custom blog post (hand-crafted prose, real product images) ===
 cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 
+# Copy comparison pages
+cp -r comparisons _site/comparisons/
+
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
@@ -61,6 +64,12 @@ for f in blog/*.html; do
   slug=$(basename "$f" .html)
   [[ $slug == custom-* ]] && continue
   printf '  <url><loc>https://www.worthitgoods.com/blog/%s</loc><priority>0.7</priority></url>\n' "$slug.html" >> _site/sitemap.xml
+done
+
+for f in comparisons/*.html; do
+  slug=$(basename "$f" .html)
+  printf '  <url><loc>https://www.worthitgoods.com/comparisons/%s</loc><priority>0.7</priority></url>
+' "$slug.html" >> _site/sitemap.xml
 done
 
 echo '</urlset>' >> _site/sitemap.xml

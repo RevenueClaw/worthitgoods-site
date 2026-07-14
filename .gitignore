@@ -1,1 +1,10 @@
 .seasonal-active
+.env
+pycache/
+__pycache__/
+*/.pyc
+*/.pyo
+*.pyc
+*.pyo
+data/
+
