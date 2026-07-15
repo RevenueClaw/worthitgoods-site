@@ -259,6 +259,21 @@ const indexHTML = `<!DOCTYPE html>
         .newsletter-msg.error { color: #dc2626; }
         .newsletter-msg.success { color: #16a34a; }
         .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
+        /* Preference checkbox options */
+        .nl-prefs {
+            display: flex; flex-direction: column; gap: 8px; margin: 14px auto 0;
+            max-width: 440px; text-align: left;
+        }
+        .nl-pref-option {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px;
+            cursor: pointer; transition: all 0.2s; font-size: 0.88rem;
+            background: #fafafa;
+        }
+        .nl-pref-option:hover { border-color: #ff6b6b; background: #fff5f5; }
+        .nl-pref-option input[type="checkbox"] { margin-top: 3px; accent-color: #ff6b6b; }
+        .nl-pref-option span { color: #4b5563; line-height: 1.4; }
+        .nl-pref-option span strong { color: #1f2937; }
 
         .products-section { padding: 80px 20px; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--dark); }
