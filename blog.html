@@ -76,10 +76,10 @@
         .newsletter-msg.error { color: #dc2626; }
         .newsletter-msg.success { color: #16a34a; }
         .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
-        /* Hero CTA - small inline signup at bottom of hero */
+        /* Hero CTA - small inline signup below hero text */
         .hero-cta {
             display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
-            margin-top: 28px; padding: 12px 20px; background: rgba(255,255,255,0.08);
+            padding: 12px 20px; background: rgba(255,255,255,0.08);
             border-radius: 12px; backdrop-filter: blur(4px);
             transition: opacity 0.4s ease;
         }
@@ -111,9 +111,16 @@
             background: #fafafa;
         }
         .nl-pref-option:hover { border-color: #ff6b6b; background: #fff5f5; }
-        .nl-pref-option input[type="radio"] { margin-top: 3px; accent-color: #ff6b6b; }
+        .nl-pref-option input[type="checkbox"] { margin-top: 3px; accent-color: #ff6b6b; }
         .nl-pref-option span { color: #4b5563; line-height: 1.4; }
         .nl-pref-option span strong { color: #1f2937; }
+        /* Make hero-content stack vertically so CTA stays centered below text */
+        .hero-content {
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .hero-cta {
+            margin-top: 24px;
+        }
     </style>
 </head>
 <body>
@@ -130,14 +137,14 @@
         <div class="hero-content">
             <h1>The WorthIt Goods Journal</h1>
             <p>Thoughtful reviews of products that actually deliver. No sponsored fluff, no affiliate bait—just honest recommendations worth your money.</p>
-        </div>
-        <div class="hero-cta" id="heroCta">
-            <span class="hero-cta-text">📬 Get fresh picks + comparisons delivered</span>
-            <form class="hero-cta-form" id="heroCtaForm">
-                <input type="email" id="heroCtaEmail" placeholder="your@email.com" required>
-                <button type="submit">Subscribe</button>
-            </form>
-            <div id="heroCtaMsg" class="newsletter-msg"></div>
+            <div class="hero-cta" id="heroCta">
+                <span class="hero-cta-text">📬 Get the latest picks delivered to your inbox</span>
+                <form class="hero-cta-form" id="heroCtaForm">
+                    <input type="email" id="heroCtaEmail" placeholder="your@email.com" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <div id="heroCtaMsg" class="newsletter-msg"></div>
+            </div>
         </div>
     </div>
     <section class="products-section">
@@ -232,12 +239,12 @@
         </form>
         <div class="nl-prefs">
             <label class="nl-pref-option">
-                <input type="radio" name="nlPrefs" value="all" checked>
-                <span><strong>All picks & comparisons</strong> — weekly roundups of new products and head-to-head comparisons</span>
+                <input type="checkbox" id="prefPicks" checked>
+                <span><strong>Product picks & roundups</strong> — new worth-it finds, batch posts, and seasonal guides</span>
             </label>
             <label class="nl-pref-option">
-                <input type="radio" name="nlPrefs" value="comparisons">
-                <span><strong>Comparisons only</strong> — just the side-by-side articles, no product roundups</span>
+                <input type="checkbox" id="prefComparisons" checked>
+                <span><strong>Side-by-side comparisons</strong> — head-to-head articles comparing top products</span>
             </label>
         </div>
         <div id="blogNlMsg" class="newsletter-msg"></div>
@@ -356,8 +363,10 @@
 
     <script>
     function getSelectedPrefs() {
-        const sel = document.querySelector('input[name="nlPrefs"]:checked');
-        return sel ? sel.value : 'all';
+        const parts = [];
+        if (document.getElementById('prefPicks').checked) parts.push('picks');
+        if (document.getElementById('prefComparisons').checked) parts.push('comparisons');
+        return parts.length === 0 ? 'picks' : parts.join(',');  // default picks
     }
 
     function submitForm(formId, emailId, msgId, successCb) {
