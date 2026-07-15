@@ -37,6 +37,7 @@ USED_ASINS = {
     "B09M68SFL9",  # FLY2SKY Tent Lamp
     "B07WNRN9WQ",  # 80hr Neck Light
     "B0CL465G9L",  # Rechargeable Spotlight
+    "B0GD7FZTC2",  # Portable Handheld Turbo Fan (vs JISULIFE)
 }
 
 # Keywords to skip — gag gifts, party supplies, seasonal items
