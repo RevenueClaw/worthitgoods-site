@@ -3158,12 +3158,12 @@
             </form>
             <div class="nl-prefs">
                 <label class="nl-pref-option">
-                    <input type="radio" name="nlPrefs" value="all" checked>
-                    <span><strong>All picks & comparisons</strong> — weekly roundups of new products and head-to-head comparisons</span>
+                    <input type="checkbox" id="homePrefPicks" checked>
+                    <span><strong>Product picks & roundups</strong> — new worth-it finds, batch posts, and seasonal guides</span>
                 </label>
                 <label class="nl-pref-option">
-                    <input type="radio" name="nlPrefs" value="comparisons">
-                    <span><strong>Comparisons only</strong> — just the side-by-side articles, no product roundups</span>
+                    <input type="checkbox" id="homePrefComparisons" checked>
+                    <span><strong>Side-by-side comparisons</strong> — head-to-head articles comparing top products</span>
                 </label>
             </div>
             <div id="newsletterMsg" class="newsletter-msg"></div>
@@ -8934,13 +8934,16 @@
         e.preventDefault();
         const email = document.getElementById('newsletterEmail').value;
         const msg = document.getElementById('newsletterMsg');
+        const parts = [];
+        if (document.getElementById('homePrefPicks').checked) parts.push('picks');
+        if (document.getElementById('homePrefComparisons').checked) parts.push('comparisons');
+        const prefs = parts.length === 0 ? 'picks' : parts.join(',');
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
             const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                const prefs = (document.querySelector('input[name="nlPrefs"]:checked') || {value:'all'}).value;
                 body: JSON.stringify({email, preferences: prefs})
             });
             const data = await res.json();
