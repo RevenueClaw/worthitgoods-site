@@ -1,0 +1,405 @@
+{
+  "generated_at": "2026-07-15T14:00:12.565017+00:00",
+  "report": {
+    "total_products": 298,
+    "unique_asins_found": 110,
+    "already_compared": 14,
+    "remaining_candidates": 55,
+    "by_category": {
+      "kitchen": 16,
+      "car care": 6,
+      "electronics": 16,
+      "outdoor": 9,
+      "health": 1,
+      "tools": 5,
+      "home": 2
+    }
+  },
+  "candidates": [
+    {
+      "asin": "B094NTCSDJ",
+      "title": "LuoCoCo Cute Egg Separator, Ceramics Vomiting Chicken Egg Yolk White Separator, Practical Household Small Egg Filter Spl",
+      "price": 7.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B094NTCSDJ?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B08TWN43G4",
+      "title": "Stainless Steel Onion Holder for Slicing,Onion Slicer Holder,Onion Cutter for Slicing of Onions,Tomatoes,Avocados,Eggs a",
+      "price": 4.97,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B08TWN43G4?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B09LQJBCT7",
+      "title": "Dosmix Retro Bluetooth Speaker, Vintage Decor Mini Wireless Speaker, Cute Portable Small Speaker for Bedroom Desk Kitche",
+      "price": 13.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B09LQJBCT7?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0CJF94M8J",
+      "title": "TrendPlain 16oz/470ml Glass Olive Oil Sprayer for Cooking \u2013 2 in 1 Olive Oil Dispenser Bottle for Kitchen Gadgets and Ai",
+      "price": 7.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0CJF94M8J?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B08TM2F4BH",
+      "title": "Saker Silicone Caulking Tool 3-in-1 Grout Removal Tool and Sealant Finishing Scraper with Stainless Steelhead, Caulk Rem",
+      "price": 12.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B08TM2F4BH?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B079J4KT8H",
+      "title": "Kaluns Grilling Accessories",
+      "price": 27.97,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B079J4KT8H?coliid=IG9ENMVJ46H43&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=2173fca0e54fc576efc84a22b29006b9&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0G15YW3VF",
+      "title": "Ninja BlendPro Kitchen System",
+      "price": 189.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0G15YW3VF?coliid=I2H472IIQLB4OZ&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=6bd08d5d4a55726a07d0979465b3bf29&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B08L7LGRC4",
+      "title": "Souper Cubes Silicone Freezer Molds",
+      "price": 78.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B08L7LGRC4?coliid=I171NJ26G1G5GB&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=25965b4e7f4e7447b6f532240245cf7a&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07Q2WVG1Z",
+      "title": "KitchenAid Gourmet Multi Sided Meat Tenderizer",
+      "price": 9.79,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B07Q2WVG1Z?coliid=I3C848LLQ4VX4G&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=5f5d80d44bbea51ca3f3f5dd3f27ee3f&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0FMN88BVM",
+      "title": "1 Gallon Glass Cookie Jars with Lids",
+      "price": 45.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0FMN88BVM?coliid=IQKXXLH5A4DNO&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=3acbfaef2ba42954e1a04cbe1e4a9040&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0DT41BHVF",
+      "title": "Radicaln Marble Salt Cellar with Lid 4\"",
+      "price": 24.85,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0DT41BHVF?coliid=IWX7PXZVYXTK2&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=7ce38f1e5a91f253e8f3b3d8ef42c038&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07ML2RT85",
+      "title": "Hey, Have You Tried Cheese Dish Towel",
+      "price": 13.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B07ML2RT85?coliid=I140KMMMXQFD1U&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=33dcb3449ea794350dd26158db5d18f3&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0007QCOC4",
+      "title": "Victorinox Tinker Swiss Army Knife",
+      "price": 31.47,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0007QCOC4?coliid=I182KS3KQ72DIT&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=217a070cc381952850c57afe56a291f6&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0CJCXJLYJ",
+      "title": "Ceramic Artisan Matte Bowls",
+      "price": 34.99,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0CJCXJLYJ?coliid=I3DHG5JOFI9IXA&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=eee8241667247072aba8e6de962f6b88&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0BNQXR1MQ",
+      "title": "Proctor Silex Easy Slice Electric Knife",
+      "price": 19.95,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0BNQXR1MQ?coliid=I3UEV0ODR8PEW4&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=4fafdb19d8c8c49d6cb87f4d0562335c&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0C6MMDCT2",
+      "title": "Elizabat Kitchen Scissors",
+      "price": 10.76,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0C6MMDCT2?coliid=IPR7DOFEFY10S&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=53f1d2a2e1dcbbff6fc74795e6dae814&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B09P8WCCLN",
+      "title": "Chemical Guys Clay Bar Kit - Complete System",
+      "price": 29.99,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B09P8WCCLN?coliid=I1XPE190M8W79H&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=cf66afb9f00f79b8739f4fe573c4ece2&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B000JFJLP6",
+      "title": "Automotive Jump-N-Carry",
+      "price": 126.02,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B000JFJLP6?coliid=I10C8P4CO7KD9W&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=196c9098068e7498ab9c199d54d26587&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B01C96AFWU",
+      "title": "Car Emergency Kit",
+      "price": 89.99,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B01C96AFWU?coliid=I3QU20NJ9HTEOQ&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=0254cb77de3c219781a124e7f2e14978&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07RB2ZYMS",
+      "title": "Meguiar's Ultimate Wash and Wax",
+      "price": 38.85,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B07RB2ZYMS?coliid=I8ZSF6WIL64SV&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=7f4601f547adebf67a3579d0fec3f776&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B08H57SN7G",
+      "title": "Pink Car Emergency Kit",
+      "price": null,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B08H57SN7G?coliid=IUHG6FRS3A9ZS&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a5feb8c7040823704354458c807c162f&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07SHJVK4G",
+      "title": "CERAKOTE\u00ae Ceramic Trim Coat Kit",
+      "price": 16.88,
+      "category": "car care",
+      "url": "https://www.amazon.com/dp/B07SHJVK4G?coliid=I3947PA4SHTWOD&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=4c7be6c9631a924389689f58bc789546&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B09KBZS2M9",
+      "title": "Adventurers Typewriter-Style Retro Mechanical Keyboard LED Backlight 83 Keys Bluetooth 5.0 Blue Axis Wood Color Panel Co",
+      "price": 76.79,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B09KBZS2M9?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0F43Q5B9K",
+      "title": "HOMPOW Mini Projector with Two -Way Bluetooth, Portable Projector for Home Theater Use, Support 1080P for Indoor/Outdoor",
+      "price": 31.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0F43Q5B9K?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B07RCNB2L3",
+      "title": "Kasa Smart Plug HS103P4, Wi-Fi Outlet Works with Alexa, Echo, Google Home & IFTTT, No Hub Required, Remote Control, 15 A",
+      "price": 29.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B07RCNB2L3?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0B19V28GN",
+      "title": "Topstache Leather Multitool Sheath,EDC Belt Organizer for Work and Daily Use,Leatherman Sheath,EDC Pocket Organizer for ",
+      "price": 22.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B09XMMZSWW",
+      "title": "Addtam Surge Protector Outlet Extender, Plug Extension Outlet with Night Light, 5-Outlet Splitter and 4 USB Ports(1 USB ",
+      "price": 12.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B09XMMZSWW?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B017G1051Y",
+      "title": "Cliganic 10 Pack Mosquito Repellent Bracelets for Adults & Kids - Natural DEET-Free Bands, Individually Wrapped",
+      "price": 9.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B017G1051Y?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0BMFW2WG5",
+      "title": "Modular Power Tool Organizer",
+      "price": 69.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0BMFW2WG5?coliid=IHFTNA4JXV032&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=f28134d3f906914c6360deec04b9cf0c&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B09B52QBDJ",
+      "title": "RETROFLAG Station Case for Raspberry Pi",
+      "price": null,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B09B52QBDJ?coliid=I2Y71KL6QRBU7R&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=d08fe8cd8d871cd6aa2191c6f094db05&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B08YJR9HDL",
+      "title": "Wood Phone Docking Station",
+      "price": 39.8,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B08YJR9HDL?coliid=I2N0TECE8A7HD7&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a7fa3a2bca48910b901c9019cd1c0c61&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0CTBJ42P9",
+      "title": "GeeekPi Case for Raspberry Pi 5",
+      "price": 16.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0CTBJ42P9?coliid=IH41TLR9YFWK&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=868c96e92a71261d5bd42d62b7b939bf&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07CHWB1JP",
+      "title": "Star Wars: Darth Vader - Original Mobile Phone & Gaming Controller Holder",
+      "price": 28.0,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B07CHWB1JP?coliid=I1L3SNUGF4MN4Y&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=ccea96aade691718f1c8374edd220758&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0D41XL87F",
+      "title": "Govee RGBIC Smart Table Lamp",
+      "price": 69.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0D41XL87F?coliid=I35LP2NMEB2PJA&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=ae4d8916a2b98bda35b20a23d11b0fe3&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0CHX3B968",
+      "title": "Apple Watch Series 9",
+      "price": null,
+      "category": "electronics",
+      "url": "https://www.amazon.com/Apple-Cellular-Smartwatch-Stainless-Fitness/dp/B0CHX3B968?pd_rd_w=Rnz0S&content-id=amzn1.sym.c2ce25da-4d17-4f37-af20-bde98a9f0bcd%3Aamzn1.symc.d3391730-f670-41da-8b34-61787b3edb82&pf_rd_p=c2ce25da-4d17-4f37-af20-bde98a9f0bcd&pf_rd_r=786YDFCJY6JV1YH8M9MA&pd_rd_wg=jcjiq&pd_rd_r=74faf68d-d384-4113-a9dc-4ce49eb48834&pd_rd_i=B0CHX3B968&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=31ff3326803abe8d84479544945ed47a&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0BS1T9J4Y",
+      "title": "Garmin Forerunner 265 Running Smartwatch",
+      "price": 434.33,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0BS1T9J4Y?coliid=I32YOO69EMJYCE&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=ee12cb2d90716b024c84381d30797982&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0CMT1J22B",
+      "title": "Travel Cable Organizer Pouch Electronic Accessories Carry Case",
+      "price": 11.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0CMT1J22B?coliid=I4JN36C2SYOY4&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a1ba9864b1e121e8bbe4aae98df75d59&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07W8KJH44",
+      "title": "NOCO GENIUS5: 5A 6V/12V Smart Battery Charger",
+      "price": null,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B07W8KJH44?coliid=I3H4GCVQDBFQTA&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=e01369bee089053872fc7d0464d689b9&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0B41MYSGP",
+      "title": "BAND-AID Brand Travel Ready Portable Emergency First Aid Kit, Minor Wound Care, Perfect for Home, Car, Camping, Travel &",
+      "price": 10.98,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0B41MYSGP?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B001ANQVYU",
+      "title": "Sawyer Products SP657 Premium Permethrin Insect Repellent for Clothing, Gear & Tents, Trigger Spray, 24-Ounce",
+      "price": 18.49,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B001ANQVYU?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0FTZ5M84W",
+      "title": "CoreMuse Camping Water Container 2 Gallon Collapsible Water Jug with Spout - Reusable Plastic Flasks, Foldable Empty Gal",
+      "price": 6.99,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0FTZ5M84W?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0C2J7C3NY",
+      "title": "Roc Inflatable Stand Up Paddle Board 10'6\" - Premium SUP Paddle Board with Accessories",
+      "price": null,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0C2J7C3NY?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B004YJCP7O",
+      "title": "Vivere Double Cotton Hammock with Steel Stand - Premium Carry Bag 450 lb Capacity",
+      "price": 129.99,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B004YJCP7O?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B06XFY5NZW",
+      "title": "Carhartt Lunchbox Cooler",
+      "price": 57.99,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B06XFY5NZW?coliid=I1YM9FNHJSYMXC&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=b20e73867eafa2099e30ae64b0eeb39c&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0G13NCNZY",
+      "title": "Coleman Snap N Go 45qt Collapsible Hard Cooler",
+      "price": 153.99,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0G13NCNZY?_encoding=UTF8&th=1&pd_rd_w=Fsr8U&content-id=amzn1.sym.98f292ea-8107-43ee-b8d7-641d14e52540&pf_rd_p=98f292ea-8107-43ee-b8d7-641d14e52540&pf_rd_r=HWX51M50XY70T1NBJDXK&pd_rd_wg=Fu28o&pd_rd_r=4aba21e7-f7fd-4237-bc10-538568ba4d21&linkCode=ll2&tag=worthitgoods-20&linkId=aad0adf460230f14763b93c552f00e25&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B07Z8WHZWV",
+      "title": "14-in-1 Survival Kit",
+      "price": 29.99,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B07Z8WHZWV?coliid=ICOVFOXOH5MMO&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=6ac226f8312dfdeabb9a25e9c8b26ba2&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0DSHYRZ9M",
+      "title": "LOVEVOOK Travel Backpack",
+      "price": null,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0DSHYRZ9M?coliid=I1Y0NEIINDGM59&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=d03e43ad429d44b48779b3ec44a57b7c&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0836Y45HD",
+      "title": "MZDXJ Muscle Roller Massage Roller Stick- Deep Tissue Fascia Blaster for Myofascial Pain Relief, Lymphatic Drainage & Bo",
+      "price": 9.99,
+      "category": "health",
+      "url": "https://www.amazon.com/dp/B0836Y45HD?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B07WP4165D",
+      "title": "Laser Level Line Tool, Multipurpose Laser Level Kit Standard Cross Line Laser leveler Beam Tool with Metric Rulers 8ft/2",
+      "price": 9.95,
+      "category": "tools",
+      "url": "https://www.amazon.com/dp/B07WP4165D?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B08KFMHQCP",
+      "title": "Klein Tools 32305 Multi-bit Ratcheting Screwdriver",
+      "price": 23.74,
+      "category": "tools",
+      "url": "https://www.amazon.com/dp/B08KFMHQCP?coliid=IXZ1IMF0SNCUO&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=0b4c9feb7854b1eb373c3e8e5afd7db1&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0DS2GQH23",
+      "title": "Heavy Duty Tool Bag",
+      "price": 34.99,
+      "category": "tools",
+      "url": "https://www.amazon.com/dp/B0DS2GQH23?coliid=I15HS1Q0EXVSC1&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=79c7f7bf6a45b568e60f719c0c8d9ad3&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B091Y7VC3T",
+      "title": "6 Tools IN ONE Versatile Multitool Pen",
+      "price": null,
+      "category": "tools",
+      "url": "https://www.amazon.com/dp/B091Y7VC3T?coliid=I23S924OLZW0OL&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=b3d9152094c80ba32417b51eae9f4540&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0F9L1586H",
+      "title": "Inspection Borescope Camera with 4.3\" IPS Screen",
+      "price": 36.99,
+      "category": "tools",
+      "url": "https://www.amazon.com/dp/B0F9L1586H?coliid=I1IUD8YPHEFAU6&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=6f7fedc3a5bbb263a9f22f6075a935e4&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0C3QQMMRJ",
+      "title": "GoveeLife Mini Air Purifier for Bedroom, Smart Filter Air Purifier with App Alexa Control for Pet Hair, Odors, Pollen, H",
+      "price": 37.99,
+      "category": "home",
+      "url": "https://www.amazon.com/dp/B0C3QQMMRJ?tag=worthitgoods-20"
+    },
+    {
+      "asin": "B0DK3JVYC8",
+      "title": "12.5 Inch Round Floor Vase",
+      "price": 79.99,
+      "category": "home",
+      "url": "https://www.amazon.com/dp/B0DK3JVYC8?coliid=IG1UOCY238OND&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=47f8546ce36be95671c5799a8a4f55ad&language=en_US&ref_=as_li_ss_tl"
+    }
+  ]
+}
