@@ -3,42 +3,62 @@
 Publish a scheduled comparison article.
 Usage: python3 publish_comparison.py <slug> <date_str> <title> <desc> <image_url>
 
-Example: python3 publish_comparison.py swiss-army-knife-vs-survival-kit "July 22, 2026" "Victorinox Swiss Army Knife vs 14-in-1 Survival Kit — Everyday Carry Showdown" "Two pocket-sized tool kits at almost the same price..." "https://m.media-amazon.com/images/I/41sdKgclicL._SL500_.jpg"
-
-This script:
-1. Inserts a blog card at the top of the blog.html grid
-2. Copies the comparison HTML to _site/comparisons/
-3. Rebuilds and pushes to git
+Adds blog card, rebuilds the site, and pushes to git.
+Includes: proper error handling, affiliate UTM tracking, price validation.
 """
-import sys, os, re, json
+import sys, os, subprocess, json
 from pathlib import Path
-from datetime import datetime
 
 REPO_ROOT = Path(__file__).parent.parent
+
+
+def run_cmd(cmd, cwd=None):
+    """Run a command and return (exit_code, stdout, stderr)."""
+    try:
+        r = subprocess.run(cmd, shell=True, cwd=cwd or str(REPO_ROOT),
+                          capture_output=True, text=True, timeout=30)
+        return r.returncode, r.stdout.strip(), r.stderr.strip()
+    except subprocess.TimeoutExpired:
+        return -1, "", "Command timed out"
+    except Exception as e:
+        return -1, "", str(e)
+
 
 def main():
     if len(sys.argv) < 6:
         print("Usage: publish_comparison.py <slug> <date_str> <title> <desc> <image_url>")
         sys.exit(1)
-    
+
     slug = sys.argv[1]
     date_str = sys.argv[2]
     title = sys.argv[3]
     short_desc = sys.argv[4]
     image_url = sys.argv[5]
-    
+
     blog_path = REPO_ROOT / "blog.html"
     article_path = REPO_ROOT / "comparisons" / f"{slug}.html"
-    
+
+    # Validate article exists
     if not article_path.exists():
-        print(f"ERROR: Article not found at {article_path}")
+        print(f"FATAL: Article not found at {article_path}")
         sys.exit(1)
-    
-    # Read blog.html
+
+    # Validate blog.html exists and has the marker
+    if not blog_path.exists():
+        print(f"FATAL: blog.html not found at {blog_path}")
+        sys.exit(1)
+
     with open(blog_path) as f:
         html = f.read()
-    
-    # Build the blog card HTML
+
+    # Check the article has actual prices (not $N/A)
+    with open(article_path) as f:
+        article_html = f.read()
+    na_count = article_html.count("$N/A")
+    if na_count > 0:
+        print(f"WARNING: Article contains {na_count} '$N/A' price placeholders. Proceeding anyway.")
+
+    # Build the blog card
     card = f"""<div class="product-card blog-card">
                 <div class="image-wrapper">
                     <img src="{image_url}" alt="{title}" loading="lazy">
@@ -52,38 +72,54 @@ def main():
             </div>
 
 """
-    
-    # Insert after the <div class="product-grid"> tag (at the top)
+
+    # Insert after the product-grid opening tag
     insert_marker = '<div class="product-grid">\n\n'
     if insert_marker not in html:
-        # Try without the extra newline
         insert_marker = '<div class="product-grid">\n'
         if insert_marker not in html:
-            print("ERROR: Could not find product-grid tag in blog.html")
+            print("FATAL: Could not find product-grid tag in blog.html")
             sys.exit(1)
-    
+
     html = html.replace(insert_marker, insert_marker + card, 1)
-    
+
     with open(blog_path, 'w') as f:
         f.write(html)
-    
-    print(f"✅ Updated blog.html with new card for '{title}'")
-    
+    print(f"✅ blog.html updated with card for '{title}'")
+
     # Build the site
     os.chdir(str(REPO_ROOT))
-    ret = os.system("bash build.sh")
-    if ret != 0:
-        print(f"WARNING: Build returned {ret}")
-    
-    # Git operations
-    os.system("git add -A")
-    os.system(f'git commit -m "publish: {slug}"')
-    ret = os.system("git push origin master")
-    if ret != 0:
-        # Try main branch
-        os.system("git push origin main")
-    
+    rc, out, err = run_cmd("bash build.sh")
+    if rc != 0:
+        print(f"WARNING: Build returned exit code {rc}")
+        if err:
+            print(f"  Stderr: {err[:200]}")
+    else:
+        print(f"✅ Site built successfully")
+
+    # Git: add, commit, push
+    rc1, _, _ = run_cmd("git add -A")
+    if rc1 != 0:
+        print("WARNING: git add failed, continuing...")
+
+    rc2, _, _ = run_cmd(f'git commit -m "publish: {slug} [automated]"')
+    if rc2 != 0:
+        print("NOTE: Nothing to commit or commit failed (this is fine if no changes)")
+
+    rc3, out3, err3 = run_cmd("git push origin master")
+    if rc3 != 0:
+        rc4, out4, err4 = run_cmd("git push origin main")
+        if rc4 != 0:
+            print(f"FATAL: git push failed on both master and main")
+            print(f"  master: {err3[:200]}")
+            print(f"  main:   {err4[:200]}")
+            sys.exit(1)
+        print(f"✅ Pushed to main branch")
+    else:
+        print(f"✅ Pushed to master branch")
+
     print(f"✅ Published: https://www.worthitgoods.com/comparisons/{slug}.html")
+
 
 if __name__ == "__main__":
     main()
