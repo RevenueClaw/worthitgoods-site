@@ -392,11 +392,21 @@ const indexHTML = `<!DOCTYPE html>
         <div class="newsletter-section">
             <div class="nl-icon">✉</div>
             <h2>Never Miss a Worth-It Find</h2>
-            <p>New hand-picked picks every 2 weeks. Honest reviews, zero hype, unsubscribe anytime.</p>
+            <p>Honest picks and real comparisons, delivered to your inbox. Pick what you want to receive.</p>
             <form class="newsletter-form" id="wigNewsletterForm">
                 <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
                 <button type="submit">Subscribe</button>
             </form>
+            <div class="nl-prefs">
+                <label class="nl-pref-option">
+                    <input type="radio" name="nlPrefs" value="all" checked>
+                    <span><strong>All picks & comparisons</strong> — weekly roundups of new products and head-to-head comparisons</span>
+                </label>
+                <label class="nl-pref-option">
+                    <input type="radio" name="nlPrefs" value="comparisons">
+                    <span><strong>Comparisons only</strong> — just the side-by-side articles, no product roundups</span>
+                </label>
+            </div>
             <div id="newsletterMsg" class="newsletter-msg"></div>
             <div class="nl-guarantee">No spam · Unsubscribe with 1 click · Hand-picked only</div>
         </div>
@@ -417,7 +427,8 @@ const indexHTML = `<!DOCTYPE html>
             const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email})
+                const prefs = (document.querySelector('input[name="nlPrefs"]:checked') || {value:'all'}).value;
+                body: JSON.stringify({email, preferences: prefs})
             });
             const data = await res.json();
             if (data.success) {

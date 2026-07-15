@@ -76,6 +76,44 @@
         .newsletter-msg.error { color: #dc2626; }
         .newsletter-msg.success { color: #16a34a; }
         .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
+        /* Hero CTA - small inline signup at bottom of hero */
+        .hero-cta {
+            display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+            margin-top: 28px; padding: 12px 20px; background: rgba(255,255,255,0.08);
+            border-radius: 12px; backdrop-filter: blur(4px);
+            transition: opacity 0.4s ease;
+        }
+        .hero-cta-text { color: rgba(255,255,255,0.85); font-size: 0.88rem; }
+        .hero-cta-form { display: flex; gap: 6px; }
+        .hero-cta-form input[type="email"] {
+            padding: 8px 14px; border: none; border-radius: 8px; font-size: 0.88rem;
+            background: rgba(255,255,255,0.9); outline: none; min-width: 200px;
+            font-family: inherit;
+        }
+        .hero-cta-form button {
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b); color: white;
+            border: none; padding: 8px 18px; border-radius: 8px; font-size: 0.88rem;
+            font-weight: 600; cursor: pointer; font-family: inherit;
+        }
+        .hero-cta-form button:hover { transform: translateY(-1px); }
+        .hero-cta .newsletter-msg { font-size: 0.82rem; width: 100%; text-align: center; }
+        .hero-cta .newsletter-msg.success { color: #86efac; }
+        .hero-cta .newsletter-msg.error { color: #fca5a5; }
+        /* Preference options */
+        .nl-prefs {
+            display: flex; flex-direction: column; gap: 8px; margin: 14px auto 0;
+            max-width: 440px; text-align: left;
+        }
+        .nl-pref-option {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px;
+            cursor: pointer; transition: all 0.2s; font-size: 0.88rem;
+            background: #fafafa;
+        }
+        .nl-pref-option:hover { border-color: #ff6b6b; background: #fff5f5; }
+        .nl-pref-option input[type="radio"] { margin-top: 3px; accent-color: #ff6b6b; }
+        .nl-pref-option span { color: #4b5563; line-height: 1.4; }
+        .nl-pref-option span strong { color: #1f2937; }
     </style>
 </head>
 <body>
@@ -92,6 +130,14 @@
         <div class="hero-content">
             <h1>The WorthIt Goods Journal</h1>
             <p>Thoughtful reviews of products that actually deliver. No sponsored fluff, no affiliate bait—just honest recommendations worth your money.</p>
+        </div>
+        <div class="hero-cta" id="heroCta">
+            <span class="hero-cta-text">📬 Get fresh picks + comparisons delivered</span>
+            <form class="hero-cta-form" id="heroCtaForm">
+                <input type="email" id="heroCtaEmail" placeholder="your@email.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div id="heroCtaMsg" class="newsletter-msg"></div>
         </div>
     </div>
     <section class="products-section">
@@ -172,6 +218,34 @@
                     <a href="blog/2026-06-28-4th-of-july-gift-guide.html" class="cta" style="margin-top: auto;">Read More →</a>
                 </div>
             </div>
+
+</div> <!-- close first product-grid -->
+
+    <!-- NEWSLETTER SIGNUP - after row 2 (between cards 6 and 7) -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="nl-icon">✉</div>
+        <h2>Never Miss a Worth-It Find</h2>
+        <p>Honest picks and real comparisons, delivered to your inbox. Pick what you want to receive.</p>
+        <form class="newsletter-form" id="blogNewsletterForm">
+            <input type="email" id="blogNlEmail" placeholder="your@email.com" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <div class="nl-prefs">
+            <label class="nl-pref-option">
+                <input type="radio" name="nlPrefs" value="all" checked>
+                <span><strong>All picks & comparisons</strong> — weekly roundups of new products and head-to-head comparisons</span>
+            </label>
+            <label class="nl-pref-option">
+                <input type="radio" name="nlPrefs" value="comparisons">
+                <span><strong>Comparisons only</strong> — just the side-by-side articles, no product roundups</span>
+            </label>
+        </div>
+        <div id="blogNlMsg" class="newsletter-msg"></div>
+        <div class="nl-guarantee">No spam &middot; Unsubscribe with 1 click &middot; Hand-picked only</div>
+    </section>
+
+<div class="product-grid"> <!-- open second product-grid -->
+
             <div class="product-card blog-card">
                 <div class="image-wrapper">
                     <img src="https://m.media-amazon.com/images/I/91M86uflhuL._AC_SL1500_.jpg" alt="Batch 14: Newest Worth-It Picks" loading="lazy">
@@ -268,19 +342,6 @@
                 </div>
             </div>
 
-    <!-- NEWSLETTER SIGNUP - directly after posts, before footer -->
-    <section id="newsletter" class="newsletter-section">
-        <div class="nl-icon">✉</div>
-        <h2>Never Miss a Worth-It Find</h2>
-        <p>New hand-picked picks every 2 weeks. Honest reviews, zero hype, unsubscribe anytime.</p>
-        <form class="newsletter-form" id="blogNewsletterForm">
-            <input type="email" id="blogNlEmail" placeholder="your@email.com" required>
-            <button type="submit">Subscribe</button>
-        </form>
-        <div id="blogNlMsg" class="newsletter-msg"></div>
-        <div class="nl-guarantee">No spam &middot; Unsubscribe with 1 click &middot; Hand-picked only</div>
-    </section>
-
 </div></section>
     <footer>
         <div style="margin-bottom: 18px;">
@@ -294,27 +355,68 @@
     </footer>
 
     <script>
-    document.getElementById('blogNewsletterForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('blogNlEmail').value;
-        const msg = document.getElementById('blogNlMsg');
+    function getSelectedPrefs() {
+        const sel = document.querySelector('input[name="nlPrefs"]:checked');
+        return sel ? sel.value : 'all';
+    }
+
+    function submitForm(formId, emailId, msgId, successCb) {
+        const form = document.getElementById(formId);
+        const email = document.getElementById(emailId).value;
+        const msg = document.getElementById(msgId);
+        const prefs = getSelectedPrefs();
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
-        try {
-            const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email})
-            });
-            const data = await res.json();
+        fetch('http://192.168.4.127:9003/api/newsletter/signup', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, preferences: prefs})
+        })
+        .then(r => r.json())
+        .then(data => {
             msg.className = 'newsletter-msg ' + (data.success ? 'success' : 'error');
             msg.textContent = data.message;
-            if (data.success) document.getElementById('blogNlEmail').value = '';
-        } catch(err) {
+            if (data.success) {
+                document.getElementById(emailId).value = '';
+                if (successCb) successCb();
+            }
+        })
+        .catch(() => {
             msg.className = 'newsletter-msg error';
             msg.textContent = 'Something went wrong. Please try again later.';
-        }
+        });
+    }
+
+    document.getElementById('blogNewsletterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitForm('blogNewsletterForm', 'blogNlEmail', 'blogNlMsg');
     });
+
+    document.getElementById('heroCtaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitForm('heroCtaForm', 'heroCtaEmail', 'heroCtaMsg', function() {
+            // On success, scroll down to the newsletter card
+            document.getElementById('newsletter').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+
+    /* Scroll-based visibility: hide hero CTA when newsletter card is near */
+    const heroCta = document.getElementById('heroCta');
+    const nlSection = document.getElementById('newsletter');
+    if (heroCta && nlSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    heroCta.style.opacity = '0';
+                    heroCta.style.pointerEvents = 'none';
+                } else {
+                    heroCta.style.opacity = '1';
+                    heroCta.style.pointerEvents = 'auto';
+                }
+            });
+        }, { threshold: 0.1 });
+        observer.observe(nlSection);
+    }
     </script>
 
 </body>
