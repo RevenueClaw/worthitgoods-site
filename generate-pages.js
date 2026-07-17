@@ -181,6 +181,7 @@ const indexHTML = `<!DOCTYPE html>
     <link rel="alternate" type="application/rss+xml" title="WorthIt Goods — Blog RSS Feed" href="https://www.worthitgoods.com/feed.xml" />
     <!-- Google Search Console: replace with your verification meta tag from search.google.com/search-console -->
     <!-- <meta name="google-site-verification" content="..." /> -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/style.css">
     <style>
         :root { --accent: #16a34a; --dark: #1f2937; }

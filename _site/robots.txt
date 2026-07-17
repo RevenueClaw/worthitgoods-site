@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.worthitgoods.com/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /unsubscribe
+Disallow: /privacy

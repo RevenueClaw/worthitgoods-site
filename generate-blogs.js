@@ -170,6 +170,7 @@ categoryBlogs.forEach(blog => {
 <meta name="twitter:description" content="${blog.desc}">
 <meta name="twitter:image" content="${featuredImage || 'https://www.worthitgoods.com/assets/og-image.jpg'}">
 <meta name="description" content="${blog.desc}">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/style.css">
     <style>
         /* ── Mobile Responsive for Blog Posts ── */

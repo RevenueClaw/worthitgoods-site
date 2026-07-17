@@ -49,6 +49,10 @@ cp privacy.html _site/
 # Google Search Console verification
 cp googlef652381e8198d3b7.html _site/
 
+# 404 page, robots.txt
+cp 404.html _site/
+cp robots.txt _site/
+
 # Generate sitemap
 cat > _site/sitemap.xml << 'XML_EOF'
 <?xml version="1.0" encoding="UTF-8"?>
