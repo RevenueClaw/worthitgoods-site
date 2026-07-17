@@ -76,7 +76,7 @@ def pick_products(match_fn, products, count=6):
 def call_llm(prompt, max_tokens=500):
     api_key = os.environ.get("LLM_API_KEY") or ""
     data = json.dumps({
-        "model": "openrouter/google/gemini-2.5-pro-preview-05-06",
+        "model": "openrouter/deepseek/deepseek-v4-flash",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens
     }).encode()
