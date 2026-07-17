@@ -157,6 +157,7 @@ categoryBlogs.forEach(blog => {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${blog.title} - WorthIt Goods</title>
+<link rel="canonical" href="https://www.worthitgoods.com/blog/${blog.slug}.html">
 <meta property="og:title" content="${blog.title}">
 <meta property="og:description" content="${blog.desc}">
 <meta property="og:image" content="${featuredImage || 'https://www.worthitgoods.com/assets/og-image.jpg'}">

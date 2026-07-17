@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adventurers Typewriter-Style Retro Mechanical Keyboard… • HOMPOW Mini Projector with Two -Way Bluetooth • FLY2SKY Portable LED Tent Lamp Emergency Lights with Hook — WorthItGoods</title>
+    <link rel="canonical" href="https://www.worthitgoods.com">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Adventurers Typewriter-Style Retro Mechanical Keyboard… & HOMPOW Mini Projector with Two -Way Bluetooth — WorthItGoods">
@@ -8985,7 +8986,7 @@
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('https://api.shaynesailab.com/api/newsletter/signup', {
+            const res = await fetch('/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, preferences: prefs})
@@ -9025,7 +9026,7 @@
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('https://api.shaynesailab.com/subscribe', {
+            const res = await fetch('/api/subscribe', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, asin, product_title: title})

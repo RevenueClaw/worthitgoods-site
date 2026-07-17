@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods Blog - Honest Reviews & Gear Picks</title>
+    <link rel="canonical" href="https://www.worthitgoods.com/blog.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="WorthIt Goods Blog - Honest Reviews & Gear Picks">
@@ -392,7 +393,7 @@
         const prefs = getSelectedPrefs();
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
-        fetch('https://api.shaynesailab.com/api/newsletter/signup', {
+        fetch('/api/newsletter/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, preferences: prefs})

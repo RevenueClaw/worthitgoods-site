@@ -10,7 +10,8 @@
     <meta property="og:image" content="https://m.media-amazon.com/images/I/71w7jfdY+0L._AC_SL1500_.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html">
+    <link rel="canonical" href="https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html">
+<meta property="og:url" content="https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html">
     <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -215,7 +216,7 @@
         msg.className = 'nl-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('https://api.shaynesailab.com/api/newsletter/signup', {
+            const res = await fetch('/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email})

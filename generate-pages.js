@@ -157,6 +157,7 @@ const indexHTML = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${products.slice(0, 3).map(p => cleanTitle(p.title)).join(' • ')} — WorthItGoods</title>
+    <link rel="canonical" href="https://www.worthitgoods.com">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="${products.slice(0, 2).map(p => cleanTitle(p.title)).join(' & ')} — WorthItGoods">
@@ -472,7 +473,7 @@ const indexHTML = `<!DOCTYPE html>
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('https://api.shaynesailab.com/api/newsletter/signup', {
+            const res = await fetch('/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, preferences: prefs})
@@ -512,7 +513,7 @@ const indexHTML = `<!DOCTYPE html>
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('https://api.shaynesailab.com/subscribe', {
+            const res = await fetch('/api/subscribe', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, asin, product_title: title})
