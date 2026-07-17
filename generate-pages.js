@@ -471,7 +471,7 @@ const indexHTML = `<!DOCTYPE html>
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
+            const res = await fetch('https://api.shaynesailab.com/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, preferences: prefs})
@@ -511,7 +511,7 @@ const indexHTML = `<!DOCTYPE html>
         msg.className = 'newsletter-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('http://192.168.4.127:9004/subscribe', {
+            const res = await fetch('https://api.shaynesailab.com/subscribe', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, asin, product_title: title})

@@ -214,7 +214,7 @@
         msg.className = 'nl-msg';
         msg.textContent = 'Subscribing...';
         try {
-            const res = await fetch('http://192.168.4.127:9003/api/newsletter/signup', {
+            const res = await fetch('https://api.shaynesailab.com/api/newsletter/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email})
