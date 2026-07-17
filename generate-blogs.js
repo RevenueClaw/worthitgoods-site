@@ -171,6 +171,16 @@ categoryBlogs.forEach(blog => {
 <meta name="twitter:image" content="${featuredImage || 'https://www.worthitgoods.com/assets/og-image.jpg'}">
 <meta name="description" content="${blog.desc}">
 <link rel="stylesheet" href="/style.css">
+    <style>
+        /* ── Mobile Responsive for Blog Posts ── */
+        @media (max-width: 640px) {
+            .product-highlight { padding: 1rem !important; margin-left: 0.5rem !important; margin-right: 0.5rem !important; }
+            .product-highlight div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .section-header { padding: 1rem !important; margin-left: 0.5rem !important; margin-right: 0.5rem !important; }
+            .hero h1 { font-size: 1.6rem; }
+            .hero p { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
 <header><nav><a href="/" class="logo">WorthItGoods</a><ul><li><a href="/">Home</a></li><li><a href="/blog.html">Blog</a></li></ul></nav></header>

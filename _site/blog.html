@@ -121,6 +121,21 @@
         .hero-cta {
             margin-top: 24px;
         }
+
+        /* ── Mobile Responsive ── */
+        @media (max-width: 640px) {
+            .blog-card .image-wrapper { padding: 0.5rem; }
+            .newsletter-section { padding: 30px 18px; margin: 30px 12px; }
+            .newsletter-section h2 { font-size: 1.3rem; }
+            .newsletter-form { flex-direction: column; gap: 10px; }
+            .newsletter-form input[type="email"] { width: 100%; }
+            .newsletter-form button { width: 100%; padding: 13px 20px; }
+            .nl-prefs { max-width: 100%; }
+            .nl-pref-option { padding: 8px 12px; font-size: 0.82rem; }
+            .hero-cta .newsletter-form { flex-direction: column; gap: 10px; }
+            .hero-cta .newsletter-form input[type="email"] { width: 100%; box-sizing: border-box; }
+            .hero-cta .newsletter-form button { width: 100%; }
+        }
     </style>
 </head>
 <body>
