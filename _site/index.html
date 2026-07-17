@@ -2631,6 +2631,34 @@
         .cta:hover { background: #15803d; }
 
         footer { background: #1f2937; color: #aaa; text-align: center; padding: 60px 20px 40px; }
+
+        /* ── Mobile Responsive ── */
+        @media (max-width: 640px) {
+            .hero { height: auto !important; min-height: 260px !important; padding: 2rem 1.2rem !important; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .cta-button { padding: 14px 28px; font-size: 1rem; }
+
+            .section-title { font-size: 1.8rem; }
+            .products-section { padding: 40px 12px; }
+
+            .newsletter-section { padding: 30px 18px; margin: 30px 12px; }
+            .newsletter-section h2 { font-size: 1.3rem; }
+            .newsletter-form { flex-direction: column; gap: 10px; }
+            .newsletter-form input[type="email"] { width: 100%; }
+            .newsletter-form button { width: 100%; padding: 13px 20px; }
+
+            .nl-prefs { max-width: 100%; }
+            .nl-pref-option { padding: 8px 12px; font-size: 0.82rem; }
+
+            .products-grid { grid-template-columns: 1fr; gap: 20px; }
+
+            .product-card .content { padding: 16px; }
+            .price-tag { font-size: 1.1rem; }
+
+            footer { padding: 40px 16px 30px; }
+            footer .footer-links { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        }
     </style>
 </head>
 <body>
