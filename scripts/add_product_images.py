@@ -7,6 +7,11 @@ import json
 import subprocess
 import os
 
+# Find shared lib
+_LIB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "lib"))
+if os.path.isdir(_LIB_PATH):
+    sys.path.insert(0, os.path.dirname(_LIB_PATH))
+
 # ── Master ASIN→Article mapping ──
 # Each entry: (filename, [(product_card_index, asin, label), ...])
 # product_card_index: 0-based index of .article-product-card divs in the file
@@ -66,15 +71,13 @@ ARTICLES = {
 }
 
 WORTHIT_REPO = "/home/rock/.openclaw/workspace/worthitgoods-repo"
-CHIPRADAR_SCRIPT = "/home/rock/workspace/chipradar/amazon_creators_api_v1.py"
 
 
 def get_image_via_paapi(asins):
-    """Try PAAPI first for all ASINs at once"""
+    """Try PAAPI via shared workspace lib"""
     print(f"  PAAPI lookup for {len(asins)} ASINs...")
     try:
-        sys.path.insert(0, "/home/rock/workspace/chipradar")
-        from amazon_creators_api_v1 import AmazonCreatorsAPI
+        from lib.amazon_paapi import AmazonCreatorsAPI
         api = AmazonCreatorsAPI()
         results = api.get_items(asins)
         images = {}

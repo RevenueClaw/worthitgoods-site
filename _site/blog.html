@@ -78,12 +78,12 @@
         .newsletter-msg.error { color: #dc2626; }
         .newsletter-msg.success { color: #16a34a; }
         .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
-        /* Hero CTA - small inline signup below hero text */
+        /* Hero CTA - signup below hero text */
         .hero-cta {
-            display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
-            padding: 12px 20px; background: rgba(255,255,255,0.08);
-            border-radius: 12px; backdrop-filter: blur(4px);
-            transition: opacity 0.4s ease;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            padding: 16px 24px; background: rgba(255,255,255,0.08);
+            border-radius: 14px; backdrop-filter: blur(4px);
+            transition: opacity 0.4s ease; max-width: 520px;
         }
         .hero-cta-text { color: rgba(255,255,255,0.85); font-size: 0.88rem; }
         .hero-cta-form { display: flex; gap: 6px; }
@@ -101,6 +101,14 @@
         .hero-cta .newsletter-msg { font-size: 0.82rem; width: 100%; text-align: center; }
         .hero-cta .newsletter-msg.success { color: #86efac; }
         .hero-cta .newsletter-msg.error { color: #fca5a5; }
+        /* Hero CTA preference options — horizontal layout */
+        .hero-cta .nl-prefs {
+            display: flex; flex-direction: row; gap: 8px; justify-content: center;
+            margin: 0; max-width: 100%;
+        }
+        .hero-cta .nl-pref-option {
+            padding: 6px 12px; font-size: 0.82rem; gap: 6px;
+        }
         /* Preference options */
         .nl-prefs {
             display: flex; flex-direction: column; gap: 8px; margin: 14px auto 0;
@@ -137,6 +145,7 @@
             .hero-cta .newsletter-form { flex-direction: column; gap: 10px; }
             .hero-cta .newsletter-form input[type="email"] { width: 100%; box-sizing: border-box; }
             .hero-cta .newsletter-form button { width: 100%; }
+            .hero-cta .nl-prefs { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
@@ -160,6 +169,16 @@
                     <input type="email" id="heroCtaEmail" placeholder="your@email.com" required>
                     <button type="submit">Subscribe</button>
                 </form>
+                <div class="nl-prefs">
+                    <label class="nl-pref-option">
+                        <input type="checkbox" id="prefPicks" checked>
+                        <span><strong>Picks &amp; roundups</strong></span>
+                    </label>
+                    <label class="nl-pref-option">
+                        <input type="checkbox" id="prefComparisons" checked>
+                        <span><strong>Comparisons</strong></span>
+                    </label>
+                </div>
                 <div id="heroCtaMsg" class="newsletter-msg"></div>
             </div>
         </div>
