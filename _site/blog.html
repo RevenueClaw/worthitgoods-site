@@ -80,8 +80,8 @@
         .nl-guarantee { font-size: 0.82rem; color: #9ca3af; margin-top: 14px; }
         /* Hero CTA - signup below hero text */
         .hero-cta {
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
-            padding: 16px 24px; background: rgba(255,255,255,0.08);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            padding: 14px 24px 12px; background: rgba(255,255,255,0.08);
             border-radius: 14px; backdrop-filter: blur(4px);
             transition: opacity 0.4s ease; max-width: 520px;
         }
@@ -101,14 +101,22 @@
         .hero-cta .newsletter-msg { font-size: 0.82rem; width: 100%; text-align: center; }
         .hero-cta .newsletter-msg.success { color: #86efac; }
         .hero-cta .newsletter-msg.error { color: #fca5a5; }
-        /* Hero CTA preference options — horizontal layout */
+        /* Hero CTA preference options — horizontal, transparent */
         .hero-cta .nl-prefs {
             display: flex; flex-direction: row; gap: 8px; justify-content: center;
             margin: 0; max-width: 100%;
         }
         .hero-cta .nl-pref-option {
             padding: 6px 12px; font-size: 0.82rem; gap: 6px;
+            background: rgba(255,255,255,0.10);
+            border-color: rgba(255,255,255,0.15);
         }
+        .hero-cta .nl-pref-option:hover {
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.4);
+        }
+        .hero-cta .nl-pref-option span { color: rgba(255,255,255,0.75); }
+        .hero-cta .nl-pref-option span strong { color: rgba(255,255,255,0.92); }
         /* Preference options */
         .nl-prefs {
             display: flex; flex-direction: column; gap: 8px; margin: 14px auto 0;
