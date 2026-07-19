@@ -73,7 +73,7 @@ def main():
 
 """
 
-    # Insert after the product-grid opening tag
+    # Insert after the product-grid opening tag (newest first)
     insert_marker = '<div class="product-grid">\n\n'
     if insert_marker not in html:
         insert_marker = '<div class="product-grid">\n'
@@ -82,6 +82,19 @@ def main():
             sys.exit(1)
 
     html = html.replace(insert_marker, insert_marker + card, 1)
+
+    # Enforce max 9 cards before newsletter — overflow the 9th below
+    nl_pos = html.find('<!-- NEWSLETTER SIGNUP')
+    if nl_pos > 0:
+        before_nl = html[:nl_pos]
+        after_nl = html[nl_pos:]
+        card_pattern = r'<div class="product-card blog-card">.*?</div>\s*</div>'
+        cards_before = list(re.finditer(card_pattern, before_nl, re.S))
+        if len(cards_before) > 9:
+            overflow_card = cards_before[-1].group()
+            before_nl = before_nl[:cards_before[-1].start()] + before_nl[cards_before[-1].end():]
+            after_nl = after_nl.replace('</section>', '</section>\n\n' + overflow_card + '\n', 1)
+            html = before_nl + after_nl
 
     with open(blog_path, 'w') as f:
         f.write(html)
