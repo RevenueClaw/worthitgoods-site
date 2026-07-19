@@ -228,11 +228,25 @@ def main():
     selected = pick_products(theme["match"], products, 6)
     for p in selected: print(f"  • {p.get('title','?')}")
     
-    pl = "\n".join(f"- {p['title']}: {p.get('blurb',p.get('description','')[:150])}" for p in selected)
-    prompt = f"Write a blog intro (2-3 paras) and conclusion for a no-nonsense product site.\n\nTheme: {theme['title']}\nProducts:\n{pl}\n\nVoice: honest, direct, slightly irreverent. No 'in today's world' or 'game-changing'. Use contractions. Under 150 words.\n\nINTRO:\n\nCONCLUSION:\n"
+    # Validate products belong to theme before generating
+    validated = [p for p in selected if p.get('title','') and p.get('blurb','')]
+    if len(validated) < 4:
+        print(f"WARNING: Only {len(validated)} products have blurbs — falling back on title validation")
+        validated = selected
+    pl = "\n".join(f"- {p['title']}: {p.get('blurb',p.get('description','')[:150])}" for p in validated)
+    prompt = f"Write a blog intro (2-3 paras) and conclusion for a no-nonsense product site.\n\nTheme: {theme['title']}\nProducts:\n{pl}\n\nIMPORTANT: Each product above was selected to match the theme. If ANY product clearly does NOT belong to '{theme['title']}', list it under REJECTED: before writing. The intro should naturally connect all products, and the conclusion should wrap up the theme.\n\nVoice: honest, direct, slightly irreverent. No 'in today's world' or 'game-changing'. Use contractions. Under 150 words.\n\nREJECTED:\n\nINTRO:\n\nCONCLUSION:\n"
     result = call_llm(prompt)
     
+    # Check if LLM rejected any products
+    rejected_llm = []
     if result:
+        rm = re.search(r'REJECTED:\n(.*?)(?=INTRO:)', result, re.S)
+        if rm:
+            rejected_text = rm.group(1).strip()
+            if rejected_text:
+                rejected_llm = [l.strip('- ').strip() for l in rejected_text.split('\n') if l.strip()]
+                if rejected_llm:
+                    print(f"LLM rejected products: {rejected_llm}")
         im = re.search(r'INTRO:\n(.*?)(?=CONCLUSION:)', result, re.S)
         cm = re.search(r'CONCLUSION:\n(.*)', result, re.S)
         ih = '\n'.join(f'<p>{p.strip()}</p>' for p in re.split(r'\n\n+', im.group(1) if im and im.group(1) else "Here are {len(selected)} products that earn their stay.") if p.strip())
