@@ -37,13 +37,13 @@ THEMES = {
         "title": "Home & Desk Upgrades That Make a Difference",
         "desc": "Small improvements for where you spend most of your time.",
         "slug_prefix": "home-office",
-        "match": lambda t, b, d: bool(re.search(r'(lamp|desk|organiz|charger|cable|dock|stand|monitor|mouse|keyboard|mat|hub|pi\s*case|ethernet|router)', (t+' '+b+' '+d).lower()))
+        "match": lambda t, b, d: bool(re.search(r'(keyboard|desk\s*(lamp|organiz|mat)|mouse|monitor|stand|docking|phone\s*dock|cable\s*organiz|air\s*purif|smart\s*(plug|lamp|outlet)|office|ethernet|router|dock|hub|dry\s*erase|mechanical\s*keyboard|bluetooth\s*speaker|charging\s*station|usb\s*c\s*charger|wood\s*phone|ga[nm]\s*fast)', (t+' '+b+' '+d).lower())) and not re.search(r'(car|auto|truck|outdoor|camp|hike|survival|golf|beach|paddle|hammock|grill|towel|jump\s*start|battery\s*charger|trunk|travel\s*backpack)', (t+' '+b+' '+d).lower())
     },
     "gadgets-geekery": {
         "title": "Gadgets & Geekery Worth Your Money",
         "desc": "From retro Pi cases to smart lamps — tech that's actually fun to use.",
         "slug_prefix": "gadgets-geekery",
-        "match": lambda t, b, d: bool(re.search(r'(pi\s*case|govee|smart|led|rgb|light|neon|drone|robot|sensor|camera|borescope|tech|gadget|raspberry|geek|nerd|star.?wars|darth|vader|retro|game|controller|console)', (t+' '+b+' '+d).lower()))
+        "match": lambda t, b, d: bool(re.search(r'(pi\s*case|govee|smart\s*(lamp|light|plug)|rgb|borescope|camera|raspberry|star.?wars|darth|vader|retro|game\s*(controller|holder))', (t+' '+b+' '+d).lower())) and not re.search(r'(car|auto|outdoor|camp|hike|survival|truck)', (t+' '+b+' '+d).lower())
     },
     "gift-ideas": {
         "title": "Gift Ideas That Don't Feel Like a Gift Card",
@@ -65,11 +65,10 @@ def load_products():
 
 def pick_products(match_fn, products, count=6):
     matched = [p for p in products if match_fn(p.get("title",""), p.get("blurb",""), p.get("description",""))]
-    matched = [p for p in matched if products.index(p) >= 38]
     random.shuffle(matched)
     if len(matched) >= count:
         return matched[:count]
-    others = [p for p in products if p not in matched and products.index(p) >= 38]
+    others = [p for p in products if p not in matched]
     random.shuffle(others)
     return matched + others[:count - len(matched)]
 
@@ -152,12 +151,13 @@ def gen_post_html(theme, products, intro_html, conclusion_html):
 <a href="/#products" style="display:inline-block;margin-top:1rem;font-weight:bold;color:#ff6b35;">Browse the full collection →</a></div>
 <p style="text-align:center;margin:3rem 0;"><a href="/blog.html" class="cta-button" style="display:inline-block;padding:1rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;text-decoration:none;border-radius:8px;font-weight:bold;">More Posts</a></p>
 </article>
-<footer><div style="margin-bottom:18px;">
+<footer style="text-align:center;background:#1a1a1a;color:#aaa;padding:3rem 2rem 1.5rem;margin-top:4rem;"><div style="margin-bottom:18px;">
 <a href="/" style="color:#ff9a56;text-decoration:none;margin:0 10px;">Home</a>
 <a href="/blog.html" style="color:#ff9a56;text-decoration:none;margin:0 10px;">Blog</a>
 <a href="/#products" style="color:#ff9a56;text-decoration:none;margin:0 10px;">All Products</a>
 <a href="/privacy.html" style="color:#ff9a56;text-decoration:none;margin:0 10px;">Privacy</a>
 </div><p>© 2026 WorthIt Goods.</p><p>As an Amazon Associate, we earn from qualifying purchases.</p></footer>
+</body>
 </body>
 </html>"""
 
