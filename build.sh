@@ -42,6 +42,9 @@ cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 # Copy comparison pages
 cp -r comparisons _site/comparisons/
 
+# Blog overlay: 2026-07-19-home-office
+cp blog/custom-2026-07-19-home-office.html _site/blog/2026-07-19-home-office.html
+
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
