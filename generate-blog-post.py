@@ -164,7 +164,15 @@ def gen_post_html(theme, products, intro_html, conclusion_html):
 def update_index(slug, title, desc, image, date_str):
     content = BLOG_INDEX.read_text()
     card = gen_card(slug, title, desc, image, date_str)
-    new = re.sub(r'(<div class="product-grid">\s*\n)', r'\1' + card + '\n', content, count=1)
+    # Count existing cards before the newsletter section
+    grid_section = content[content.find('<div class="product-grid">'):content.find('NEWSLETTER SIGNUP')]
+    before_nl = len(re.findall(r'product-card blog-card', grid_section))
+    if before_nl >= 9:
+        # Insert just before the newsletter section (keep max 9 before newsletter)
+        new = re.sub(r'(\s*<!-- NEWSLETTER SIGNUP)', '\n' + card + '\1', content, count=1)
+    else:
+        # Insert at top of grid
+        new = re.sub(r'(<div class="product-grid">\s*\n)', r'\1' + card + '\n', content, count=1)
     if new != content:
         BLOG_INDEX.write_text(new); return True
     return False
