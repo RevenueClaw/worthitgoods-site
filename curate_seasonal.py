@@ -332,6 +332,10 @@ PRODUCT_NOUNS = {
     'brush', 'comb', 'mirror', 'tray', 'basket', 'bin', 'screwdriver', 'wrench',
     'hammer', 'level', 'camera', 'lens', 'tripod', 'speaker', 'adapter', 'hub',
     'dock', 'paddleboard', 'hammock', 'cooler', 'lunchbox',
+    'plug', 'registration', 'purifier', 'filter',
+    'projector', 'keyboard', 'mouse',
+    'backpack', 'duffle', 'sling', 'pouch', 'wallet',
+    'curtain', 'blind', 'rug', 'cushion', 'throw',
 }
 
 

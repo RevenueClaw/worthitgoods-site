@@ -25,6 +25,23 @@ if ! jq empty "$PRODUCTS_FILE" >/dev/null 2>&1; then
   echo "❌ Existing products JSON malformed" >&2
   exit 1
 fi
+
+# 🔍 AUTO-DEDUP: Check each new product against existing products
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEDUP_SCRIPT="$SCRIPT_DIR/check_dedup.py"
+if [[ -f "$DEDUP_SCRIPT" ]]; then
+  echo "🔍 Checking new batch for duplicates..."
+  DUPLICATES=$(python3 "$DEDUP_SCRIPT" "$NEW_BATCH" "$PRODUCTS_FILE" 2>&1)
+  if [[ $? -eq 1 ]]; then
+    echo "$DUPLICATES"
+    echo "❌ Duplicates found — remove them before adding batch"
+    exit 1
+  elif [[ -n "$DUPLICATES" && "$DUPLICATES" != "OK"* ]]; then
+    echo "$DUPLICATES"
+  fi
+  echo "✅ No duplicates detected"
+fi
+
 # Merge – prepend
 TMP="${PRODUCTS_FILE}.tmp"
 jq -s '.[0] + .[1]' "$NEW_BATCH" "$PRODUCTS_FILE" > "$TMP"

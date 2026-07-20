@@ -249,6 +249,15 @@ PRODUCT_NOUNS = {
     'camera', 'lens', 'tripod', 'speaker', 'adapter', 'hub', 'dock',
     'flag', 'banner', 'windsock', 'bunting',
     'paddleboard', 'hammock', 'cooler', 'lunchbox',
+    'plug', 'registration', 'purifier', 'filter', 'trimmer', 'shaver',
+    'sander', 'detector', 'monitor', 'tracker', 'alarm', 'lock',
+    'straps', 'harness', 'leash', 'collar', 'bowl', 'feeder',
+    'brush', 'clipper', 'dryer', 'heater', 'humidifier', 'diffuser',
+    'projector', 'keyboard', 'mouse', 'tablet', 'laptop', 'monitor',
+    'headphones', 'earbuds', 'microphone', 'webcam', 'router',
+    'backpack', 'duffle', 'tote', 'sling', 'pouch', 'wallet',
+    'stool', 'chair', 'desk', 'shelf', 'cabinet', 'drawer',
+    'curtain', 'blind', 'rug', 'mat', 'cushion', 'throw',
 }
 
 
