@@ -5,15 +5,23 @@
     <link>https://www.worthitgoods.com/blog.html</link>
     <description>Honest, hand-picked products that actually deliver. Weekly finds, seasonal guides, and gear worth your money.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jul 2026 01:28:09 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2026 14:05:52 GMT</lastBuildDate>
     <atom:link href="https://www.worthitgoods.com/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
       <title>America&apos;s 250th Birthday: 4th of July &amp; Summer Fun</title>
       <link>https://www.worthitgoods.com/blog/250th-product-milestone-4th-of-july-summer-fun.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/250th-product-milestone-4th-of-july-summer-fun.html</guid>
-      <pubDate>Mon, 20 Jul 2026 01:28:09 GMT</pubDate>
+      <pubDate>Mon, 20 Jul 2026 14:05:52 GMT</pubDate>
       <description>Celebrate America&apos;s 250th with fireworks, yard games, BBQ essentials, SUP boards, patriotic decor, and more summer gear - all vetted and worth it.</description>
       <media:content url="https://www.worthitgoods.com/assets/july-fourth-hero.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>🎒 Back to School — WorthItGoods Picks</title>
+      <link>https://www.worthitgoods.com/blog/2026-07-20-seasonal-back_to_school.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-07-20-seasonal-back_to_school.html</guid>
+      <pubDate>Mon, 20 Jul 2026 12:00:00 GMT</pubDate>
+      <description>10 hand-picked dorm and school essentials that actually make campus life better. Desk lamps, mini fridges, bedding, gadgets, organizers.</description>
+      <media:content url="https://m.media-amazon.com/images/I/31WWRLgpC0L._SL500_.jpg" medium="image"/>
     </item>
     <item>
       <title>Home &amp; Desk Upgrades That Make a Difference</title>
@@ -85,7 +93,7 @@
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-outdoor-survival-essentials.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
       <description>Multitools, kits, coolers for trails.</description>
-      <media:content url="https://m.media-amazon.com/images/I/81QgQd4-9jL._AC_SL1500_.jpg" medium="image"/>
+      <media:content url="https://m.media-amazon.com/images/I/41tFuYxx6GL._SL500_.jpg" medium="image"/>
     </item>
     <item>
       <title>Top Tech Fitness Gear in 2026</title>
@@ -101,7 +109,7 @@
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-top-gifts-home.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
       <description>Decorative keepsakes, coasters, and home joys.</description>
-      <media:content url="https://m.media-amazon.com/images/I/61eFOUqGaLL._SL500_.jpg" medium="image"/>
+      <media:content url="https://m.media-amazon.com/images/I/51h+bo9KqKL._SL500_.jpg" medium="image"/>
     </item>
   </channel>
 </rss>
