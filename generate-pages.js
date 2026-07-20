@@ -123,22 +123,7 @@ function renderProduct(p) {
                         <!-- Full enhanced description -->
                         <p class="full-desc">${p.description}</p>
                         
-                        <button class="toggle-btn" onclick="
-                            const content = this.parentElement;
-                            const short = content.querySelector('.short-desc');
-                            const full = content.querySelector('.full-desc');
-                            if (full.style.display === 'block') {
-                                full.style.display = 'none';
-                                short.style.display = 'block';
-                                this.textContent = 'Why It\u2019s Worth It \u2192';
-                            } else {
-                                full.style.display = 'block';
-                                short.style.display = 'none';
-                                this.textContent = 'Show less \u2191';
-                            }
-                            ">
-                            Why It\u2019s Worth It \u2192
-                        </button>
+                        <button class="toggle-btn">Why It\u2019s Worth It \u2192</button>
                         
                         <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                         <div style="text-align:center;margin-top:8px;">
@@ -535,6 +520,32 @@ const indexHTML = `<!DOCTYPE html>
     // Close modal on backdrop click
     document.getElementById('paModal').addEventListener('click', function(e) {
         if (e.target === this) closePriceAlert();
+    });
+
+    /* ── Card-wide click: toggle Why It's Worth It ── */
+    document.querySelectorAll('.product-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            // Don't toggle if clicking the Amazon link, price alert link, or toggle button
+            if (e.target.closest('.cta') || e.target.closest('[onclick*=\"openPriceAlert\"]') || e.target.closest('.toggle-btn')) return;
+            
+            const content = this.querySelector('.content');
+            const short = content.querySelector('.short-desc');
+            const full = content.querySelector('.full-desc');
+            const btn = content.querySelector('.toggle-btn');
+            if (!full) return;
+            
+            if (full.style.display === 'block') {
+                full.style.display = 'none';
+                short.style.display = 'block';
+                btn.textContent = 'Why It\u2019s Worth It \u2192';
+            } else {
+                full.style.display = 'block';
+                short.style.display = 'none';
+                btn.textContent = 'Show less \u2191';
+            }
+        });
+        // Make the card cursor indicate it's clickable
+        card.style.cursor = 'pointer';
     });
     </script>
 

@@ -538,6 +538,18 @@
         }, { threshold: 0.1 });
         observer.observe(nlSection);
     }
+    /* ── Blog card-wide click: navigate to post ── */
+    document.querySelectorAll('.blog-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            // Don't navigate if clicking on the newsletter section
+            if (e.target.closest('.newsletter-section')) return;
+            const link = this.querySelector('h3 a, .cta');
+            if (link) {
+                window.location.href = link.getAttribute('href');
+            }
+        });
+        card.style.cursor = 'pointer';
+    });
     </script>
 
 </body>
