@@ -20,7 +20,7 @@ Available themes:
   back_to_school, dorm_life, fall_essentials, halloween, thanksgiving_host,
   holiday_gifts, winter_essentials, spring_cleaning, summer_survival, college_grad
 
-  --count N   products per subcategory (default 2 = ~12 total)
+  --count N   products per subcategory (default 1 = ~6 total)
   --craft     also attempt to generate a matching blog post
   --fun       require minimum fun products (default 1)
 """
@@ -418,7 +418,7 @@ We don't take payments for placement. Every product on WorthItGoods is chosen be
 
 
 # ── Main Curation ──────────────────────────────────────────────────────────────
-def curate_seasonal(theme_key, products_per_subcat=2, require_fun=1):
+def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
     if theme_key not in SEASONAL_THEMES:
         print(f"❌ Unknown theme: {theme_key}")
         print(f"   Available: {', '.join(SEASONAL_THEMES.keys())}")
@@ -429,6 +429,7 @@ def curate_seasonal(theme_key, products_per_subcat=2, require_fun=1):
     curated = []
     fun_candidates = []
     seen_asins = set()
+    seen_categories = set()  # Track product types to prevent same-category duplicates
     total_target = products_per_subcat * len(theme["subcategories"])
     
     print(f"\n{'='*60}")
@@ -554,6 +555,18 @@ def curate_seasonal(theme_key, products_per_subcat=2, require_fun=1):
                 if not img:
                     continue
                 
+                # ⚠️ DEDUP: Skip if same product type already in batch (e.g. 2 desk lamps, 2 mini fridges)
+                title_lower = title.lower()
+                product_type = None
+                for noun in PRODUCT_NOUNS:
+                    if noun in title_lower:
+                        product_type = noun
+                        break
+                if product_type and product_type in seen_categories:
+                    print(f"\n      ⏭️ [dupe category={product_type}] {title[:60]}")
+                    count += 1
+                    continue
+                
                 product = {
                     "title": title,
                     "image": img,
@@ -563,6 +576,8 @@ def curate_seasonal(theme_key, products_per_subcat=2, require_fun=1):
                 }
                 curated.append(product)
                 seen_asins.add(asin)
+                if product_type:
+                    seen_categories.add(product_type)
                 hits += 1
                 count += 1
                 print(f"\n      ✅ {title[:60]}")
