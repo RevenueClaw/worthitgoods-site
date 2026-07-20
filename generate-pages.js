@@ -144,7 +144,7 @@ function renderProduct(p) {
                         <!-- Full enhanced description -->
                         <p class="full-desc">${p.description}</p>
                         
-                        <button class="toggle-btn">Why It\u2019s Worth It \u2192</button>
+                        <button class="toggle-btn" type="button">Why It\u2019s Worth It \u2192</button>
                         
                         <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                         <div style="text-align:center;margin-top:8px;">
@@ -272,10 +272,10 @@ const indexHTML = `<!DOCTYPE html>
         /* Back to School: subtle floating dots */
         .hero[data-theme="back_to_school"] ~ .products-section::before {
             background-image:
-                radial-gradient(circle at 20% 30%, rgba(22, 163, 74, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 80% 60%, rgba(244, 162, 97, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 40% 80%, rgba(233, 196, 106, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 60% 20%, rgba(231, 111, 81, 0.03) 1px, transparent 1px);
+                radial-gradient(circle at 20% 30%, rgba(22, 163, 74, 0.10) 1px, transparent 1px),
+                radial-gradient(circle at 80% 60%, rgba(244, 162, 97, 0.10) 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, rgba(233, 196, 106, 0.10) 1px, transparent 1px),
+                radial-gradient(circle at 60% 20%, rgba(231, 111, 81, 0.10) 1px, transparent 1px);
             background-size: 60px 60px;
             animation: float-dots 30s linear infinite;
         }
@@ -538,9 +538,10 @@ const indexHTML = `<!DOCTYPE html>
     </header>
     <div class="hero"${activeTheme ? ` data-theme="${SEASONAL_THEME}"` : ''}>
         <div class="hero-content">
-            ${activeTheme ? `<div class="theme-badge">${activeTheme.badge}</div>` : ''}
+            ${activeTheme ? `<div class="seasonal-banner"><span class="seasonal-label">⏰ Limited Time</span> ${activeTheme.badge}</div>` : ''}
             <h1>WorthIt Goods</h1>
             <p>${activeTheme ? activeTheme.tagline : 'Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.'}</p>
+            <p class="seasonal-sub">Honest, hand-picked products that actually deliver. No junk. No hype. Just gear worth your money and time.</p>
             <a href="#products" class="cta-button">Browse Worth-It Picks</a>
         </div>
     </div>
@@ -656,27 +657,38 @@ const indexHTML = `<!DOCTYPE html>
 
     /* ── Card-wide click: toggle Why It's Worth It ── */
     document.querySelectorAll('.product-card').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-            // Don't toggle if clicking the Amazon link or price alert link
-            if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
-            
-            const content = this.querySelector('.content');
-            const short = content.querySelector('.short-desc');
-            const full = content.querySelector('.full-desc');
-            const btn = content.querySelector('.toggle-btn');
+        // Direct toggle function
+        function toggleDesc() {
+            var content = card.querySelector('.content');
+            if (!content) return;
+            var short = content.querySelector('.short-desc');
+            var full = content.querySelector('.full-desc');
+            var btn = content.querySelector('.toggle-btn');
             if (!full) return;
             
-            if (full.style.display === 'block') {
-                full.style.display = 'none';
-                short.style.display = 'block';
-                btn.textContent = 'Why It\u2019s Worth It \u2192';
-            } else {
-                full.style.display = 'block';
-                short.style.display = 'none';
-                btn.textContent = 'Show less \u2191';
+            var isVisible = full.style.display === 'block';
+            full.style.display = isVisible ? 'none' : 'block';
+            short.style.display = isVisible ? 'block' : 'none';
+            if (btn) {
+                btn.textContent = isVisible ? 'Why It’s Worth It →' : 'Show less ↑';
             }
+        }
+        
+        // Card-wide click
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
+            toggleDesc();
         });
-        // Make the card cursor indicate it's clickable
+        
+        // Toggle button direct click as safety net
+        var toggleBtn = card.querySelector('.toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleDesc();
+            });
+        }
+        
         card.style.cursor = 'pointer';
     });
     </script>
