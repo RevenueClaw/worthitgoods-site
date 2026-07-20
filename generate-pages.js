@@ -5,7 +5,28 @@ const productsDataPath = 'data/sample_products.json';
 const siteDir = '_site';
 
 // ── Seasonal Theme Configuration ──────────────────────────────────────────────
-const SEASONAL_THEME = process.env.SEASONAL_THEME || '';
+const SEASONAL_THEME = process.env.SEASONAL_THEME || (() => {
+    try {
+        // Check filesystem for .seasonal-active + .seasonal-theme-name
+        // Cloudflare Pages checks out a fresh copy — these files are in git
+        const fs = require('fs');
+        const activePath = '.seasonal-active';
+        const namePath = '.seasonal-theme-name';
+        if (fs.existsSync(activePath) && fs.existsSync(namePath)) {
+            const ts = parseInt(fs.readFileSync(activePath, 'utf8').trim(), 10);
+            const now = Math.floor(Date.now() / 1000);
+            const maxAge = 5 * 86400; // 5 days
+            if (now - ts < maxAge) {
+                const theme = fs.readFileSync(namePath, 'utf8').trim();
+                console.log('🎨 Seasonal theme detected:', theme);
+                return theme;
+            } else {
+                console.log('⏳ Seasonal theme expired');
+            }
+        }
+    } catch (_) {}
+    return '';
+})();
 
 const THEMES = {
     back_to_school: {
