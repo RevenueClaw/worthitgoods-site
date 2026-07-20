@@ -127,7 +127,7 @@ function renderProduct(p) {
                         
                         <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                         <div style="text-align:center;margin-top:8px;">
-                            <a href="#" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
+                            <a href="#" class="price-alert-link" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
                                 <span style="font-size:0.85rem;">🔔</span> Get Price Alert
                             </a>
                         </div>
@@ -525,8 +525,8 @@ const indexHTML = `<!DOCTYPE html>
     /* ── Card-wide click: toggle Why It's Worth It ── */
     document.querySelectorAll('.product-card').forEach(function(card) {
         card.addEventListener('click', function(e) {
-            // Don't toggle if clicking the Amazon link, price alert link, or toggle button
-            if (e.target.closest('.cta') || e.target.closest('[onclick*=\"openPriceAlert\"]') || e.target.closest('.toggle-btn')) return;
+            // Don't toggle if clicking the Amazon link or price alert link
+            if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
             
             const content = this.querySelector('.content');
             const short = content.querySelector('.short-desc');
