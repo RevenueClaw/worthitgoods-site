@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# ── Seasonal theme flag ──
+# ── Seasonal theme auto-detect ──
+# Priority: CLI --theme flag > .seasonal-active file > none
 THEME=""
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -14,6 +15,24 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+# If no --theme flag, check .seasonal-active
+if [[ -z "$THEME" && -f .seasonal-active ]]; then
+    THEME_FILE=".seasonal-active"
+    THEME_TIMESTAMP=$(cat "$THEME_FILE")
+    NOW=$(date +%s)
+    AGE=$((NOW - THEME_TIMESTAMP))
+    MAX_AGE=$((5 * 86400))
+    if [[ $AGE -lt $MAX_AGE ]]; then
+        # Theme is still active — read theme name from curate_seasonal.py or default
+        if [[ -f .seasonal-theme-name ]]; then
+            THEME=$(cat .seasonal-theme-name)
+        else
+            THEME="back_to_school"
+        fi
+        echo "🎨 Seasonal theme active: $THEME"
+    fi
+fi
 
 # Generate site from data/sample_products.json
 rm -rf _site

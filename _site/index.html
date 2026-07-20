@@ -2649,6 +2649,117 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        /* ── Themed Hero Backgrounds ── */
+        .hero[data-theme="back_to_school"] {
+            background: linear-gradient(135deg, #1a365d 0%, #2d6a4f 30%, #e9c46a 60%, #f4a261 80%, #e76f51 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 25s ease infinite;
+        }
+        .hero[data-theme="back_to_school"]::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 29px),
+                repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(255,255,255,0.03) 28px, rgba(255,255,255,0.03) 29px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero[data-theme="back_to_school"] .theme-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero[data-theme="fall_essentials"] {
+            background: linear-gradient(135deg, #5c3a21 0%, #8b5a2b 25%, #d4a373 50%, #cc8b5c 75%, #a0522d 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
+        }
+        .hero[data-theme="halloween"] {
+            background: linear-gradient(135deg, #0d0221 0%, #1a0a3e 25%, #ff6b35 50%, #1a0a3e 75%, #0d0221 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        .hero[data-theme="holiday_gifts"] {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 25%, #1a7a1a 50%, #991b1b 75%, #dc2626 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 18s ease infinite;
+        }
+        .hero[data-theme="thanksgiving_host"] {
+            background: linear-gradient(135deg, #92400e 0%, #b45309 25%, #f59e0b 50%, #b45309 75%, #78350f 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 22s ease infinite;
+        }
+
+        /* ── Subtle Animated Background Behind Product Cards ── */
+        .products-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .products-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Back to School: subtle floating dots */
+        .hero[data-theme="back_to_school"] ~ .products-section::before {
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(22, 163, 74, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 80% 60%, rgba(244, 162, 97, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, rgba(233, 196, 106, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 60% 20%, rgba(231, 111, 81, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: float-dots 30s linear infinite;
+        }
+        @keyframes float-dots {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-60px) rotate(0.5deg); }
+        }
+        /* Fall: floating dots */
+        .hero[data-theme="fall_essentials"] ~ .products-section::before {
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(212, 163, 115, 0.04) 0, rgba(212, 163, 115, 0.04) 4px, transparent 4px),
+                radial-gradient(circle at 85% 45%, rgba(160, 82, 45, 0.04) 0, rgba(160, 82, 45, 0.04) 3px, transparent 3px),
+                radial-gradient(circle at 50% 75%, rgba(204, 139, 92, 0.03) 0, rgba(204, 139, 92, 0.03) 5px, transparent 5px);
+            background-size: 80px 80px;
+            animation: float-dots 35s linear infinite;
+        }
+        /* Halloween: subtle floating dots */
+        .hero[data-theme="halloween"] ~ .products-section::before {
+            background-image:
+                radial-gradient(circle at 30% 40%, rgba(255, 107, 53, 0.03) 0, rgba(255, 107, 53, 0.03) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(255, 107, 53, 0.03) 0, rgba(255, 107, 53, 0.03) 3px, transparent 3px);
+            background-size: 50px 50px;
+            animation: float-dots 20s linear infinite;
+        }
+        /* Holiday: floating sparkle dots */
+        .hero[data-theme="holiday_gifts"] ~ .products-section::before {
+            background-image:
+                radial-gradient(circle at 40% 30%, rgba(220, 38, 38, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 60% 70%, rgba(26, 122, 26, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 20% 60%, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float-dots 25s linear infinite;
+        }
+        /* Thanksgiving: warm floating dots */
+        .hero[data-theme="thanksgiving_host"] ~ .products-section::before {
+            background-image:
+                radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0, rgba(245, 158, 11, 0.03) 3px, transparent 3px),
+                radial-gradient(circle at 80% 20%, rgba(146, 64, 14, 0.03) 0, rgba(146, 64, 14, 0.03) 2px, transparent 2px);
+            background-size: 70px 70px;
+            animation: float-dots 28s linear infinite;
+        }
+
+
         /* Diagonal light sweep — single soft ray moving across */
         .hero::after {
             content: '';
@@ -2866,11 +2977,11 @@
         </ul>
       </nav>
     </header>
-    <div class="hero">
+    <div class="hero" data-theme="back_to_school">
         <div class="hero-content">
-            
+            <div class="theme-badge">🎒 Back to School Picks</div>
             <h1>WorthIt Goods</h1>
-            <p>Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.</p>
+            <p>Smart dorm & school essentials that actually make campus life better</p>
             <a href="#products" class="cta-button">Browse Worth-It Picks</a>
         </div>
     </div>
