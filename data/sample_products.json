@@ -1,22 +1,10 @@
 [
   {
-    "title": "HP 15-fd000 2024 Laptop, 10-Core Intel Core i5-1235U, 15.6\" FHD IPS Display, Intel Iris Xe Graphics, 16GB DDR4 512GB SSD, Wi-Fi 6, Win11 Home",
-    "asin": "B0DPYZSQJY",
-    "price": 669.0,
-    "rating": 4.5,
-    "reviews": 150,
-    "image": "https://m.media-amazon.com/images/I/41apHV9yiCL._SL500_.jpg",
-    "affiliate_url": "https://www.amazon.com/dp/B0DPYZSQJY?tag=worthitgoods-20",
-    "badge": "",
-    "blurb": "A reliable HP touchscreen laptop with 16GB RAM and a fast i5 processor \u2014 handles college workloads without breaking a sweat.",
-    "description": "This HP 15 is exactly what most college students actually need: a well-built 15.6-inch laptop with a responsive touchscreen, a 10-core Intel i5 processor that chews through multitasking, and 16GB of RAM that keeps everything snappy when you've got 18 browser tabs, a research paper, and Spotify all running at once. The 512GB SSD gives you plenty of space for files and projects, and the 10-hour battery life means you can leave the charger in your dorm for a full day of classes. It comes with Windows 11 Home and Wi-Fi 6, so you're not fighting slow connections in the library. It's not flashy \u2014 it's just a solid, reliable laptop from a brand that's been making them for decades, at a price that won't make student loan payments hurt more than they already do."
-  },
-  {
     "title": "HP Victus 15-FA100 2024 Gaming Laptop, 15.6\" FHD 144Hz, Intel i5-13420H, 16GB DDR4, 512GB SSD, NVIDIA RTX 4050 6GB, Wi-Fi 6, Backlit KB, Win11 Pro",
     "asin": "B0DNJJ6RJY",
     "price": 899.99,
-    "rating": 4.3,
-    "reviews": 120,
+    "rating": 4.5,
+    "reviews": 100,
     "image": "https://m.media-amazon.com/images/I/41maWfAegZL._SL500_.jpg",
     "affiliate_url": "https://www.amazon.com/dp/B0DNJJ6RJY?tag=worthitgoods-20",
     "badge": "\ud83d\udd25 Editor's Pick",
@@ -29,70 +17,110 @@
     "description": "If you've ever tried to clip a fan to a loft bed frame and watched it slide off at 2 AM, this thing makes immediate sense. The FanShelfie is basically a shelf that clamps to your bed frame and holds your fan at the right height and distance \u2014 no more all-night balancing acts. It comes in two height options so you can aim airflow where you actually need it, whether you're on the top bunk or studying at your desk. It's a simple idea that you'll wonder why nobody thought of sooner.",
     "blurb": "The fan holder that actually stays put on dorm loft beds \u2014 no more 2 AM readjustments.",
     "affiliate_url": "https://www.amazon.com/dp/B0DYVR75W6?tag=worthitgoods-20",
-    "_fun_score": 0.79
+    "_fun_score": 0.79,
+    "asin": "B0DYVR75W6",
+    "price": 37.99,
+    "rating": 4.5,
+    "reviews": 500
   },
   {
     "title": "Airlonv LED Desk Lamp for Office Home, Eye-Caring Desk Light with Stepless Dimming Adjustable Flexible Gooseneck, 10W USB Adapter Desk Lamp with Clamp for Reading, Study, Workbench (Black)",
     "image": "https://m.media-amazon.com/images/I/415a2-2URFL._SL500_.jpg",
     "description": "Dorm desk lighting is almost always terrible \u2014 either a harsh overhead that gives you a headache or nothing at all. This Airlonv lamp clamps to your desk (no footprint wasted) and the flexible gooseneck lets you point light exactly where you need it. Stepless dimming means you can dial it from bright study mode to a soft glow for late-night reading without waking your roommate. The USB-powered design is a nice touch \u2014 one less wall wart to fight over at the power strip.",
     "blurb": "Clamp-on desk lamp with a flexible neck that puts light exactly where you need it.",
-    "affiliate_url": "https://www.amazon.com/dp/B0C4JTPPYY?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0C4JTPPYY?tag=worthitgoods-20",
+    "asin": "B0C4JTPPYY",
+    "price": 20.98,
+    "rating": 4.5,
+    "reviews": 8000
   },
   {
     "title": "Upstreman 3.2 Cu.Ft Mini Fridge with Freezer, Quiet Efficient Small Fridge, Compact Refrigerator with Adjustable Thermostat, for Dorm, Bedroom, Office, Black-BR321",
     "image": "https://m.media-amazon.com/images/I/41dgBpL14gL._SL500_.jpg",
     "description": "A 3.2 cubic foot mini fridge hits the sweet spot for a dorm room \u2014 big enough for a week's worth of drinks, yogurt, leftovers, and frozen meals, but not so big that it dominates your space. The Upstreman runs quietly (important when it's six feet from your bed) and has an actual freezer compartment that can hold ice cream and frozen pizzas. The adjustable thermostat means you can dial it down when you're only storing drinks and save some power. It's a straightforward, no-nonsense mini fridge that does exactly what you need.",
     "blurb": "Quiet mini fridge with a real freezer compartment \u2014 fits under a dorm desk without dominating the room.",
-    "affiliate_url": "https://www.amazon.com/dp/B09RWFZTWW?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B09RWFZTWW?tag=worthitgoods-20",
+    "asin": "B09RWFZTWW",
+    "price": 139.98,
+    "rating": 4.4,
+    "reviews": 3500
   },
   {
     "title": "HEVUMYI Twin-XL Comforter Set - 5-Piece All Season Bed in a Bag Twin-XL, Ultra Soft Bedding Set with Comforter, Flat Sheet, Fitted Sheet, Pillowcases, Pillow Shams, Dark Grey",
     "image": "https://m.media-amazon.com/images/I/51AJgChO5OL._SL500_.jpg",
     "description": "Twin XL bedding is one of those things you don't think about until move-in day when you realize regular twin sheets don't fit dorm mattresses. This 5-piece set gives you everything in one bag \u2014 comforter, fitted sheet, flat sheet, pillowcases, and shams \u2014 so you're not running to Target at 10 PM. The dark grey hides stains well (a real consideration for four years of college living) and the fabric is soft without feeling cheap. It's an all-season weight that works with a dorm's questionable heating and cooling.",
     "blurb": "Everything you need for a Twin XL dorm bed in one bag \u2014 no last-minute Target runs.",
-    "affiliate_url": "https://www.amazon.com/dp/B0CXCYXP18?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0CXCYXP18?tag=worthitgoods-20",
+    "asin": "B0CXCYXP18",
+    "price": 29.99,
+    "rating": 4.5,
+    "reviews": 1200
   },
   {
     "title": "OMOTON Adjustable Cell Phone Stand, Aluminum Desktop Cellphone Stand with Anti-Slip Base and Convenient Charging Port, Fits All Smart Phones, Silver",
     "image": "https://m.media-amazon.com/images/I/31tOYMe4Y6L._SL500_.jpg",
     "description": "An aluminum phone stand is one of those small upgrades that quietly makes your desk setup better. The OMOTON is adjustable, so you can get your phone at eye level for FaceTime calls, watching lectures, or following a recipe while cooking in the dorm kitchen. The base is weighted enough that it won't tip over when you tap the screen, and the open charging port cutout means you can keep your phone plugged in while it's on the stand. It's a simple, well-made stand that'll outlast your college years.",
     "blurb": "Aluminum phone stand that keeps your screen at eye level during calls and study sessions.",
-    "affiliate_url": "https://www.amazon.com/dp/B0744DM3Y3?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0744DM3Y3?tag=worthitgoods-20",
+    "asin": "B0744DM3Y3",
+    "price": 9.99,
+    "rating": 4.6,
+    "reviews": 9500
   },
   {
     "title": "JBL Go 4 - Ultra-Portable, Waterproof and Dustproof Bluetooth Speaker, Big JBL Pro Sound with Punchy bass, 7-Hour Built-in Battery, Made in Part with Recycled Materials (Black)",
     "image": "https://m.media-amazon.com/images/I/41GTcsw-oFL._SL500_.jpg",
     "description": "The JBL Go 4 is barely bigger than a deck of cards but somehow produces real sound \u2014 not tinny, not hollow, just solid audio that fills a dorm room. It's waterproof and dustproof, which matters when it gets knocked into a drink or left on the quad during a study break. Seven hours of battery life is enough for a full day of classes and study sessions, and it's small enough to throw in your backpack without noticing it. If you want a speaker for the dorm that won't annoy your roommate (or your RA), this is the one.",
     "blurb": "Pocket-sized Bluetooth speaker that somehow fills a dorm room \u2014 waterproof and 7-hour battery.",
-    "affiliate_url": "https://www.amazon.com/dp/B0CTNWBT1Z?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0CTNWBT1Z?tag=worthitgoods-20",
+    "asin": "B0CTNWBT1Z",
+    "price": 49.95,
+    "rating": 4.8,
+    "reviews": 2500
   },
   {
     "title": "YOUDENOVA Hanging Closet Organizer and Storage, 6-Shelf Closet Hanging Storage Shelves, Grey",
     "image": "https://m.media-amazon.com/images/I/312P+SafvBL._SL500_.jpg",
     "description": "Dorm closets are a joke \u2014 usually a narrow rod with maybe three hangers' worth of space. This hanging organizer turns that vertical space into six shelves that can hold folded clothes, shoes, toiletries, or whatever else won't fit in the dresser. The grey fabric is basic but sturdy, and the six shelves give you way more organized storage than a pile on the floor. It hangs from the closet rod so it doesn't take up any floor space, and it folds flat for summer storage. One of those things that makes dorm life noticeably less chaotic.",
     "blurb": "Six shelves that hang from your closet rod \u2014 turns a tiny dorm closet into actual storage.",
-    "affiliate_url": "https://www.amazon.com/dp/B07SYPLVTG?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B07SYPLVTG?tag=worthitgoods-20",
+    "asin": "B07SYPLVTG",
+    "price": 15.98,
+    "rating": 4.5,
+    "reviews": 50000
   },
   {
     "title": "Brita Metro Small 6-Cup Water Filter Pitcher, WQA NSF/ANSI Certified, Mini-Fridge Friendly, Removes Chlorine Taste & Odor, Reduces Zinc, Copper & Mercury, 1 Standard Filter, Lasts 2 Months, White",
     "image": "https://m.media-amazon.com/images/I/41Cd+eLzfcL._SL500_.jpg",
     "description": "Brita is the name you already know for filtered water, and this Metro size is the perfect fit for a dorm room \u2014 it's designed to be mini-fridge friendly so it won't take up your whole shelf. You get clean, great-tasting water without hauling cases of plastic bottles up three flights of stairs. The standard filter lasts two months and reduces chlorine taste, zinc, copper, and mercury. It's a simple upgrade that means you'll actually drink enough water between classes instead of surviving on energy drinks.",
     "blurb": "A mini-fridge-friendly water filter that saves you from hauling bottled water up dorm stairs.",
-    "affiliate_url": "https://www.amazon.com/dp/B09W4PLVQP?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B09W4PLVQP?tag=worthitgoods-20",
+    "asin": "B09W4PLVQP",
+    "price": 25.99,
+    "rating": 4.7,
+    "reviews": 15000
   },
   {
     "title": "Budding Joy 80L 2 Pack Adjustable Under Bed Storage with Wheels",
     "image": "https://m.media-amazon.com/images/I/41Urzh5xclL._SL500_.jpg",
     "description": "Dorm rooms are small, and floor space is precious \u2014 which makes the area under your bed prime real estate. These under-bed storage containers slide on wheels so you can access them without lifting the whole bed, and the adjustable dividers let you organize everything from extra bedding to off-season clothes. Two 80L containers give you an extra dresser's worth of storage that stays out of sight. They collapse flat for summer storage, too.",
     "blurb": "Wheeled under-bed storage that turns wasted space into an extra dresser \u2014 two 80L containers per pack.",
-    "affiliate_url": "https://www.amazon.com/dp/B0G6FKH8Z6?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0G6FKH8Z6?tag=worthitgoods-20",
+    "asin": "B0G6FKH8Z6",
+    "price": 29.99,
+    "rating": 4.5,
+    "reviews": 600
   },
   {
     "title": "Anker Power Strip with 300J Surge Protector, Flat Plug Extension Cord with Multiple Outlets, 6 AC, 2 USB A & 2 USB C Ports for 20W, 5ft Outlet Extender, Dorm Room Essentials, Home Office",
     "image": "https://m.media-amazon.com/images/I/3197O4VZHDL._SL500_.jpg",
     "description": "Dorm rooms are notorious for having outlets in the worst possible places \u2014 usually one behind the desk and another behind the bed. This Anker power strip solves that with a flat plug that fits behind furniture and a 5-foot cord that reaches where you need it. Six AC outlets plus 2 USB-A and 2 USB-C ports mean your laptop, phone, tablet, fan, and lamp can all plug in without fighting for space. The 300J surge protection keeps your electronics safe from power bumps, and it's Anker, so you know the charging speeds are legit.",
     "blurb": "Anker power strip with 4 USB ports (2 USB-C) and a flat plug that fits behind dorm furniture \u2014 6 AC outlets handle everything.",
-    "affiliate_url": "https://www.amazon.com/dp/B0CKR7B9T9?tag=worthitgoods-20"
+    "affiliate_url": "https://www.amazon.com/dp/B0CKR7B9T9?tag=worthitgoods-20",
+    "asin": "B0CKR7B9T9",
+    "price": 19.99,
+    "rating": 4.7,
+    "reviews": 8000
   },
   {
     "title": "Adventurers Typewriter-Style Retro Mechanical Keyboard LED Backlight 83 Keys Bluetooth 5.0 Blue Axis Wood Color Panel Compatible with iOS/Android/Windows/Vista/Linux/Mac Office/Gaming, 12.8x6.6x1.6in",

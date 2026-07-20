@@ -579,119 +579,118 @@ const indexHTML = `<!DOCTYPE html>
         </div>
     </section>
 
-    <script>
-    document.getElementById('wigNewsletterForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('newsletterEmail').value;
-        const msg = document.getElementById('newsletterMsg');
-        const parts = [];
-        if (document.getElementById('homePrefPicks').checked) parts.push('picks');
-        if (document.getElementById('homePrefComparisons').checked) parts.push('comparisons');
-        const prefs = parts.length === 0 ? 'picks' : parts.join(',');
-        msg.className = 'newsletter-msg';
-        msg.textContent = 'Subscribing...';
-        try {
-            const res = await fetch('/api/newsletter/signup', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, preferences: prefs})
-            });
-            const data = await res.json();
-            if (data.success) {
-                msg.className = 'newsletter-msg success';
-                msg.textContent = data.message;
-                document.getElementById('newsletterEmail').value = '';
-            } else {
+        <script>
+    /* ── Newsletter form (gracefully handled if missing) ── */
+    (function() {
+        var form = document.getElementById('wigNewsletterForm');
+        if (!form) return;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            const msg = document.getElementById('newsletterMsg');
+            const parts = [];
+            if (document.getElementById('homePrefPicks').checked) parts.push('picks');
+            if (document.getElementById('homePrefComparisons').checked) parts.push('comparisons');
+            const prefs = parts.length === 0 ? 'picks' : parts.join(',');
+            msg.className = 'newsletter-msg';
+            msg.textContent = 'Subscribing...';
+            try {
+                const res = await fetch('/api/newsletter/signup', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, preferences: prefs})
+                });
+                const data = await res.json();
+                if (data.success) {
+                    msg.className = 'newsletter-msg success';
+                    msg.textContent = data.message;
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    msg.className = 'newsletter-msg error';
+                    msg.textContent = data.message;
+                }
+            } catch(err) {
                 msg.className = 'newsletter-msg error';
-                msg.textContent = data.message;
+                msg.textContent = 'Something went wrong. Please try again later.';
             }
-        } catch(err) {
-            msg.className = 'newsletter-msg error';
-            msg.textContent = 'Something went wrong. Please try again later.';
-        }
-    });
+        });
+    })();
 
     /* ── Price Alert Modal ── */
     function openPriceAlert(asin, title) {
-        document.getElementById('paModal').style.display = 'flex';
+        var m = document.getElementById('paModal');
+        if (!m) return;
+        m.style.display = 'flex';
         document.getElementById('paAsin').value = asin;
         document.getElementById('paProduct').value = title;
-        document.getElementById('paMsg').textContent = '';
-        document.getElementById('paMsg').className = 'newsletter-msg';
+        var msg = document.getElementById('paMsg');
+        if (msg) { msg.textContent = ''; msg.className = 'newsletter-msg'; }
     }
     function closePriceAlert() {
-        document.getElementById('paModal').style.display = 'none';
+        var m = document.getElementById('paModal');
+        if (m) m.style.display = 'none';
     }
-    document.getElementById('paForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const email = document.getElementById('paEmail').value.trim();
-        const asin = document.getElementById('paAsin').value;
-        const title = document.getElementById('paProduct').value;
-        const msg = document.getElementById('paMsg');
-        msg.className = 'newsletter-msg';
-        msg.textContent = 'Subscribing...';
-        try {
-            const res = await fetch('/api/subscribe', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, asin, product_title: title})
-            });
-            const data = await res.json();
-            if (data.success) {
-                msg.className = 'newsletter-msg success';
-                msg.textContent = data.message || "You're subscribed! We'll email you when the price drops.";
-                document.getElementById('paEmail').value = '';
-            } else {
+    (function() {
+        var paForm = document.getElementById('paForm');
+        if (!paForm) return;
+        paForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('paEmail').value.trim();
+            const asin = document.getElementById('paAsin').value;
+            const title = document.getElementById('paProduct').value;
+            const msg = document.getElementById('paMsg');
+            if (!msg) return;
+            msg.className = 'newsletter-msg';
+            msg.textContent = 'Subscribing...';
+            try {
+                const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, asin, product_title: title})
+                });
+                const data = await res.json();
+                if (data.success) {
+                    msg.className = 'newsletter-msg success';
+                    msg.textContent = data.message || "You're subscribed!";
+                    document.getElementById('paEmail').value = '';
+                } else {
+                    msg.className = 'newsletter-msg error';
+                    msg.textContent = data.message || 'Something went wrong.';
+                }
+            } catch(err) {
                 msg.className = 'newsletter-msg error';
-                msg.textContent = data.message || 'Something went wrong.';
+                msg.textContent = 'Service unavailable.';
             }
-        } catch(err) {
-            msg.className = 'newsletter-msg error';
-            msg.textContent = 'Service unavailable. Please try again later.';
-        }
-    });
-    // Close modal on backdrop click
-    document.getElementById('paModal').addEventListener('click', function(e) {
-        if (e.target === this) closePriceAlert();
-    });
-
-    /* ── Card-wide click: toggle Why It's Worth It ── */
-    document.querySelectorAll('.product-card').forEach(function(card) {
-        // Direct toggle function
-        function toggleDesc() {
-            var content = card.querySelector('.content');
-            if (!content) return;
-            var short = content.querySelector('.short-desc');
-            var full = content.querySelector('.full-desc');
-            var btn = content.querySelector('.toggle-btn');
-            if (!full) return;
-            
-            var isVisible = full.style.display === 'block';
-            full.style.display = isVisible ? 'none' : 'block';
-            short.style.display = isVisible ? 'block' : 'none';
-            if (btn) {
-                btn.textContent = isVisible ? 'Why It’s Worth It →' : 'Show less ↑';
-            }
-        }
-        
-        // Card-wide click
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
-            toggleDesc();
         });
-        
-        // Toggle button direct click as safety net
-        var toggleBtn = card.querySelector('.toggle-btn');
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleDesc();
-            });
+    })();
+    (function() {
+        var modal = document.getElementById('paModal');
+        if (!modal) return;
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closePriceAlert();
+        });
+    })();
+
+    /* ── Card-wide click: toggle Why It's Worth It (delegated) ── */
+    document.addEventListener('click', function(e) {
+        var card = e.target.closest('.product-card');
+        if (!card) return;
+        if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
+        var content = card.querySelector('.content');
+        if (!content) return;
+        var short = content.querySelector('.short-desc');
+        var full = content.querySelector('.full-desc');
+        var btn = content.querySelector('.toggle-btn');
+        if (!full) return;
+        var isVisible = full.style.display === 'block';
+        full.style.display = isVisible ? 'none' : 'block';
+        short.style.display = isVisible ? 'block' : 'none';
+        if (btn) {
+            btn.textContent = isVisible ? 'Why It\u2019s Worth It \u2192' : 'Show less \u2191';
         }
-        
-        card.style.cursor = 'pointer';
     });
-    </script>
+    document.querySelectorAll('.product-card').forEach(function(c) { c.style.cursor = 'pointer'; });
+    </script></script>
 
     <!-- ── Price Alert Modal ── -->
     <div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
