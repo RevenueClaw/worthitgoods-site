@@ -45,9 +45,13 @@
         .blog-product {
             background: white; border-radius: 16px; overflow: hidden;
             box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 40px;
+            cursor: pointer; transition: all 0.3s ease; position: relative;
         }
-        .blog-product .image-wrap { height: 260px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 20px; border-bottom: 1px solid #f0f0f0; }
-        .blog-product .image-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .blog-product:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.18); }
+        .blog-product .image-wrap { height: 260px; display: flex; align-items: center; justify-content: center; background: #fff; padding: 20px; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease; }
+        .blog-product:hover .image-wrap { background: #fafafa; }
+        .blog-product .image-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.4s ease; }
+        .blog-product:hover .image-wrap img { transform: scale(1.07); }
         .blog-product .info { padding: 24px; }
         .blog-product h2 { font-size: 1.4rem; margin-bottom: 8px; }
         .blog-product .tag {
@@ -278,6 +282,19 @@
             <p><strong>Lenovo IdeaPad 3</strong> — The student laptop that actually has a real processor and DDR5 RAM at a price that won't empty your bank account. Most laptops at this price point cut corners — this one doesn't.</p>
             <p><strong>Owala FreeSip</strong> — 130,000+ people can't be wrong. The water bottle that actually makes you drink more water, with a lid design that's genuinely clever.</p>
         </div>
+
+    <script>
+        /* ── Card-wide click: go to Amazon affiliate link (delegated) ── */
+        document.addEventListener('click', function(e) {
+            var card = e.target.closest('.blog-product');
+            if (!card) return;
+            if (e.target.closest('.shop-link') || e.target.closest('a')) return;
+            var link = card.querySelector('.shop-link');
+            if (link && link.href) {
+                window.open(link.href, '_blank');
+            }
+        });
+    </script>
 
         <div class="blog-outro">
             <h3>Why You Can Trust These Picks</h3>
