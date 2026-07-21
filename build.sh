@@ -50,6 +50,9 @@ node generate-rss.js
 # Copy assets (css, images, etc.)
 cp -r assets _site/
 
+# Enforce exactly 9 cards before newsletter section
+python3 scripts/enforce_blog_layout.py blog.html
+
 # Copy blog
 mkdir -p _site/blog
 cp blog.html _site/

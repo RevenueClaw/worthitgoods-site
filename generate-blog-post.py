@@ -168,20 +168,11 @@ def update_index(slug, title, desc, image, date_str):
     # Then keep max 9 cards before newsletter by moving the 9th below
     new = re.sub(r'(<div class="product-grid">\s*\n)', r'\1' + card + '\n', content, count=1)
     if new != content:
-        # Now ensure we have at most 9 cards before newsletter
-        nl_pos = new.find('<!-- NEWSLETTER SIGNUP')
-        before_nl = new[:nl_pos]
-        after_nl = new[nl_pos:]
-        cards_before = list(re.finditer(
-            r'<div class="product-card blog-card">.*?</div>\s*</div>',
-            before_nl, re.S
-        ))
-        if len(cards_before) > 9:
-            # Last card in the pre-newsletter section goes below newsletter
-            overflow_card = cards_before[-1].group()
-            before_nl = before_nl[:cards_before[-1].start()] + before_nl[cards_before[-1].end():]
-            after_nl = after_nl.replace('</section>', '</section>\n\n' + overflow_card + '\n', 1)
-            new = before_nl + after_nl
+        # Enforce exactly 9 cards before newsletter
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
+        from enforce_blog_layout import enforce_9_cards_before_nl
+        new = enforce_9_cards_before_nl(new)
         BLOG_INDEX.write_text(new)
         return True
     return False

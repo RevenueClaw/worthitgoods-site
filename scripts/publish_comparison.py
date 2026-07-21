@@ -83,18 +83,9 @@ def main():
 
     html = html.replace(insert_marker, insert_marker + card, 1)
 
-    # Enforce max 9 cards before newsletter — overflow the 9th below
-    nl_pos = html.find('<!-- NEWSLETTER SIGNUP')
-    if nl_pos > 0:
-        before_nl = html[:nl_pos]
-        after_nl = html[nl_pos:]
-        card_pattern = r'<div class="product-card blog-card">.*?</div>\s*</div>'
-        cards_before = list(re.finditer(card_pattern, before_nl, re.S))
-        if len(cards_before) > 9:
-            overflow_card = cards_before[-1].group()
-            before_nl = before_nl[:cards_before[-1].start()] + before_nl[cards_before[-1].end():]
-            after_nl = after_nl.replace('</section>', '</section>\n\n' + overflow_card + '\n', 1)
-            html = before_nl + after_nl
+    # Enforce exactly 9 cards before newsletter
+    from enforce_blog_layout import enforce_9_cards_before_nl
+    html = enforce_9_cards_before_nl(html)
 
     with open(blog_path, 'w') as f:
         f.write(html)
