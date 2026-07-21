@@ -13,7 +13,7 @@ Returns JSON with star_rating, review_count, and asin per product.
 import sys, re, json, time, os, subprocess, tempfile
 
 # Rate limit: max requests per run
-MAX_REQUESTS = 40
+MAX_REQUESTS = 60
 MIN_STAR_RATING = 4.5
 MIN_REVIEW_COUNT = 100
 
@@ -57,8 +57,8 @@ def fetch_rating(asin: str, cache: dict) -> dict:
     # Check cache
     if asin in cache:
         entry = cache[asin]
-        # Cache valid for 7 days
-        if time.time() - entry.get('fetched_at', 0) < 7 * 86400:
+        # Cache valid for 30 days (ratings change slowly on established products)
+        if time.time() - entry.get('fetched_at', 0) < 30 * 86400:
             return {**entry, 'source': 'cache'}
     
     result = {
@@ -162,8 +162,8 @@ def fetch_rating(asin: str, cache: dict) -> dict:
     cache[asin]['fetched_at'] = time.time()
     save_cache(cache)
     
-    # Small delay to avoid hammering Amazon
-    time.sleep(1.5)
+    # Delay to avoid hitting Amazon rate limits
+    time.sleep(2.5)
     
     return result
 
