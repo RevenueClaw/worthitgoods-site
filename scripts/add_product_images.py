@@ -56,7 +56,7 @@ ARTICLES = {
         (0, "B001ANQVYU", "Sawyer Permethrin"),
         (1, "B06X9Q2HJ2", "Ben's Clothing & Gear"),
     ],
-    "comparisons/swiss-army-knife-vs-survival-kit.html": [
+    "comparisons/victorinox-vs-leatherman-rev-multitool.html": [
         (0, "B0007QCOC4", "Victorinox Tinker"),
         (1, "B07Z8WHZWV", "14-in-1 Survival Kit"),
     ],
