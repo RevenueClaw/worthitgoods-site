@@ -79,26 +79,33 @@ cp 404.html _site/
 cp robots.txt _site/
 
 # Generate sitemap
+TODAY=$(date -u +%Y-%m-%d)
+
 cat > _site/sitemap.xml << 'XML_EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.worthitgoods.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://www.worthitgoods.com/blog.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.worthitgoods.com/feed.xml</loc><priority>0.8</priority></url>
-  <url><loc>https://www.worthitgoods.com/privacy.html</loc><priority>0.3</priority></url>
-  <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority></url>
+  <url><loc>https://www.worthitgoods.com/</loc><priority>1.0</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/blog.html</loc><priority>0.9</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/feed.xml</loc><priority>0.8</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/privacy.html</loc><priority>0.3</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority><lastmod>XML_TODAY</lastmod></url>
 XML_EOF
+
+sed -i "s/XML_TODAY/$TODAY/g" _site/sitemap.xml
 
 for f in blog/*.html; do
   slug=$(basename "$f" .html)
   [[ $slug == custom-* ]] && continue
-  printf '  <url><loc>https://www.worthitgoods.com/blog/%s</loc><priority>0.7</priority></url>\n' "$slug.html" >> _site/sitemap.xml
+  # Use git log for lastmod date, fall back to file mtime
+  LASTMOD=$(git log -1 --format=%aI "$f" 2>/dev/null | head -c 10 || stat -c %y "$f" | head -c 10)
+  printf '  <url><loc>https://www.worthitgoods.com/blog/%s</loc><priority>0.7</priority><lastmod>%s</lastmod></url>\n' "$slug.html" "${LASTMOD:-$TODAY}" >> _site/sitemap.xml
 done
 
 for f in comparisons/*.html; do
   slug=$(basename "$f" .html)
-  printf '  <url><loc>https://www.worthitgoods.com/comparisons/%s</loc><priority>0.7</priority></url>
-' "$slug.html" >> _site/sitemap.xml
+  LASTMOD=$(git log -1 --format=%aI "$f" 2>/dev/null | head -c 10 || stat -c %y "$f" | head -c 10)
+  printf '  <url><loc>https://www.worthitgoods.com/comparisons/%s</loc><priority>0.7</priority><lastmod>%s</lastmod></url>
+' "$slug.html" "${LASTMOD:-$TODAY}" >> _site/sitemap.xml
 done
 
 echo '</urlset>' >> _site/sitemap.xml
