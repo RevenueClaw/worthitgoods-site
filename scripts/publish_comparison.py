@@ -6,7 +6,7 @@ Usage: python3 publish_comparison.py <slug> <date_str> <title> <desc> <image_url
 Adds blog card, rebuilds the site, and pushes to git.
 Includes: proper error handling, affiliate UTM tracking, price validation.
 """
-import sys, os, subprocess, json
+import sys, os, subprocess, json, re, urllib.request
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -51,12 +51,57 @@ def main():
     with open(blog_path) as f:
         html = f.read()
 
-    # Check the article has actual prices (not $N/A)
+    # Read article HTML
     with open(article_path) as f:
         article_html = f.read()
+
+    # Check the article has actual prices (not $N/A)
     na_count = article_html.count("$N/A")
     if na_count > 0:
         print(f"WARNING: Article contains {na_count} '$N/A' price placeholders. Proceeding anyway.")
+
+    # === PRE-PUBLISH VALIDATION ===
+    # Validate all Amazon ASINs resolve (not 404)
+    asins = re.findall(r'/dp/([A-Z0-9]{10})(?:\?|/|$)', article_html)
+    asins = list(set(asins))  # deduplicate
+    broken_asins = []
+    for asin in asins:
+        url = f'https://www.amazon.com/dp/{asin}'
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                if resp.status != 200:
+                    broken_asins.append((asin, url, resp.status))
+        except Exception as e:
+            broken_asins.append((asin, url, str(e)))
+    if broken_asins:
+        for asin, url, reason in broken_asins:
+            print(f"  ❌ ASIN {asin} — {url} — {reason}")
+        print(f"FATAL: {len(broken_asins)} broken ASIN(s) found. Fix the article before publishing.")
+        sys.exit(1)
+    else:
+        print(f"✅ All {len(asins)} ASIN(s) resolve OK")
+
+    # Validate all image URLs resolve (not 404)
+    img_urls = re.findall(r'<img[^>]+src="(https://m\.media-amazon\.com[^"]+)"', article_html)
+    img_urls = list(set(img_urls))
+    broken_imgs = []
+    for img_url in img_urls:
+        try:
+            req = urllib.request.Request(img_url, headers={'User-Agent': 'Mozilla/5.0'}, method='HEAD')
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                if resp.status != 200:
+                    broken_imgs.append((img_url, resp.status))
+        except Exception as e:
+            broken_imgs.append((img_url, str(e)))
+    if broken_imgs:
+        for img_url, reason in broken_imgs:
+            print(f"  ❌ Image — {img_url} — {reason}")
+        print(f"FATAL: {len(broken_imgs)} broken image(s) found. Fix the article before publishing.")
+        sys.exit(1)
+    else:
+        print(f"✅ All {len(img_urls)} image(s) resolve OK")
+    # === END VALIDATION ===
 
     # Build the blog card
     card = f"""<div class="product-card blog-card">
