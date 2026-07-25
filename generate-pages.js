@@ -671,6 +671,61 @@ const indexHTML = `<!DOCTYPE html>
         });
     })();
 
+    /* ── Product Suggestion Modal ── */
+    function openSuggestion() {
+        var m = document.getElementById('sgModal');
+        if (!m) return;
+        m.style.display = 'flex';
+        var msg = document.getElementById('sgMsg');
+        if (msg) { msg.textContent = ''; msg.className = 'newsletter-msg'; }
+    }
+    function closeSuggestion() {
+        var m = document.getElementById('sgModal');
+        if (m) m.style.display = 'none';
+    }
+    (function() {
+        var sgForm = document.getElementById('sgForm');
+        if (!sgForm) return;
+        sgForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const product = document.getElementById('sgProduct').value.trim();
+            const email = document.getElementById('sgEmail').value.trim();
+            const notes = document.getElementById('sgNotes').value.trim();
+            const msg = document.getElementById('sgMsg');
+            if (!msg || !product) return;
+            msg.className = 'newsletter-msg';
+            msg.textContent = 'Submitting...';
+            try {
+                const res = await fetch('https://price-alert.worthitgoods.com/suggest', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, product, notes})
+                });
+                const data = await res.json();
+                if (data.success) {
+                    msg.className = 'newsletter-msg success';
+                    msg.textContent = data.message || 'Thanks!';
+                    document.getElementById('sgProduct').value = '';
+                    document.getElementById('sgEmail').value = '';
+                    document.getElementById('sgNotes').value = '';
+                } else {
+                    msg.className = 'newsletter-msg error';
+                    msg.textContent = data.message || 'Something went wrong.';
+                }
+            } catch(err) {
+                msg.className = 'newsletter-msg error';
+                msg.textContent = 'Service unavailable.';
+            }
+        });
+    })();
+    (function() {
+        var modal = document.getElementById('sgModal');
+        if (!modal) return;
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) closeSuggestion();
+        });
+    })();
+
     /* ── Card-wide click: toggle Why It's Worth It (delegated) ── */
     document.addEventListener('click', function(e) {
         var card = e.target.closest('.product-card');
@@ -691,6 +746,22 @@ const indexHTML = `<!DOCTYPE html>
     });
     document.querySelectorAll('.product-card').forEach(function(c) { c.style.cursor = 'pointer'; });
     </script></script>
+
+    <!-- ── Product Suggestion Modal ── -->
+    <div id="sgModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+      <div style="background:white;border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
+        <button onclick="closeSuggestion()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;">×</button>
+        <h3 style="margin-top:0;margin-bottom:8px;font-size:1.3rem;">📝 Suggest a Product</h3>
+        <p style="color:#6b7280;font-size:0.9rem;margin-bottom:16px;">Looking for something we haven't covered? Tell us what you'd like us to find the best deal on.</p>
+        <form id="sgForm">
+          <input type="text" id="sgProduct" placeholder="What product do you need?" required style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;margin-bottom:12px;box-sizing:border-box;">
+          <input type="email" id="sgEmail" placeholder="your@email.com (optional)" style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;margin-bottom:12px;box-sizing:border-box;">
+          <textarea id="sgNotes" placeholder="Any details? Budget, use case, etc. (optional)" rows="3" style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;margin-bottom:12px;box-sizing:border-box;resize:vertical;"></textarea>
+          <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;">Submit Suggestion</button>
+          <div id="sgMsg" class="newsletter-msg" style="margin-top:8px;"></div>
+        </form>
+      </div>
+    </div>
 
     <!-- ── Price Alert Modal ── -->
     <div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
@@ -715,6 +786,7 @@ const indexHTML = `<!DOCTYPE html>
             <a href="/feed.xml" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">RSS Feed</a>
             <a href="/#products" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">All Products</a>
             <a href="/privacy.html" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Privacy</a>
+            <a href="#" onclick="openSuggestion();return false;" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Suggest a Product</a>
         </div>
         <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
         <p>As an Amazon Associate, I earn from qualifying purchases. Prices may vary.</p>
