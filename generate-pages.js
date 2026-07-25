@@ -643,7 +643,7 @@ const indexHTML = `<!DOCTYPE html>
             msg.className = 'newsletter-msg';
             msg.textContent = 'Subscribing...';
             try {
-                const res = await fetch('/api/subscribe', {
+                const res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({email, asin, product_title: title})
