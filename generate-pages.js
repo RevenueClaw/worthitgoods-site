@@ -151,6 +151,11 @@ function renderProduct(p) {
                             <a href="#" class="price-alert-link" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
                                 <span style="font-size:0.85rem;">🔔</span> Get Price Alert
                             </a>
+                            <div style="margin-top:6px;">
+                                <a href="https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(p.title)}&campid=5339174383&mkcid=1&mkevt=1&mkrid=711-53200-19255-0&siteid=0" target="_blank" rel="nofollow" style="font-size:0.75rem;color:#9ca3af;text-decoration:none;">
+                                    📦 or find on eBay
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
