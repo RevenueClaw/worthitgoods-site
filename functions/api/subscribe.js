@@ -15,7 +15,7 @@ export async function onRequest(context) {
     const body = await request.text();
 
     const response = await fetch(
-      "https://api.shaynesailab.com/subscribe",
+      "https://price-alert.worthitgoods.com/subscribe",
       {
         method: "POST",
         headers: {
