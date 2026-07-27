@@ -546,7 +546,7 @@ const indexHTML = `<!DOCTYPE html>
             ${activeTheme ? `<div class="seasonal-banner"><span class="seasonal-label">⏰ Limited Time</span> ${activeTheme.badge}</div>` : ''}
             <h1>WorthIt Goods</h1>
             <p>${activeTheme ? activeTheme.tagline : 'Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.'}</p>
-            <p class="seasonal-sub">Honest, hand-picked products that actually deliver. No junk. No hype. Just gear worth your money and time.</p>
+            ${activeTheme ? '<p class="seasonal-sub">Honest, hand-picked products that actually deliver. No junk. No hype. Just gear worth your money and time.</p>' : ''}
             <a href="#products" class="cta-button">Browse Worth-It Picks</a>
         </div>
     </div>
