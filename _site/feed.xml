@@ -1,41 +1,387 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>WorthIt Goods — Blog</title>
+    <title>WorthIt Goods — Blog &amp; Comparisons</title>
     <link>https://www.worthitgoods.com/blog.html</link>
-    <description>Honest, hand-picked products that actually deliver. Weekly finds, seasonal guides, and gear worth your money.</description>
+    <description>Honest, hand-picked products that actually deliver. Weekly finds, seasonal guides, comparisons, and gear worth your money.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jul 2026 17:30:51 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2026 15:36:23 GMT</lastBuildDate>
     <atom:link href="https://www.worthitgoods.com/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
       <title>America&apos;s 250th Birthday: 4th of July &amp; Summer Fun</title>
       <link>https://www.worthitgoods.com/blog/250th-product-milestone-4th-of-july-summer-fun.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/250th-product-milestone-4th-of-july-summer-fun.html</guid>
-      <pubDate>Tue, 21 Jul 2026 17:30:51 GMT</pubDate>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Celebrate America&apos;s 250th with fireworks, yard games, BBQ essentials, SUP boards, patriotic decor, and more summer gear - all vetted and worth it.</description>
       <media:content url="https://www.worthitgoods.com/assets/july-fourth-hero.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Chemical Guys vs Mothers Clay Bar Kit — Which Car Clay System Is Better?</title>
+      <link>https://www.worthitgoods.com/comparisons/chemical-guys-vs-mothers-clay-bar.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/chemical-guys-vs-mothers-clay-bar.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Chemical Guys Clay Bar Kit ($41.99) vs Mothers California Gold Clay Bar Kit ($22.55) — a detailed comparison of two popular car clay bar systems. Which one actually cleans better, and is the Chemical Guys worth almost double?</description>
+      <media:content url="https://m.media-amazon.com/images/I/51oMfD+N3cL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Coleman Snap N Go vs YETI Roadie 15 — Best Small Hard Cooler (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/coleman-snap-n-go-vs-yeti-roadie.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/coleman-snap-n-go-vs-yeti-roadie.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Coleman Snap N Go 45qt Collapsible Cooler ($153.99) vs YETI Roadie 15 ($200) — we compare a groundbreaking collapsible design against a rotomolded icon to find the best portable cooler for day trips.</description>
+      <media:content url="https://m.media-amazon.com/images/I/61osRWOfgNL._SL1500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Portable Handheld Turbo Fan vs JISULIFE Life9 — Which Fan Is Worth It?</title>
+      <link>https://www.worthitgoods.com/comparisons/handheld-turbo-fan-vs-jisulife.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/handheld-turbo-fan-vs-jisulife.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Diveblues Portable Handheld Turbo Fan ($15.29) vs JISULIFE Life9 Turbo Fan ($28.79). Two popular portable fans compared on battery, power, features, and value. Which one should you buy?</description>
+      <media:content url="https://m.media-amazon.com/images/I/41U7VPCed0L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>LOVEVOOK vs MATEIN Travel Backpack — Best Carry-On Backpack Under $40 (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/lovevook-vs-matein-travel-backpack.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/lovevook-vs-matein-travel-backpack.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>LOVEVOOK Travel Backpack ($39.99) vs MATEIN 40L Travel Backpack ($33.99) — we compare organization, comfort, packing cubes, and value to find the best budget carry-on backpack.</description>
+      <media:content url="https://m.media-amazon.com/images/I/71TRocHiv5L._AC_SL1500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>NOCO GENIUS5 vs Battery Tender Junior — Best Smart Battery Charger (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/noco-vs-battery-tender-charger.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/noco-vs-battery-tender-charger.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>NOCO GENIUS5 ($49.95) vs Battery Tender Junior ($29.95) — we compare charging speed, battery compatibility, safety features, and value to find the best smart battery charger and maintainer.</description>
+      <media:content url="https://m.media-amazon.com/images/I/81-r5GpnOsL._AC_SL1500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Roc vs iRocker Paddle Board — Best Inflatable SUP for Beginners (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/roc-vs-irocker-paddle-board.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/roc-vs-irocker-paddle-board.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Roc Inflatable SUP ($249.98) vs iRocker Nautical 10&apos;6 ($379) — we compare durability, stability, included accessories, and value to find the best inflatable paddle board for most people.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51Nk8R5-dAL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Sawyer Permethrin vs Ben&apos;s Clothing &amp; Gear — Which Bug Spray For Clothes Actually Wins?</title>
+      <link>https://www.worthitgoods.com/comparisons/sawyer-permethrin-vs-bens-clothing-gear.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/sawyer-permethrin-vs-bens-clothing-gear.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Sawyer SP657 Permethrin ($18.49) vs Ben&apos;s Clothing &amp; Gear Insect Repellent ($20.99) — two best-selling permethrin sprays compared head-to-head. We test coverage, longevity, value, and tick/mosquito protection.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41pVZYqoMXL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Souper Cubes vs Walfos Silicone Freezer Trays — Meal Prep Comparison</title>
+      <link>https://www.worthitgoods.com/comparisons/souper-cubes-vs-walfos-freezer-trays.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/souper-cubes-vs-walfos-freezer-trays.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Souper Cubes Silicone Freezer Molds ($78.99) vs Walfos Silicone Freezer Trays with Lids (~$25). Two silicone meal prep freezer solutions compared on quality, value, and ease of use. Which should you buy?</description>
+      <media:content url="https://m.media-amazon.com/images/I/81h+zUx++tL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>TENS 7000 vs AUVON Rechargeable — Which TENS Unit Is Actually Better?</title>
+      <link>https://www.worthitgoods.com/comparisons/tens-7000-vs-auvon.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/tens-7000-vs-auvon.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>TENS 7000 ($38.88) vs AUVON Rechargeable ($32.99) — two best-selling TENS units compared head-to-head. Our detailed comparison covers modes, battery, build quality, and who should buy which.</description>
+      <media:content url="https://m.media-amazon.com/images/I/511ETL4vbRL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>TOSY Flying Disc vs Nite Ize Flashflight: Best LED Flying Disc Comparison (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/tosy-flying-disc-vs-nite-ize-flashflight.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/tosy-flying-disc-vs-nite-ize-flashflight.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>TOSY Flying Disc vs Nite Ize Flashflight — compare 108 RGB LED features, battery life, flight performance, and value. Find out which LED frisbee is worth your money.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51upeHnXyuL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Vivere vs Amazon Basics Hammock — Best Double Hammock with Stand (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/vivere-vs-amazon-basics-hammock.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/vivere-vs-amazon-basics-hammock.html</guid>
+      <pubDate>Mon, 27 Jul 2026 15:36:23 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Vivere Double Cotton Hammock ($129.99) vs Amazon Basics Double Hammock ($69.99) — we compare comfort, durability, size, and value to find the best hammock with stand for your backyard.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41+rovzQcSL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Gift Ideas That Don&apos;t Feel Like a Gift Card</title>
+      <link>https://www.worthitgoods.com/blog/2026-07-26-gift-ideas.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-07-26-gift-ideas.html</guid>
+      <pubDate>Sun, 26 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
+      <description>Thoughtful presents that show you paid attention. No clutter, no junk.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41GTcsw-oFL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Under Armour Undeniable 5.0 vs Nike Brasilia — Best Gym Duffle Bag (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/under-armour-vs-nike-duffle-bag.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/under-armour-vs-nike-duffle-bag.html</guid>
+      <pubDate>Sat, 25 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Under Armour Undeniable 5.0 Duffle ($37.50) vs Nike Brasilia Training Duffle ($55) — two of the most popular gym bags compared head-to-head. We test durability, organization, comfort, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/5189Rfw0b1L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Carhartt Lunchbox Cooler vs Arctic Zone Titan — Best Insulated Lunch Bag (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/carhartt-lunchbox-vs-arctic-zone.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/carhartt-lunchbox-vs-arctic-zone.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Carhartt Lunchbox Cooler ($57.99) vs Arctic Zone Titan Expandable Lunch Box ($41.67) — two rugged lunch bags compared. We test insulation, durability, capacity, and value to find the best work lunch cooler.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41sMaSK8nkL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Cocktail Smoker Kit vs Aged &amp; Charred — Best Bourbon Whiskey Smoker Kit (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/cocktail-smoker-vs-aged-charred-smoker.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/cocktail-smoker-vs-aged-charred-smoker.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Cocktail Smoker Kit ($31.34) vs Aged &amp; Charred Whiskey Smoker Kit ($89.99) — two whiskey smoker kits compared. We test smoke flavor, build quality, wood chip variety, and value to find the best cocktail smoker.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51OkKSO3omL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Govee RGBIC Smart Table Lamp vs Philips Hue Go — Best Smart Table Lamp (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/govee-smart-lamp-vs-philips-hue-go.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/govee-smart-lamp-vs-philips-hue-go.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Govee RGBIC Smart Table Lamp 2 ($69.99) vs Philips Hue Go ($87.99) — two top smart lamps compared. We test brightness, color accuracy, app features, and value to find the best smart table lamp.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41g8-ONEigL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Klein Tools 32305 vs Megapro 15-in-1 — Best Multi-Bit Ratcheting Screwdriver (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/klein-tools-vs-megapro-screwdriver.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/klein-tools-vs-megapro-screwdriver.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Klein Tools 32305 15-in-1 ($23.74) vs Megapro 15-in-1 ($49.19) — two top-rated multi-bit ratcheting screwdrivers compared. We test grip, bit storage, ratchet quality, and value for pros and DIYers.</description>
+      <media:content url="https://m.media-amazon.com/images/I/31ONJBE-byL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Ninja SLUSHi vs Homintell Slushie Machine — Best Frozen Drink Maker (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/ninja-slushi-vs-homintell-slushie.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/ninja-slushi-vs-homintell-slushie.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Ninja SLUSHi ($298.49) vs Homintell 68oz Slushie Machine ($149.99) — two no-ice frozen drink machines compared. We test freezing speed, capacity, texture, and value to find the best slushie maker for home.</description>
+      <media:content url="https://m.media-amazon.com/images/I/416XVlobCvL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Victorinox Tinker vs Leatherman Rev — Pocket Multitool Showdown (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/victorinox-vs-leatherman-rev-multitool.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/victorinox-vs-leatherman-rev-multitool.html</guid>
+      <pubDate>Wed, 22 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Victorinox Tinker Swiss Army Knife ($31.47) vs Leatherman Rev Multitool ($44.95) — two iconic EDC tools compared on tool count, weight, capability, and value. Which pocket tool really earns its carry?</description>
+      <media:content url="https://m.media-amazon.com/images/I/41sdKgclicL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>BAND-AID Travel Ready First Aid Kit vs Surviveware 98-Piece Kit — Best Portable First Aid 2026</title>
+      <link>https://www.worthitgoods.com/comparisons/bandaid-vs-surviveware-first-aid-kit.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/bandaid-vs-surviveware-first-aid-kit.html</guid>
+      <pubDate>Tue, 21 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>BAND-AID Travel Ready First Aid Kit ($10.98) vs Surviveware 98-Piece First Aid Kit ($32.39) — two portable first aid kits compared. Contents, quality, durability, and best use cases.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51eMZsVjirL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Cliganic Mosquito Repellent Bracelets vs OFF! Clip-On — Best DEET-Free Bug Repellent (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/cliganic-vs-off-clip-on-mosquito-repellent.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/cliganic-vs-off-clip-on-mosquito-repellent.html</guid>
+      <pubDate>Tue, 21 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Cliganic 10-Pack Mosquito Repellent Bracelets ($8.99) vs OFF! Clip-On Mosquito Repellent ($9.99) — two DEET-free, wearable bug repellents compared for effectiveness, coverage, and value on the trail.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51osqsImfOL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>FLY2SKY LED Tent Lamp vs BioLite Luci Solar Lantern — Best Camping Lantern 2026</title>
+      <link>https://www.worthitgoods.com/comparisons/fly2sky-vs-biolite-luci-lantern.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/fly2sky-vs-biolite-luci-lantern.html</guid>
+      <pubDate>Tue, 21 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>FLY2SKY LED Tent Lamp 4-Pack ($13.99) vs BioLite Luci Solar Lantern ($22.95) — two compact camping lights compared. We test brightness, battery life, durability, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41+3PcFwzIL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Stainless Steel Onion Holder vs Mueller Mandoline Slicer — Best Kitchen Slicing Gadget (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/onion-holder-vs-mueller-mandoline.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/onion-holder-vs-mueller-mandoline.html</guid>
+      <pubDate>Tue, 21 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Stainless Steel Onion Holder ($4.97) vs Mueller Mandoline Slicer ($29.97) — two kitchen slicing solutions compared. Safety, precision, versatility, and which one belongs in your kitchen.</description>
+      <media:content url="https://m.media-amazon.com/images/I/514xYJzkZHL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Adventurers Retro Keyboard vs Azio Retro Classic — Best Typewriter Keyboard (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/retro-keyboard-vs-azio.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/retro-keyboard-vs-azio.html</guid>
+      <pubDate>Tue, 21 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Adventurers Typewriter Retro Keyboard ($76.79) vs Azio Retro Classic ($99.99) — two vintage mechanical keyboards compared. We test build quality, typing feel, Bluetooth performance, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51tXEs69Q5L._SL500_.jpg" medium="image"/>
     </item>
     <item>
       <title>🎒 Back to School — WorthItGoods Picks</title>
       <link>https://www.worthitgoods.com/blog/2026-07-20-seasonal-back_to_school.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-07-20-seasonal-back_to_school.html</guid>
       <pubDate>Mon, 20 Jul 2026 12:00:00 GMT</pubDate>
-      <description>14 hand-picked dorm and school essentials — laptops, water bottles, backpacks, and more that actually make campus life better.</description>
-      <media:content url="https://m.media-amazon.com/images/I/41lLP2VVGML._SL500_.jpg" medium="image"/>
+      <category>Blog Post</category>
+      <description>14 hand-picked dorm and school essentials — laptops, water bottles, backpacks, mini fridges, and more. The stuff that actually makes campus life better. All ratings verified on Amazon.</description>
+      <media:content url="https://m.media-amazon.com/images/I/51UNOR+ag6L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Angry Mama vs IMPRESA Microwave Steam Cleaner — Best Microwave Cleaner (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/angry-mama-vs-impresa-microwave-cleaner.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/angry-mama-vs-impresa-microwave-cleaner.html</guid>
+      <pubDate>Mon, 20 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Angry Mama Microwave Steam Cleaner ($7.98) vs IMPRESA 2-Pack Microwave Steam Cleaner ($9.99) — two steam-cleaning gadgets that make microwave grime disappear. Which is the better buy?</description>
+      <media:content url="https://m.media-amazon.com/images/I/31g-vMCVYbL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Dosmix Retro Bluetooth Speaker vs Victrola Willow — Best Vintage Speaker (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/dosmix-vs-victrola-retro-speaker.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/dosmix-vs-victrola-retro-speaker.html</guid>
+      <pubDate>Mon, 20 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Dosmix Retro Bluetooth Speaker ($13.99) vs Victrola Willow Retro Wood Bluetooth Radio ($49.99) — two vintage-style speakers compared for sound, features, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/414pF-MunuL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Laser Level Line Tool vs Huepar — Best Budget Laser Level (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/laser-level-vs-huepar.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/laser-level-vs-huepar.html</guid>
+      <pubDate>Mon, 20 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Multipurpose Laser Level Kit ($9.88) vs Huepar Self-Leveling Green Laser ($45.99) — two laser levels for DIY picture hanging and home improvement. Which one is right for your toolbox?</description>
+      <media:content url="https://m.media-amazon.com/images/I/51TA+8eP4zL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>PetOde Dryer Vent Cleaner Kit vs Lint Lizard — Best Dryer Vent Cleaner (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/petode-vs-lint-lizard-dryer-vent-cleaner.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/petode-vs-lint-lizard-dryer-vent-cleaner.html</guid>
+      <pubDate>Mon, 20 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>PetOde Dryer Vent Cleaner Kit ($7.99) vs Lint Lizard Hurricane Vacuum Attachment ($14.99) — two dryer vent cleaning tools compared for effectiveness, ease of use, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/515TS53ns1L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>TrendPlain Olive Oil Sprayer vs Evo — Best Oil Sprayer for Cooking (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/trendplain-vs-evo-oil-sprayer.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/trendplain-vs-evo-oil-sprayer.html</guid>
+      <pubDate>Mon, 20 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>TrendPlain 16oz Glass Olive Oil Sprayer ($9.99) vs Evo Original Oil Sprayer ($18.99) — two refillable oil sprayers compared for mist quality, build, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41SEgwRnBaL._SL500_.jpg" medium="image"/>
     </item>
     <item>
       <title>Home &amp; Desk Upgrades That Make a Difference</title>
       <link>https://www.worthitgoods.com/blog/2026-07-19-home-office.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-07-19-home-office.html</guid>
       <pubDate>Sun, 19 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Small improvements for where you spend most of your time.</description>
       <media:content url="https://m.media-amazon.com/images/I/51tXEs69Q5L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>DEYACE Small Sling Bag vs tomtoc SlingBean T32 — Best Budget EDC Sling Bag (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/deyace-vs-tomtoc-sling-bag.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/deyace-vs-tomtoc-sling-bag.html</guid>
+      <pubDate>Sun, 19 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>DEYACE Small Sling Bag ($13.59) vs tomtoc SlingBean T32 ($33.99) — budget EDC sling bags compared. We test capacity, durability, and value to find the best crossbody bag.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41vqIYmiqsL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>HOTOR Trunk Organizer vs FORTEM — Best Car Trunk Organizer Under $30 (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/hotor-vs-fortem-trunk-organizer.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/hotor-vs-fortem-trunk-organizer.html</guid>
+      <pubDate>Sun, 19 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>HOTOR Trunk Organizer ($12.99) vs FORTEM Trunk Organizer ($27.99) — two best-selling car trunk organizers compared. We test capacity, durability, and value to find the best budget trunk organizer.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41YTMzr1ewL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Kasa Smart Plug HS103P4 vs Amazon Basics — Best Budget Smart Plug 4-Pack (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/kasa-vs-amazon-basics-smart-plug.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/kasa-vs-amazon-basics-smart-plug.html</guid>
+      <pubDate>Sun, 19 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Kasa Smart Plug HS103P4 4-Pack ($34.82) vs Amazon Basics Smart Plug 2-Pack ($15.00) — affordable smart plugs compared. We test compatibility, scheduling, and value to find the best budget smart plug.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41JnNfpIRXL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Magnetic Measuring Spoons Set vs Spring Chef — Best Stainless Steel Measuring Spoons (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/magnetic-measuring-spoons-vs-spring-chef.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/magnetic-measuring-spoons-vs-spring-chef.html</guid>
+      <pubDate>Sun, 19 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Magnetic Measuring Spoons Set ($6.88) vs Spring Chef Magnetic Measuring Spoons ($8.99) — affordable kitchen measuring spoons compared. We test accuracy, durability, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/418H9mm5m4L._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Saker Caulking Tool vs King&amp;Charles — Best Silicone Caulking Tool Under $15 (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/saker-vs-king-charles-caulking-tool.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/saker-vs-king-charles-caulking-tool.html</guid>
+      <pubDate>Sun, 19 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Saker 3-in-1 Caulking Tool ($12.99) vs King&amp;Charles Silicone Caulking Tool Kit ($6.95) — budget caulking tools compared. We test grout removal, sealant finishing, and value.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41aL7C4aTUL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>Addtam Surge Protector vs Belkin — Best Wall Outlet Extender (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/addtam-vs-belkin-surge-protector.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/addtam-vs-belkin-surge-protector.html</guid>
+      <pubDate>Sat, 18 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>Addtam Surge Protector Outlet Extender ($12.99) vs Belkin 6-Outlet Surge Protector ($29.99) — two popular power solutions compared. USB-C, night light, rotating plug, and value for money.</description>
+      <media:content url="https://m.media-amazon.com/images/I/31-Zd23NLpL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>GoveeLife Mini Air Purifier vs LEVOIT Core Mini — Best Smart Bedroom Purifier (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/goveelife-vs-levoit-mini-air-purifier.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/goveelife-vs-levoit-mini-air-purifier.html</guid>
+      <pubDate>Sat, 18 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>GoveeLife Mini Air Purifier ($49.99) vs LEVOIT Core Mini ($39.99) — two smart compact purifiers compared. We test smart features, noise, filtration, and value to find the best bedroom air purifier.</description>
+      <media:content url="https://m.media-amazon.com/images/I/414BWzB7-NL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>HOMPOW Mini Projector vs WiMiUS — Best Budget Projector Under $50 (2026)</title>
+      <link>https://www.worthitgoods.com/comparisons/hompow-vs-wimius-mini-projector.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/hompow-vs-wimius-mini-projector.html</guid>
+      <pubDate>Sat, 18 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>HOMPOW Mini Projector ($34.99) vs WiMiUS Mini Projector ($49.99) — two budget 1080p projectors compared. We test picture quality, Bluetooth, portability, and value to find the best sub-$50 projector.</description>
+      <media:content url="https://m.media-amazon.com/images/I/41BXuhGwdQL._SL500_.jpg" medium="image"/>
+    </item>
+    <item>
+      <title>TENS Unit vs Muscle Roller Stick — Which Actually Fixes Your Pain?</title>
+      <link>https://www.worthitgoods.com/comparisons/tens-unit-vs-muscle-roller.html</link>
+      <guid isPermaLink="true">https://www.worthitgoods.com/comparisons/tens-unit-vs-muscle-roller.html</guid>
+      <pubDate>Tue, 14 Jul 2026 04:00:00 GMT</pubDate>
+      <category>Comparison</category>
+      <description>We bought and tested two very different approaches to muscle pain relief: the TENS 7000 ($38.88) and the MZDXJ Muscle Roller Stick ($9.99). Here&apos;s what actually works for different kinds of pain.</description>
+      <media:content url="https://m.media-amazon.com/images/I/31DSbW1Q0bL._SL500_.jpg" medium="image"/>
     </item>
     <item>
       <title>5 Kitchen Tools That Earn Their Counter Space • WorthIt Goods</title>
       <link>https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-07-08-5-kitchen-tools.html</guid>
       <pubDate>Wed, 08 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>No gadgets. No gimmicks. Just five genuinely useful kitchen tools that make cooking better.</description>
       <media:content url="https://m.media-amazon.com/images/I/71w7jfdY+0L._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -44,6 +390,7 @@
       <link>https://www.worthitgoods.com/blog/2026-06-21-batch-16-fathers-day.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-06-21-batch-16-fathers-day.html</guid>
       <pubDate>Sun, 21 Jun 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Practical picks for every dad: car detailing, grilling tools, funny drinkware, safety gear, and more. Honest </description>
       <media:content url="https://www.worthitgoods.com/assets/fathers-day-hero.jpg" medium="image"/>
     </item>
@@ -52,6 +399,7 @@
       <link>https://www.worthitgoods.com/blog/2026-05-08-batch14-latest-picks.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-05-08-batch14-latest-picks.html</guid>
       <pubDate>Fri, 08 May 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Batch 14: Kinetic Sand toys, emergency kits, GaN chargers, Ninja blenders, wood docks, UA duffles, Souper Cubes, Pi cases.</description>
       <media:content url="https://m.media-amazon.com/images/I/91M86uflhuL._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -60,6 +408,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-30-batch13-latest-picks.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-30-batch13-latest-picks.html</guid>
       <pubDate>Thu, 30 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Batch 13: Flashlights, screwdrivers, squishy toys, slushie machines, Pi cases.</description>
       <media:content url="https://m.media-amazon.com/images/I/713zZiMwgFL._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -68,6 +417,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-batch10-latest-picks.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-batch10-latest-picks.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Fresh vetted kitchen/home gems.</description>
       <media:content url="https://m.media-amazon.com/images/I/71NZXah-fRL._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -76,6 +426,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-batch12-latest-picks.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-batch12-latest-picks.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Batch 12: Wine glasses, coolers, coasters, sunglasses, zesters.</description>
       <media:content url="https://m.media-amazon.com/images/I/71NZXah-fRL._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -84,6 +435,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-best-kitchen-tools.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-best-kitchen-tools.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Curated kitchen essentials for prep, storage, cleaning.</description>
       <media:content url="https://m.media-amazon.com/images/I/51Ns6PVuEGL._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -92,6 +444,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-outdoor-survival-essentials.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-outdoor-survival-essentials.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Multitools, kits, coolers for trails.</description>
       <media:content url="https://m.media-amazon.com/images/I/41tFuYxx6GL._SL500_.jpg" medium="image"/>
     </item>
@@ -100,6 +453,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-tech-fitness-gear.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-tech-fitness-gear.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Wearables, lights, organizers—no subs.</description>
       <media:content url="https://m.media-amazon.com/images/I/71gJu0DP96L._AC_SL1500_.jpg" medium="image"/>
     </item>
@@ -108,6 +462,7 @@
       <link>https://www.worthitgoods.com/blog/2026-04-29-top-gifts-home.html</link>
       <guid isPermaLink="true">https://www.worthitgoods.com/blog/2026-04-29-top-gifts-home.html</guid>
       <pubDate>Wed, 29 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Blog Post</category>
       <description>Decorative keepsakes, coasters, and home joys.</description>
       <media:content url="https://m.media-amazon.com/images/I/51h+bo9KqKL._SL500_.jpg" medium="image"/>
     </item>

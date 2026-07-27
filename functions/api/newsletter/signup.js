@@ -2,7 +2,7 @@
  * WorthIt Goods — Newsletter Signup Proxy
  * 
  * Proxies newsletter signup POST requests from worthitgoods.com
- * to the backend API running through Cloudflare Tunnel.
+ * to the ChipRadar backend -> Pi5 Listmonk via reverse SSH tunnel.
  */
 export async function onRequest(context) {
   const { request } = context;
@@ -14,14 +14,18 @@ export async function onRequest(context) {
   try {
     const body = await request.text();
 
+    // Parse the JSON body to extract email, then forward as form data
+    const json = JSON.parse(body);
+    const email = json.email || "";
+
     const response = await fetch(
-      "https://api.shaynesailab.com/api/newsletter/signup",
+      "https://chipradar.io/api/worthitgoods/subscribe",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body,
+        body: "email=" + encodeURIComponent(email),
       }
     );
 

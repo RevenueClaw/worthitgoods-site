@@ -62,17 +62,23 @@
             var email = form.email.value;
             var btn = form.querySelector('button');
             btn.disabled = true; btn.textContent = 'Subscribing...';
-            fetch('https://api.shaynesailab.com/api/newsletter-signup', {
+            fetch('https://chipradar.io/api/worthitgoods/subscribe', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email: email, source: 'worthitgoods-newsletter', name: '', company: '', message: 'Newsletter signup', timeline: ''})
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'email=' + encodeURIComponent(email)
             })
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 var msg = document.getElementById('newsletter-msg');
-                msg.textContent = "You're in. Check your inbox for a confirmation.";
-                msg.className = 'success'; msg.style.display = 'block';
-                form.reset(); form.style.display = 'none';
+                if (d.success) {
+                    msg.textContent = "You're subscribed! We'll let you know about the best finds.";
+                    msg.className = 'success'; msg.style.display = 'block';
+                    form.reset(); form.style.display = 'none';
+                } else {
+                    msg.textContent = d.message || 'Something went wrong.';
+                    msg.className = 'error'; msg.style.display = 'block';
+                    btn.disabled = false; btn.textContent = 'Subscribe';
+                }
             })
             .catch(function() {
                 var msg = document.getElementById('newsletter-msg');
