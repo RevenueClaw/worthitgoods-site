@@ -94,7 +94,7 @@ def fun_score(title, brand=""):
     if re.search(r"\b(retro|vintage|nostalgia|classic|modern|minimalist|unique)\b", t, re.I): score += 0.06
     return max(0.0, min(1.0, score))
 
-EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+"]
+EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+"]
 BORING_KEYWORDS = ["batteries","light bulb","paper towel","toilet paper","trash bag","cleaning supply","laundry","diaper","baby wipe","dog food","cat food","vitamin","supplement","ink cartridge","toner","filter replacement"]
 
 EXISTING_CACHE = None
@@ -106,17 +106,35 @@ def load_existing():
         except: EXISTING_CACHE = []
     return EXISTING_CACHE
 
-PRODUCT_NOUNS = {'rest','spoon','cup','bowl','knife','ladle','spatula','grater','zester','shears','skillet','mold','scale','timer','board','rack','holder','bag','pack','case','hat','shirt','pants','socks','gloves','lamp','light','fan','charger','cable','stand','mount','tool','pouch','organizer','mat','towel','kit','set','caddy','scoop','shooter','launcher','disc','puzzle','game','tumbler','mug','glass','bottle','jar','container','blanket','pillow','plush','coaster','vase','journal','brush','comb','mirror','tray','basket','bin','screwdriver','socket','wrench','hammer','level','camera','lens','tripod','speaker','adapter','hub','dock','flag','banner','windsock','bunting','paddleboard','hammock','cooler','lunchbox','plug','registration','purifier','filter','trimmer','shaver','sander','detector','monitor','tracker','alarm','lock','straps','harness','leash','collar','bowl','feeder','brush','clipper','dryer','heater','humidifier','diffuser','projector','keyboard','mouse','tablet','laptop','monitor','headphones','earbuds','microphone','webcam','router','backpack','duffle','tote','sling','pouch','wallet','stool','chair','desk','shelf','cabinet','drawer','curtain','blind','rug','mat','cushion','throw'}
+import string as _string
 
-def is_duplicate_by_content(title):
-    existing = load_existing()
+def _clean_tokens(title):
+    """Split title into lowercase tokens with punctuation stripped."""
     t = title.lower().strip()
+    for ch in _string.punctuation:
+        t = t.replace(ch, ' ')
+    return [w for w in t.split() if w]
+
+PRODUCT_NOUNS = {'rest','spoon','cup','bowl','knife','ladle','spatula','grater','zester','shears','skillet','mold','scale','timer','board','rack','holder','bag','pack','case','hat','shirt','pants','socks','gloves','lamp','light','fan','charger','cable','stand','mount','tool','pouch','organizer','mat','towel','kit','set','caddy','scoop','shooter','launcher','disc','puzzle','game','tumbler','mug','glass','bottle','jar','container','blanket','pillow','plush','coaster','vase','journal','brush','comb','mirror','tray','basket','bin','screwdriver','socket','wrench','hammer','level','camera','lens','tripod','speaker','adapter','hub','dock','flag','banner','windsock','bunting','paddleboard','hammock','cooler','lunchbox','plug','registration','purifier','filter','trimmer','shaver','sander','detector','monitor','tracker','alarm','lock','straps','harness','leash','collar','bowl','feeder','brush','clipper','dryer','heater','humidifier','diffuser','projector','keyboard','mouse','tablet','laptop','monitor','headphones','earbuds','microphone','webcam','router','backpack','duffle','tote','sling','pouch','wallet','stool','chair','desk','shelf','cabinet','drawer','curtain','blind','rug','mat','cushion','throw','flashlight','flash','beacon','outlet','socket','power','battery','strap','rope','tie','tape','glue','adhesive','clip','hook','nail','screw','bolt','nut','washer','keychain','lanyard','badge','sheath','holster','sleeve','cover','skin','wrap','grip','pad','cloth','foam','wire','tube','hose','connector','coupler','splitter','converter','sensor','indicator','gauge','meter','thermometer','compass','gps','transmitter','receiver','antenna','telescope','microscope','binoculars','sight','laser','bulb','ribbon','cord','usb','hdmi','ethernet','audio','video'}
+
+def is_duplicate_by_content(title, check_asins=None):
+    """Check if title is a duplicate of any existing product (by content or ASIN)."""
+    existing = load_existing()
+    # ASIN check
+    if check_asins:
+        for p in existing:
+            existing_url = p.get("affiliate_url","")
+            for new_asin in check_asins:
+                if new_asin and new_asin in existing_url:
+                    return True
+    t = _clean_tokens(title)
+    t_set = set(t)
+    stop_words = {"and","the","for","with","in","of","to","a","an","is"}
     for p in existing:
-        et = p.get("title","").lower().strip()
+        et = _clean_tokens(p.get("title",""))
         if not et: continue
-        new_words, exist_words = set(t.split()), set(et.split())
-        common = new_words & exist_words
-        stop_words = {"and","the","for","with","in","of","to","a","an","is","-","|",",","."}
+        exist_set = set(et)
+        common = t_set & exist_set
         meaningful = [w for w in common if len(w) > 3 and w not in stop_words]
         shared_nouns = set(meaningful) & PRODUCT_NOUNS
         if shared_nouns and len(meaningful) >= 2: return True
@@ -200,7 +218,7 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=3):
                 title = r.get("title","") or ""
                 brand = r.get("brand","") or ""
                 if is_excluded(title,brand): continue
-                if is_duplicate_by_content(title): continue
+                if is_duplicate_by_content(title, [asin]): continue
                 images = r.get("images",{})
                 primary = (images.get("primary",{}) if isinstance(images,dict) else {})
                 large = (primary.get("large",{}) if isinstance(primary,dict) else {})
@@ -320,7 +338,7 @@ def curate_products(count_per_category=2):
                 title = r.get("title","") or ""
                 brand = r.get("brand","") or ""
                 if is_excluded(title,brand): continue
-                if is_duplicate_by_content(title): continue
+                if is_duplicate_by_content(title, [asin]): continue
                 images = r.get("images",{})
                 primary = (images.get("primary",{}) if isinstance(images,dict) else {})
                 large = (primary.get("large",{}) if isinstance(primary,dict) else {})
