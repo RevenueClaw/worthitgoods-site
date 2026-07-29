@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect width="500" height="500" fill="#f3f4f6"/>
+  <rect x="100" y="100" width="300" height="300" rx="20" fill="#e5e7eb" stroke="#d1d5db" stroke-width="2"/>
+  <text x="250" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#9ca3af">Walfos Freezer Trays</text>
+  <text x="250" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#b0b7c3">(Image unavailable)</text>
+</svg>

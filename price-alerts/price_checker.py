@@ -150,7 +150,7 @@ You're receiving this because you subscribed to price alerts at WorthItGoods.com
 </html>"""
         
         client.inboxes.messages.send(
-            inbox_id="revenueclaw@agentmail.to",
+            inbox_id=os.getenv("AGENTMAIL_EMAIL", "revenueclaw@agentmail.to"),
             to=email,
             subject=subject,
             html=html,

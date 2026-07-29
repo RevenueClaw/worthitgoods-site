@@ -32,7 +32,7 @@ body { background: #f8f9fa; }
 .article-product-card.ours { border-left: 4px solid #16a34a; }
 .article-product-card.competitor { border-left: 4px solid #f59e0b; }
 .article-product-card h3 { margin-top: 0; font-size: 1.25rem; }
-.price-tag { display: inline-block; background: #1f2937; color: white; padding: 4px 12px; border-radius: 6px; font-size: 1.1rem; font-weight: 600; }
+.price-tag { display: inline-block; background: #ff6b35; color: white; padding: 4px 12px; border-radius: 6px; font-size: 1.1rem; font-weight: 600; }
 .compare-table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .compare-table th { background: #1f2937; color: white; padding: 14px 16px; text-align: left; font-size: 0.9rem; }
 .compare-table th:first-child { width: 28%; }
@@ -40,6 +40,7 @@ body { background: #f8f9fa; }
 .compare-table tr:last-child td { border-bottom: none; }
 .compare-table .label { font-weight: 600; color: #6b7280; font-size: 0.85rem; }
 .check { color: #10b981; }
+.cross { color: #ef4444; }
 .article-cta { display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff9a56, #ff6b6b); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 8px; transition: transform 0.2s, box-shadow 0.2s; }
 .article-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,53,0.3); }
 .article-cta.green { background: linear-gradient(135deg, #0b3b2c, #2d9f6e); }
@@ -101,7 +102,7 @@ body { background: #f8f9fa; }
 <div class="article-product-card competitor">
   
   <div class="product-image-wrapper">
-    <img src="https://m.media-amazon.com/images/I/61X+sHVlh5L._SL500_.jpg" alt="Walfos Silicone Freezer Tray with Lid" class="product-img" loading="lazy">
+    <img src="/assets/placeholder-walfos.svg" alt="Walfos Silicone Freezer Tray with Lid" class="product-img" loading="lazy">
   </div>
   <h3>💰 Walfos Silicone Freezer Tray with Lid (4-Pack)</h3>
   <p><span class="price-tag">~$25.00</span> <span style="color:#6b7280;font-size:0.9rem;">on Amazon (4-piece set)</span></p>
@@ -252,24 +253,9 @@ body { background: #f8f9fa; }
 
 </div>
 
-<footer>
-  <div class="footer-content">
-    <div class="footer-col">
-      <h4>WorthIt Goods</h4>
-      <p>Honest picks, no hype. Every product earns its spot.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Explore</h4>
-      <a href="../">Home</a>
-      <a href="../#products">All Picks</a>
-      <a href="../blog.html">Journal</a>
-    </div>
-    <div class="footer-col">
-      <h4>More</h4>
-      <a href="../privacy.html">Privacy Policy</a>
-      <a href="../#newsletter">Newsletter</a>
-    </div>
-  </div>
+<footer style="background:#1f2937;color:rgba(255,255,255,0.6);text-align:center;padding:2rem;font-size:0.85rem;">
+  <p>WorthIt Goods — Honest product comparisons. Some links are affiliate links; we may earn a commission at no extra cost to you.</p>
+  <p><a href="../" style="color:#14b8a6;">Home</a> · <a href="../#products" style="color:#14b8a6;">All Picks</a> · <a href="../privacy.html" style="color:#14b8a6;">Privacy</a></p>
 </footer>
 
 </body>
