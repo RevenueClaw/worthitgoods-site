@@ -75,53 +75,113 @@ function cleanTitle(title) {
 
 function generateProductSchema(products) {
     // Product schema for every item — enables Google rich results
-    const productSchemas = products.map((p, i) => ({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": p.title,
-        "image": p.image,
-        "description": (p.blurb || p.description).substring(0, 300),
-        "offers": {
+    // Includes all fields required for Product-rich snippets (price, availability, currency)
+    // Reference: https://developers.google.com/search/docs/appearance/structured-data/product
+    const productSchemas = products.map((p, i) => {
+        // Build offer with price if available
+        const offer = {
             "@type": "Offer",
             "url": p.affiliate_url,
-            "availability": "https://schema.org/InStock",
+            "availability": p.price ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "itemCondition": "https://schema.org/NewCondition",
             "seller": {
                 "@type": "Organization",
                 "name": "Amazon.com"
             }
+        };
+        if (p.price && p.price > 0) {
+            offer.price = p.price;
+            offer.priceCurrency = "USD";
         }
-    }));
+        
+        // Extract ASIN from affiliate URL (format: /dp/B0XXXXX?tag=...)
+        const asinMatch = (p.affiliate_url || '').match(/\/dp\/([A-Z0-9]{10})(?:\?|$)/);
+        const asin = asinMatch ? asinMatch[1] : null;
 
-    // WebSite schema for site search
-    const siteSchema = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "WorthItGoods",
-        "url": "https://www.worthitgoods.com",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://www.worthitgoods.com/#products"
-            },
-            "query-input": "required name=search_term_string"
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": p.title,
+            "image": p.image,
+            "description": (p.blurb || p.description || "").substring(0, 300),
+            "sku": asin,
+            "mpn": asin,
+            "offers": offer
+        };
+
+        // Add brand if we can extract it from title
+        const brand = extractBrand(p.title);
+        if (brand) {
+            schema.brand = {
+                "@type": "Brand",
+                "name": brand
+            };
+        }
+
+        return schema;
+    }).filter(s => s !== null);
+
+    // Aggregate all schemas into @graph for cleaner output
+    const graph = [
+        // Organization schema
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "WorthItGoods",
+            "url": "https://www.worthitgoods.com",
+            "description": "Curated product discovery — honest picks, no hype."
         },
-        "description": "Curated products actually worth buying. Honest reviews, hand-picked finds."
-    };
+        // WebSite schema
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "WorthItGoods",
+            "url": "https://www.worthitgoods.com",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://www.worthitgoods.com/#products"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        ...productSchemas
+    ];
 
-    // Organization schema
-    const orgSchema = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "WorthItGoods",
-        "url": "https://www.worthitgoods.com",
-        "description": "Curated product discovery — honest picks, no hype."
-    };
-
+    // Use @graph to pack all schemas into one script tag (cleaner, fewer bytes)
     return `
-<script type="application/ld+json">${JSON.stringify(siteSchema, null, 2)}</script>
-<script type="application/ld+json">${JSON.stringify(orgSchema, null, 2)}</script>
-<script type="application/ld+json">${JSON.stringify(productSchemas, null, 2)}</script>`;
+<script type="application/ld+json">${JSON.stringify({"@context": "https://schema.org", "@graph": graph}, null, 2)}</script>`;
+}
+
+function extractBrand(title) {
+    // Common brands seen in our products
+    const brands = [
+        "HOTLIGH", "OLIGHT", "Gerber", "XXXFLOWER", "Rerdeim",
+        "Govee", "GoveeLife", "Anker", "Belkin", "Coleman",
+        "Carhartt", "Chemical Guys", "Mothers", "Cliganic",
+        "Victrola", "Dosmix", "Klein Tools", "Megapro", "Huepar",
+        "Noco", "Nintendo", "Amazon Basics", "Kasa", "Philips",
+        "LEVOIT", "Biolite", "Luci", "Tomtoc", "Matein",
+        "Lovevook", "Wimius", "Hompow", "Surviveware",
+        "Hotor", "Fortem", "Depstech", "Ninja", "Homintell",
+        "Angry Mama", "Impresa", "Spring Chef", "Mueller",
+        "Addtam", "Jisulife", "Fly2Sky", "AZIO", "Dioche",
+        "Snow Deer", "Lorell", "WALFOS", "Souper Cubes",
+        "BAND-AID", "Deyace", "Camp Chef", "SE", "HOTO",
+        "PETODE", "Lint Lizard", "GLOCUSENT", "YIERBLUE",
+        "FLY2SKY", "COSORI", "BALACNY", "HOTO", "forues",
+        "YAHEETECH", "Stalwart", "Leegoal", "MAGNA-TILES",
+        "PicassoTiles", "BUNCH Halos", "SafeRest", "LANE LINEN",
+        "Tosuny", "Nite Ize", "TENs", "AUVON", "Veken",
+        "Brita", "Hydro Flask", "Yeti", "Stanley"
+    ];
+    for (const brand of brands.sort((a, b) => b.length - a.length)) {
+        if (title.toUpperCase().includes(brand.toUpperCase())) {
+            return brand;
+        }
+    }
+    return null;
 }
 
 
