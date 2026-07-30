@@ -16,6 +16,7 @@ from amazon_creators_api_v1 import AmazonCreatorsAPI
 
 REPO_DIR = Path.home() / '.openclaw' / 'workspace' / 'worthitgoods-repo'
 PRODUCTS_FILE = REPO_DIR / 'worthitgoods_products.json'
+SAMPLE_FILE = REPO_DIR / 'data' / 'sample_products.json'
 BATCH_SIZE = 10  # Amazon PAAPIv5 recommended batch limit
 
 def main():
@@ -86,6 +87,41 @@ def main():
     with open(PRODUCTS_FILE, 'w') as f:
         json.dump(products, f, indent=2)
 
+    # ── Sync prices to data/sample_products.json (used by site generator) ──
+    print(f"\n  Syncing prices to site generator data...")
+    try:
+        with open(SAMPLE_FILE) as f:
+            sample_products = json.load(f)
+        
+        # Build ASIN→price lookup from updated main file
+        price_lookup = {}
+        for p in products:
+            asin = p.get('asin')
+            price = p.get('price')
+            features = p.get('features', [])
+            if asin:
+                price_lookup[asin] = {'price': price, 'features': features}
+        
+        # Update matching products in sample file
+        synced = 0
+        for p in sample_products:
+            asin_match = __import__('re').search(r'/dp/([A-Z0-9]{10})(?:\?|$)', p.get('affiliate_url', ''))
+            if asin_match:
+                asin = asin_match.group(1)
+                if asin in price_lookup:
+                    live = price_lookup[asin]
+                    if live['price'] is not None:
+                        p['price'] = live['price']
+                        synced += 1
+                    if live['features']:
+                        p['features'] = live['features']
+        
+        with open(SAMPLE_FILE, 'w') as f:
+            json.dump(sample_products, f, indent=2)
+        print(f"    Synced {synced}/{len(sample_products)} products with live prices")
+    except Exception as e:
+        print(f"    WARNING: Price sync failed: {e}")
+
     # Report
     print(f"\n{'='*60}")
     print(f"Batch Price Sweep Results ({total_calls} API calls)")
@@ -117,6 +153,42 @@ def main():
             removed += 1
             print(f"    Removed {d}")
     print(f"  Cleaned up {removed} duplicate files")
+
+    # ── Rebuild site with fresh prices ──
+    print(f"\n  Rebuilding site with fresh prices...")
+    try:
+        build_result = __import__('subprocess').run(
+            ['bash', 'build.sh'],
+            cwd=str(REPO_DIR),
+            capture_output=True, text=True, timeout=120
+        )
+        if build_result.returncode == 0:
+            print(f"    Site built successfully")
+            # Git commit and push
+            git_result = __import__('subprocess').run(
+                ['git', 'add', '-A'],
+                cwd=str(REPO_DIR),
+                capture_output=True, text=True, timeout=30
+            )
+            git_result = __import__('subprocess').run(
+                ['git', 'commit', '-m', f'Auto price sweep & site rebuild {__import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}'],
+                cwd=str(REPO_DIR),
+                capture_output=True, text=True, timeout=30
+            )
+            print(f"    Git commit: {git_result.stdout[:100]}")
+            
+            # Push both branches
+            for branch in ['master', 'main']:
+                __import__('subprocess').run(
+                    ['git', 'push', 'origin', branch],
+                    cwd=str(REPO_DIR),
+                    capture_output=True, text=True, timeout=60
+                )
+            print(f"    Pushed to master + main")
+        else:
+            print(f"    Build failed:\n{build_result.stderr[:500]}")
+    except Exception as e:
+        print(f"    WARNING: Site rebuild failed: {e}")
 
     return 0  # Always exit 0 — unavailable items are expected, not errors
 
