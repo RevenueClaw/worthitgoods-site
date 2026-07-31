@@ -1,23 +1,17 @@
 #!/usr/bin/env python3
 """
-WorthItGoods Deal of the Day — auto-posts the best deal to Mastodon, Telegram, and Moltbook.
-
-Picks the top deal based on great value rating, rotates through products daily.
-Designed to run via cron.
+WorthItGoods Deal of the Day — auto-posts the best deal with image
+to Mastodon, Telegram, and Moltbook.
 
 Usage:
   python3 deal_of_the_day.py [--dry-run]
-
-Environment:
-  MASTODON_WIG_ACCESS_TOKEN - from mastodon-worthitgoods.env
-  TELEGRAM_WIG_BOT_TOKEN / TELEGRAM_WIG_CHANNEL_ID - for Telegram posting
-  Moltbook credentials at ~/.config/moltbook/credentials.json
+  python3 deal_of_the_day.py --product 42   # force specific product
 """
 
 import json
 import os
 import sys
-import random
+import io
 import urllib.request
 import urllib.error
 import urllib.parse
@@ -65,32 +59,67 @@ def save_state(state):
         json.dump(state, f, indent=2)
 
 
+def get_product_image(product):
+    """Fetch product image from product's image field or fallback to ASIN-based URL.
+    Returns (image_bytes, mime_type) or (None, None)."""
+    asin = product.get("asin", "")
+    product_image = product.get("image", "")
+
+    urls = []
+
+    # 1. Use the product's stored image URL directly
+    if product_image:
+        urls.append(product_image)
+
+    # 2. Fallback: try ASIN-based URL patterns
+    if asin:
+        urls += [
+            f"https://m.media-amazon.com/images/P/{asin}._SL500_.jpg",
+            f"https://m.media-amazon.com/images/I/{asin}._SL500_.jpg",
+            f"https://m.media-amazon.com/images/I/{asin}._AC_SL500_.jpg",
+        ]
+
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36"
+            })
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                img_bytes = resp.read()
+                if len(img_bytes) > 1000:
+                    print(f"  📷 Fetched image ({len(img_bytes)} bytes)")
+                    return img_bytes, "image/jpeg"
+        except Exception:
+            continue
+
+    print("  ⚠️ No product image found")
+    return None, None
+
+
 def pick_deal(products, state):
     """Pick the best unpicked deal. If all posted, reset rotation."""
     posted = set(state.get("posted_indices", []))
 
-    # Score products: prefer ones with prices, good badges, and shorter descriptions
     scored = []
     for i, p in enumerate(products):
         price = p.get("price")
         if price is None or price < 2.0:
             continue
-        # Prefer products with better value (subjective: middle-priced items tend to be best deals)
-        value_score = 50 - abs(price - 30)  # Peak at $30
+        asin = p.get("asin", "")
+        if not asin:
+            continue  # skip products without ASIN (can't get image)
+        value_score = 50 - abs(price - 30)
         if p.get("badge"):
             value_score += 20
         scored.append((value_score, i, p))
 
-    # Sort by score descending
     scored.sort(key=lambda x: -x[0])
 
-    # First try: pick highest-scored unpicked
     for score, idx, product in scored:
         if idx not in posted:
             print(f"  Picked: {product['title'][:50]}... (score: {score})")
             return idx, product
 
-    # All posted — reset and pick the best overall
     print("  All deals posted — resetting rotation")
     state["posted_indices"] = []
     if scored:
@@ -100,17 +129,14 @@ def pick_deal(products, state):
 
 
 def format_deal_text(product):
-    """Format a compelling deal post."""
+    """Format a compelling deal post (text-only, image sent separately)."""
     title = product.get("title", "")
     price = product.get("price", 0)
     url = product.get("url", "")
-    asin = product.get("asin", "")
     description = product.get("description", "")
 
-    # Clean title
     short_title = title[:80] + "..." if len(title) > 80 else title
 
-    # Build post
     badge_emoji = ""
     badge = product.get("badge", "")
     if "Editor" in badge or "Pick" in badge:
@@ -121,8 +147,6 @@ def format_deal_text(product):
         badge_emoji = "⭐"
 
     price_str = f"${price:.2f}" if price else "Check price"
-
-    # Short description
     short_desc = description[:200].strip() if description else ""
 
     text = f"""{badge_emoji} Deal of the Day: {short_title}
@@ -134,13 +158,11 @@ def format_deal_text(product):
 🛒 Shop now → {url}
 
 #WorthItGoods #DealOfTheDay #AmazonDeals"""
-
     return text.strip()
 
 
-def post_to_mastodon(text):
-    """Post to WorthItGoods Mastodon account."""
-    # Read token
+def post_to_mastodon(text, img_bytes):
+    """Post with image to Mastodon. Uploads media first, then attaches to status."""
     token = None
     with open(MASTODON_TOKEN_FILE) as f:
         for line in f:
@@ -152,34 +174,69 @@ def post_to_mastodon(text):
         print("  ⚠️ No Mastodon token found")
         return False
 
-    data = json.dumps({"status": text}).encode("utf-8")
-    req = urllib.request.Request(
-        f"{MASTODON_API}/statuses",
-        data=data,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-            "Idempotency-Key": f"dotd-{datetime.now(timezone.utc).strftime('%Y%m%d')}"
-        },
-        method="POST"
-    )
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
+        # Step 1: Upload image as media attachment
+        media_id = None
+        if img_bytes:
+            boundary = b"----WebKitFormBoundary7MA4YWxkTrZu0gW"
+            body = (
+                b"--" + boundary + b"\r\n"
+                b'Content-Disposition: form-data; name="file"; filename="product.jpg"\r\n'
+                b"Content-Type: image/jpeg\r\n\r\n"
+                + img_bytes + b"\r\n"
+                b"--" + boundary + b"--\r\n"
+            )
+            media_req = urllib.request.Request(
+                f"{MASTODON_API}/media",
+                data=body,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": f"multipart/form-data; boundary={boundary.decode()}",
+                },
+                method="POST"
+            )
+            with urllib.request.urlopen(media_req, timeout=30) as resp:
+                media_result = json.loads(resp.read().decode("utf-8"))
+                media_id = media_result.get("id")
+                if media_id:
+                    print(f"  📷 Mastodon media upload: id={media_id}")
+
+        # Step 2: Post status with media attachment (use JSON body, not form-encoded)
+        status_data = {"status": text}
+        if media_id:
+            status_data["media_ids"] = [media_id]
+
+        data = json.dumps(status_data).encode("utf-8")
+        status_req = urllib.request.Request(
+            f"{MASTODON_API}/statuses",
+            data=data,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "Idempotency-Key": f"dotd-{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+            },
+            method="POST"
+        )
+        with urllib.request.urlopen(status_req, timeout=30) as resp:
             result = json.loads(resp.read().decode("utf-8"))
-            print(f"  ✅ Mastodon: https://mastodon.social/@{result.get('id','')}")
+            mastodon_id = result.get("id", "")
+            if media_id:
+                print(f"  ✅ Mastodon: https://mastodon.social/@{mastodon_id} (with image)")
+            else:
+                print(f"  ✅ Mastodon: https://mastodon.social/@{mastodon_id} (no image)")
             return True
+
     except Exception as e:
         print(f"  ❌ Mastodon failed: {e}")
         return False
 
 
-def post_to_telegram(text):
-    """Post to WorthItGoods Telegram channel."""
+def post_to_telegram(text, img_bytes):
+    """Post with photo and caption to Telegram."""
     bot_token = os.environ.get("TELEGRAM_WIG_BOT_TOKEN")
     channel_id = os.environ.get("TELEGRAM_WIG_CHANNEL_ID", "@worthitgoods")
 
     if not bot_token:
-        # Try reading from .env
         env_path = BASE_DIR / ".env"
         if env_path.exists():
             with open(env_path) as f:
@@ -192,31 +249,61 @@ def post_to_telegram(text):
         print("  ⚠️ No Telegram bot token found")
         return False
 
-    data = json.dumps({
-        "chat_id": channel_id,
-        "text": text,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": False
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        f"{TELEGRAM_API}{bot_token}/sendMessage",
-        data=data,
-        headers={"Content-Type": "application/json"},
-        method="POST"
-    )
     try:
+        if img_bytes:
+            # Send as photo with caption (much higher engagement)
+            boundary = "----Boundary7MA4YWxkTrZu0gW"
+            body_parts = []
+            body_parts.append(f"--{boundary}\r\n")
+            body_parts.append('Content-Disposition: form-data; name="chat_id"\r\n\r\n')
+            body_parts.append(f"{channel_id}\r\n")
+            body_parts.append(f"--{boundary}\r\n")
+            body_parts.append('Content-Disposition: form-data; name="photo"; filename="product.jpg"\r\n')
+            body_parts.append("Content-Type: image/jpeg\r\n\r\n")
+            body_parts_before = "".join(body_parts).encode("utf-8")
+            body_parts_after = f"\r\n--{boundary}\r\n".encode("utf-8") + \
+                               'Content-Disposition: form-data; name="caption"\r\n\r\n'.encode("utf-8") + \
+                               text.encode("utf-8") + \
+                               f"\r\n--{boundary}--\r\n".encode("utf-8")
+
+            body = body_parts_before + img_bytes + body_parts_after
+
+            req = urllib.request.Request(
+                f"{TELEGRAM_API}{bot_token}/sendPhoto",
+                data=body,
+                headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+                method="POST"
+            )
+        else:
+            # Fallback: text-only message
+            data = json.dumps({
+                "chat_id": channel_id,
+                "text": text,
+                "disable_web_page_preview": False
+            }).encode("utf-8")
+            req = urllib.request.Request(
+                f"{TELEGRAM_API}{bot_token}/sendMessage",
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+
         with urllib.request.urlopen(req, timeout=30) as resp:
             result = json.loads(resp.read().decode("utf-8"))
-            print(f"  ✅ Telegram: message {result.get('result',{}).get('message_id','?')}")
+            msg_id = result.get("result", {}).get("message_id", "?")
+            if img_bytes:
+                print(f"  ✅ Telegram: message {msg_id} (with photo)")
+            else:
+                print(f"  ✅ Telegram: message {msg_id} (no image)")
             return True
+
     except Exception as e:
         print(f"  ❌ Telegram failed: {e}")
         return False
 
 
 def post_to_moltbook(text):
-    """Post to Moltbook agent social network."""
+    """Post to Moltbook (text-only — no image support in their API)."""
     if not MOLTBOOK_CREDS.exists():
         print("  ⚠️ No Moltbook credentials found")
         return False
@@ -229,14 +316,11 @@ def post_to_moltbook(text):
         print("  ⚠️ No Moltbook API key")
         return False
 
-    # Extract title from the first line
     first_line = text.split("\n")[0][:300]
     title = first_line.replace("🔥", "").replace("💰", "").replace("⭐", "").strip()
 
-    # Content: everything after the title
     content_lines = text.split("\n")[1:]
     content = "\n".join(content_lines).strip()
-    # Truncate for Moltbook
     if len(content) > 1900:
         content = content[:1850] + "...\n\nFull post → " + SITE_URL
 
@@ -258,7 +342,6 @@ def post_to_moltbook(text):
     )
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
-            result = json.loads(resp.read().decode("utf-8"))
             print(f"  ✅ Moltbook: https://www.moltbook.com/u/rockclaw")
             return True
     except Exception as e:
@@ -281,12 +364,10 @@ def main():
 
     state = load_state()
 
-    # Check if already posted today
     if state.get("last_date") == today and not args.product:
         print("  Already posted today. Use --product to force.")
         return 0
 
-    # Pick deal
     if args.product is not None:
         idx = args.product
         product = products[idx]
@@ -303,17 +384,20 @@ def main():
     print(text)
     print("─" * 40)
 
+    # Fetch product image
+    img_bytes, img_mime = get_product_image(product)
+
     if args.dry_run:
-        print("\n=== DRY RUN — not posting ===")
+        asin = product.get("asin", "")
+        print(f"\nImage: {'✅' if img_bytes else '❌'} for ASIN {asin}")
+        print("=== DRY RUN — not posting ===")
         return 0
 
-    # Post to all channels
     print("\nPosting...")
-    mastodon_ok = post_to_mastodon(text)
-    telegram_ok = post_to_telegram(text)
+    mastodon_ok = post_to_mastodon(text, img_bytes)
+    telegram_ok = post_to_telegram(text, img_bytes)
     moltbook_ok = post_to_moltbook(text)
 
-    # Update state
     if mastodon_ok or telegram_ok or moltbook_ok:
         posted = state.get("posted_indices", [])
         if idx not in posted:
