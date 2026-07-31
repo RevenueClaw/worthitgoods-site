@@ -1,21 +1,15 @@
 {
-  "date": "2026-07-31 00:24 UTC",
+  "date": "2026-07-31 05:45 UTC",
   "results": [
     {
-      "name": "Google",
-      "status": "dry-run"
-    },
-    {
-      "name": "Bing",
-      "status": "dry-run"
-    },
-    {
       "name": "Yandex",
-      "status": "dry-run"
+      "status": 200,
+      "reason": "ok"
     },
     {
-      "name": "IndexNow (Bing)",
-      "status": "dry-run"
+      "name": "Seznam (Czech)",
+      "status": 404,
+      "reason": "Not Found"
     }
   ]
 }
