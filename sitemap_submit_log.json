@@ -1,0 +1,21 @@
+{
+  "date": "2026-07-31 00:24 UTC",
+  "results": [
+    {
+      "name": "Google",
+      "status": "dry-run"
+    },
+    {
+      "name": "Bing",
+      "status": "dry-run"
+    },
+    {
+      "name": "Yandex",
+      "status": "dry-run"
+    },
+    {
+      "name": "IndexNow (Bing)",
+      "status": "dry-run"
+    }
+  ]
+}
