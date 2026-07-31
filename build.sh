@@ -83,6 +83,9 @@ cp privacy.html _site/
 # Google Search Console verification
 cp googlef652381e8198d3b7.html _site/
 
+# Bing Webmaster Tools verification
+cp BingSiteAuth.xml _site/
+
 # 404 page, robots.txt
 cp 404.html _site/
 cp robots.txt _site/
