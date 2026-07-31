@@ -2,6 +2,12 @@
 /**
  * Generate RSS feed for WorthItGoods blog posts + comparisons.
  * Reads blog/*.html and comparisons/*.html, extracts metadata, produces feed.xml.
+ *
+ * BUGFIX 2026-07-31:
+ * - Blog posts without YYYY-MM-DD filename prefix now check article:published_time meta tag
+ * - Comparisons with "Published Month Year" (no day) default to 1st of month
+ * - Comparisons with no Published line fall back to article:published_time meta, then file mtime
+ * - Future-dated content (pre-scheduled) is properly detected and skipped
  */
 const fs = require('fs');
 const path = require('path');
@@ -27,25 +33,74 @@ function extractMeta(filePath) {
                      html.match(/<img[^>]+src="([^"]+)"[^>]*>/);
     const image = imgMatch ? imgMatch[1] : SITE_URL + '/assets/og-image-v2.jpg';
 
-    return { title, description, image };
+    // Extract article:published_time meta tag
+    const pubTimeMatch = html.match(/<meta\s+property="article:published_time"[^>]+content="([^"]+)"/);
+    const publishedTime = pubTimeMatch ? pubTimeMatch[1] : null;
+
+    return { title, description, image, publishedTime };
+}
+
+/**
+ * Parse a date string from various formats into a Date object.
+ * Returns null if unparseable.
+ */
+function parseDate(str) {
+    if (!str) return null;
+    try {
+        const d = new Date(str);
+        if (!isNaN(d.getTime())) return d;
+    } catch (e) {}
+    return null;
+}
+
+/**
+ * Best-effort date extraction for a file.
+ * Priority: 1) explicit date from content, 2) article:published_time meta, 3) file mtime
+ */
+function extractDate(html, meta, filePath) {
+    // 1) article:published_time meta tag (works for any file type)
+    if (meta.publishedTime) {
+        const d = parseDate(meta.publishedTime);
+        if (d) return d;
+    }
+
+    // 2) File mtime as last resort
+    try {
+        const stat = fs.statSync(filePath);
+        return stat.mtime;
+    } catch (e) {}
+
+    return null;
 }
 
 // Scan blog posts
 fs.readdirSync(BLOG_DIR).forEach(file => {
     if (!file.endsWith('.html') || file.startsWith('custom-')) return;
-    const meta = extractMeta(path.join(BLOG_DIR, file));
+    const filePath = path.join(BLOG_DIR, file);
+    const meta = extractMeta(filePath);
     if (!meta) return;
 
+    const html = fs.readFileSync(filePath, 'utf8');
+
+    // Try filename date prefix first
     const dateMatch = file.match(/^(\d{4}-\d{2}-\d{2})/);
-    const pubDate = dateMatch
-        ? new Date(dateMatch[1] + 'T12:00:00Z').toUTCString()
-        : null;
+    let pubDate = null;
+    if (dateMatch) {
+        pubDate = new Date(dateMatch[1] + 'T12:00:00Z');
+    } else {
+        // Fall back to article:published_time meta or file mtime
+        pubDate = extractDate(html, meta, filePath);
+    }
+
+    if (!pubDate) {
+        pubDate = new Date(); // last resort — should never happen
+    }
 
     const slug = file.replace(/\.html$/, '');
     entries.push({
         ...meta,
         url: `${SITE_URL}/blog/${encodeURIComponent(slug)}.html`,
-        pubDate: pubDate || new Date().toUTCString(),
+        pubDate: pubDate.toUTCString(),
         category: 'Blog Post',
     });
 });
@@ -55,32 +110,56 @@ fs.readdirSync(COMP_DIR).forEach(file => {
     if (!file.endsWith('.html')) return;
     // Skip the duplicate nested comparisons/ dir if it exists
     if (file.startsWith('comparisons')) return;
-    const meta = extractMeta(path.join(COMP_DIR, file));
+    const filePath = path.join(COMP_DIR, file);
+    const meta = extractMeta(filePath);
     if (!meta) return;
 
-    // For comparisons, get date from the article meta or file mtime
-    const html = fs.readFileSync(path.join(COMP_DIR, file), 'utf8');
+    const html = fs.readFileSync(filePath, 'utf8');
+
+    // Try multiple date patterns from the HTML content
     const dateMetaMatch = html.match(/Published\s+(\w+\s+\d+,\s+\d{4})/i) ||
                           html.match(/(\w+\s+\d+,\s+\d{4})\s*·\s*Comparison/) ||
-                          html.match(/Comparison\s*·\s*(\w+\s+\d+,\s+\d{4})/);
-    const pubDate = dateMetaMatch ? dateMetaMatch[1] : null;
+                          html.match(/Comparison\s*·\s*(\w+\s+\d+,\s+\d{4})/) ||
+                          // Handle "Published July 2026" (no day) — default to 1st
+                          html.match(/Published\s+(\w+)\s+(\d{4})/i);
 
-    // Skip articles with future publish dates (pre-scheduled)
-    const parsedDate = pubDate ? new Date(pubDate) : null;
-    if (parsedDate && parsedDate > new Date()) {
+    let pubDate = null;
+
+    if (dateMetaMatch) {
+        if (dateMetaMatch[2]) {
+            // "Published July 2026" format — use 1st of month
+            pubDate = new Date(`${dateMetaMatch[1]} 1, ${dateMetaMatch[2]}`);
+        } else {
+            // "Published July 22, 2026" format
+            pubDate = new Date(dateMetaMatch[1]);
+        }
+    }
+
+    // If no date found in content, try meta tag or file mtime
+    if (!pubDate || isNaN(pubDate.getTime())) {
+        pubDate = extractDate(html, meta, filePath);
+    }
+
+    // Skip articles with future publish dates (pre-scheduled content)
+    if (pubDate && pubDate > new Date()) {
         return;
+    }
+
+    // Last resort (shouldn't happen with mtime fallback)
+    if (!pubDate || isNaN(pubDate.getTime())) {
+        pubDate = new Date();
     }
 
     const slug = file.replace(/\.html$/, '');
     entries.push({
         ...meta,
         url: `${SITE_URL}/comparisons/${encodeURIComponent(slug)}.html`,
-        pubDate: pubDate ? new Date(pubDate).toUTCString() : new Date().toUTCString(),
+        pubDate: pubDate.toUTCString(),
         category: 'Comparison',
     });
 });
 
-// Sort by date descending
+// Sort by date descending (newest first)
 entries.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
 // Build RSS XML
