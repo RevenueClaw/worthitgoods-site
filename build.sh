@@ -124,4 +124,7 @@ echo '</urlset>' >> _site/sitemap.xml
 
 echo "Sitemap: $(grep -c '<url>' _site/sitemap.xml) URLs"
 
+# Submit sitemap to search engines
+python3 scripts/submit_sitemap.py 2>&1 | tail -5
+
 find _site -name '*.html' | wc -l | xargs -I{} echo "{} HTML pages built."
