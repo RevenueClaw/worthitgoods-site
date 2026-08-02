@@ -76,6 +76,9 @@ cp blog/custom-2026-07-19-home-office.html _site/blog/2026-07-19-home-office.htm
 # Blog overlay: 2026-07-26-gift-ideas
 cp blog/custom-2026-07-26-gift-ideas.html _site/blog/2026-07-26-gift-ideas.html
 
+# Blog overlay: 2026-08-02-outdoor-trail
+cp blog/custom-2026-08-02-outdoor-trail.html _site/blog/2026-08-02-outdoor-trail.html
+
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
