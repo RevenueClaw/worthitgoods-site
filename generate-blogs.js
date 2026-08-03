@@ -193,9 +193,9 @@ ${blog.heroSubtitle ? `<p style="font-size:1.2em;opacity:0.9;margin-top:0.5rem;"
 </div>
 </div>
 <article class="products-section">
-<div class="section-header">
-<h2>Introduction</h2>
-${intro}
+<div style="max-width:650px;margin:0 auto 2.5rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#fafafa,#f0f4ff);border-left:4px solid #ff6b35;border-radius:0 12px 12px 0;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;">Introduction</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;">${intro}</p>
 </div>
 <h2>Top Picks</h2>
 ${catProds.map(p => `
@@ -222,16 +222,16 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
 <a href="${p.affurl}" target="_blank" class="cta" style="display:inline-block;padding:1rem 2rem;background:#ff6b35;color:white;text-decoration:none;border-radius:8px;font-weight:bold;margin-top:1rem;">Shop on Amazon →</a>
 </section>
 `).join('')}
-<div class="section-header" style="max-width:650px;margin:3rem auto 0;padding:1.5rem;background:#f8f9fa;border-radius:12px;">
-<h2>Buying Advice</h2>
-<p style="line-height:1.6;font-size:1.1em;">${advice}</p>
+<div style="max-width:650px;margin:3rem auto 0;padding:1.5rem 2rem;background:linear-gradient(135deg,#f8f9fa,#f0f0f0);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;">Buying Advice</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;">${advice}</p>
 </div>
-<div class="section-header" style="max-width:650px;margin:2rem auto 0;padding:1.5rem;background:#e9ecef;border-radius:12px;">
-<h2>Conclusion</h2>
-<p style="line-height:1.6;font-size:1.1em;">${conclusion}</p>
-<a href="/#products" style="font-weight:bold;color:#ff6b35;">← Full Product Grid</a>
+<div style="max-width:650px;margin:2rem auto 0;padding:1.5rem 2rem;background:linear-gradient(135deg,#f8f9fa,#f0f0f0);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;">Conclusion</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;">${conclusion}</p>
+<a href="/#products" class="cta" style="display:inline-block;padding:0.9rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;border-radius:8px;font-weight:bold;text-decoration:none;margin-top:0.5rem;">Browse the Full Collection →</a>
 </div>
-<p style="text-align:center;margin:3rem 0;"><a href="/blog.html" class="cta-button" style="display:inline-block;padding:1rem 2rem;background:#007bff;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">Read More Posts</a></p>
+<p style="text-align:center;margin:3rem 0;"><a href="/blog.html" class="cta-button" style="display:inline-block;padding:1rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;text-decoration:none;border-radius:8px;font-weight:bold;">More Blog Posts</a></p>
 </article>
 <footer style="margin-top:4rem;padding:2rem;background:#333;color:white;text-align:center;">
 <p>© 2026 WorthIt Goods. Amazon affiliate disclosure: We earn from qualifying purchases.</p>
