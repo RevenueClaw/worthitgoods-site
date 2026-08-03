@@ -194,8 +194,8 @@ ${blog.heroSubtitle ? `<p style="font-size:1.2em;opacity:0.9;margin-top:0.5rem;"
 </div>
 <article class="products-section">
 <div style="max-width:650px;margin:0 auto 2.5rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#fafafa,#f0f4ff);border-left:4px solid #ff6b35;border-radius:0 12px 12px 0;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;">Introduction</h2>
-<p style="line-height:1.75;font-size:1.05rem;color:#333;">${intro}</p>
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;margin-bottom:0.8rem;">Introduction</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;margin-bottom:0.8rem;">${intro}</p>
 </div>
 <h2>Top Picks</h2>
 ${catProds.map(p => `
@@ -223,12 +223,12 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
 </section>
 `).join('')}
 <div style="max-width:650px;margin:3rem auto 0;padding:1.5rem 2rem;background:linear-gradient(135deg,#f8f9fa,#f0f0f0);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;">Buying Advice</h2>
-<p style="line-height:1.75;font-size:1.05rem;color:#333;">${advice}</p>
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;margin-bottom:0.8rem;">Buying Advice</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;margin-bottom:0.8rem;">${advice}</p>
 </div>
 <div style="max-width:650px;margin:2rem auto 0;padding:1.5rem 2rem;background:linear-gradient(135deg,#f8f9fa,#f0f0f0);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;">Conclusion</h2>
-<p style="line-height:1.75;font-size:1.05rem;color:#333;">${conclusion}</p>
+<h2 style="margin-top:0;font-size:1.35rem;color:#1a1a1a;border-bottom:2px solid #ff6b35;padding-bottom:0.5rem;display:inline-block;margin-bottom:0.8rem;">Conclusion</h2>
+<p style="line-height:1.75;font-size:1.05rem;color:#333;margin-bottom:0.8rem;">${conclusion}</p>
 <a href="/#products" class="cta" style="display:inline-block;padding:0.9rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;border-radius:8px;font-weight:bold;text-decoration:none;margin-top:0.5rem;">Browse the Full Collection →</a>
 </div>
 <p style="text-align:center;margin:3rem 0;"><a href="/blog.html" class="cta-button" style="display:inline-block;padding:1rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;text-decoration:none;border-radius:8px;font-weight:bold;">More Blog Posts</a></p>
