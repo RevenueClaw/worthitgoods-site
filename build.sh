@@ -34,6 +34,21 @@ if [[ -z "$THEME" && -f .seasonal-active ]]; then
     fi
 fi
 
+# === SAFETY NET: Recover comparison/blog files that exist only in _site ===
+# Published articles must always be committed to source directories (comparisons/ or blog/)
+# but if anything was generated directly in _site, this prevents data loss on rebuild.
+if [ -d "_site/comparisons" ]; then
+    mkdir -p comparisons
+    for f in _site/comparisons/*.html; do
+        [ -f "$f" ] || continue
+        base=$(basename "$f")
+        if [ ! -f "comparisons/$base" ]; then
+            cp "$f" "comparisons/$base"
+            echo "⚠️  Recovered: comparisons/$base (was only in _site)"
+        fi
+    done
+fi
+
 # Generate site from data/sample_products.json
 rm -rf _site
 SEASONAL_THEME="$THEME" node generate-pages.js
