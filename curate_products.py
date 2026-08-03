@@ -34,8 +34,8 @@ OUTPUT_FILE = OUTPUT_DIR / f"curated_batch_{date.today():%Y-%m-%d}.json"
 
 MIN_STAR_RATING = 4.5
 MIN_REVIEW_COUNT = 100
-FUN_MIN_STAR_RATING = 4.0
-FUN_MIN_REVIEW_COUNT = 50
+FUN_MIN_STAR_RATING = 4.3
+FUN_MIN_REVIEW_COUNT = 100
 
 CURATION_QUERIES = {
     "kitchen": ["unique kitchen gadget","clever kitchen tool","silicone kitchen accessory","baking tool","chef recommended kitchen","kitchen organization","food storage solution"],
