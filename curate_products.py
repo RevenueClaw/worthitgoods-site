@@ -273,7 +273,7 @@ def curate_products(count_per_category=2):
 
     for tier_label, tier_queries in fun_query_tiers:
         print(f"\n  \u203a {tier_label}")
-        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=3)
+        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=5)
         if not tier_candidates:
             print(f"  No candidates found in {tier_label}")
             continue
@@ -296,9 +296,8 @@ def curate_products(count_per_category=2):
             else:
                 print(f"    \N{cross mark} FUN FAIL: {rating}\u2606 / {reviews} reviews | {p['title'][:50]}")
 
-        if fun_passing:
-            print(f"\n  \u2713 Got {len(fun_passing)} fun product(s) across all tiers \u2014 done with Phase 1")
-            break
+        # No early exit — all 3 tiers run every time, pooling all passing candidates
+        # so we get the widest possible pool of fun products to choose from
 
         # Cooldown before next tier
         if tier_label != fun_query_tiers[-1][0]:
