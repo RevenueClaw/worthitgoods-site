@@ -308,7 +308,14 @@ def curate_products(count_per_category=2):
     if not fun_passing:
         print(f"\n  \u26a0\ufe0f No fun products passed threshold after all 3 tiers. Accepting 0 fun products this week.")
 
-    fun_passing.sort(key=lambda p: p.get("_fun_score", 0), reverse=True)
+    # Sort fun passers by combined score: rating/reviews dominate (70%) but
+    # fun_score still rewards genuinely interesting products (30%).
+    # This way a 4.3* / 100review product with fun keywords doesn't beat
+    # a 4.9* / 3000review product with a plain name.
+    def fun_quality_score(p):
+        rating = p.get("rating") or 0
+        return (rating * 2000 + (p.get("reviews_count") or 0)) * 0.7 + (p.get("_fun_score", 0) * 1000) * 0.3
+    fun_passing.sort(key=fun_quality_score, reverse=True)
     print(f"\n  Phase 1 complete: {len(fun_candidates)} total fun candidates, {len(fun_passing)} passing filter")
 
     # Phase 2: Standard products
@@ -376,7 +383,7 @@ def curate_products(count_per_category=2):
             time.sleep(5)
         scrape_batch(standard_candidates, "standard products", rating_fetcher)
 
-    # Filter standard candidates
+    # Filter standard candidates and sort by quality (highest rated first)
     standard_passing = []
     for p in standard_candidates:
         rating = p.get("rating") or 0
@@ -386,6 +393,10 @@ def curate_products(count_per_category=2):
             print(f"    PASS: {rating}\u2606 / {reviews} reviews | {p['title'][:60]}")
         else:
             print(f"    FAIL: {rating}\u2606 / {reviews} reviews | {p['title'][:50]}")
+
+    # Sort passing standard products by rating + reviews so we pick the best
+    # products for the site, not just whatever PAAPI returned first
+    standard_passing.sort(key=lambda p: (p.get("rating") or 0) * 2000 + (p.get("reviews_count") or 0), reverse=True)
 
     # Build final curated list
     fun_slots = min(2, len(fun_passing))
