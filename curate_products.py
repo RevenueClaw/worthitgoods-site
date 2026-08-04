@@ -11,7 +11,7 @@ Strategy:
   - **Ensure at least 1-2 "fun/interesting/unique" products per batch**
     - Dedicated FUN_QUERIES target novelty, clever design, conversation-starters
     - fun_score() measures novelty/uniqueness/cool-factor from title keywords
-    - Phase 1: search fun queries, score candidates, reserve top picks
+    - Phase 1: search fun queries (ALL 3 tiers run every time), score candidates, reserve top picks
     - Phase 2: fill remaining slots from standard category queries
     - Every batch includes at least 1 fun product before filling with staples
   - **Rating pre-filter:** ALL products checked for star rating BEFORE final batch
@@ -51,12 +51,12 @@ CURATION_QUERIES = {
 
 FUN_QUERIES = {
     "unique_gadgets": ["cool unique gadget","clever invention","ingenious gadget","award winning gadget","innovative product","genius design","smart invention","reddot design award","IF design award"],
-    "clever_kitchen": ["genius kitchen gadget","clever kitchen invention","unique kitchen tool","chef secret weapon","kitchen hack"],
-    "fun_tech": ["cool tech gadget","unique tech accessory","retro gadget","nostalgia tech","fun desk toy","DIY electronics kit","STEM kit"],
-    "quirky_home": ["unique home decor","funny gift","novelty gift","conversation starter","interesting home accessory","creative wall art","unique lamp"],
-    "interesting_edc": ["cool EDC","unique every day carry","interesting pocket tool","titanium gadget","innovative multi tool","EDC gear unique"],
+    "clever_kitchen": ["genius kitchen gadget","clever kitchen invention","unique kitchen tool","chef secret weapon","kitchen must have"],
+    "fun_tech": ["cool tech gadget","unique tech accessory","AI gadget","AI accessory","smart home fun","retro premium gadget","nostalgia tech","fun desk toy","DIY electronics kit","STEM kit"],
+    "quirky_home": ["unique home decor","conversation piece home","unique decorative gift","interesting home accessory","creative wall art","unique lamp"],
+    "interesting_edc": ["cool EDC","unique every day carry","premium EDC","interesting pocket tool","titanium gadget","innovative multi tool","EDC gear unique"],
     "outdoor_fun": ["camping gadget cool","hiking innovation","unique outdoor gear","backyard fun game","travel unique gadget","portable hammock"],
-    "retro_nostalgia": ["retro gadget","nostalgic tech","vintage style modern","throwback game classic","classic design reimagined","retro gaming accessory","vintage inspired modern"],
+    "retro_nostalgia": ["retro gadget","retro premium gadget","nostalgic tech","vintage style modern","throwback game classic","classic design reimagined","retro gaming accessory","premium retro gaming","vintage inspired modern"],
 }
 
 FUN_KEYWORDS = ["innovative","patented","unique","award","genius","clever","ingenious","unusual","creative","one-of-a-kind","conversation","novel","original","reusable","multifunctional","2-in-1","3-in-1","multi-functional","titanium","premium","handmade","artisan","compact","portable","transforms","converts","folds","collapsible","solar","rechargeable","bamboo","ceramic","copper","solid wood","leather","magnetic","glass","stainless","retro","vintage","modern","minimalist","DIY","kit","build","assemble","custom","modular","adjustable","universal","compatible","smart","app","bluetooth","LED","sensor","award-winning","as seen on","shark tank","dragon's den","kickstarter","indiegogo","upgrade","next generation","version 2"]
@@ -74,7 +74,7 @@ FUN_QUERIES_TIER_3 = {
     "top_rated_fun": ["highly rated unique","amazon choice gadget","editor pick fun","4.5 star unique","top rated cool"],
     "creative_design": ["creative design product","award winning design","ergonomic innovative","space saving clever","minimalist design cool"],
     "hobby_fun": ["DIY kit cool","STEM toy adult","board game unique","hobby gift interesting","makers tool"],
-    "kitchen_odd": ["weird kitchen gadget","strange but useful","kitchen tool unusual","cooking innovation","oddly satisfying kitchen"],
+    "kitchen_odd": ["innovative kitchen tool","highly rated kitchen gadget","kitchen tool unusual","cooking innovation","oddly satisfying kitchen"],
 }
 
 FUN_BORING_PATTERNS = [r"basic",r"standard",r"ordinary",r"plain",r"simple",r"generic",r"replacement",r"refill",r"bulk",r"value pack",r"economy"]
@@ -189,11 +189,13 @@ def scrape_batch(candidates, label, fetcher_path):
         print(f"    stderr: {result.stderr[:200]}")
     return len(need)
 
-def search_fun_tier(api, seen_asins, tier_queries, fun_target=3):
+def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20):
     """Search a tier of fun queries and collect candidates.
     
     Returns list of candidate product dicts with _fun_score set.
     Updates seen_asins in-place to avoid re-searching same ASINs.
+    item_count controls how many PAAPI results to fetch per query (default 20
+    since many get filtered out by dedup, image, and exclusion checks).
     """
     candidates = []
     for category, queries in tier_queries.items():
@@ -203,7 +205,7 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=3):
             if hits >= fun_target: break
             print(f"    '{query}'...", end=" ", flush=True)
             try:
-                results = api.search_items(query, item_count=10)
+                results = api.search_items(query, item_count=item_count)
             except Exception as e:
                 print(f"error: {e}")
                 continue
@@ -258,11 +260,13 @@ def curate_products(count_per_category=2):
     print(f"Active categories: {', '.join(active_categories)}")
     print(f"{'='*60}")
 
-    # Phase 1: Fun products (3-tier retry loop)
+    # Phase 1: Fun products (3 tiers, ALL run every time)
     # Each tier uses different search queries to find fun products.
-    # After each tier we scrape ratings and filter. If we get ≥1 fun product
-    # that passes, we stop — otherwise we try broader queries.
-    print(f"\n{'─'*60}\n  PHASE 1: Fun Product Search (3-tier retry)\n{'─'*60}\n")
+    # No early exit: we search all 3 tiers and pool every candidate that
+    # passes the rating filter, then sort by fun_score and pick the best.
+    # This maximizes the chance of finding 1-2 genuinely great fun picks
+    # instead of settling for the first product that clears the bar.
+    print(f"\n{'─'*60}\n  PHASE 1: Fun Product Search (3 tiers, no early exit)\n{'─'*60}\n")
     rating_fetcher = os.path.join(os.path.dirname(__file__),'scripts','fetch_rating.py')
     fun_passing = []
     fun_query_tiers = [
@@ -273,7 +277,7 @@ def curate_products(count_per_category=2):
 
     for tier_label, tier_queries in fun_query_tiers:
         print(f"\n  \u203a {tier_label}")
-        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=5)
+        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20)
         if not tier_candidates:
             print(f"  No candidates found in {tier_label}")
             continue
@@ -296,12 +300,9 @@ def curate_products(count_per_category=2):
             else:
                 print(f"    \N{cross mark} FUN FAIL: {rating}\u2606 / {reviews} reviews | {p['title'][:50]}")
 
-        # No early exit — all 3 tiers run every time, pooling all passing candidates
-        # so we get the widest possible pool of fun products to choose from
-
-        # Cooldown before next tier
+        # Cooldown before next tier (all tiers run every time)
         if tier_label != fun_query_tiers[-1][0]:
-            print(f"  No fun products passed filter. Trying next tier in 5s...")
+            print(f"  Tier done: {len(fun_passing)} passing so far. Trying next tier in 5s...")
             time.sleep(5)
 
     if not fun_passing:
@@ -322,7 +323,7 @@ def curate_products(count_per_category=2):
             if hits >= count_per_category or len(standard_candidates) >= standard_needed: break
             print(f"  '{query}'...", end=" ", flush=True)
             try:
-                results = api.search_items(query, item_count=10)
+                results = api.search_items(query, item_count=20)
             except Exception as e:
                 print(f"error: {e}")
                 continue
