@@ -867,3 +867,93 @@ const indexHTML = `<!DOCTYPE html>
 
 fs.writeFileSync(path.join(siteDir, 'index.html'), indexHTML);
 console.log('Generated site with ' + products.length + ' products. Enhanced descriptions now collapsible.');
+
+// ── Generate individual product detail pages for SEO ──
+const productDir = path.join(siteDir, 'product');
+fs.mkdirSync(productDir, { recursive: true });
+
+function slugify(name) {
+    return name.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')
+        .substring(0, 80);
+}
+
+let productPageCount = 0;
+for (const product of products) {
+    const slug = slugify(product.title);
+    const title = cleanTitle(product.title);
+    const desc = (product.description || product.blurb || '').replace(/<[^>]+>/g, '').substring(0, 160);
+    const price = product.price ? '$' + parseFloat(product.price).toFixed(2) : 'Check price';
+    const category = product.category || 'Deals';
+    const canonicalUrl = 'https://www.worthitgoods.com/product/' + slug + '.html';
+
+    const productPage = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} — WorthItGoods</title>
+    <meta name="description" content="${desc}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${desc}">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:image" content="${product.image}">
+    <link rel="canonical" href="${canonicalUrl}">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "${title.replace(/"/g, '\\"')}",
+        "description": "${desc.replace(/"/g, '\\"')}",
+        "image": "${product.image}",
+        "offers": {
+            "@type": "Offer",
+            "price": "${product.price || '0'}",
+            "priceCurrency": "USD",
+            "url": "${product.affiliate_url || '#'}"
+        }
+    }
+    </script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; background: #f8fafc; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #ff9a56; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .product-detail { background: #fff; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .product-detail img { max-width: 100%; border-radius: 8px; margin-bottom: 20px; }
+        .product-detail h1 { font-size: 1.8rem; margin: 0 0 10px; color: #111; }
+        .product-detail .price { font-size: 1.5rem; font-weight: 700; color: #059669; margin: 15px 0; }
+        .product-detail .category { display: inline-block; background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 15px; }
+        .product-detail .description { color: #555; margin: 15px 0; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #ff9a56, #ff6b6b); color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; margin: 20px 0; }
+        .cta-button:hover { opacity: 0.9; }
+        footer { text-align: center; padding: 40px 20px; color: #9ca3af; font-size: 0.85rem; }
+        @media (max-width: 600px) { .product-detail { padding: 16px; } .product-detail h1 { font-size: 1.4rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to WorthItGoods</a>
+        <div class="product-detail">
+            <span class="category">${category}</span>
+            <h1>${title}</h1>
+            <img src="${thumbnailUrl(product.image)}" alt="${title}" loading="eager" width="500" height="500">
+            <div class="price">${price}</div>
+            <div class="description">${product.description || product.blurb || ''}</div>
+            <a href="${product.affiliate_url || '#'}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
+        </div>
+    </div>
+    <footer>
+        <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
+        <p>As an Amazon Associate, I earn from qualifying purchases.</p>
+    </footer>
+</body>
+</html>`;
+
+    fs.writeFileSync(path.join(productDir, slug + '.html'), productPage);
+    productPageCount++;
+}
+
+console.log('Generated ' + productPageCount + ' product detail pages for SEO');

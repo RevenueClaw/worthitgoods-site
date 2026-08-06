@@ -138,6 +138,15 @@ for f in comparisons/*.html; do
 ' "$slug.html" "${LASTMOD:-$TODAY}" >> _site/sitemap.xml
 done
 
+# Add product detail pages to sitemap (SEO: multiply indexed pages)
+if [ -d "_site/product" ]; then
+  for f in _site/product/*.html; do
+    slug=$(basename "$f" .html)
+    printf '  <url><loc>https://www.worthitgoods.com/product/%s</loc><priority>0.6</priority><lastmod>%s</lastmod></url>
+' "$slug.html" "$TODAY" >> _site/sitemap.xml
+  done
+fi
+
 echo '</urlset>' >> _site/sitemap.xml
 
 echo "Sitemap: $(grep -c '<url>' _site/sitemap.xml) URLs"
