@@ -71,6 +71,11 @@ function cleanTitle(title) {
     return title.slice(0, 55).trim() + '\u2026';
 }
 
+// Shrink Amazon image URLs for grid thumbnails: SL500->SL250, AC_SL1500->SL250
+function thumbnailUrl(url) {
+    return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL250_');
+}
+
 // ── SEO: JSON-LD Structured Data ────────────────────────────────────────────
 
 function generateProductSchema(products) {
@@ -190,7 +195,7 @@ function renderProduct(p) {
     return `
                 <div class="product-card${p.badge ? ' has-badge' : ''}">
                     <div class="image-wrapper">
-                        <img src="${p.image}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy">
+                        <img src="${thumbnailUrl(p.image)}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy" width="250" height="250" decoding="async">
                         ${badge}
                     </div>
                     <div class="content">
