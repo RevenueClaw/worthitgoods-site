@@ -71,9 +71,9 @@ function cleanTitle(title) {
     return title.slice(0, 55).trim() + '\u2026';
 }
 
-// Shrink Amazon image URLs for grid thumbnails: SL500->SL250, AC_SL1500->SL250
+// Shrink Amazon image URLs for grid thumbnails: SL500->SL400, AC_SL1500->SL400
 function thumbnailUrl(url) {
-    return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL250_');
+    return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL400_');
 }
 
 // ── SEO: JSON-LD Structured Data ────────────────────────────────────────────
@@ -195,7 +195,7 @@ function renderProduct(p) {
     return `
                 <div class="product-card${p.badge ? ' has-badge' : ''}">
                     <div class="image-wrapper">
-                        <img src="${thumbnailUrl(p.image)}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy" width="250" height="250" decoding="async">
+                        <img src="${thumbnailUrl(p.image)}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy" width="400" height="400" decoding="async">
                         ${badge}
                     </div>
                     <div class="content">
@@ -939,7 +939,7 @@ for (const product of products) {
         <div class="product-detail">
             <span class="category">${category}</span>
             <h1>${title}</h1>
-            <img src="${thumbnailUrl(product.image)}" alt="${title}" loading="eager" width="500" height="500">
+            <img src="${thumbnailUrl(product.image)}" alt="${title}" loading="eager" width="400" height="400">
             <div class="price">${price}</div>
             <div class="description">${product.description || product.blurb || ''}</div>
             <a href="${product.affiliate_url || '#'}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
