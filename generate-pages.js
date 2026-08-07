@@ -76,6 +76,13 @@ function thumbnailUrl(url) {
     return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL400_');
 }
 
+// Extract ASIN from Amazon affiliate URL
+function asinFromUrl(url) {
+    if (!url) return '';
+    const m = url.match(/\/dp\/([A-Z0-9]{10})(?:\?|$)/);
+    return m ? m[1] : '';
+}
+
 // ── SEO: JSON-LD Structured Data ────────────────────────────────────────────
 
 function generateProductSchema(products) {
@@ -211,7 +218,7 @@ function renderProduct(p) {
                         
                         <button class="toggle-btn" type="button">Why It\u2019s Worth It \u2192</button>
                         
-                        <a href="${p.affiliate_url}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                        <a href="/go/${slugify(p.title)}?asin=${asinFromUrl(p.affiliate_url)}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                         <div style="text-align:center;margin-top:8px;">
                             <a href="#" class="price-alert-link" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
                                 <span style="font-size:0.85rem;">🔔</span> Get Price Alert
@@ -942,7 +949,7 @@ for (const product of products) {
             <img src="${thumbnailUrl(product.image)}" alt="${title}" loading="eager" width="400" height="400">
             <div class="price">${price}</div>
             <div class="description">${product.description || product.blurb || ''}</div>
-            <a href="${product.affiliate_url || '#'}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
+            <a href="/go/${slug}?asin=${asinFromUrl(product.affiliate_url)}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
         </div>
     </div>
     <footer>
