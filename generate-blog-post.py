@@ -25,13 +25,13 @@ THEMES = {
         "title": "Kitchen Essentials That Earn Their Drawer Space",
         "desc": "Real tools that make cooking less frustrating. No unitaskers, no gimmicks.",
         "slug_prefix": "kitchen-essentials",
-        "match": lambda t, b, d: bool(re.search(r'(measur|spatula|grater|zest|kitchen|cook|chef|bake|knife|peeler|cutter|strainer|whisk|bowl|spoon|towel|soap|clean|scrub|squeeze|stor(?:age|e)|organiz|pantry|counter|dish)', (t+' '+b+' '+d).lower())) and not re.search(r'(watch|phone|cable|backpack|survival|flashlight|multitool|cocktail|smoker|wine|beer|drinkware|flask|barware|can.?holder)', (t+' '+b+' '+d).lower())
+        "match": lambda t, b, d: bool(re.search(r'(measur|spatula|grater|zest|kitchen|cook|chef|bake|knife|peeler|cutter|strainer|whisk|bowl|spoon|towel|soap|scrub|squeeze|pantry|counter|dish|olive\s*oil|onion\s*holder|egg\s*separator|jar\s*spatula|salt\s*cellar|meat\s*tenderiz|baking|mixing\s*bowl|cookie\s*jars?|splatter|utensil\s*rest|silicone\s*baking|cheese\s*grater|lemon\s*zest|spatula\s*set|steam\s*cleaner\s*microwave)', (t+' '+b+' '+d).lower())) and not re.search(r'(car|auto|truck|trunk|vehicle|suv|sedan|glove\s*box|registration|insurance|dryer|vent\s*clean|lint|laundry|dog|puppy|pet\s*water|pet\s*?bowl|band.?aid|first.?aid|emergency\s*(kit|food|supply)|survival|flashlight|spotlight|borescope|backpack|duffle|hammock|cooler|ice\s*chest|lunchbox|camp|camping|hike|hiking|trail|outdoor|jump.?start|battery.charger|sanding|clay\s*bar|ceramic\s*trim|screwdriver|putty\s*knife|clothesline|usb|flash\s*drive|memory\s*stick|raspberry\s*pi|pi\s*case|circuit\s*board|golf\s*towel|under\s*armour|multitool|cocktail|smoker|wine|beer|drinkware|flask|barware|can.?holder|phone\s*?case|charging\s*station|laptop\s*stand|bluetooth|power\s*tool|california\s*?car|chemical\s*guys|carhartt|emergency\s*?shart|t.?rex|birthday\s*card|dinosaur|funny\s*apron.*dad|grill|mounting\s*tape|clip\s*fan|table.?top\s*fan|klein\s*tools|saker\s*silicone|caulking|grout\s*removal|wash\s*and\s*wax|rim\s*coat|spackle|drywall|hand\s*soap\s*sheet|travel\s*(clothes|case|art|set)|retro\s*usb|flash\s*drive\s*w\/|action\s*and\s*an|phone\s*stand|cell.?phone\s*stand|body\s*soap)', (t+' '+b+' '+d).lower())
     },
     "edc-pocket-gear": {
         "title": "Everyday Carry: Gear You'll Actually Use",
         "desc": "Pocket-sized tools that earn their spot in your bag or pocket.",
         "slug_prefix": "edc-pocket-gear",
-        "match": lambda t, b, d: bool(re.search(r'(multitool|knife|flashlight|wallet|keychain|pocket|edc|survival|tinker|swiss.+army)', (t+' '+b+' '+d).lower()))
+        "match": lambda t, b, d: bool(re.search(r'(multitool|knife|flashlight|wallet|keychain|pocket|edc|survival|tinker|swiss.+army)', (t+' '+b+' '+d).lower())) and not re.search(r'(putty|spackle|drywall|paint\s*scraper|sanding|scraper\s*tool|caulking|grout|plaster|screwdriver|clay\s*bar|ceramic\s*trim)', (t+' '+b+' '+d).lower())
     },
     "home-office": {
         "title": "Home & Desk Upgrades That Make a Difference",
