@@ -151,7 +151,13 @@ def is_excluded(title, brand=""):
 
 ALL_CATEGORIES = list(CURATION_QUERIES.keys())
 
-def get_active_categories(active_count=6):
+def get_active_categories(active_count=9):
+    """Return which categories to curate this week.
+    
+    Default now uses ALL categories (9) so every niche gets covered each
+    week and we have a bigger pool to filter from. Kept the week-seeded
+    shuffle so ordering varies, but nothing is dropped.
+    """
     week_num = date.today().isocalendar()[1]
     rng = random.Random(week_num)
     shuffled = ALL_CATEGORIES[:]
@@ -159,34 +165,44 @@ def get_active_categories(active_count=6):
     return shuffled[:active_count]
 
 def scrape_batch(candidates, label, fetcher_path):
-    """Scrape ratings for a batch of candidate products."""
+    """Scrape ratings for a batch of candidate products.
+    
+    Chunks the batch (12 ASINs per subprocess call) so we never hit the
+    fetch_rating.py 300s subprocess timeout. Each ASIN takes ~15-18s
+    (curl scrape + 2.5s delay), so a full 12-ASIN chunk stays well under
+    the limit. Without chunking, large candidate batches were silently
+    losing ratings for ASINs past #17, which filtered out valid products.
+    """
     need = [p for p in candidates if p.get("asin") and (not p.get("rating") or not p.get("reviews_count"))]
     if not need:
         return 0
-    scrape_asins = [p["asin"] for p in need]
     import subprocess, json as json_mod
-    result = subprocess.run(
-        [sys.executable, fetcher_path, '--batch'] + scrape_asins,
-        capture_output=True, text=True, timeout=300
-    )
-    if result.stdout.strip():
-        try:
-            ratings = json_mod.loads(result.stdout.strip())
-            count = 0
-            for r in ratings:
-                asin = r.get("asin")
-                if r.get("star_rating") and r.get("review_count"):
-                    for p in need:
-                        if p.get("asin") == asin:
-                            p["rating"] = r["star_rating"]
-                            p["reviews_count"] = r["review_count"]
-                            count += 1
-                            break
-            print(f"    Got {count}/{len(scrape_asins)} ratings for {label}")
-        except json_mod.JSONDecodeError:
-            print(f"    Failed to parse rating fetch output for {label}")
-    if result.stderr:
-        print(f"    stderr: {result.stderr[:200]}")
+    total_ok = 0
+    CHUNK = 12
+    for start in range(0, len(need), CHUNK):
+        chunk = need[start:start + CHUNK]
+        scrape_asins = [p["asin"] for p in chunk]
+        result = subprocess.run(
+            [sys.executable, fetcher_path, '--batch'] + scrape_asins,
+            capture_output=True, text=True, timeout=300
+        )
+        if result.stdout.strip():
+            try:
+                ratings = json_mod.loads(result.stdout.strip())
+                for r in ratings:
+                    asin = r.get("asin")
+                    if r.get("star_rating") and r.get("review_count"):
+                        for p in chunk:
+                            if p.get("asin") == asin:
+                                p["rating"] = r["star_rating"]
+                                p["reviews_count"] = r["review_count"]
+                                total_ok += 1
+                                break
+            except json_mod.JSONDecodeError:
+                print(f"    Failed to parse rating fetch output for {label} (chunk {start // CHUNK + 1})")
+        if result.stderr:
+            print(f"    stderr: {result.stderr[:200]}")
+    print(f"    Got {total_ok}/{len(need)} ratings for {label}")
     return len(need)
 
 def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20):
@@ -246,12 +262,14 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20):
     return candidates
 
 
-def curate_products(count_per_category=2):
+def curate_products(count_per_category=2, exclude_asins=None):
     api = AmazonCreatorsAPI(partner_tag=PARTNER_TAG)
     fun_candidates = []
     standard_candidates = []
-    seen_asins = set()
-    active_categories = get_active_categories(active_count=6)
+    # exclude_asins lets a top-up iteration skip products already curated
+    # in an earlier attempt (dedup across iterations, not just vs the site)
+    seen_asins = set(exclude_asins or [])
+    active_categories = get_active_categories(active_count=9)
     total_target = count_per_category * len(active_categories)
 
     print(f"\n{'='*60}")
@@ -446,6 +464,12 @@ def curate_products(count_per_category=2):
         print("  No products passed rating filter!")
     return curated
 
+def asin_from_url(url):
+    """Extract ASIN from an affiliate URL for cross-iteration dedup."""
+    if url and '/dp/' in url:
+        return url.split('/dp/')[1].split('?')[0]
+    return ''
+
 def save(products):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_FILE, "w") as f:
@@ -457,30 +481,61 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=2)
+    parser.add_argument("--min-target", type=int, default=8,
+                        help="Keep iterating until we have at least this many products (default 8)")
     args = parser.parse_args()
 
-    max_retries = 2
-    for attempt in range(max_retries + 1):
-        try:
-            products = curate_products(count_per_category=args.count)
-            if products:
-                save(products)
-                print(f"\N{check mark} Curation complete: {len(products)} products")
-                return 0
-            else:
-                print(f"\N{cross mark} Attempt {attempt+1}/{max_retries+1}: No products passed filter")
-                if attempt < max_retries:
-                    wait = 60 * (attempt + 1)
-                    print(f"  Retrying in {wait}s...")
-                    time.sleep(wait)
-        except Exception as e:
-            print(f"\N{cross mark} Attempt {attempt+1}/{max_retries+1} failed: {e}")
-            if attempt < max_retries:
-                wait = 60 * (attempt + 1)
-                print(f"  Retrying in {wait}s...")
-                time.sleep(wait)
+    # TOP-UP LOOP: run up to 3 curation passes. Each pass searches ALL 9
+    # categories with a slightly deeper per-category target (2 -> 3 -> 4).
+    # Rating/review thresholds NEVER relax — we only dig for more candidates
+    # that still clear the same 4.5*/100 (standard) / 4.3*/100 (fun) bars.
+    max_passes = 3
+    all_products = []
+    all_asins = set()
 
-    print("\N{cross mark} All retries exhausted.")
+    for attempt in range(max_passes):
+        count = args.count + attempt
+        print(f"\n{'='*60}")
+        print(f"  CURATION PASS {attempt + 1}/{max_passes} (count_per_category={count})")
+        print(f"{'='*60}")
+        try:
+            products = curate_products(count_per_category=count, exclude_asins=all_asins)
+        except Exception as e:
+            print(f"\N{cross mark} Pass {attempt+1}/{max_passes} failed: {e}")
+            if attempt < max_passes - 1:
+                time.sleep(30)
+            continue
+
+        if not products:
+            print(f"\N{cross mark} Pass {attempt+1}/{max_passes}: No products passed filter")
+            if attempt < max_passes - 1:
+                time.sleep(30)
+            continue
+
+        new_count = 0
+        for p in products:
+            asin = asin_from_url(p.get("affiliate_url", ""))
+            if asin and asin in all_asins:
+                continue
+            all_products.append(p)
+            if asin:
+                all_asins.add(asin)
+            new_count += 1
+        print(f"\N{check mark} Pass {attempt+1}: {new_count} new products (running total {len(all_products)})")
+
+        if len(all_products) >= args.min_target:
+            print(f"\n\N{check mark} Reached target ({len(all_products)} >= {args.min_target}). Stopping early.")
+            break
+        if attempt < max_passes - 1:
+            wait = 30 * (attempt + 1)
+            print(f"  Only {len(all_products)}/{args.min_target} — digging deeper in {wait}s (count -> {count + 1})...")
+            time.sleep(wait)
+
+    if all_products:
+        save(all_products)
+        print(f"\N{check mark} Curation complete: {len(all_products)} products")
+        return 0
+    print("\N{cross mark} No products found after all passes.")
     return 1
 
 if __name__ == "__main__":
