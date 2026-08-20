@@ -43,7 +43,7 @@ def main():
         print(f"FATAL: Article not found at {article_path}")
         sys.exit(1)
 
-    # Validate blog.html exists and has the marker
+    # Validate blog.html exists
     if not blog_path.exists():
         print(f"FATAL: blog.html not found at {blog_path}")
         sys.exit(1)
@@ -59,6 +59,49 @@ def main():
     na_count = article_html.count("$N/A")
     if na_count > 0:
         print(f"WARNING: Article contains {na_count} '$N/A' price placeholders. Proceeding anyway.")
+
+    # === PRE-PUBLISH VALIDATION ===
+    # === IDEMPOTENCY CHECK: Don't add a duplicate card ===
+    escaped_slug = slug.replace("-", "\\-")
+    if f'href="comparisons/{slug}.html"' in html:
+        print(f"⚠️  Blog card for '{slug}' already exists — SKIPPING duplicate add.")
+        print(f"    Rebuilding + pushing anyway to ensure site is up to date.")
+        # Still rebuild and push to ensure price/formatting updates propagate
+        rebuild_and_push(slug)
+        return
+    print(f"✅ No existing card found for '{slug}' — proceeding to add.")
+    # === END IDEMPOTENCY CHECK ===
+
+    # === CARD IMAGE VALIDATION ===
+    # Ensure the featured blog card image URL actually resolves (not 404)
+    try:
+        img_req = urllib.request.Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}, method='HEAD')
+        with urllib.request.urlopen(img_req, timeout=10) as img_resp:
+            if img_resp.status != 200:
+                print(f"FATAL: Card image URL returns {img_resp.status}: {image_url}")
+                sys.exit(1)
+    except Exception as e:
+        print(f"FATAL: Card image URL unreachable: {image_url} — {e}")
+        sys.exit(1)
+    print(f"✅ Card image resolves OK")
+    # === END CARD IMAGE VALIDATION ===
+
+    # === TOPIC RECENCY CHECK (soft warning) ===
+    topic_keywords = set()
+    skip_words = {'the', 'a', 'an', 'and', 'or', 'for', 'that', 'this', 'with', 'under', 'over', 'is', 'are', 'not', 'but', 'vs', 'in', 'on', 'at', 'to', 'of', 'it', 'its'}
+    for word in title.lower().split():
+        word = word.strip("$₿\"'.,;:!?()[]")
+        if word not in skip_words and len(word) > 3:
+            topic_keywords.add(word)
+    card_h3s = re.findall(r'<h3>.*?</h3>', html, re.S)
+    for card_h3 in card_h3s:
+        card_text = card_h3.lower()
+        matches = sum(1 for kw in topic_keywords if kw in card_text)
+        if matches >= 3:
+            print(f"⚠️  WARNING: Similar topic exists in another blog card!")
+            print(f"    Found {matches} shared keywords — possible duplicate topic.")
+            print(f"    Existing: {card_h3[:80]}...")
+    # === END TOPIC CHECK ===
 
     # === PRE-PUBLISH VALIDATION ===
     # Validate all Amazon ASINs resolve (not 404)
@@ -168,6 +211,24 @@ def main():
         print(f"✅ Pushed to master branch")
 
     print(f"✅ Published: https://www.worthitgoods.com/comparisons/{slug}.html")
+
+
+def rebuild_and_push(slug):
+    """Rebuild site and push without adding a card (for idempotent updates)."""
+    os.chdir(str(REPO_ROOT))
+    rc, out, err = run_cmd("bash build.sh")
+    if rc != 0:
+        print(f"WARNING: Build returned exit code {rc}")
+    else:
+        print(f"✅ Site rebuilt (idempotent update)")
+
+    run_cmd("git add -A")
+    run_cmd(f'git commit -m "rebuild: {slug} [idempotent]"')
+    rc3, _, _ = run_cmd("git push origin master")
+    if rc3 != 0:
+        run_cmd("git push origin main")
+
+    print(f"✅ Updated (idempotent): https://www.worthitgoods.com/comparisons/{slug}.html")
 
 
 if __name__ == "__main__":
