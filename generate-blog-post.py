@@ -208,14 +208,52 @@ def check_cadence():
             return False
     return True
 
+def get_recent_themes(days_back=30):
+    """Get themes used in the last `days_back` days to avoid topic repetition."""
+    recent = set()
+    now = datetime.date.today()
+    cutoff = now - timedelta(days=days_back)
+    
+    # Check all files in blog/ for date-based slugs
+    for f in os.listdir(BLOG_DIR):
+        m = re.search(r'(\d{4}-\d{2}-\d{2})-(.+)', f)
+        if m:
+            try:
+                post_date = datetime.datetime.strptime(m.group(1), '%Y-%m-%d').date()
+                if post_date >= cutoff:
+                    slug_theme = m.group(2).lower()
+                    # Map slug suffix back to theme key
+                    for key, theme_info in THEMES.items():
+                        if theme_info["slug_prefix"] in slug_theme or slug_theme in theme_info["slug_prefix"]:
+                            recent.add(key)
+            except:
+                pass
+    
+    return recent
+
+
 def choose_theme(products):
     existing = get_existing_slugs()
+    recent_themes = get_recent_themes(days_back=30)
+    
     scores = {}
     for key, theme in THEMES.items():
         if sum(1 for p in products if theme["match"](p.get("title",""), p.get("blurb",""), p.get("description",""))) >= 4:
             scores[key] = sum(1 for p in products if theme["match"](p.get("title",""), p.get("blurb",""), p.get("description","")))
     if not scores: return "home-office"
     ranked = sorted(scores.items(), key=lambda x: -x[1])
+    
+    # Prefer themes NOT used in the last 30 days
+    fresh_themes = [k for k, _ in ranked if k not in recent_themes]
+    if fresh_themes:
+        for key, _ in ranked:
+            if key in fresh_themes:
+                if THEMES[key]["slug_prefix"] not in " ".join(existing):
+                    return key
+        return fresh_themes[0]
+    
+    # All themes used recently — pick the one farthest back
+    # (fall through to normal scoring)
     for key, _ in ranked:
         if THEMES[key]["slug_prefix"] not in " ".join(existing):
             return key
