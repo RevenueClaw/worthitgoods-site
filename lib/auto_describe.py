@@ -12,6 +12,19 @@ import json, os, sys, re, urllib.request, urllib.error, time
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
+
+# Load .env if present (no dependency on python-dotenv)
+_env_path = BASE / '.env'
+if _env_path.exists():
+    for _line in _env_path.read_text().splitlines():
+        _line = _line.strip()
+        if _line.startswith('export '):
+            _line = _line[7:]
+        if '=' in _line and not _line.startswith('#') and _line.strip():
+            _k, _v = _line.split('=', 1)
+            _v = _v.strip('"').strip("'")
+            os.environ.setdefault(_k.strip(), _v)
+
 LLM_API_KEY = os.environ.get("OPENROUTER_API_KEY", os.environ.get("LLM_API_KEY", ""))
 LLM_MODEL = "deepseek/deepseek-v4-flash"
 
