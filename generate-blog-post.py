@@ -209,12 +209,31 @@ def check_cadence():
     return True
 
 def get_recent_themes(days_back=30):
-    """Get themes used in the last `days_back` days to avoid topic repetition."""
+    """Get themes used in the last `days_back` days to avoid topic repetition.
+    
+    Uses a persistent state file (used_themes.json) so cooldown survives
+    file deletion. When duplicates are removed by a fix, the state file
+    preserves the history so the theme repetition guard still works.
+    """
+    state_file = BASE / "used_themes.json"
     recent = set()
     now = datetime.date.today()
     cutoff = now - timedelta(days=days_back)
     
-    # Check all files in blog/ for date-based slugs
+    # Prefer state file (survives file deletion)
+    if state_file.exists():
+        try:
+            with open(state_file) as f:
+                state = json.load(f)
+            for key, entry in state.items():
+                post_date = datetime.datetime.strptime(entry["date"], '%Y-%m-%d').date()
+                if post_date >= cutoff:
+                    recent.add(key)
+            return recent
+        except:
+            pass
+    
+    # Fallback: scan blog/ files
     for f in os.listdir(BLOG_DIR):
         m = re.search(r'(\d{4}-\d{2}-\d{2})-(.+)', f)
         if m:
@@ -222,7 +241,6 @@ def get_recent_themes(days_back=30):
                 post_date = datetime.datetime.strptime(m.group(1), '%Y-%m-%d').date()
                 if post_date >= cutoff:
                     slug_theme = m.group(2).lower()
-                    # Map slug suffix back to theme key
                     for key, theme_info in THEMES.items():
                         if theme_info["slug_prefix"] in slug_theme or slug_theme in theme_info["slug_prefix"]:
                             recent.add(key)
@@ -230,6 +248,25 @@ def get_recent_themes(days_back=30):
                 pass
     
     return recent
+
+
+def record_theme_used(theme_key):
+    """Record that a theme was used today in used_themes.json."""
+    state_file = BASE / "used_themes.json"
+    state = {}
+    if state_file.exists():
+        try:
+            with open(state_file) as f:
+                state = json.load(f)
+        except:
+            pass
+    state[theme_key] = {"date": str(datetime.date.today()), "theme_title": THEMES.get(theme_key, {}).get("title", theme_key)}
+    # Prune entries older than 90 days
+    cutoff = (datetime.date.today() - timedelta(days=90)).isoformat()
+    state = {k: v for k, v in state.items() if v.get("date", "") >= cutoff}
+    with open(state_file, "w") as f:
+        json.dump(state, f, indent=2)
+    print(f"  Recorded theme '{theme_key}' in used_themes.json")
 
 
 def choose_theme(products):
@@ -318,6 +355,7 @@ def main():
         print("blog.html updated")
     add_custom_to_build(slug)
     print("build.sh updated")
+    record_theme_used(tk)
     print(f"\nNext: bash build.sh && git add -A && git commit -m 'blog: {slug}' && git push origin main")
 
 if __name__ == "__main__":

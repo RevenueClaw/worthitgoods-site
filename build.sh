@@ -94,8 +94,6 @@ cp blog/custom-2026-07-26-gift-ideas.html _site/blog/2026-07-26-gift-ideas.html
 # Blog overlay: 2026-08-02-outdoor-trail
 cp blog/custom-2026-08-02-outdoor-trail.html _site/blog/2026-08-02-outdoor-trail.html
 
-# Blog overlay: 2026-08-23-kitchen-essentials
-cp blog/custom-2026-08-23-kitchen-essentials.html _site/blog/2026-08-23-kitchen-essentials.html
 
 # Copy privacy page
 cp unsubscribe.html _site/

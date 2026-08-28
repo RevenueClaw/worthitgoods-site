@@ -472,10 +472,81 @@ def asin_from_url(url):
 
 def save(products):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # STEP 1: Auto-generate descriptions via LLM before saving
+    # The pipeline previously relied on manual editing, which often got skipped.
+    # Now we auto-generate so every curated product ships with real descriptions.
+    print(f"\n{'='*60}")
+    print(f"  GENERATING DESCRIPTIONS via LLM ({len(products)} products)")
+    print(f"{'='*60}")
+    
+    llm_api_key = os.environ.get("LLM_API_KEY") or ""
+    headers = {"Content-Type": "application/json"}
+    if llm_api_key:
+        llm_url = "https://openrouter.ai/api/v1/chat/completions"
+        headers["Authorization"] = f"Bearer {llm_api_key}"
+    else:
+        llm_url = "http://192.168.4.131:18792/infer"
+    
+    product_info = "\n".join(
+        f"PRODUCT {i}: ${p.get('price','?')} — {p['title']}\n  ASIN: {asin_from_url(p.get('affiliate_url',''))}\n  Image: {p.get('image','')}"
+        for i, p in enumerate(products)
+    )
+    prompt = f"""You are writing product descriptions for WorthItGoods.com, an honest product curation site.
+Voice: direct, slightly irreverent, no hype. Use contractions.
+Keep blurbs under 15 words and descriptions under 60 words.
+
+For each product below, generate:
+1. A one-line blurb (hook) — short, punchy, honest
+2. A genuine "why it's worth it" description (2-4 sentences)
+
+Format EXACTLY as:
+PRODUCT [i]:
+BLURB: <one line>
+DESCRIPTION: <2-4 sentences>
+
+---
+{product_info}
+"""
+    
+    try:
+        data_bytes = json.dumps({
+            "model": "deepseek/deepseek-v4-flash",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": min(500 * len(products), 4000)
+        }).encode()
+        import urllib.request
+        req = urllib.request.Request(llm_url, data=data_bytes, headers=headers, method="POST")
+        resp = urllib.request.urlopen(req, timeout=180)
+        llm_result = json.loads(resp.read())
+        response_text = llm_result["choices"][0]["message"]["content"].strip()
+        
+        # Parse responses
+        current_idx = None
+        for line in response_text.split("\n"):
+            m = re.match(r"PRODUCT\s+(\d+):", line)
+            if m:
+                current_idx = int(m.group(1))
+                continue
+            m = re.match(r"BLURB:\s*(.+)", line)
+            if m and current_idx is not None and current_idx < len(products):
+                products[current_idx]["blurb"] = m.group(1).strip()
+                continue
+            m = re.match(r"DESCRIPTION:\s*(.+)", line)
+            if m and current_idx is not None and current_idx < len(products):
+                if "description" not in products[current_idx] or "edit me" in str(products[current_idx].get("description","")):
+                    products[current_idx]["description"] = m.group(1).strip()
+        
+        updated = sum(1 for p in products if "edit me" not in str(p.get("description","")) and "edit me" not in str(p.get("blurb","")))
+        print(f"  Generated descriptions for {updated}/{len(products)} products")
+    except Exception as e:
+        print(f"  LLM description generation failed (will save with placeholders): {e}")
+    
+    # STEP 2: Write the curated batch file
     with open(OUTPUT_FILE, "w") as f:
         json.dump(products, f, indent=2)
     print(f"\nSaved {len(products)} products to {OUTPUT_FILE}")
-    print(f"Edit descriptions before merging, then: ./add_batch.sh {OUTPUT_FILE}")
+    print(f"Descriptions {'auto-generated' if updated else 'need editing'} — run ./add_batch.sh {OUTPUT_FILE} to merge")
 
 def main():
     import argparse
