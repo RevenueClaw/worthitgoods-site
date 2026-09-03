@@ -670,10 +670,10 @@ const indexHTML = `<!DOCTYPE html>
             msg.className = 'newsletter-msg';
             msg.textContent = 'Subscribing...';
             try {
-                const res = await fetch('/api/newsletter/signup', {
+                const res = await fetch('https://chipradar.io/api/worthitgoods/subscribe', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({email, preferences: prefs})
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: 'email=' + encodeURIComponent(email)
                 });
                 const data = await res.json();
                 if (data.success) {
