@@ -370,6 +370,13 @@ def curate_products(count_per_category=2, exclude_asins=None):
                 img = large.get("url","") if isinstance(large,dict) else ""
                 if not img: continue
                 score = fun_score(title,brand)
+                # Intra-batch similarity guard: skip if title tokens strongly
+                # overlap an already-found candidate (same product type from
+                # different ASIN, e.g. "6 piece kitchen set" vs "5 piece...")
+                t_tokens = frozenset(w for w in title.lower().split() if len(w) > 2)
+                is_similar = any(len(t_tokens & st) >= max(2, min(len(t_tokens), len(st)) // 2) for st in batch_titles)
+                if is_similar:
+                    continue
                 product = {
                     "title":title,"image":img,
                     "description":"(edit me - write genuine why-it-is-worth-it description)",
@@ -379,6 +386,7 @@ def curate_products(count_per_category=2, exclude_asins=None):
                 }
                 standard_candidates.append(product)
                 seen_asins.add(asin)
+                batch_titles.add(t_tokens)
                 hits += 1; new_count += 1
                 fun_indicator = f" [fun={score:.2f}]" if score >= 0.5 else ""
                 print(f"\n    + {title[:60]}{fun_indicator}")
@@ -421,23 +429,51 @@ def curate_products(count_per_category=2, exclude_asins=None):
     curated = []
     curated_asins = set()
 
+    # ── Intra-batch category diversity guard ──
+    # Max MAX_PER_CATEGORY products from any broad category per batch;
+    # prevents adjacent products like 4 OTC health items or 3 kitchen tools.
+    # Counts apply BOTH to fun products added first AND standard added second.
+    # E.g. 1 fun kitchen product leaves room for 1 more kitchen standard
+    # in the same batch (cap = 2).
+    MAX_PER_CATEGORY = 2
+    cat_counts = {}
+
+    def _broad_cat(p):
+        t = p.get("title","").lower()
+        if any(k in t for k in ['kitchen','cook','egg','scissors','herb','gadget','pan','pot','knife','spatula','bowl','measur','spoon','grater','baking','freezer']): return 'kitchen'
+        if any(k in t for k in ['benadryl','itch','motion','insect repellent','first aid','bandaid','pain','muscle','massage','tens']): return 'health'
+        if any(k in t for k in ['monitor','keyboard','tablet','charging','cable','usb','desk','mouse','lamp','plug','fan','charger','phone']): return 'desk_electronics'
+        if any(k in t for k in ['camping','wipe','hammock','cooler','lantern','flashlight','backpack','hiking','tent','paddle','survival']): return 'outdoor'
+        if any(k in t for k in ['car','automotive','truck','vehicle','dashboard','seat cover']): return 'automotive'
+        if any(k in t for k in ['pet','dog ','cat ','leash','collar','feeder']): return 'pets'
+        if any(k in t for k in ['tool','screwdriver','drill','hammer','wrench','level','saw','sander','multitool']): return 'tools'
+        if any(k in t for k in ['yoga','exercise','fitness','gym','workout','posture']): return 'fitness'
+        if any(k in t for k in ['toy','game','puzzle','craft','art','stem','educational']): return 'toys_games'
+        return 'other'
+
     for p in fun_passing[:fun_slots]:
+        cat = _broad_cat(p)
         curated.append({
             "title":p["title"],"image":p["image"],
             "description":p["description"],"blurb":p["blurb"],
             "affiliate_url":p["affiliate_url"],"asin":p["asin"],
         })
         curated_asins.add(p["asin"])
+        cat_counts[cat] = cat_counts.get(cat, 0) + 1
 
     for p in standard_passing:
         if len(curated) >= total_target: break
-        if p.get("asin") not in curated_asins:
-            curated.append({
-                "title":p["title"],"image":p["image"],
-                "description":p["description"],"blurb":p["blurb"],
-                "affiliate_url":p["affiliate_url"],"asin":p["asin"],
-            })
-            curated_asins.add(p["asin"])
+        if p.get("asin") in curated_asins: continue
+        cat = _broad_cat(p)
+        current_cat_count = cat_counts.get(cat, 0)
+        if current_cat_count >= MAX_PER_CATEGORY: continue
+        curated.append({
+            "title":p["title"],"image":p["image"],
+            "description":p["description"],"blurb":p["blurb"],
+            "affiliate_url":p["affiliate_url"],"asin":p["asin"],
+        })
+        curated_asins.add(p["asin"])
+        cat_counts[cat] = current_cat_count + 1
 
     print(f"\n  After rating filter: {len(curated)}/{total_target} products")
 
