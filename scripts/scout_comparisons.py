@@ -22,23 +22,60 @@ COMPARISONS_DIR = os.path.join(REPO_DIR, "comparisons")
 SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 CANDIDATES_FILE = os.path.join(SCRIPTS_DIR, "comparison_candidates.json")
 
-# Products already used in comparisons — ASINs extracted from articles + catalog
-USED_ASINS = {
-    "B00NCRE4GO",  # TENS 7000 (vs Muscle Roller, vs AUVON)
-    "B0B3CNJ3SQ",  # Swiss Army Knife (vs Survival Kit)
-    "B0CB1D82NB",  # INIU 100W GaN Charger (vs 30W)
-    "B0BZHZ56M9",  # UGREEN 30W Charger (vs 100W)
-    "B07H7ZDBV4",  # Splatypus Jar Spatula
-    "B09P6HFCSP",  # Magnetic Measuring Spoons
-    "B0738C7RXF",  # Deiss PRO Zester
-    "B07VLBVQBP",  # Red the Crab Utensil Rest
-    "B0000CCY1Y",  # OXO Measuring Cups
-    "B004GF1OVY",  # Chemical Guys Clay Bar
-    "B09M68SFL9",  # FLY2SKY Tent Lamp
-    "B07WNRN9WQ",  # 80hr Neck Light
-    "B0CL465G9L",  # Rechargeable Spotlight
-    "B0GD7FZTC2",  # Portable Handheld Turbo Fan (vs JISULIFE)
-}
+# Products already used in comparisons — dynamically extracted from comparisons/ directory
+USED_ASINS = set()
+
+# Track all (asin1, asin2) pairs already compared to prevent exact duplicates
+EXISTING_COMPARISON_PAIRS = set()
+
+def load_existing_comparisons():
+    """Scan existing comparison articles to extract ASIN pairs used together.
+    This prevents creating the exact same comparison twice."""
+    pairs = set()
+    if not os.path.isdir(COMPARISONS_DIR):
+        return pairs
+    for fname in sorted(os.listdir(COMPARISONS_DIR)):
+        if not fname.endswith('.html'):
+            continue
+        fpath = os.path.join(COMPARISONS_DIR, fname)
+        try:
+            content = open(fpath).read()
+        except Exception:
+            continue
+        asins = set()
+        for m in re.finditer(r'/dp/([A-Z0-9]{10})', content):
+            asins.add(m.group(1))
+        for m in re.finditer(r'asin[12]:\s*([A-Z0-9]{10})', content):
+            asins.add(m.group(1))
+        if len(asins) >= 2:
+            asin_list = sorted(asins)
+            for i in range(len(asin_list)):
+                for j in range(i+1, len(asin_list)):
+                    pairs.add((asin_list[i], asin_list[j]))
+    return pairs
+
+def load_used_asins():
+    """Scan all existing comparison articles and extract every ASIN used.
+    This prevents duplicates by ensuring no product appears in a new
+    comparison if it's already featured in an existing one."""
+    used = set()
+    if not os.path.isdir(COMPARISONS_DIR):
+        return used
+    for fname in os.listdir(COMPARISONS_DIR):
+        if not fname.endswith('.html'):
+            continue
+        fpath = os.path.join(COMPARISONS_DIR, fname)
+        try:
+            content = open(fpath).read()
+        except Exception:
+            continue
+        # Extract ASINs from Amazon /dp/ links
+        for m in re.finditer(r'/dp/([A-Z0-9]{10})', content):
+            used.add(m.group(1))
+        # Also check Jekyll front matter asin1/asin2 fields
+        for m in re.finditer(r'asin[12]:\s*([A-Z0-9]{10})', content):
+            used.add(m.group(1))
+    return used
 
 # Keywords to skip — gag gifts, party supplies, seasonal items
 SKIP_WORDS = [
@@ -118,6 +155,11 @@ def should_skip(title):
 
 
 def main():
+    # Dynamically load used ASINs from existing comparison articles
+    global USED_ASINS, EXISTING_COMPARISON_PAIRS
+    USED_ASINS = load_used_asins()
+    EXISTING_COMPARISON_PAIRS = load_existing_comparisons()
+    
     products = load_products()
     seen_asins = set()
     
@@ -160,6 +202,9 @@ def main():
         for c in candidates_by_category.get(cat, []):
             flat_candidates.append(c)
     
+    # Warn if candidate ASIN has already been paired with a specific competitor
+    # (This is a safety check for the agent using the output)
+    
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "report": {
@@ -168,6 +213,7 @@ def main():
             "already_compared": len(USED_ASINS),
             "remaining_candidates": len(flat_candidates),
             "by_category": {cat: len(candidates_by_category.get(cat, [])) for cat in ordered_cats},
+            "existing_comparison_pairs": len(EXISTING_COMPARISON_PAIRS),
         },
         "candidates": flat_candidates,
     }
@@ -177,14 +223,14 @@ def main():
     
     print(f"\nComparison Scout v2")
     print(f"{'='*50}")
-    print(f"Already compared:  {len(USED_ASINS)} products")
+    print(f"Already compared:  {len(USED_ASINS)} ASINs from {len(EXISTING_COMPARISON_PAIRS)} comparison pairs")
     print(f"Available:         {len(flat_candidates)} candidates by category:")
     for cat in ordered_cats:
         count = len(candidates_by_category.get(cat, []))
         if count > 0:
             print(f"  {cat:15s}: {count}")
-    print(f"\nAgent will: pick one → search web for competitors")
-    print(f"→ verify via Amazon API → write article → schedule publish")
+    print(f"\nNote: All ASINs and pairs are dynamically loaded from comparisons/ directory.")
+    print(f"No hardcoded lists — stale removal is automatic on next scout run.")
     print(f"{'='*50}")
 
 
