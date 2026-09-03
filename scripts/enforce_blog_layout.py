@@ -73,44 +73,102 @@ def deduplicate_cards(html):
 
 def enforce_9_cards_before_nl(html: str) -> str:
     """
-    Step 1: Deduplicate cards (remove duplicate hrefs)
-    Step 2: Ensure exactly TARGET_CARDS (9) blog cards before newsletter.
+    Ensure exactly TARGET_CARDS (9) blog cards before newsletter section,
+    WITHOUT breaking the .product-grid container structure.
+    Cards are extracted from WITHIN the grid, keeping the grid intact.
     """
+    card_tag = '<div class="product-card blog-card">'
+    nl_marker = '<!-- NEWSLETTER SIGNUP'
+    
     # Step 1: Deduplicate
     html, removed = deduplicate_cards(html)
     if removed:
         print(f"  Removed {removed} duplicate card(s)")
     
-    # Step 2: Enforce 9-card limit
-    nl_pos = html.find(NL_MARKER)
-    if nl_pos <= 0:
-        return html  # No newsletter section found
+    # Step 2: Find the product-grid container
+    grid_open = html.find('<div class="product-grid">')
+    if grid_open == -1:
+        return html
     
-    before_nl = html[:nl_pos]
-    after_nl = html[nl_pos:]
+    grid_start = grid_open + len('<div class="product-grid">')
     
-    cards_before = extract_cards(before_nl)
+    # Find grid close by matching depth
+    # Count depth from grid_start, find the matching </div>
+    depth = 1
+    grid_end = grid_start
+    while depth > 0 and grid_end < len(html):
+        if html[grid_end:grid_end+6] == '</div>':
+            depth -= 1
+            if depth == 0:
+                break
+            grid_end += 6
+        elif html[grid_end:grid_end+5] == '<div ' or html[grid_end:grid_end+5] == '<div>':
+            depth += 1
+            grid_end += 1
+        else:
+            grid_end += 1
+    
+    if depth > 0:
+        return html  # Can't find grid close
+    
+    grid_end += 6
+    grid_content = html[grid_start:grid_end - 6]
+    
+    # Step 3: Find newsletter section within grid content
+    nl_pos = grid_content.find(nl_marker)
+    if nl_pos == -1:
+        # Try finding the section tag
+        nl_pos = grid_content.find('<section id="newsletter"')
+    if nl_pos == -1:
+        return html  # No newsletter in grid
+    
+    before_nl = grid_content[:nl_pos]
+    after_nl_marker = grid_content[nl_pos:]
+    
+    # Extract cards from before_nl
+    cards_before = []
+    pos = 0
+    while True:
+        start = before_nl.find(card_tag, pos)
+        if start == -1:
+            break
+        scan = start + len(card_tag)
+        close_count = 0
+        while scan < len(before_nl) and close_count < 2:
+            if before_nl[scan:scan+6] == '</div>':
+                close_count += 1
+                scan += 6
+            else:
+                scan += 1
+        cards_before.append(before_nl[start:scan])
+        pos = scan
     
     if len(cards_before) <= TARGET_CARDS:
         return html  # Already correct
     
-    # Move overflow cards below newsletter
-    overflow_count = len(cards_before) - TARGET_CARDS
+    # Overflow cards go below newsletter
+    cards_to_keep = cards_before[:TARGET_CARDS]
+    overflow_cards = cards_before[TARGET_CARDS:]
     
-    # Find the position of the TARGET_CARDS-th card's end
-    # The first TARGET_CARDS cards stay; the rest go below newsletter
-    split_pos = cards_before[TARGET_CARDS - 1][1]  # end of the TARGET_CARDS-th card
+    # Find where the TARGET_CARDS-th card ends in the original content
+    kept_cards_html = ''.join(cards_to_keep)
+    overflow_cards_html = ''.join(overflow_cards)
     
-    # Everything after the last kept card but before newsletter goes below
-    overflow_html = before_nl[split_pos:].strip()
-    kept_before = before_nl[:split_pos]
+    # Rebuild grid content: kept cards + newsletter marker + overflow cards
+    # The overflow_cards_html goes after the newsletter section
+    # Find where newsletter section closes
+    nl_section_end = after_nl_marker.find('</section>')
+    if nl_section_end >= 0:
+        after_nl_rebuilt = (after_nl_marker[:nl_section_end + len('</section>')] +
+                          '\n' + overflow_cards_html +
+                          after_nl_marker[nl_section_end + len('</section>'):])
+    else:
+        after_nl_rebuilt = after_nl_marker + '\n' + overflow_cards_html
     
-    # Insert overflow after newsletter section close
-    after_nl = after_nl.replace('</section>', '</section>\n\n' + overflow_html + '\n', 1)
+    new_grid_content = kept_cards_html + '\n' + after_nl_rebuilt
     
-    return kept_before + after_nl
-
-
+    # Rebuild the full html
+    return html[:grid_start] + new_grid_content + html[grid_end:]
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 enforce_blog_layout.py <blog.html>")

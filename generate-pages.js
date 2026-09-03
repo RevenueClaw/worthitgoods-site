@@ -626,10 +626,9 @@ const indexHTML = `<!DOCTYPE html>
         <section id="products" class="products-section" style="padding-top: 20px;">
         <h2 class="section-title">Our Latest Worth-It Picks</h2>
         <div class="products-grid">
-            ${products.slice(0, 12).map(p => renderProduct(p)).join('')}
-        </div>
+            ${products.slice(0, 9).map(p => renderProduct(p)).join('')}
 
-        <div class="newsletter-section">
+        <div class="newsletter-section" style="grid-column: 1 / -1; max-width: none; margin: 40px 0;">
             <div class="nl-icon">✉</div>
             <h2>Never Miss a Worth-It Find</h2>
             <p>Honest picks and real comparisons, delivered to your inbox. Pick what you want to receive.</p>
@@ -651,8 +650,7 @@ const indexHTML = `<!DOCTYPE html>
             <div class="nl-guarantee">No spam · Unsubscribe with 1 click · Hand-picked only</div>
         </div>
 
-        <div class="products-grid">
-            ${products.slice(12).map(p => renderProduct(p)).join('')}
+            ${products.slice(9).map(p => renderProduct(p)).join('')}
         </div>
     </section>
 
