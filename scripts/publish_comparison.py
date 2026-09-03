@@ -103,6 +103,43 @@ def main():
             print(f"    Existing: {card_h3[:80]}...")
     # === END TOPIC CHECK ===
 
+    # === DUPLICATE COMPARISON CHECK ===
+    # Extract ASINs from this article and check if any pair has already
+    # been compared in an existing article (regardless of file name).
+    article_asins = set(re.findall(r'/dp/([A-Z0-9]{10})(?:\?|/|$)', article_html))
+    if len(article_asins) >= 2:
+        article_pairs = set()
+        asin_list = sorted(list(article_asins))
+        for i in range(len(asin_list)):
+            for j in range(i+1, len(asin_list)):
+                article_pairs.add((asin_list[i], asin_list[j]))
+
+        # Scan existing comparisons for matching pairs
+        existing_pairs = set()
+        if os.path.isdir('comparisons'):
+            for fname in os.listdir('comparisons'):
+                if not fname.endswith('.html'): continue
+                fpath = os.path.join('comparisons', fname)
+                try:
+                    ec = open(fpath).read()
+                except:
+                    continue
+                existing_asins = set(re.findall(r'/dp/([A-Z0-9]{10})(?:\?|/|$)', ec))
+                if len(existing_asins) >= 2:
+                    e_list = sorted(list(existing_asins))
+                    for i in range(len(e_list)):
+                        for j in range(i+1, len(e_list)):
+                            existing_pairs.add((e_list[i], e_list[j]))
+
+        for pair in article_pairs:
+            if pair in existing_pairs:
+                a1, a2 = pair
+                print(f"FATAL: ASIN pair ({a1}, {a2}) already compared in an existing article!")
+                print(f"  This exact comparison already exists. Remove the new article")
+                print(f"  or replace one product with a different alternative.")
+                sys.exit(1)
+        print(f"✅ No duplicate ASIN pairs found — {len(article_asins)} ASINs all unique to existing comparisons")
+
     # === PRE-PUBLISH VALIDATION ===
     # Validate all Amazon ASINs resolve (not 404)
     asins = re.findall(r'/dp/([A-Z0-9]{10})(?:\?|/|$)', article_html)
