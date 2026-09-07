@@ -269,6 +269,7 @@ def curate_products(count_per_category=2, exclude_asins=None):
     # exclude_asins lets a top-up iteration skip products already curated
     # in an earlier attempt (dedup across iterations, not just vs the site)
     seen_asins = set(exclude_asins or [])
+    batch_titles = set()
     active_categories = get_active_categories(active_count=9)
     total_target = count_per_category * len(active_categories)
 
