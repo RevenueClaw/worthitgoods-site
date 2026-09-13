@@ -239,25 +239,26 @@ const indexHTML = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${products.slice(0, 3).map(p => cleanTitle(p.title)).join(' • ')} — WorthItGoods</title>
+    <title>WorthIt Goods — Products Actually Worth Buying</title>
+    <meta name="description" content="Honest, hand-picked products that actually deliver. No junk, no hype. Just gear worth your money.">
     <link rel="canonical" href="https://www.worthitgoods.com">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="${products.slice(0, 2).map(p => cleanTitle(p.title)).join(' & ')} — WorthItGoods">
-    <meta property="og:description" content="${products.slice(0, 4).map(p => p.blurb || p.description.substring(0, 80)).join(' | ')}">
-    <meta property="og:image" content="${products[0].image}">
-    <meta property="og:image:width" content="500">
-    <meta property="og:image:height" content="500">
-    <meta property="og:image:alt" content="${cleanTitle(products[0].title)} — featured worth-it pick on WorthItGoods">
+    <meta property="og:title" content="WorthIt Goods — Products Actually Worth Buying">
+    <meta property="og:description" content="Honest, hand-picked products that actually deliver. No junk, no hype. Just gear worth your money.">
+    <meta property="og:image" content="https://www.worthitgoods.com/assets/og-image-v2.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WorthItGoods — products actually worth buying">
     <meta property="og:url" content="https://www.worthitgoods.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="WorthItGoods">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WorthItGoods — Hand-picked Products Actually Worth Buying">
-    <meta name="twitter:description" content="${products.slice(0, 3).map(p => cleanTitle(p.title)).join(', ')} and more worth-it finds.">
-    <meta name="twitter:image" content="${products[0].image}">
+    <meta name="twitter:title" content="WorthIt Goods — Products Actually Worth Buying">
+    <meta name="twitter:description" content="Honest, hand-picked products that actually deliver. No junk, no hype.">
+    <meta name="twitter:image" content="https://www.worthitgoods.com/assets/og-image-v2.jpg">
 
     ${generateProductSchema(products)}
 
