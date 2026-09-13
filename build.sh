@@ -98,6 +98,9 @@ cp blog/custom-2026-08-02-outdoor-trail.html _site/blog/2026-08-02-outdoor-trail
 # Blog overlay: 2026-08-30-edc-pocket-gear
 cp blog/custom-2026-08-30-edc-pocket-gear.html _site/blog/2026-08-30-edc-pocket-gear.html
 
+# Blog overlay: 2026-09-13-gadgets-geekery
+cp blog/custom-2026-09-13-gadgets-geekery.html _site/blog/2026-09-13-gadgets-geekery.html
+
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
