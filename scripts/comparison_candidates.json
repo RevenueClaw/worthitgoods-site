@@ -1,29 +1,22 @@
 {
-  "generated_at": "2026-09-03T20:44:43.977751+00:00",
+  "generated_at": "2026-09-15T14:55:22.542081+00:00",
   "report": {
-    "total_products": 350,
-    "unique_asins_found": 180,
-    "already_compared": 147,
-    "remaining_candidates": 14,
+    "total_products": 366,
+    "unique_asins_found": 200,
+    "already_compared": 167,
+    "remaining_candidates": 13,
     "by_category": {
       "kitchen": 3,
-      "car care": 4,
-      "electronics": 4,
-      "outdoor": 2,
+      "car care": 3,
+      "electronics": 6,
+      "outdoor": 1,
       "health": 0,
-      "tools": 1,
+      "tools": 0,
       "home": 0
     },
-    "existing_comparison_pairs": 85
+    "existing_comparison_pairs": 96
   },
   "candidates": [
-    {
-      "asin": "B094NTCSDJ",
-      "title": "LuoCoCo Cute Egg Separator, Ceramics Vomiting Chicken Egg Yolk White Separator, Practical Household Small Egg Filter Spl",
-      "price": 7.99,
-      "category": "kitchen",
-      "url": "https://www.amazon.com/dp/B094NTCSDJ?tag=worthitgoods-20"
-    },
     {
       "asin": "B0DT41BHVF",
       "title": "Radicaln Marble Salt Cellar with Lid 4\"",
@@ -37,6 +30,13 @@
       "price": 13.99,
       "category": "kitchen",
       "url": "https://www.amazon.com/dp/B07ML2RT85?coliid=I140KMMMXQFD1U&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=33dcb3449ea794350dd26158db5d18f3&language=en_US&ref_=as_li_ss_tl"
+    },
+    {
+      "asin": "B0BRNDZBDY",
+      "title": "Kitchen Gadgets Set 6 Pieces, Outdoor Camping Glamping Essentials",
+      "price": 11.58,
+      "category": "kitchen",
+      "url": "https://www.amazon.com/dp/B0BRNDZBDY?tag=worthitgoods-20"
     },
     {
       "asin": "B09P8WCCLN",
@@ -58,13 +58,6 @@
       "price": null,
       "category": "car care",
       "url": "https://www.amazon.com/dp/B08H57SN7G?coliid=IUHG6FRS3A9ZS&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a5feb8c7040823704354458c807c162f&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
-      "asin": "B07SHJVK4G",
-      "title": "CERAKOTE\u00ae Ceramic Trim Coat Kit",
-      "price": 16.88,
-      "category": "car care",
-      "url": "https://www.amazon.com/dp/B07SHJVK4G?coliid=I3947PA4SHTWOD&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=4c7be6c9631a924389689f58bc789546&language=en_US&ref_=as_li_ss_tl"
     },
     {
       "asin": "B0B19V28GN",
@@ -95,25 +88,25 @@
       "url": "https://www.amazon.com/Apple-Cellular-Smartwatch-Stainless-Fitness/dp/B0CHX3B968?pd_rd_w=Rnz0S&content-id=amzn1.sym.c2ce25da-4d17-4f37-af20-bde98a9f0bcd%3Aamzn1.symc.d3391730-f670-41da-8b34-61787b3edb82&pf_rd_p=c2ce25da-4d17-4f37-af20-bde98a9f0bcd&pf_rd_r=786YDFCJY6JV1YH8M9MA&pd_rd_wg=jcjiq&pd_rd_r=74faf68d-d384-4113-a9dc-4ce49eb48834&pd_rd_i=B0CHX3B968&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=31ff3326803abe8d84479544945ed47a&language=en_US&ref_=as_li_ss_tl"
     },
     {
-      "asin": "B0FTZ5M84W",
-      "title": "CoreMuse Camping Water Container 2 Gallon Collapsible Water Jug with Spout - Reusable Plastic Flasks, Foldable Empty Gal",
-      "price": 6.25,
-      "category": "outdoor",
-      "url": "https://www.amazon.com/dp/B0FTZ5M84W?tag=worthitgoods-20"
+      "asin": "B0F1ZY5QNL",
+      "title": "iCasso Beige Keyboard Mat 35.4\"x15.7\", Desk Protector for Workspace",
+      "price": 28.99,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0F1ZY5QNL?tag=worthitgoods-20"
     },
     {
-      "asin": "B07Z8WHZWV",
-      "title": "14-in-1 Survival Kit",
-      "price": 29.99,
-      "category": "outdoor",
-      "url": "https://www.amazon.com/dp/B07Z8WHZWV?coliid=ICOVFOXOH5MMO&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=6ac226f8312dfdeabb9a25e9c8b26ba2&language=en_US&ref_=as_li_ss_tl"
+      "asin": "B0GK93SXHV",
+      "title": "Lamicall Gooseneck Tablet Holder for Bed, Unique Tapered Flexible Arm",
+      "price": 25.97,
+      "category": "electronics",
+      "url": "https://www.amazon.com/dp/B0GK93SXHV?tag=worthitgoods-20"
     },
     {
-      "asin": "B091Y7VC3T",
-      "title": "6 Tools IN ONE Versatile Multitool Pen",
-      "price": null,
-      "category": "tools",
-      "url": "https://www.amazon.com/dp/B091Y7VC3T?coliid=I23S924OLZW0OL&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=b3d9152094c80ba32417b51eae9f4540&language=en_US&ref_=as_li_ss_tl"
+      "asin": "B0FB971CN3",
+      "title": "Camping Essentials - Body Wipes for Camping Adults Bathing No Rinse - 50 XL Deodorant Bathing Shower Wipes For Men Women",
+      "price": 11.69,
+      "category": "outdoor",
+      "url": "https://www.amazon.com/dp/B0FB971CN3?tag=worthitgoods-20"
     }
   ]
 }
