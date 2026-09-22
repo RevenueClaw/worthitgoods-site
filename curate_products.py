@@ -221,7 +221,7 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20):
             if hits >= fun_target: break
             print(f"    '{query}'...", end=" ", flush=True)
             try:
-                results = api.search_items(query, item_count=item_count)
+                results = api.search_items(query)
             except Exception as e:
                 print(f"error: {e}")
                 continue
@@ -349,7 +349,7 @@ def curate_products(count_per_category=2, exclude_asins=None):
             if hits >= count_per_category or len(standard_candidates) >= standard_needed: break
             print(f"  '{query}'...", end=" ", flush=True)
             try:
-                results = api.search_items(query, item_count=20)
+                results = api.search_items(query)
             except Exception as e:
                 print(f"error: {e}")
                 continue
