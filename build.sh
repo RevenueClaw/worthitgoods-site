@@ -101,6 +101,9 @@ cp blog/custom-2026-08-30-edc-pocket-gear.html _site/blog/2026-08-30-edc-pocket-
 # Blog overlay: 2026-09-13-gadgets-geekery
 cp blog/custom-2026-09-13-gadgets-geekery.html _site/blog/2026-09-13-gadgets-geekery.html
 
+# Blog overlay: 2026-09-27-kitchen-essentials
+cp blog/custom-2026-09-27-kitchen-essentials.html _site/blog/2026-09-27-kitchen-essentials.html
+
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
