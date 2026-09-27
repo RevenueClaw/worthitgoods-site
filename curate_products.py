@@ -38,46 +38,209 @@ FUN_MIN_STAR_RATING = 4.3
 FUN_MIN_REVIEW_COUNT = 100
 
 CURATION_QUERIES = {
-    "kitchen": ["unique kitchen gadget","clever kitchen tool","silicone kitchen accessory","baking tool","chef recommended kitchen","kitchen organization","food storage solution"],
-    "home": ["smart home gadget","home organization","desk organization","phone stand","cable management","home office setup"],
-    "tools": ["home improvement tool","DIY gadget","multi tool","tool organizer","garage organization"],
-    "outdoor": ["camping essential","outdoor gear","hiking accessory","backyard game","travel gadget"],
+    "kitchen": ["unique kitchen gadget","clever kitchen tool","silicone kitchen accessory","baking tool","chef recommended kitchen","kitchen organization","food storage solution","kitchen tool you did not know"],
+    "home": ["smart home gadget","home organization","desk organization","phone stand","cable management","home office setup","clever home solution"],
+    "tools": ["home improvement tool","DIY gadget","multi tool","tool organizer","garage organization","quality hand tool professional"],
+    "outdoor": ["camping essential","outdoor gear","hiking accessory","backyard game","travel gadget","compact outdoor gear unique"],
     "lifestyle": ["everyday carry","EDC gear","travel essential","phone accessory","desk organizer"],
     "automotive": ["vehicle interior organizer premium","car detailing tool professional","truck accessory useful","car tech gadget","vehicle organization system","auto interior upgrade","car seat organizer","garage storage solution"],
-    "pets": ["clever pet product","innovative pet toy","interactive pet feeder","travel pet accessory","pet grooming tool","unique cat product","puzzle toy dog","pet travel essential","dog enrichment toy"],
+    "pets": ["clever pet product","innovative pet toy","interactive pet feeder","travel pet accessory","pet grooming tool","unique cat product","puzzle toy dog","pet travel essential","dog enrichment toy","cat window perch unique"],
     "fitness_recovery": ["muscle recovery tool","posture corrector innovative","massage gun compact","balance trainer home","resistance band system","exercise gadget unique","fitness accessory clever","stretching device"],
     "desk_gaming": ["ergonomic desk accessory unique","cable management clever","monitor arm premium","gaming desk organizer","standing desk accessory","wrist rest ergonomic","desk lamp innovative","mouse pad large premium"],
+    "tech_gadgets": ["USB hub premium design","wireless charger unique stand","bluetooth gadget clever useful","desk toy functional adult","tech organizer compact travel","eInk display gadget unique","mini projector portable personal","digital gadget minimal design"],
+    "audio_video": ["bluetooth speaker unique design","headphone stand premium material","microphone accessory clever","webcam cover premium slider","earbuds case unique leather","cable organizer audio premium","dac portable high resolution","vinyl record accessory cleaning"],
+    "lighting_decor": ["LED lamp unique sculptural","smart light bulb non standard","night light kids adults unique","string light clever outdoor","desk lamp architect design","reading light clip on premium","mood light color changing creative","sensor light closet cabinet"],
 }
 
 FUN_QUERIES = {
-    "unique_gadgets": ["cool unique gadget","clever invention","ingenious gadget","award winning gadget","innovative product","genius design","smart invention","reddot design award","IF design award"],
-    "clever_kitchen": ["genius kitchen gadget","clever kitchen invention","unique kitchen tool","chef secret weapon","kitchen must have"],
-    "fun_tech": ["cool tech gadget","unique tech accessory","AI gadget","AI accessory","smart home fun","retro premium gadget","nostalgia tech","fun desk toy","DIY electronics kit","STEM kit"],
-    "quirky_home": ["unique home decor","conversation piece home","unique decorative gift","interesting home accessory","creative wall art","unique lamp"],
-    "interesting_edc": ["cool EDC","unique every day carry","premium EDC","interesting pocket tool","titanium gadget","innovative multi tool","EDC gear unique"],
-    "outdoor_fun": ["camping gadget cool","hiking innovation","unique outdoor gear","backyard fun game","travel unique gadget","portable hammock"],
-    "retro_nostalgia": ["retro gadget","retro premium gadget","nostalgic tech","vintage style modern","throwback game classic","classic design reimagined","retro gaming accessory","premium retro gaming","vintage inspired modern"],
+    "tech_gadgets_fun": [
+        "cool desk toy",
+        "fun tech gadget gift",
+        "bluetooth gadget clever",
+        "USB gadget unique small",
+        "desk accessory cool gadget",
+        "solar powered gadget portable",
+        "smart home gadget unique",
+        "LED gadget creative desk",
+        "kitchen gadget cool unique",
+        "camping gadget useful small",
+    ],
+    "edc_interesting": [
+        "titanium EDC pen",
+        "pocket tool multitool",
+        "minimalist wallet RFID",
+        "keychain gadget useful",
+        "EDC gear unique gift",
+        "pocket organizer leather",
+        "multitool award design",
+        "titanium carry flashlight",
+    ],
+    "retro_vintage_nostalgia": [
+        "retro bluetooth speaker",
+        "vintage style desk lamp",
+        "mechanical keyboard retro",
+        "classic design modern tech",
+        "retro game console mini",
+        "cassette tape bluetooth",
+        "throwback gadget gift",
+        "vinyl record accessory",
+    ],
+    "kitchen_curious": [
+        "unique kitchen tool",
+        "clever kitchen gadget",
+        "silicone kitchen helper",
+        "baking gadget cool",
+        "chef recommended gadget",
+        "magnetic kitchen tool",
+        "space saving kitchen gadget",
+        "not your typical kitchen tool",
+    ],
+    "home_quirky": [
+        "unique home decor gadget",
+        "conversation piece home",
+        "interesting wall art",
+        "smart home unique gadget",
+        "LED lamp desk decoration",
+        "multifunctional home gadget",
+        "unusual decorative accessory",
+        "handmade artisan decor",
+    ],
+    "outdoor_adventure": [
+        "camping essential unique",
+        "outdoor gear cool gadget",
+        "travel gadget compact",
+        "hiking accessory useful",
+        "portable hammock travel",
+        "backpack gadget organizer",
+        "emergency gear multiuse",
+        "solar camping light",
+    ],
+    "car_tech_gear": [
+        "car gadget useful cool",
+        "vehicle organizer clever",
+        "car accessory tech unique",
+        "dashboard gadget magnetic",
+        "car interior accessory premium",
+        "garage tool organizer",
+        "road trip essential gadget",
+        "automotive gadget small",
+    ],
+    "pet_lover_gadgets": [
+        "cool pet gadget",
+        "dog toy interactive",
+        "cat accessory clever",
+        "smart pet feeder",
+        "pet grooming tool",
+        "travel pet gadget",
+        "cat window perch",
+        "dog enrichment toy",
+    ],
+    "health_fitness_gadget": [
+        "massage gun mini",
+        "posture corrector comfortable",
+        "fitness tracker gadget",
+        "resistance band set",
+        "yoga accessory unique",
+        "gadget for back pain",
+        "balance trainer compact",
+        "exercise gadget home gym",
+    ],
 }
 
-FUN_KEYWORDS = ["innovative","patented","unique","award","genius","clever","ingenious","unusual","creative","one-of-a-kind","conversation","novel","original","reusable","multifunctional","2-in-1","3-in-1","multi-functional","titanium","premium","handmade","artisan","compact","portable","transforms","converts","folds","collapsible","solar","rechargeable","bamboo","ceramic","copper","solid wood","leather","magnetic","glass","stainless","retro","vintage","modern","minimalist","DIY","kit","build","assemble","custom","modular","adjustable","universal","compatible","smart","app","bluetooth","LED","sensor","award-winning","as seen on","shark tank","dragon's den","kickstarter","indiegogo","upgrade","next generation","version 2"]
+FUN_KEYWORDS = ["innovative","patented","unique","award","genius","clever","ingenious","unusual","creative","one-of-a-kind","conversation","novel","original","reusable","multifunctional","2-in-1","3-in-1","multi-functional","titanium","premium","handmade","artisan","compact","portable","transforms","converts","folds","collapsible","solar","rechargeable","bamboo","ceramic","copper","solid wood","leather","magnetic","glass","stainless","retro","vintage","modern","minimalist","DIY","kit","build","assemble","custom","modular","adjustable","universal","compatible","smart","app","bluetooth","LED","sensor","award-winning","as seen on","shark tank","dragon's den","kickstarter","indiegogo","upgrade","next generation","version 2",
+    "solid wood","walnut","oak","maple","aluminum","brass","copper","silicone","carbon fiber","marble","stone","resin","wool","canvas",
+    "patented","mechanical","analog","gear","spring","tension","magnet","suction","portable","folding","collapsible","magnetic",
+    "heirloom","generation","built to last","lifetime","timeless","classic","throwback","nostalgic","retro design","heritage",
+    "creative","imaginative","whimsical","playful","fun","delight","surprising","unexpected","charming"]
 
 # Additional fun query tiers for retry — broader angles to find fun products
 # when the primary queries don't yield anything that passes the rating threshold
 FUN_QUERIES_TIER_2 = {
-    "gifts_more": ["unique gift under 50","cool gadget gift","impressive present","gift for gadget lover","birthday gift unique"],
-    "popular_trending": ["trending gadget","viral amazon product","popular cool find","tiktok gadget","instagram worthy home"],
-    "useful_problems": ["actually useful gadget","problem solving tool","life hack product","everyday problem solved","smart solution home"],
-    "interesting_tech": ["bluetooth gadget cool","smart home unique","LED creative product","tech accessory fun","desk gadget useful"],
+    "gifts_fun_under_50": [
+        "gift for gadget lover",
+        "unique gift under 50",
+        "impressive present gadget",
+        "birthday gift unique cool",
+        "white elephant gift useful",
+        "gift for dad gadget",
+        "secret santa gadget unique",
+    ],
+    "trending_viral_products": [
+        "trending gadget viral",
+        "shark tank product gadget",
+        "instagram worthy gadget",
+        "viral tiktok gadget amazon",
+        "product hunt gadget amazon",
+        "popular unique find",
+    ],
+    "problem_solver_clever": [
+        "actually useful gadget",
+        "life hack product",
+        "problem solving tool clever",
+        "smart solution annoying problem",
+        "everyday object redesigned",
+        "multifunctional product space saving",
+    ],
+    "diy_maker_stem": [
+        "DIY electronics kit",
+        "raspberry pi accessory",
+        "STEM kit for adults",
+        "maker gift gadget",
+        "soldering kit beginner",
+        "electronics project kit",
+        "3D printer accessory",
+    ],
 }
 
 FUN_QUERIES_TIER_3 = {
-    "top_rated_fun": ["highly rated unique","amazon choice gadget","editor pick fun","4.5 star unique","top rated cool"],
-    "creative_design": ["creative design product","award winning design","ergonomic innovative","space saving clever","minimalist design cool"],
-    "hobby_fun": ["DIY kit cool","STEM toy adult","board game unique","hobby gift interesting","makers tool"],
-    "kitchen_odd": ["innovative kitchen tool","highly rated kitchen gadget","kitchen tool unusual","cooking innovation","oddly satisfying kitchen"],
+    "niche_desk_office": [
+        "cable management desk",
+        "wrist rest ergonomic",
+        "wireless charger stand",
+        "desk lamp LED",
+        "pen holder unique",
+        "mouse pad premium large",
+        "monitor riser stand",
+    ],
+    "bathroom_grooming": [
+        "electric razor travel",
+        "bathroom organizer space saving",
+        "shower speaker waterproof",
+        "electric toothbrush travel",
+        "nail care kit",
+        "hair clipper cordless",
+        "grooming bag travel",
+    ],
+    "garden_outdoor_living": [
+        "self watering planter",
+        "indoor garden kit",
+        "garden tool ergonomic",
+        "smart plant sensor",
+        "LED grow light",
+        "outdoor string light",
+        "plant pot decorative",
+    ],
+    "audio_video_gadget": [
+        "portable bluetooth speaker unique",
+        "headphone stand premium",
+        "cable organizer travel",
+        "webcam cover slider",
+        "turntable vinyl accessory",
+        "USB DAC portable",
+        "projector mini portable",
+    ],
+    "travel_adventure": [
+        "packing cube organizer",
+        "travel adapter universal",
+        "portable espresso maker",
+        "travel towel quick dry",
+        "luggage tag tracker",
+        "portable water bottle",
+        "travel jewelry case",
+    ],
 }
 
-FUN_BORING_PATTERNS = [r"basic",r"standard",r"ordinary",r"plain",r"simple",r"generic",r"replacement",r"refill",r"bulk",r"value pack",r"economy"]
+FUN_BORING_PATTERNS = [r"basic",r"standard",r"ordinary",r"plain",r"simple",r"generic",r"replacement",r"refill",r"bulk",r"value pack",r"economy",r"set of \d",r"pack of \d",r"\d+ pack",r"combo pack",r"variety pack"]
 
 def fun_score(title, brand=""):
     t = title.lower()
@@ -86,15 +249,18 @@ def fun_score(title, brand=""):
         if kw in t: score += 0.12
     for pat in FUN_BORING_PATTERNS:
         if re.search(pat, t): score -= 0.15
-    if re.search(r"\b(patent|award|design|invention|shark tank|dragon|kickstarter|indiegogo)\b", t, re.I): score += 0.25
+    if re.search(r"\b(patent|award|design|invention|shark tank|dragon|kickstarter|indiegogo|reddot|iF design|good design)\b", t, re.I): score += 0.30
     if re.search(r"\b(2-in-1|3-in-1|4-in-1|multi|universal|adjustable|folding|collapsible|rechargeable|solar)\b", t, re.I): score += 0.10
-    if re.search(r"\b(titanium|bamboo|copper|solid wood|ceramic|leather|carbon fiber|marble)\b", t, re.I): score += 0.08
-    if re.search(r"\b(kit|DIY|build|assemble|custom)\b", t, re.I): score += 0.08
-    if re.search(r"\b(bluetooth|smart|app|sensor|LED|digital)\b", t, re.I): score += 0.06
+    if re.search(r"\b(titanium|bamboo|copper|solid wood|ceramic|leather|carbon fiber|marble|walnut|oak|brass|aluminum|wool|canvas)\b", t, re.I): score += 0.10
+    if re.search(r"\b(kit|DIY|build|assemble|custom|maker|craft)\b", t, re.I): score += 0.08
+    if re.search(r"\b(bluetooth|smart|app|sensor|LED|digital|eink|analog|mechanical)\b", t, re.I): score += 0.06
     if re.search(r"\b(retro|vintage|nostalgia|classic|modern|minimalist|unique)\b", t, re.I): score += 0.06
+    if re.search(r"\b(heirloom|lifetime|timeless|heritage|generation)\b", t, re.I): score += 0.10
+    if re.search(r"\b(whimsical|playful|delight|surprising|unexpected|charming)\b", t, re.I): score += 0.08
+    if re.search(r"\b(shark tank|dragon's den|as seen on tv|kickstarter|indiegogo|funded)\b", t, re.I): score += 0.20
     return max(0.0, min(1.0, score))
 
-EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+"]
+EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+",r"Windows\s+11",r"Microsoft\s+Office",r"TurboTax",r"QuickBooks"]
 BORING_KEYWORDS = ["batteries","light bulb","paper towel","toilet paper","trash bag","cleaning supply","laundry","diaper","baby wipe","dog food","cat food","vitamin","supplement","ink cartridge","toner","filter replacement"]
 
 EXISTING_CACHE = None
@@ -205,13 +371,110 @@ def scrape_batch(candidates, label, fetcher_path):
     print(f"    Got {total_ok}/{len(need)} ratings for {label}")
     return len(need)
 
-def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20):
+def generate_diverse_queries(api, fun_queries, max_new=12):
+    """Use LLM to generate fresh, creative PAAPI search queries for hidden-gem discovery.
+
+    Each week this produces new query angles so the pipeline doesn't stagnate on
+    the same search terms. Queries are designed to surface non-obvious products
+    on Amazon (not the front-page bestsellers). Falls back gracefully if LLM is
+    unreachable — the static queries still run.
+
+    Returns augmented dict of fun_queries (mutates the passed-in dict).
+    """
+    llm_api_key = os.environ.get("OPENROUTER_API_KEY", os.environ.get("LLM_API_KEY", ""))
+    if not llm_api_key:
+        print("  LLM query gen: no API key, skipping")
+        return fun_queries
+
+    existing = []
+    for cat, qs in fun_queries.items():
+        existing.append(f"- {cat}: {', '.join(str(q) for q in qs[:3])}...")
+    context = "\n".join(existing)
+
+    prompt = f"""You are a product scout for WorthItGoods.com, an affiliate site that finds hidden-gem products on Amazon.
+
+Your job is to generate SEARCH QUERIES for Amazon's product database. CRITICAL RULE: The queries MUST be short, natural, conversational phrases that a REAL HUMAN would type into Amazon's search bar.
+
+EXAMPLES OF GOOD queries: "cool desk toy", "unique kitchen gadget", "bluetooth speaker small", "titanium wallet", "camping essential gift"
+
+EXAMPLES OF BAD queries (too abstract): "multifunctional home object", "patented innovation desk" -- these return no results on Amazon.
+
+EXISTING search categories and sample queries:
+{context}
+
+Generate {max_new} fresh Amazon PAAPI search queries. Each query must be:
+- 2-4 words, natural conversational language
+- Something a shopper would actually type into Amazon
+- Likely to surface interesting products from small/unique brands
+- Avoiding bestseller/popular/wishlist/front-page terms
+- Covering DIFFERENT categories than the existing ones
+
+Return ONLY a JSON object where keys are category names and values are arrays of 1-3 search query strings per category.
+Generate 4-6 categories total.
+
+Example correct output:
+{{\n  "gaming_gadgets": ["mini retro game console", "mechanical keyboard under 100"],\n  "home_gadgets": ["smart plug voice control", "LED desk lamp touch"],\n  "travel_essentials": ["packable daypack", "travel adapter universal"]\n}}
+
+Return ONLY valid JSON, no explanation, no markdown."""
+
+    payload = json.dumps({
+        "model": "deepseek/deepseek-v4-flash",
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 1000,
+        "temperature": 0.9,
+        "response_format": {"type": "json_object"}
+    }).encode()
+
+    try:
+        import urllib.request
+        req = urllib.request.Request(
+            "https://openrouter.ai/api/v1/chat/completions",
+            data=payload,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {llm_api_key}",
+            },
+            method="POST",
+        )
+        resp = urllib.request.urlopen(req, timeout=30)
+        result = json.loads(resp.read())
+        raw = result["choices"][0]["message"]["content"].strip()
+
+        try:
+            new_queries = json.loads(raw)
+        except json.JSONDecodeError:
+            import re as _re
+            m = _re.search(r'\{.*\}', raw, _re.DOTALL)
+            if m:
+                new_queries = json.loads(m.group())
+            else:
+                raise
+
+        if isinstance(new_queries, dict):
+            added = 0
+            for cat, qs in new_queries.items():
+                if isinstance(qs, list) and len(qs) > 0:
+                    clean = [str(q).strip() for q in qs if isinstance(q, str) and len(q.strip()) > 5]
+                    if clean:
+                        cat_key = f"llm_{cat}"
+                        fun_queries[cat_key] = clean[:4]
+                        added += len(clean)
+                        for q in clean:
+                            print(f"  [LLM] : {cat_key}: {q}")
+            print(f"  LLM query gen: added {added} new queries across {len(new_queries)} categories")
+    except Exception as e:
+        print(f"  LLM query gen: {type(e).__name__}: {e} (will use static queries)")
+
+    return fun_queries
+
+
+def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=30):
     """Search a tier of fun queries and collect candidates.
     
     Returns list of candidate product dicts with _fun_score set.
     Updates seen_asins in-place to avoid re-searching same ASINs.
-    item_count controls how many PAAPI results to fetch per query (default 20
-    since many get filtered out by dedup, image, and exclusion checks).
+    item_count controls how many PAAPI results to fetch per query (default 30
+    to improve odds of finding hidden gems through the rating gate, image, and exclusion checks).
     """
     candidates = []
     for category, queries in tier_queries.items():
@@ -279,6 +542,16 @@ def curate_products(count_per_category=2, exclude_asins=None):
     print(f"Active categories: {', '.join(active_categories)}")
     print(f"{'='*60}")
 
+    # Phase 0: LLM query diversity — generate fresh search angles each week
+    # This augments the static FUN_QUERIES with LLM-generated queries that
+    # target hidden-gem products. Falls back gracefully if LLM unavailable.
+    print(f"\n{'─'*60}\n  PHASE 0: LLM Query Diversity Generation\n{'─'*60}")
+    try:
+        generate_diverse_queries(api, FUN_QUERIES)
+    except Exception as e:
+        print(f"  LLM query diversity skipped: {e}")
+    print()
+
     # Phase 1: Fun products (3 tiers, ALL run every time)
     # Each tier uses different search queries to find fun products.
     # No early exit: we search all 3 tiers and pool every candidate that
@@ -296,7 +569,7 @@ def curate_products(count_per_category=2, exclude_asins=None):
 
     for tier_label, tier_queries in fun_query_tiers:
         print(f"\n  \u203a {tier_label}")
-        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=20)
+        tier_candidates = search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=30)
         if not tier_candidates:
             print(f"  No candidates found in {tier_label}")
             continue

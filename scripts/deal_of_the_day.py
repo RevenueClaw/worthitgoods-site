@@ -245,8 +245,8 @@ def post_to_mastodon(text, img_bytes, img_mime):
 
 def post_to_telegram(text, img_bytes, img_mime):
     """Post to Telegram channel. Returns True on success."""
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    channel = os.environ.get("TELEGRAM_CHANNEL_ID", "")
+    token = os.environ.get("TELEGRAM_WIG_BOT_TOKEN", "")
+    channel = os.environ.get("TELEGRAM_WIG_CHANNEL_ID", "")
     if not token or not channel:
         print("  ⚠️ Telegram not configured (missing env vars)")
         return False
