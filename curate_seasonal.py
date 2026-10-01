@@ -449,7 +449,7 @@ def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
             break
         print(f"    '{query}'...", end=" ", flush=True)
         try:
-            results = api.search_items(query, item_count=10)
+            results = api.search_items(query, item_page=1)
         except Exception as e:
             print(f"error: {e}")
             continue
@@ -533,7 +533,7 @@ def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
             
             print(f"    '{query}'...", end=" ", flush=True)
             try:
-                results = api.search_items(query, item_count=10)
+                results = api.search_items(query, item_page=1)
             except Exception as e:
                 print(f"error: {e}")
                 continue
