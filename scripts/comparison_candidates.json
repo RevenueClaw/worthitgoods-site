@@ -1,29 +1,22 @@
 {
-  "generated_at": "2026-09-15T14:55:22.542081+00:00",
+  "generated_at": "2026-10-01T14:00:10.185069+00:00",
   "report": {
     "total_products": 366,
-    "unique_asins_found": 200,
-    "already_compared": 167,
-    "remaining_candidates": 13,
+    "unique_asins_found": 212,
+    "already_compared": 186,
+    "remaining_candidates": 9,
     "by_category": {
-      "kitchen": 3,
+      "kitchen": 2,
       "car care": 3,
-      "electronics": 6,
+      "electronics": 3,
       "outdoor": 1,
       "health": 0,
       "tools": 0,
       "home": 0
     },
-    "existing_comparison_pairs": 96
+    "existing_comparison_pairs": 107
   },
   "candidates": [
-    {
-      "asin": "B0DT41BHVF",
-      "title": "Radicaln Marble Salt Cellar with Lid 4\"",
-      "price": 24.85,
-      "category": "kitchen",
-      "url": "https://www.amazon.com/dp/B0DT41BHVF?coliid=IWX7PXZVYXTK2&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=7ce38f1e5a91f253e8f3b3d8ef42c038&language=en_US&ref_=as_li_ss_tl"
-    },
     {
       "asin": "B07ML2RT85",
       "title": "Hey, Have You Tried Cheese Dish Towel",
@@ -60,32 +53,11 @@
       "url": "https://www.amazon.com/dp/B08H57SN7G?coliid=IUHG6FRS3A9ZS&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a5feb8c7040823704354458c807c162f&language=en_US&ref_=as_li_ss_tl"
     },
     {
-      "asin": "B0B19V28GN",
-      "title": "Topstache Leather Multitool Sheath,EDC Belt Organizer for Work and Daily Use,Leatherman Sheath,EDC Pocket Organizer for ",
-      "price": 22.99,
-      "category": "electronics",
-      "url": "https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20"
-    },
-    {
       "asin": "B09B52QBDJ",
       "title": "RETROFLAG Station Case for Raspberry Pi",
       "price": null,
       "category": "electronics",
       "url": "https://www.amazon.com/dp/B09B52QBDJ?coliid=I2Y71KL6QRBU7R&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=d08fe8cd8d871cd6aa2191c6f094db05&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
-      "asin": "B07CHWB1JP",
-      "title": "Star Wars: Darth Vader - Original Mobile Phone & Gaming Controller Holder",
-      "price": 28.0,
-      "category": "electronics",
-      "url": "https://www.amazon.com/dp/B07CHWB1JP?coliid=I1L3SNUGF4MN4Y&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=ccea96aade691718f1c8374edd220758&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
-      "asin": "B0CHX3B968",
-      "title": "Apple Watch Series 9",
-      "price": null,
-      "category": "electronics",
-      "url": "https://www.amazon.com/Apple-Cellular-Smartwatch-Stainless-Fitness/dp/B0CHX3B968?pd_rd_w=Rnz0S&content-id=amzn1.sym.c2ce25da-4d17-4f37-af20-bde98a9f0bcd%3Aamzn1.symc.d3391730-f670-41da-8b34-61787b3edb82&pf_rd_p=c2ce25da-4d17-4f37-af20-bde98a9f0bcd&pf_rd_r=786YDFCJY6JV1YH8M9MA&pd_rd_wg=jcjiq&pd_rd_r=74faf68d-d384-4113-a9dc-4ce49eb48834&pd_rd_i=B0CHX3B968&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=31ff3326803abe8d84479544945ed47a&language=en_US&ref_=as_li_ss_tl"
     },
     {
       "asin": "B0F1ZY5QNL",

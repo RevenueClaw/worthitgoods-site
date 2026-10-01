@@ -119,6 +119,7 @@ def main():
         if os.path.isdir('comparisons'):
             for fname in os.listdir('comparisons'):
                 if not fname.endswith('.html'): continue
+                if fname == f'{slug}.html': continue  # skip self
                 fpath = os.path.join('comparisons', fname)
                 try:
                     ec = open(fpath).read()
