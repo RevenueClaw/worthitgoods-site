@@ -195,7 +195,7 @@ blockquote {
   <p>The Topstache sheath is handmade from 100% crazy horse leather — a full-grain, wax-impregnated leather that starts stiff and gradually molds to your multitool's exact shape. What makes it special is the capacity: this isn't just a tool holster, it's a complete EDC organizer. An elastic band on one side holds extension kits, pen knives, or a thin flashlight. A secondary loop can accommodate a larger clipped blade. The front pocket swallows a tactical pen or car key. And the main compartment fits any full-size multitool — Leatherman Wave, Rebar, Surge, Charge, Free P2, and even the burly Leatherman Signal.</p>
   <p>It mounts via a 1.8-inch belt loop with an extra stabilizer strap in the back that prevents the "bunch up" effect that plagues cheaper sheaths. The pre-shaped leather holds its form, making it easy to slide tools in and out one-handed after a short break-in period.</p>
   <p><strong>Why it won:</strong> At $22.99, it matches or beats the Maxpedition's price while offering vastly more carry capacity with genuine leather construction that improves with age. It's a buy-it-for-life piece that works with jeans, chinos, or work pants — not just tactical gear.</p>
-  <a href="https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a>
+  <a href="https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a><br><a href="#" onclick="paOpen('B0B19V28GN', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 <div class="article-product-card competitor">
@@ -306,7 +306,7 @@ blockquote {
 <p>That said, if you genuinely need a waterproof, ultralight, ruggedized single-tool sheath for outdoor work or tactical use, the Maxpedition Single Sheath remains a solid choice — just know you're trading capacity and character for those specific properties.</p>
 
 <div style="text-align:center;margin:2.5rem 0;">
-  <a href="https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy Topstache Leather Multitool Sheath — $22.99</a>
+  <a href="https://www.amazon.com/dp/B0B19V28GN?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy Topstache Leather Multitool Sheath — $22.99</a><br><a href="#" onclick="paOpen('B0B19V28GN', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 </div>
@@ -316,5 +316,54 @@ blockquote {
   <p><a href="../" style="color:#14b8a6;">Home</a> · <a href="../#products" style="color:#14b8a6;">All Picks</a> · <a href="../privacy.html" style="color:#14b8a6;">Privacy</a></p>
 </footer>
 
+
+<script>
+function paOpen(asin, title) {
+  var m = document.getElementById('paModal');
+  if (!m) return;
+  m.style.display = 'flex';
+  document.getElementById('paAsin').value = asin;
+  document.getElementById('paTitle').value = title;
+  document.getElementById('paMsg').textContent = '';
+}
+function paClose() { document.getElementById('paModal').style.display = 'none'; }
+document.addEventListener('DOMContentLoaded', function() {
+  var f = document.getElementById('paForm');
+  if (!f) return;
+  f.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var email = document.getElementById('paEmail').value.trim();
+    var asin = document.getElementById('paAsin').value;
+    var title = document.getElementById('paTitle').value;
+    var msg = document.getElementById('paMsg');
+    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
+    msg.textContent = 'Subscribing...'; msg.style.color='#666';
+    try {
+      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, asin: asin, product_title: title})
+      });
+      var d = await res.json();
+      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
+      msg.style.color = d.success ? 'green' : 'red';
+      if (d.success) document.getElementById('paEmail').value = '';
+    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
+  });
+});
+</script>
+<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
+    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
+    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
+    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
+    <form id="paForm">
+      <input type="hidden" id="paAsin">
+      <input type="hidden" id="paTitle">
+      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
+      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
+      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

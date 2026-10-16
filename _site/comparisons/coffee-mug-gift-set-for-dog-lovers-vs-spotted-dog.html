@@ -94,7 +94,7 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
   <p>This 2-pack includes one "Dog Mom" mug and one "Dog Dad" mug — each holding 14oz of your favorite hot beverage. The mugs are made from premium heavyweight ceramic with a smooth, glossy finish that feels substantial in hand. The print is crisp, full-color, and dishwasher-safe — we ran them through 30+ dishwasher cycles and saw zero fading or peeling. The 14oz capacity is noticeably more generous than standard 11-12oz mugs, which matters for anyone who doesn't want to get up for a refill during their morning coffee.</p>
   <p>The handmade quality is evident in the feel — these aren't thin, mass-produced promotional mugs. The walls are thick enough to keep coffee hot longer while staying comfortable to hold without a handle sleeve. The gift presentation is simple but clean: each mug is individually wrapped, and the set works beautifully as a paired gift for dog-loving couples or two separate gifts for Dog Mom and Dog Dad. At $38.95 for two large mugs, the per-mug cost is about $19.48 — premium, but justified by the build quality and capacity.</p>
   <p><strong>Why it won:</strong> Larger 14oz capacity, thicker ceramic construction, excellent print durability, and the most direct emotional connection for dog parents. The "Dog Mom / Dog Dad" labeling doubles down on the gift angle — it's basically designed to be given. The print quality and dishwasher durability are best-in-class.</p>
-  <a href="https://www.amazon.com/dp/B0CK1519D2?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a>
+  <a href="https://www.amazon.com/dp/B0CK1519D2?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a><br><a href="#" onclick="paOpen('B0CK1519D2', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 <div class="article-product-card competitor">
@@ -185,7 +185,7 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
 <p>But the Coffee Mug Gift Set for Dog Lovers wins the comparison because it makes a <em>statement</em>. Giving a "Dog Mom" mug says something specific and loving. The quality backs it up — bigger mugs, better ceramic, print that lasts. It's the kind of gift that gets used daily for years and makes the recipient smile every single morning. That $38.95 investment in daily joy is, by any measure, worth it.</p>
 
 <div style="text-align:center;margin:2.5rem 0;">
-  <a href="https://www.amazon.com/dp/B0CK1519D2?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy Coffee Mug Gift Set for Dog Lovers — $38.95</a>
+  <a href="https://www.amazon.com/dp/B0CK1519D2?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy Coffee Mug Gift Set for Dog Lovers — $38.95</a><br><a href="#" onclick="paOpen('B0CK1519D2', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 </div>
@@ -195,5 +195,54 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
   <p><a href="../" style="color:#14b8a6;">Home</a> · <a href="../#products" style="color:#14b8a6;">All Picks</a> · <a href="../privacy.html" style="color:#14b8a6;">Privacy</a></p>
 </footer>
 
+
+<script>
+function paOpen(asin, title) {
+  var m = document.getElementById('paModal');
+  if (!m) return;
+  m.style.display = 'flex';
+  document.getElementById('paAsin').value = asin;
+  document.getElementById('paTitle').value = title;
+  document.getElementById('paMsg').textContent = '';
+}
+function paClose() { document.getElementById('paModal').style.display = 'none'; }
+document.addEventListener('DOMContentLoaded', function() {
+  var f = document.getElementById('paForm');
+  if (!f) return;
+  f.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var email = document.getElementById('paEmail').value.trim();
+    var asin = document.getElementById('paAsin').value;
+    var title = document.getElementById('paTitle').value;
+    var msg = document.getElementById('paMsg');
+    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
+    msg.textContent = 'Subscribing...'; msg.style.color='#666';
+    try {
+      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, asin: asin, product_title: title})
+      });
+      var d = await res.json();
+      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
+      msg.style.color = d.success ? 'green' : 'red';
+      if (d.success) document.getElementById('paEmail').value = '';
+    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
+  });
+});
+</script>
+<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
+    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
+    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
+    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
+    <form id="paForm">
+      <input type="hidden" id="paAsin">
+      <input type="hidden" id="paTitle">
+      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
+      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
+      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>
