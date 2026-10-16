@@ -90,7 +90,7 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
   <p class="price-tag">$19.49</p>
   <p>The TOSY Flying Disc is a genuinely impressive piece of technology. It packs <strong>108 individually addressable RGB LEDs</strong> that can display 16.7 million different colors simultaneously — you can cycle through modes, set it to pulse, strobe, or fade, and even set a timer. A 30-minute USB-C charge delivers around 1,000 throws or 90 minutes of continuous play. The motion sensor automatically turns the lights on when you pick it up and off when idle. At 175g, it meets PDGA regulation weight for professional ultimate discs — meaning it flies straight, cuts through wind, and is consistent throw after throw. It's fully waterproof and comes with a rubberized rim for comfortable grip. TIME magazine named it one of the Best Inventions of 2024.</p>
   <p><strong>Why it won:</strong> The TOSY delivers 10x the features at just $4.50 more than the Flashflight. The light show is genuinely jaw-dropping — people will stop and stare. The USB-C rechargeability and professional-grade flight dynamics put it in a different class entirely.</p>
-  <a href="https://www.amazon.com/dp/B0C3ZTKRGX?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a>
+  <a href="https://www.amazon.com/dp/B0C3ZTKRGX?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Check Price on Amazon →</a><br><a href="#" onclick="paOpen('B0C3ZTKRGX', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 <div class="article-product-card competitor">
@@ -174,7 +174,7 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
 <p>The TOSY Flying Disc is the best LED disc we've tested by a wide margin. The visual spectacle is next-level, the USB-C rechargeability solves the battery hassle permanently, and the professional-grade flight dynamics make it a legitimate ultimate disc that happens to light up. At $19.49, it's an easy recommendation for anyone who spends time outdoors after dark.</p>
 
 <div style="text-align:center;margin:2.5rem 0;">
-  <a href="https://www.amazon.com/dp/B0C3ZTKRGX?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy TOSY Flying Disc — $19.49</a>
+  <a href="https://www.amazon.com/dp/B0C3ZTKRGX?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener" style="font-size:1.1rem;padding:14px 32px;">Buy TOSY Flying Disc — $19.49</a><br><a href="#" onclick="paOpen('B0C3ZTKRGX', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 </div>
@@ -184,5 +184,54 @@ blockquote { border-left: 4px solid #e5e7eb; padding: 8px 16px; margin: 1.25rem 
   <p><a href="../" style="color:#14b8a6;">Home</a> · <a href="../#products" style="color:#14b8a6;">All Picks</a> · <a href="../privacy.html" style="color:#14b8a6;">Privacy</a></p>
 </footer>
 
+
+<script>
+function paOpen(asin, title) {
+  var m = document.getElementById('paModal');
+  if (!m) return;
+  m.style.display = 'flex';
+  document.getElementById('paAsin').value = asin;
+  document.getElementById('paTitle').value = title;
+  document.getElementById('paMsg').textContent = '';
+}
+function paClose() { document.getElementById('paModal').style.display = 'none'; }
+document.addEventListener('DOMContentLoaded', function() {
+  var f = document.getElementById('paForm');
+  if (!f) return;
+  f.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var email = document.getElementById('paEmail').value.trim();
+    var asin = document.getElementById('paAsin').value;
+    var title = document.getElementById('paTitle').value;
+    var msg = document.getElementById('paMsg');
+    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
+    msg.textContent = 'Subscribing...'; msg.style.color='#666';
+    try {
+      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, asin: asin, product_title: title})
+      });
+      var d = await res.json();
+      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
+      msg.style.color = d.success ? 'green' : 'red';
+      if (d.success) document.getElementById('paEmail').value = '';
+    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
+  });
+});
+</script>
+<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
+    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
+    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
+    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
+    <form id="paForm">
+      <input type="hidden" id="paAsin">
+      <input type="hidden" id="paTitle">
+      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
+      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
+      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

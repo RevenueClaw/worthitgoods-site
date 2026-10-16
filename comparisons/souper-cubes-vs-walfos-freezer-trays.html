@@ -110,7 +110,7 @@ body { background: #f8f9fa; }
   <p>Four trays give you 6 total cups of freezing capacity — enough for a batch of soup or a week's worth of sauce portions. The lids are snug enough for stacking but not quite as secure as Souper Cubes' snap-on design. The silicone is noticeably thinner, which means it's easier to flex but also less durable over the long haul. After about a year of regular use, some users report the silicone starting to stiffen or crack at the corners.</p>
   <p>That said, for $25 you're getting a functional meal prep tool that does 80% of what Souper Cubes does at 32% of the price. For someone just getting into freezer meal prep, that's a compelling entry point.</p>
   <p><strong>Key specs:</strong> 4-piece set (1.5 cup each), food-grade silicone, snap-on lids, BPA-free, dishwasher-safe, freezer-safe.</p>
-  <a href="https://www.amazon.com/dp/B0DD6XY98K?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Buy Walfos Trays — ~$25.00 →</a>
+  <a href="https://www.amazon.com/dp/B0DD6XY98K?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Buy Walfos Trays — ~$25.00 →</a><br><a href="#" onclick="paOpen('B0DD6XY98K', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 <h2>Head-to-Head Comparison</h2>
@@ -242,7 +242,7 @@ body { background: #f8f9fa; }
 
 <div style="display:flex;gap:16px;flex-wrap:wrap;margin:2rem 0;">
 <a href="https://www.amazon.com/dp/B08L7LGRC4?tag=worthitgoods-20" class="article-cta green" target="_blank" rel="noopener">Buy Souper Cubes — $78.99 →</a>
-<a href="https://www.amazon.com/dp/B0DD6XY98K?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Buy Walfos Trays — ~$25.00 →</a>
+<a href="https://www.amazon.com/dp/B0DD6XY98K?tag=worthitgoods-20" class="article-cta" target="_blank" rel="noopener">Buy Walfos Trays — ~$25.00 →</a><br><a href="#" onclick="paOpen('B0DD6XY98K', 'This product');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-top:4px;"><span>🔔</span> Get Price Alert</a>
 </div>
 
 <div style="margin: 2rem 0; padding: 20px; background: #f3f4f6; border-radius: 12px;">
@@ -258,5 +258,54 @@ body { background: #f8f9fa; }
   <p><a href="../" style="color:#14b8a6;">Home</a> · <a href="../#products" style="color:#14b8a6;">All Picks</a> · <a href="../privacy.html" style="color:#14b8a6;">Privacy</a></p>
 </footer>
 
+
+<script>
+function paOpen(asin, title) {
+  var m = document.getElementById('paModal');
+  if (!m) return;
+  m.style.display = 'flex';
+  document.getElementById('paAsin').value = asin;
+  document.getElementById('paTitle').value = title;
+  document.getElementById('paMsg').textContent = '';
+}
+function paClose() { document.getElementById('paModal').style.display = 'none'; }
+document.addEventListener('DOMContentLoaded', function() {
+  var f = document.getElementById('paForm');
+  if (!f) return;
+  f.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var email = document.getElementById('paEmail').value.trim();
+    var asin = document.getElementById('paAsin').value;
+    var title = document.getElementById('paTitle').value;
+    var msg = document.getElementById('paMsg');
+    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
+    msg.textContent = 'Subscribing...'; msg.style.color='#666';
+    try {
+      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, asin: asin, product_title: title})
+      });
+      var d = await res.json();
+      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
+      msg.style.color = d.success ? 'green' : 'red';
+      if (d.success) document.getElementById('paEmail').value = '';
+    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
+  });
+});
+</script>
+<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
+    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
+    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
+    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
+    <form id="paForm">
+      <input type="hidden" id="paAsin">
+      <input type="hidden" id="paTitle">
+      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
+      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
+      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>
