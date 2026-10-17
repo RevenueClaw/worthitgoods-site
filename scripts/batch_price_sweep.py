@@ -154,6 +154,20 @@ def main():
             print(f"    Removed {d}")
     print(f"  Cleaned up {removed} duplicate files")
 
+    # ── Publish slim price JSON for browser-side price sync ──
+    # Comparison pages bake prices into text at build time; this JSON lets
+    # price-sync.js keep the displayed figure honest between rebuilds.
+    try:
+        emit = __import__('subprocess').run(
+            ['python3', 'scripts/emit_live_prices.py'],
+            cwd=str(REPO_DIR),
+            capture_output=True, text=True, timeout=90
+        )
+        line = (emit.stdout.strip() or emit.stderr.strip()).splitlines()
+        print(f"    Price JSON: {line[-1][:160] if line else 'no output'}")
+    except Exception as e:
+        print(f"    WARNING: price JSON emit failed: {e}")
+
     # ── Rebuild site with fresh prices ──
     print(f"\n  Rebuilding site with fresh prices...")
     try:
