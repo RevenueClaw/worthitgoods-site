@@ -26,7 +26,7 @@ if _env_path.exists():
             os.environ.setdefault(_k.strip(), _v)
 
 LLM_API_KEY = os.environ.get("OPENROUTER_API_KEY", os.environ.get("LLM_API_KEY", ""))
-LLM_MODEL = "deepseek/deepseek-v4-flash"
+LLM_MODEL = "deepseek/deepseek-v4.1-flash"
 
 def call_llm(prompt, max_tokens=300, temperature=0.7):
     """Call DeepSeek V4 Flash via OpenRouter."""

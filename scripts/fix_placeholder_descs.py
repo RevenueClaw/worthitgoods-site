@@ -8,7 +8,7 @@ DATA_FILE = os.path.join(REPO_DIR, "data", "sample_products.json")
 def call_llm(prompt, max_tokens=2000):
     api_key = os.environ.get("LLM_API_KEY", "")
     data_bytes = json.dumps({
-        "model": "deepseek/deepseek-v4-flash",
+        "model": "deepseek/deepseek-v4.1-flash",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": max_tokens
     }).encode()

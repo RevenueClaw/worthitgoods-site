@@ -418,7 +418,7 @@ Example correct output:
 Return ONLY valid JSON, no explanation, no markdown."""
 
     payload = json.dumps({
-        "model": "deepseek/deepseek-v4-flash",
+        "model": "deepseek/deepseek-v4.1-flash",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 1000,
         "temperature": 0.9,
@@ -821,7 +821,7 @@ DESCRIPTION: <2-4 sentences>
     
     try:
         data_bytes = json.dumps({
-            "model": "deepseek/deepseek-v4-flash",
+            "model": "deepseek/deepseek-v4.1-flash",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": min(500 * len(products), 4000)
         }).encode()
