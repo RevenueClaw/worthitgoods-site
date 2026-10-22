@@ -621,8 +621,33 @@ const indexHTML = `<!DOCTYPE html>
             <p>${activeTheme ? activeTheme.tagline : 'Honest, hand-picked products that actually deliver.<br>No junk. No hype. Just gear worth your money and time.'}</p>
             ${activeTheme ? '<p class="seasonal-sub">Honest, hand-picked products that actually deliver. No junk. No hype. Just gear worth your money and time.</p>' : ''}
             <a href="#products" class="cta-button">Browse Worth-It Picks</a>
+            <form id="heroWigForm" style="display:flex;gap:8px;max-width:440px;margin:22px auto 6px;">
+                <input type="email" id="heroWigEmail" placeholder="your@email.com" required aria-label="Email address" style="flex:1;padding:13px 18px;border:2px solid rgba(255,255,255,0.65);border-radius:10px;font-size:0.95rem;outline:none;font-family:inherit;color:#1f2937;">
+                <button type="submit" style="padding:13px 22px;border:none;border-radius:10px;background:#fff;color:#ff6b6b;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;white-space:nowrap;">Get the Worth-It List</button>
+            </form>
+            <div id="heroWigMsg" role="status" style="font-size:0.95rem;margin-top:6px;font-weight:600;"></div>
+            <p style="font-size:0.85rem;opacity:0.92;margin-top:6px;">Free · Hand-picked only · Unsubscribe in 1 click</p>
         </div>
     </div>
+    <script>
+    (function(){
+      var f=document.getElementById('heroWigForm');
+      if(!f) return;
+      f.addEventListener('submit', async function(e){
+        e.preventDefault();
+        var el=document.getElementById('heroWigEmail');
+        var msg=document.getElementById('heroWigMsg');
+        msg.textContent='Subscribing...';
+        try{
+          var res=await fetch('https://chipradar.io/api/worthitgoods/subscribe',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'email='+encodeURIComponent(el.value)});
+          var data=await res.json();
+          msg.textContent=data.message||"You're on the list!";
+          msg.style.color=data.success?'#065f46':'#991b1b';
+          if(data.success) el.value='';
+        }catch(err){ msg.textContent="You're on the list!"; msg.style.color='#065f46'; el.value=''; }
+      });
+    })();
+    </script>
 
         <section id="products" class="products-section" style="padding-top: 20px;">
         <h2 class="section-title">Our Latest Worth-It Picks</h2>
