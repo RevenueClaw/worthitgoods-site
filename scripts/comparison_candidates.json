@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-10-01T14:00:10.185069+00:00",
+  "generated_at": "2026-10-21T06:17:16.496391+00:00",
   "report": {
-    "total_products": 366,
-    "unique_asins_found": 212,
-    "already_compared": 186,
-    "remaining_candidates": 9,
+    "total_products": 372,
+    "unique_asins_found": 227,
+    "already_compared": 206,
+    "remaining_candidates": 7,
     "by_category": {
       "kitchen": 2,
-      "car care": 3,
+      "car care": 2,
       "electronics": 3,
-      "outdoor": 1,
+      "outdoor": 0,
       "health": 0,
       "tools": 0,
       "home": 0
     },
-    "existing_comparison_pairs": 107
+    "existing_comparison_pairs": 118
   },
   "candidates": [
     {
@@ -37,13 +37,6 @@
       "price": 29.99,
       "category": "car care",
       "url": "https://www.amazon.com/dp/B09P8WCCLN?coliid=I1XPE190M8W79H&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=cf66afb9f00f79b8739f4fe573c4ece2&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
-      "asin": "B01C96AFWU",
-      "title": "Car Emergency Kit",
-      "price": null,
-      "category": "car care",
-      "url": "https://www.amazon.com/dp/B01C96AFWU?coliid=I3QU20NJ9HTEOQ&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=0254cb77de3c219781a124e7f2e14978&language=en_US&ref_=as_li_ss_tl"
     },
     {
       "asin": "B08H57SN7G",
@@ -72,13 +65,6 @@
       "price": 25.97,
       "category": "electronics",
       "url": "https://www.amazon.com/dp/B0GK93SXHV?tag=worthitgoods-20"
-    },
-    {
-      "asin": "B0FB971CN3",
-      "title": "Camping Essentials - Body Wipes for Camping Adults Bathing No Rinse - 50 XL Deodorant Bathing Shower Wipes For Men Women",
-      "price": 11.69,
-      "category": "outdoor",
-      "url": "https://www.amazon.com/dp/B0FB971CN3?tag=worthitgoods-20"
     }
   ]
 }
