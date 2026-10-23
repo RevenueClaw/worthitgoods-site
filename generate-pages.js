@@ -650,21 +650,21 @@ const indexHTML = `<!DOCTYPE html>
     </script>
 
     <!-- CATEGORY NAVIGATION -->
-    <section style="padding:20px 20px 10px; max-width:1200px; margin:0 auto;">
-        <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
-            <a href="/categories/kitchen/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🍳 Kitchen</a>
-            <a href="/categories/electronics/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🔌 Electronics</a>
-            <a href="/categories/automotive/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🚗 Automotive</a>
-            <a href="/categories/outdoor/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🏕️ Outdoor</a>
-            <a href="/categories/health/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">💊 Health</a>
-            <a href="/categories/home-decor/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🏠 Home</a>
-            <a href="/categories/tools/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🔧 Tools</a>
-            <a href="/categories/toys-games/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🎮 Toys</a>
-            <a href="/categories/pets/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🐾 Pets</a>
-            <a href="/categories/gifts/" style="padding:8px 16px; background:#1a1a2e; color:#e5e5e5; border-radius:20px; text-decoration:none; font-size:13px; border:1px solid #2a2a3e;">🎁 Gifts</a>
-            <a href="/categories/" style="padding:8px 16px; background:#f59e0b; color:#000; border-radius:20px; text-decoration:none; font-size:13px; font-weight:600;">All Categories →</a>
+    <div style="max-width:1200px; margin:0 auto; padding:16px 20px 0;">
+        <div style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">
+            <a href="/categories/kitchen/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🍳 Kitchen</a>
+            <a href="/categories/electronics/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🔌 Electronics</a>
+            <a href="/categories/automotive/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🚗 Automotive</a>
+            <a href="/categories/outdoor/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🏕️ Outdoor</a>
+            <a href="/categories/health/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">💊 Health</a>
+            <a href="/categories/home-decor/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🏠 Home</a>
+            <a href="/categories/tools/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🔧 Tools</a>
+            <a href="/categories/toys-games/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🎮 Toys</a>
+            <a href="/categories/pets/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🐾 Pets</a>
+            <a href="/categories/gifts/" style="padding:9px 18px; background:#fff; color:#374151; border-radius:50px; text-decoration:none; font-size:13px; font-weight:500; border:1.5px solid #e5e7eb; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff9a56';this.style.color='#ff6b6b';" onmouseout="this.style.borderColor='#e5e7eb';this.style.color='#374151';">🎁 Gifts</a>
+            <a href="/categories/" style="padding:9px 20px; background:linear-gradient(135deg,#ff9a56,#ff6b6b); color:#fff; border-radius:50px; text-decoration:none; font-size:13px; font-weight:600; box-shadow:0 2px 8px rgba(255,107,107,0.25);">All Categories →</a>
         </div>
-    </section>
+    </div>
 
         <section id="products" class="products-section" style="padding-top: 20px;">
         <h2 class="section-title">Our Latest Worth-It Picks</h2>
