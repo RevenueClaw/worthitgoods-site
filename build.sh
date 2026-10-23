@@ -85,6 +85,12 @@ cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 # Copy comparison pages
 cp -r comparisons _site/comparisons/
 
+# Copy category pages
+if [ -d categories ]; then
+  mkdir -p _site/categories
+  cp -r categories/. _site/categories/
+fi
+
 # Copy best-of roundup index (programmatic category pages)
 if [ -d best-of ]; then
   mkdir -p _site/best-of
