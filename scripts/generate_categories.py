@@ -180,14 +180,32 @@ for cat_key, products in sorted(categories.items(), key=lambda x: -len(x[1])):
 print(f"Built {pages_built} category pages")
 
 # Build category index page (all categories)
+cat_meta = {
+    "kitchen-dining": "🍳", "electronics": "🔌", "automotive": "🚗", "outdoor": "🏕️",
+    "health": "💊", "home-decor": "🏠", "tools": "🔧", "toys-games": "🎮",
+    "pets": "🐾", "gifts-novelty": "🎁", "office": "📎", "clothing-accessories": "👕", "other": "📦"
+}
 cat_links = ""
 for cat_key in sorted(categories.keys(), key=lambda x: -len(categories[x])):
     if len(categories[cat_key]) < 2: continue
     meta = CATEGORY_META.get(cat_key, {})
+    products = categories[cat_key]
+    # Use first product's image as category hero, with emoji fallback
+    hero_img = ""
+    for p in products:
+        img = p.get("image", "")
+        if img and img.startswith("http"):
+            hero_img = img
+            break
+    emoji = cat_meta.get(cat_key, "📦")
+    img_html = f'<div class="cat-img"><img src="{hero_img}" alt="{meta.get("name", cat_key)}" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>{emoji}</span>&apos;"></div>' if hero_img else f'<div class="cat-img cat-img-fallback"><span class="cat-emoji">{emoji}</span></div>'
     cat_links += f"""        <a href="/categories/{meta.get('slug', cat_key)}/" class="cat-card">
-            <h3>{meta.get('name', cat_key.replace('-',' ').title())}</h3>
-            <p>{meta.get('desc', '')}</p>
-            <span class="count">{len(categories[cat_key])} products</span>
+            {img_html}
+            <div class="cat-text">
+                <h3>{meta.get('name', cat_key.replace('-',' ').title())}</h3>
+                <p>{meta.get('desc', '')}</p>
+                <span class="count">{len(products)} products</span>
+            </div>
         </a>\n"""
 
 index_html = f"""<!DOCTYPE html>
@@ -211,12 +229,17 @@ index_html = f"""<!DOCTYPE html>
         @keyframes gradient-shift {{ 0% {{ background-position: 0% 50%; }} 50% {{ background-position: 100% 50%; }} 100% {{ background-position: 0% 50%; }} }}
         .hero h1 {{ font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }}
         .hero p {{ font-size: 1.1rem; opacity: 0.92; max-width: 500px; margin: 0 auto; }}
-        .cat-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 30px 0; }}
-        .cat-card {{ background: #fff; padding: 24px; border-radius: 12px; text-decoration: none; color: #1f2937; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03); transition: transform .2s, box-shadow .2s; border: 1px solid #f3f4f6; }}
+        .cat-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 30px 0; }}
+        .cat-card {{ background: #fff; border-radius: 12px; text-decoration: none; color: #1f2937; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03); transition: transform .2s, box-shadow .2s; border: 1px solid #f3f4f6; overflow: hidden; display: flex; }}
         .cat-card:hover {{ transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #ff9a56; }}
-        .cat-card h3 {{ margin-bottom: 8px; font-size: 1.05rem; font-weight: 600; }}
-        .cat-card p {{ color: #6b7280; font-size: .88rem; margin-bottom: 10px; line-height: 1.4; }}
-        .cat-card .count {{ font-size: .8rem; color: #16a34a; font-weight: 600; }}
+        .cat-img {{ width: 100px; min-height: 100px; background: #f9fafb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
+        .cat-img img {{ width: 80px; height: 80px; object-fit: contain; }}
+        .cat-img-fallback {{ background: linear-gradient(135deg, #fff7ed, #fef2f2); }}
+        .cat-emoji {{ font-size: 2.4rem; line-height: 1; }}
+        .cat-text {{ padding: 16px; flex: 1; }}
+        .cat-text h3 {{ margin-bottom: 6px; font-size: 1rem; font-weight: 600; }}
+        .cat-text p {{ color: #6b7280; font-size: .83rem; margin-bottom: 8px; line-height: 1.4; }}
+        .cat-text .count {{ font-size: .78rem; color: #16a34a; font-weight: 600; }}
         .footer {{ margin-top: 40px; padding: 30px 0; border-top: 1px solid #e5e7eb; font-size: 13px; color: #9ca3af; text-align: center; }}
         .footer a {{ color: #ff6b6b; text-decoration: none; }}
     </style>

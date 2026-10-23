@@ -19,12 +19,17 @@
         @keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
         .hero p { font-size: 1.1rem; opacity: 0.92; max-width: 500px; margin: 0 auto; }
-        .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 30px 0; }
-        .cat-card { background: #fff; padding: 24px; border-radius: 12px; text-decoration: none; color: #1f2937; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03); transition: transform .2s, box-shadow .2s; border: 1px solid #f3f4f6; }
+        .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 30px 0; }
+        .cat-card { background: #fff; border-radius: 12px; text-decoration: none; color: #1f2937; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03); transition: transform .2s, box-shadow .2s; border: 1px solid #f3f4f6; overflow: hidden; display: flex; }
         .cat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #ff9a56; }
-        .cat-card h3 { margin-bottom: 8px; font-size: 1.05rem; font-weight: 600; }
-        .cat-card p { color: #6b7280; font-size: .88rem; margin-bottom: 10px; line-height: 1.4; }
-        .cat-card .count { font-size: .8rem; color: #16a34a; font-weight: 600; }
+        .cat-img { width: 100px; min-height: 100px; background: #f9fafb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .cat-img img { width: 80px; height: 80px; object-fit: contain; }
+        .cat-img-fallback { background: linear-gradient(135deg, #fff7ed, #fef2f2); }
+        .cat-emoji { font-size: 2.4rem; line-height: 1; }
+        .cat-text { padding: 16px; flex: 1; }
+        .cat-text h3 { margin-bottom: 6px; font-size: 1rem; font-weight: 600; }
+        .cat-text p { color: #6b7280; font-size: .83rem; margin-bottom: 8px; line-height: 1.4; }
+        .cat-text .count { font-size: .78rem; color: #16a34a; font-weight: 600; }
         .footer { margin-top: 40px; padding: 30px 0; border-top: 1px solid #e5e7eb; font-size: 13px; color: #9ca3af; text-align: center; }
         .footer a { color: #ff6b6b; text-decoration: none; }
     </style>
@@ -35,64 +40,100 @@
     <div class="container">
         <div class="cat-grid">
         <a href="/categories/general/" class="cat-card">
-            <h3>General</h3>
-            <p>Useful products that don't fit neatly into one category — but still worth it.</p>
-            <span class="count">35 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/51YW-jZHgjL._SL500_.jpg" alt="General" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>📦</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>General</h3>
+                <p>Useful products that don't fit neatly into one category — but still worth it.</p>
+                <span class="count">35 products</span>
+            </div>
         </a>
         <a href="/categories/kitchen/" class="cat-card">
-            <h3>Kitchen & Dining</h3>
-            <p>Cooking gadgets, drinkware, and clever kitchen tools that make mealtime better.</p>
-            <span class="count">32 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/51tXEs69Q5L._SL500_.jpg" alt="Kitchen & Dining" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🍳</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Kitchen & Dining</h3>
+                <p>Cooking gadgets, drinkware, and clever kitchen tools that make mealtime better.</p>
+                <span class="count">32 products</span>
+            </div>
         </a>
         <a href="/categories/electronics/" class="cat-card">
-            <h3>Electronics & Gadgets</h3>
-            <p>Desk accessories, charging solutions, and clever electronics for work and play.</p>
-            <span class="count">16 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/41+3PcFwzIL._SL500_.jpg" alt="Electronics & Gadgets" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🔌</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Electronics & Gadgets</h3>
+                <p>Desk accessories, charging solutions, and clever electronics for work and play.</p>
+                <span class="count">16 products</span>
+            </div>
         </a>
         <a href="/categories/health/" class="cat-card">
-            <h3>Health & Personal Care</h3>
-            <p>First aid, pain relief, insect repellent, and wellness products that actually work.</p>
-            <span class="count">11 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/41BXuhGwdQL._SL500_.jpg" alt="Health & Personal Care" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>💊</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Health & Personal Care</h3>
+                <p>First aid, pain relief, insect repellent, and wellness products that actually work.</p>
+                <span class="count">11 products</span>
+            </div>
         </a>
         <a href="/categories/automotive/" class="cat-card">
-            <h3>Automotive & Car Care</h3>
-            <p>Car accessories, emergency kits, cleaning supplies, and tools for your vehicle.</p>
-            <span class="count">11 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/51KYxgaGwWL._SL500_.jpg" alt="Automotive & Car Care" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🚗</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Automotive & Car Care</h3>
+                <p>Car accessories, emergency kits, cleaning supplies, and tools for your vehicle.</p>
+                <span class="count">11 products</span>
+            </div>
         </a>
         <a href="/categories/toys-games/" class="cat-card">
-            <h3>Toys & Games</h3>
-            <p>Creative toys, puzzles, art supplies, and fun activities for all ages.</p>
-            <span class="count">11 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/51EsA-WI-CL._SL500_.jpg" alt="Toys & Games" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🎮</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Toys & Games</h3>
+                <p>Creative toys, puzzles, art supplies, and fun activities for all ages.</p>
+                <span class="count">11 products</span>
+            </div>
         </a>
         <a href="/categories/outdoor/" class="cat-card">
-            <h3>Outdoor & Camping</h3>
-            <p>Camping gear, hiking essentials, and outdoor living products for adventurers.</p>
-            <span class="count">10 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/41onamOfOWL._SL500_.jpg" alt="Outdoor & Camping" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🏕️</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Outdoor & Camping</h3>
+                <p>Camping gear, hiking essentials, and outdoor living products for adventurers.</p>
+                <span class="count">10 products</span>
+            </div>
         </a>
         <a href="/categories/clothing/" class="cat-card">
-            <h3>Clothing & Accessories</h3>
-            <p>Socks, hats, wallets, bags, and wearable accessories with personality.</p>
-            <span class="count">5 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/41vqIYmiqsL._SL500_.jpg" alt="Clothing & Accessories" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>👕</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Clothing & Accessories</h3>
+                <p>Socks, hats, wallets, bags, and wearable accessories with personality.</p>
+                <span class="count">5 products</span>
+            </div>
         </a>
         <a href="/categories/tools/" class="cat-card">
-            <h3>Tools & Hardware</h3>
-            <p>Multi-tools, screwdrivers, wrenches, and practical hardware for DIY projects.</p>
-            <span class="count">5 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/41tFuYxx6GL._SL500_.jpg" alt="Tools & Hardware" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🔧</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Tools & Hardware</h3>
+                <p>Multi-tools, screwdrivers, wrenches, and practical hardware for DIY projects.</p>
+                <span class="count">5 products</span>
+            </div>
         </a>
         <a href="/categories/home-decor/" class="cat-card">
-            <h3>Home Decor</h3>
-            <p>Vases, candles, blankets, pillows, and decorative touches for every room.</p>
-            <span class="count">5 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/31ZnbTrkv9S._SL500_.jpg" alt="Home Decor" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🏠</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Home Decor</h3>
+                <p>Vases, candles, blankets, pillows, and decorative touches for every room.</p>
+                <span class="count">5 products</span>
+            </div>
         </a>
         <a href="/categories/pets/" class="cat-card">
-            <h3>Pet Supplies</h3>
-            <p>Collars, leashes, feeders, and accessories for your furry friends.</p>
-            <span class="count">4 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/414BWzB7-NL._SL500_.jpg" alt="Pet Supplies" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🐾</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Pet Supplies</h3>
+                <p>Collars, leashes, feeders, and accessories for your furry friends.</p>
+                <span class="count">4 products</span>
+            </div>
         </a>
         <a href="/categories/gifts/" class="cat-card">
-            <h3>Gifts & Novelty</h3>
-            <p>Funny, quirky, and unexpected gifts that make people laugh and remember you.</p>
-            <span class="count">3 products</span>
+            <div class="cat-img"><img src="https://m.media-amazon.com/images/I/81CoTAGDlOL._AC_SL1500_.jpg" alt="Gifts & Novelty" loading="lazy" onerror="this.parentElement.innerHTML=&apos;<span class=cat-emoji>🎁</span>&apos;"></div>
+            <div class="cat-text">
+                <h3>Gifts & Novelty</h3>
+                <p>Funny, quirky, and unexpected gifts that make people laugh and remember you.</p>
+                <span class="count">3 products</span>
+            </div>
         </a>
 
         </div>
