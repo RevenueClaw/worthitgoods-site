@@ -322,5 +322,14 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 <script src="/assets/price-sync.js" defer></script>
+<script>
+(function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
+if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);
+if(!t||t.length<5)return;var u='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(t)+'&campid='+c+'&mkcid=1&mkevt=1&mkrid=711-53200-19255-0&siteid=0';
+var a=document.createElement('a');a.href=u;a.className='ebay-mini-link';a.target='_blank';a.rel='nofollow';
+a.style.cssText='display:inline-block;font-size:0.7rem;color:#9ca3af;text-decoration:none;margin-left:8px';
+a.textContent='📦 eBay';h.appendChild(a);});})();
+</script>
+
 </body>
 </html>
