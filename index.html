@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt Goods • Products Actually Worth Buying</title>
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WorthIt Goods",
+      "url": "https://www.worthitgoods.com",
+      "description": "Honest, hand-picked products that actually deliver. No junk. No hype.",
+      "sameAs": ["https://www.worthitgoods.com"],
+      "@graph": [{
+        "@type": "WebSite",
+        "url": "https://www.worthitgoods.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.worthitgoods.com/search?q={search_term}",
+          "query-input": "required name=search_term"
+        }
+      }]
+    }
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="WorthIt Goods • Products Actually Worth Buying" />
     <meta property="og:description" content="Honest, hand-picked products that actually deliver. No junk. No hype. Just gear worth your money and time." />
