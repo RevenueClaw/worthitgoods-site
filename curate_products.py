@@ -145,13 +145,34 @@ FUN_QUERIES = {
         "balance trainer compact",
         "exercise gadget home gym",
     ],
+    "viral_discovery_engagement": [
+        "tiktok viral gadget",
+        "instagram worthy desk accessory",
+        "weird amazon find cool",
+        "i didnt know i needed this",
+        "oddly satisfying gadget",
+        "mind blowing gift idea",
+        "hilarious gift unique",
+        "conversation starter desk",
+        "cool thing under 30 dollars",
+        "genius product design",
+        "must have car accessory clever",
+        "kitchen tool you never knew",
+        "fascinating gadget small",
+        "head turning office accessory",
+        "unique gift they actually want",
+        "unusual home gadget clever",
+        "clever problem solving tool",
+        "product that makes you look twice",
+    ],
 }
 
 FUN_KEYWORDS = ["innovative","patented","unique","award","genius","clever","ingenious","unusual","creative","one-of-a-kind","conversation","novel","original","reusable","multifunctional","2-in-1","3-in-1","multi-functional","titanium","premium","handmade","artisan","compact","portable","transforms","converts","folds","collapsible","solar","rechargeable","bamboo","ceramic","copper","solid wood","leather","magnetic","glass","stainless","retro","vintage","modern","minimalist","DIY","kit","build","assemble","custom","modular","adjustable","universal","compatible","smart","app","bluetooth","LED","sensor","award-winning","as seen on","shark tank","dragon's den","kickstarter","indiegogo","upgrade","next generation","version 2",
     "solid wood","walnut","oak","maple","aluminum","brass","copper","silicone","carbon fiber","marble","stone","resin","wool","canvas",
     "patented","mechanical","analog","gear","spring","tension","magnet","suction","portable","folding","collapsible","magnetic",
     "heirloom","generation","built to last","lifetime","timeless","classic","throwback","nostalgic","retro design","heritage",
-    "creative","imaginative","whimsical","playful","fun","delight","surprising","unexpected","charming"]
+    "creative","imaginative","whimsical","playful","fun","delight","surprising","unexpected","charming",
+    "viral","tiktok","instagram","must-have","mind-blowing","life-changing","game-changer","hilarious","funny","weird","bizarre","fascinating","jaw-dropping","addictive","satisfying","oddly satisfying","head-turning","eye-catching","showstopper","wow factor","you need this","never knew you needed","life hack","genius design","not your average","reimagined","reinvented"]
 
 # Additional fun query tiers for retry — broader angles to find fun products
 # when the primary queries don't yield anything that passes the rating threshold
@@ -580,17 +601,28 @@ def curate_products(count_per_category=2, exclude_asins=None):
         print(f"  Scraping ratings for {len(tier_candidates)} fun candidates...")
         scrape_batch(tier_candidates, f"{tier_label} fun", rating_fetcher)
 
-        # Filter by fun rating threshold
+        # Filter by fun rating threshold — sliding scale: highly novel products
+        # can clear a slightly lower bar (still quality-gated at 4.0☆/50 reviews).
+        # This lets genuinely unique/conversation-starting products through
+        # even if they haven't accumulated thousands of reviews yet.
         tier_passing = 0
         for p in tier_candidates:
             rating = p.get("rating") or 0
             reviews = p.get("reviews_count") or 0
-            if rating >= FUN_MIN_STAR_RATING and reviews >= FUN_MIN_REVIEW_COUNT:
+            fun = p.get("_fun_score", 0)
+            # Highly novel: 4.0☆ / 50 reviews  |  Moderately novel: 4.2☆ / 75  |  Standard fun: 4.3☆ / 100
+            if fun > 0.7:
+                passes = rating >= 4.0 and reviews >= 50
+            elif fun > 0.55:
+                passes = rating >= 4.2 and reviews >= 75
+            else:
+                passes = rating >= FUN_MIN_STAR_RATING and reviews >= FUN_MIN_REVIEW_COUNT
+            if passes:
                 fun_passing.append(p)
                 tier_passing += 1
-                print(f"    \N{check mark} FUN PASS: {rating}\u2606 / {reviews} reviews | {p['title'][:60]}")
+                print(f"    ✔ FUN PASS: {rating}☆ / {reviews} reviews [fun={fun:.2f}] | {p['title'][:60]}")
             else:
-                print(f"    \N{cross mark} FUN FAIL: {rating}\u2606 / {reviews} reviews | {p['title'][:50]}")
+                print(f"    ✘ FUN FAIL: {rating}☆ / {reviews} reviews [fun={fun:.2f}] | {p['title'][:50]}")
 
         # Cooldown before next tier (all tiers run every time)
         if tier_label != fun_query_tiers[-1][0]:
@@ -657,6 +689,7 @@ def curate_products(count_per_category=2, exclude_asins=None):
                     "blurb":"(edit me - one-line hook)",
                     "affiliate_url":f"https://www.amazon.com/dp/{asin}?tag={PARTNER_TAG}",
                     "asin":asin,
+                    "_fun_score":round(score,2),
                 }
                 standard_candidates.append(product)
                 seen_asins.add(asin)
@@ -750,6 +783,24 @@ def curate_products(count_per_category=2, exclude_asins=None):
         cat_counts[cat] = current_cat_count + 1
 
     print(f"\n  After rating filter: {len(curated)}/{total_target} products")
+
+    # ── Fun product enforcement: every batch needs at least 1 engaging product ──
+    if fun_slots == 0 and standard_passing:
+        # No fun products passed — pick the most interesting standard candidate
+        # by fun_score as a fallback (still quality-gated by standard thresholds).
+        best_fun = max(standard_passing, key=lambda p: p.get("_fun_score", 0) if p.get("asin") not in curated_asins else 0)
+        if best_fun.get("_fun_score", 0) > 0.35:
+            curated.insert(0, {
+                "title": best_fun["title"], "image": best_fun["image"],
+                "description": best_fun["description"], "blurb": best_fun["blurb"],
+                "affiliate_url": best_fun["affiliate_url"], "asin": best_fun["asin"],
+            })
+            curated_asins.add(best_fun["asin"])
+            print(f"  ⚡ Fun fallback: injected most interesting standard product [fun={best_fun.get('_fun_score',0):.2f}]")
+        else:
+            print(f"  ⚠️  No fun products AND no interesting standard candidates — batch may be flat")
+    elif fun_slots == 0:
+        print(f"  ⚠️  No fun products found — batch may lack engagement hooks")
 
     # Enrichment: PAAPI prices
     if curated:
