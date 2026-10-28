@@ -1,118 +1,177 @@
 #!/usr/bin/env python3
 """
-Assign visual badges to products based on PAAPI price data.
+add_badges.py — Assign engaging, data-driven badges to existing products.
+Replaces monotonous single-badge system with sparse, earned badges.
 
-Only 4 badge types:
-  - 💰 Budget Pick:   price ≤ $15 (selectively applied — only to standout deals)
-  - ⚡ Great Value:   price between $15-$25
-  - 🔧 Premium Pick:  price ≥ $80
-  - 🔥 Editor's Pick: manual — set by curation agent only
+Badge types (at most one per product, priority order):
+  1. "🎯 Hidden Gem"  — fun_score >= 0.70 AND has price (unique, clever products)
+  2. "💰 Under $10"   — price <= $10 AND fun_score >= 0.45 (bargains worth noticing)
 
-Budget Pick is deliberately underused — only ~25% of eligible products get it.
+Only ~15% of products get badges. The rest stay clean — badges feel earned.
+
+Usage:
+  python3 scripts/add_badges.py                        # score + badge all products
+  python3 scripts/add_badges.py --dry-run              # preview only
+  python3 scripts/add_badges.py data/curated_batch_*.json  # badge a specific batch
 """
-import json
+
+import json, re, sys, os
 from pathlib import Path
 
-REPO_DIR = Path(__file__).resolve().parent.parent
-DATA_FILE = REPO_DIR / "data" / "sample_products.json"
-
-# ── Budget Pick keep list ───────────────────────────────────────────
-# These products genuinely feel like steals at their price.
-# Add products to this list by checking their index or asin in sample_products.json.
-# Format: (keyword to match in title, optional min_price)
-BUDGET_PICK_KEEP = [
-    # Under $6 — absurdly cheap for useful items (auto-keep if < $6 via keyword)
-    # Multi-packs and fun items under $10
-    # Unique gadgets under $14
-    # Quality kitchen tools under $10
+# ── fun_score function (mirrors curate_products.py) ──────────────────────────
+FUN_KEYWORDS = [
+    "innovative","patented","unique","award","genius","clever","ingenious",
+    "unusual","creative","one-of-a-kind","conversation","novel","original",
+    "multifunctional","2-in-1","3-in-1","multi-functional",
+    "titanium","premium","handmade","artisan","compact","portable",
+    "transforms","converts","folds","collapsible","solar","rechargeable",
+    "bamboo","ceramic","copper","solid wood","leather","magnetic","glass",
+    "stainless","retro","vintage","modern","minimalist",
+    "DIY","kit","build","assemble","custom","modular","adjustable",
+    "universal","compatible","smart","app","bluetooth","LED","sensor",
+    "award-winning","as seen on","shark tank","dragon's den","kickstarter","indiegogo",
+    "solid wood","walnut","oak","maple","aluminum","brass","copper",
+    "silicone","carbon fiber","marble","stone","resin","wool","canvas",
+    "patented","mechanical","analog","gear","spring","tension","magnet",
+    "suction","portable","folding","collapsible","magnetic",
+    "heirloom","generation","built to last","lifetime","timeless",
+    "classic","throwback","nostalgic","retro design","heritage",
+    "creative","imaginative","whimsical","playful","fun","delight",
+    "surprising","unexpected","charming",
+    "viral","tiktok","instagram","must-have","mind-blowing","life-changing",
+    "game-changer","hilarious","funny","weird","bizarre","fascinating",
+    "jaw-dropping","addictive","satisfying","oddly satisfying",
+    "head-turning","eye-catching","showstopper","wow factor",
+    "you need this","never knew you needed","life hack","genius design",
+    "not your average","reimagined","reinvented",
 ]
 
-# Set of product title substrings that qualify for Budget Pick
-BUDGET_TITLES = {
-    # Under $7 — dirt cheap utility items
-    "onion holder", "sanding sponge", "measuring spoon set",
-    "water container 2 gallon", "sunglass holder", "craftsman shallow",
-    # Fun items under $10
-    "vomiting chicken", "angry mama", "squishy toys",
-    "sasquatch", "funny sasquatch",
-    # Kitchen tools under $10
-    "olive oil sprayer", "meat tenderizer", "kitchenaid",
-    "magnetic measuring spoon", "elizabat kitchen",
-    # Gadgets under $14
-    "pooch selfie", "muscle roller", "laser level",
-    "tent lamp", "retro bluetooth speaker",
-    "edc pocket multitool",
-    # Multi-packs
-    "8 pack sanding sponge", "30 pack squishy",
-}
+FUN_BORING_PATTERNS = [
+    r"basic",r"standard",r"ordinary",r"plain",r"simple",r"generic",
+    r"replacement",r"refill",r"bulk",r"value pack",r"economy",
+    r"set of \d",r"pack of \d",r"\d+ pack",r"combo pack",r"variety pack",
+]
 
-def qualify_for_budget(title_lower: str, price: float) -> bool:
-    """Only ~25% of sub-$15 products should get Budget Pick."""
-    if any(kw in title_lower for kw in BUDGET_TITLES):
-        return True
-    # Under $6 always qualifies
-    if price < 6:
-        return True
-    return False
+
+def fun_score(title, brand=""):
+    t = title.lower()
+    score = 0.3
+    for kw in FUN_KEYWORDS:
+        if kw in t:
+            score += 0.12
+    for pat in FUN_BORING_PATTERNS:
+        if re.search(pat, t):
+            score -= 0.15
+    if re.search(r"\b(patent|award|design|invention|shark tank|dragon|kickstarter|indiegogo|reddot|iF design|good design)\b", t, re.I):
+        score += 0.30
+    if re.search(r"\b(2-in-1|3-in-1|4-in-1|multi|universal|adjustable|folding|collapsible|rechargeable|solar)\b", t, re.I):
+        score += 0.10
+    if re.search(r"\b(titanium|bamboo|copper|solid wood|ceramic|leather|carbon fiber|marble|walnut|oak|brass|aluminum|wool|canvas)\b", t, re.I):
+        score += 0.10
+    if re.search(r"\b(kit|DIY|build|assemble|custom|maker|craft)\b", t, re.I):
+        score += 0.08
+    if re.search(r"\b(bluetooth|smart|app|sensor|LED|digital|eink|analog|mechanical)\b", t, re.I):
+        score += 0.06
+    if re.search(r"\b(retro|vintage|nostalgia|classic|modern|minimalist|unique)\b", t, re.I):
+        score += 0.06
+    if re.search(r"\b(heirloom|lifetime|timeless|heritage|generation)\b", t, re.I):
+        score += 0.10
+    if re.search(r"\b(whimsical|playful|delight|surprising|unexpected|charming)\b", t, re.I):
+        score += 0.08
+    if re.search(r"\b(shark tank|dragon's den|as seen on tv|kickstarter|indiegogo|funded)\b", t, re.I):
+        score += 0.20
+    return max(0.0, min(1.0, score))
+
 
 def assign_badge(product):
-    """Assign badge using price data only. Budget Pick is selective."""
-    existing = product.get("badge")
-    if existing == "🔥 Editor's Pick":
-        return existing  # preserve manual
+    """Return (badge_string_or_None, was_updated_bool)."""
+    price = product.get('price')
+    score = product.get('_fun_score', 0)
     
-    price = product.get("price")
-    if price is None:
-        return None
+    # Recompute fun_score if not set
+    if score == 0:
+        score = fun_score(product.get('title', ''))
+        product['_fun_score'] = round(score, 2)
     
-    title = product.get("title", "").lower()
+    # Priority 1: Hidden Gem — clever, unique, well-designed products
+    if score >= 0.70 and price is not None:
+        old = product.get('badge')
+        product['badge'] = '🎯 Hidden Gem'
+        return ('🎯 Hidden Gem', old != '🎯 Hidden Gem')
     
-    if price <= 15:
-        if qualify_for_budget(title, price):
-            return "💰 Budget Pick"
-        return None  # not a standout deal
+    # Priority 2: Under $10 — bargains that aren't boring
+    if price is not None and price <= 10 and score >= 0.45:
+        old = product.get('badge')
+        product['badge'] = '💰 Under $10'
+        return ('💰 Under $10', old != '💰 Under $10')
     
-    if 15 < price <= 25:
-        return "⚡ Great Value"
+    # No badge qualifies — clear any existing badge
+    if product.get('badge'):
+        product.pop('badge', None)
+        return (None, True)
     
-    if price >= 80:
-        return "🔧 Premium Pick"
+    return (None, False)
+
+
+def process_products(products):
+    """Score and badge a list of products. Modifies in place."""
+    stats = {'total': len(products), 'hidden_gem': 0, 'under_10': 0, 'cleared': 0, 'unchanged': 0}
     
-    return None
+    for p in products:
+        badge, changed = assign_badge(p)
+        if badge == '🎯 Hidden Gem':
+            stats['hidden_gem'] += 1
+        elif badge == '💰 Under $10':
+            stats['under_10'] += 1
+        elif changed:
+            stats['cleared'] += 1
+        else:
+            stats['unchanged'] += 1
+    
+    return stats
+
 
 def main():
-    with open(DATA_FILE) as f:
-        products = json.load(f)
+    dry_run = '--dry-run' in sys.argv
     
-    budget_count = 0
-    for p in products:
-        badge = assign_badge(p)
-        p["badge"] = badge
-        if badge == "💰 Budget Pick":
-            budget_count += 1
+    # Determine target: specific batch file or the main product DB
+    files = [a for a in sys.argv[1:] if a.endswith('.json') and a != '--dry-run']
     
-    # Check Editor's Pick still preserved (manual override)
-    for p in products:
-        if p.get("badge") is None:
-            # There might be a manual override stored elsewhere; skip
-            pass
+    if files:
+        targets = files
+    else:
+        repo = Path(__file__).resolve().parent.parent
+        targets = [str(repo / 'data' / 'sample_products.json')]
     
-    with open(DATA_FILE, "w") as f:
-        json.dump(products, f, indent=2, ensure_ascii=False)
-    
-    total = len(products)
-    badges = {}
-    for p in products:
-        b = p.get("badge")
-        badges[b] = badges.get(b, 0) + 1
-    
-    print(f"✅ Badges assigned: {sum(badges.values())}/{total}")
-    print(f"   {'💰 Budget Pick':<20} {badges.get('💰 Budget Pick', 0)}  (capped — only standout deals)")
-    print(f"   {'⚡ Great Value':<20} {badges.get('⚡ Great Value', 0)}")
-    print(f"   {'🔧 Premium Pick':<20} {badges.get('🔧 Premium Pick', 0)}")
-    editor_badge = "🔥 Editor's Pick"
-    print(f"   {'🔥 Editor' + chr(39) + 's Pick':<20} {badges.get(editor_badge, 0)}")
-    print(f"   No badge: {badges.get(None, 0)}")
+    for fpath in targets:
+        with open(fpath) as f:
+            products = json.load(f)
+        
+        stats = process_products(products)
+        
+        badged = stats['hidden_gem'] + stats['under_10']
+        pct = badged / max(stats['total'], 1) * 100
+        
+        print(f"\n{fpath}")
+        print(f"  Total: {stats['total']} products")
+        print(f"  🎯 Hidden Gems: {stats['hidden_gem']}")
+        print(f"  💰 Under $10:   {stats['under_10']}")
+        print(f"  Badged: {badged} ({pct:.0f}%)")
+        print(f"  Clean:  {stats['unchanged'] + stats['cleared']}")
+        
+        if stats['hidden_gem'] > 0:
+            print(f"\n  Hidden Gems:")
+            for p in products:
+                if p.get('badge') == '🎯 Hidden Gem':
+                    print(f"    [{p['_fun_score']:.2f}] ${p.get('price','?')} — {p['title'][:65]}")
+        
+        if not dry_run:
+            with open(fpath, 'w') as f:
+                json.dump(products, f, indent=2)
+            print(f"  ✅ Saved")
+        else:
+            print(f"  (dry run — not saved)")
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

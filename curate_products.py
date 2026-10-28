@@ -903,7 +903,21 @@ DESCRIPTION: <2-4 sentences>
     except Exception as e:
         print(f"  LLM description generation failed (will save with placeholders): {e}")
     
-    # STEP 2: Write the curated batch file
+    # STEP 2: Assign badges (Hidden Gem / Under $10) based on fun_score + price
+    try:
+        import importlib.util
+        badge_path = os.path.join(os.path.dirname(__file__), 'scripts', 'add_badges.py')
+        spec = importlib.util.spec_from_file_location('add_badges', badge_path)
+        badge_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(badge_mod)
+        badge_stats = badge_mod.process_products(products)
+        badged = badge_stats.get('hidden_gem', 0) + badge_stats.get('under_10', 0)
+        if badged > 0:
+            print(f"  Badges assigned: {badged}/{len(products)} ({badge_stats.get('hidden_gem',0)} Hidden Gems, {badge_stats.get('under_10',0)} Under $10)")
+    except Exception as be:
+        print(f"  Badge assignment skipped: {be}")
+    
+    # STEP 3: Write the curated batch file
     with open(OUTPUT_FILE, "w") as f:
         json.dump(products, f, indent=2)
     print(f"\nSaved {len(products)} products to {OUTPUT_FILE}")
