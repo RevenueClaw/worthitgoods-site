@@ -57,21 +57,7 @@ if (!fs.existsSync(siteDir)) {
     fs.mkdirSync(siteDir, { recursive: true });
 }
 
-let products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
-
-// Interleave badge types so both Hidden Gem and Under $10 are visible immediately
-const gems = products.filter(p => p.badge === '🎯 Hidden Gem');
-const bargains = products.filter(p => p.badge === '💰 Under $10');
-const rest = products.filter(p => !gems.includes(p) && !bargains.includes(p));
-const gemCopy = [...gems]; const bargainCopy = [...bargains]; const restCopy = [...rest];
-const head = [];
-for (let i = 0; i < 3 && (gemCopy.length || bargainCopy.length); i++) {
-  if (gemCopy.length) head.push(gemCopy.shift());
-  if (bargainCopy.length) head.push(bargainCopy.shift());
-  if (restCopy.length) head.push(restCopy.shift());
-  if (restCopy.length) head.push(restCopy.shift());
-}
-products = [...head, ...gemCopy, ...bargainCopy, ...restCopy];
+const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 
 function cleanTitle(title) {

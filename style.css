@@ -420,7 +420,22 @@ footer {
     color: #fff;
     border-color: rgba(167, 139, 250, 0.3);
 }
-.product-badge[data-badge*="Under $10"] {
+.product-badge[data-badge*="Gift Pick"] {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: #fff;
+    border-color: rgba(244, 143, 177, 0.3);
+}
+.product-badge[data-badge*="Premium Design"] {
+    background: linear-gradient(135deg, #1a1a2e, #2d3436);
+    color: #f1c40f;
+    border-color: rgba(241, 196, 15, 0.4);
+}
+.product-badge[data-badge*="Problem Solver"] {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border-color: rgba(96, 165, 250, 0.3);
+}
+.product-badge[data-badge*="Best Value"] {
     background: linear-gradient(135deg, #059669, #10b981);
     color: #fff;
     border-color: rgba(52, 211, 153, 0.3);
