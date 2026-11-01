@@ -1,29 +1,22 @@
 {
-  "generated_at": "2026-10-21T06:17:16.496391+00:00",
+  "generated_at": "2026-11-01T15:00:08.826925+00:00",
   "report": {
-    "total_products": 372,
-    "unique_asins_found": 227,
-    "already_compared": 206,
-    "remaining_candidates": 7,
+    "total_products": 380,
+    "unique_asins_found": 266,
+    "already_compared": 257,
+    "remaining_candidates": 4,
     "by_category": {
-      "kitchen": 2,
-      "car care": 2,
-      "electronics": 3,
+      "kitchen": 1,
+      "car care": 1,
+      "electronics": 2,
       "outdoor": 0,
       "health": 0,
       "tools": 0,
       "home": 0
     },
-    "existing_comparison_pairs": 118
+    "existing_comparison_pairs": 322
   },
   "candidates": [
-    {
-      "asin": "B07ML2RT85",
-      "title": "Hey, Have You Tried Cheese Dish Towel",
-      "price": 13.99,
-      "category": "kitchen",
-      "url": "https://www.amazon.com/dp/B07ML2RT85?coliid=I140KMMMXQFD1U&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=33dcb3449ea794350dd26158db5d18f3&language=en_US&ref_=as_li_ss_tl"
-    },
     {
       "asin": "B0BRNDZBDY",
       "title": "Kitchen Gadgets Set 6 Pieces, Outdoor Camping Glamping Essentials",
@@ -32,25 +25,11 @@
       "url": "https://www.amazon.com/dp/B0BRNDZBDY?tag=worthitgoods-20"
     },
     {
-      "asin": "B09P8WCCLN",
-      "title": "Chemical Guys Clay Bar Kit - Complete System",
-      "price": 29.99,
-      "category": "car care",
-      "url": "https://www.amazon.com/dp/B09P8WCCLN?coliid=I1XPE190M8W79H&colid=300RVEMPRMDH&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=cf66afb9f00f79b8739f4fe573c4ece2&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
       "asin": "B08H57SN7G",
       "title": "Pink Car Emergency Kit",
       "price": null,
       "category": "car care",
       "url": "https://www.amazon.com/dp/B08H57SN7G?coliid=IUHG6FRS3A9ZS&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=a5feb8c7040823704354458c807c162f&language=en_US&ref_=as_li_ss_tl"
-    },
-    {
-      "asin": "B09B52QBDJ",
-      "title": "RETROFLAG Station Case for Raspberry Pi",
-      "price": null,
-      "category": "electronics",
-      "url": "https://www.amazon.com/dp/B09B52QBDJ?coliid=I2Y71KL6QRBU7R&colid=300RVEMPRMDH&th=1&linkCode=ll2&tag=worthitgoods-20&linkId=d08fe8cd8d871cd6aa2191c6f094db05&language=en_US&ref_=as_li_ss_tl"
     },
     {
       "asin": "B0F1ZY5QNL",
