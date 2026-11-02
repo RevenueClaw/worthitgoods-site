@@ -282,7 +282,7 @@ def fun_score(title, brand=""):
     return max(0.0, min(1.0, score))
 
 EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+",r"Windows\s+11",r"Microsoft\s+Office",r"TurboTax",r"QuickBooks"]
-BORING_KEYWORDS = ["batteries","light bulb","paper towel","toilet paper","trash bag","cleaning supply","laundry","diaper","baby wipe","dog food","cat food","vitamin","supplement","ink cartridge","toner","filter replacement"]
+BORING_KEYWORDS = ["batteries","light bulb","paper towel","toilet paper","trash bag","cleaning supply","laundry","diaper","baby wipe","dog food","cat food","vitamin","supplement","ink cartridge","toner","filter replacement","tape refill","label tape refill"]
 
 EXISTING_CACHE = None
 def load_existing():

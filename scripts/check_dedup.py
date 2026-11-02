@@ -37,6 +37,7 @@ NARROW_CATEGORIES = {
     "desk_lamp": ["desk lamp", "led desk light", "office lamp", "task lamp"],
     "screwdriver_set": ["screwdriver set", "precision screwdriver", "repair kit", "magnetic screwdriver"],
     "kitchen_knife": ["chef knife", "kitchen knife", "paring knife", "knife set"],
+    "hostess_gift": ["hostess", "hostess gift", "hostess art"],
 }
 
 
@@ -115,6 +116,18 @@ def main():
     # ── Phase 3: Within-batch narrow-category conflicts ──────────────────────
     category_conflicts_found = category_conflicts(new_batch)
 
+    # ── Phase 4: Title overlap against existing products ─────────────────────
+    # Catches same-brand/different-ASIN items that slip past Phase 1
+    # (e.g. two hostess-art products from the same brand with different ASINs)
+    existing_tokens = [tokenize(p.get("title", "")) for p in existing]
+    cross_conflicts = []
+    for i, np in enumerate(new_batch):
+        nt = tokenize(np.get("title", ""))
+        for j, et in enumerate(existing_tokens):
+            overlap = title_overlap(nt, et)
+            if overlap > 0.55:  # stricter threshold for cross-batch (55% vs 45% within-batch)
+                cross_conflicts.append((i, j, overlap, new_batch[i].get("title", "")[:60], existing[j].get("title", "")[:60]))
+
     # ── Report ───────────────────────────────────────────────────────────────
     errors = False
 
@@ -141,6 +154,14 @@ def main():
             print(f"  ⚠️  Category: {group} ({len(items)} products)")
             for idx, title in items:
                 print(f"      [{idx+1}] {title}")
+
+    if cross_conflicts:
+        errors = True
+        print("\n❌ CROSS-BATCH TITLE CONFLICTS — new product too similar to existing:")
+        for i, j, overlap, new_title, existing_title in cross_conflicts:
+            print(f"  ⚠️  {overlap:.0%} title overlap with existing product:")
+            print(f"      NEW  [{i+1}] {new_title}...")
+            print(f"      EXISTING     {existing_title}...")
 
     if errors:
         print(f"\nRemove conflicting products and re-run.")
