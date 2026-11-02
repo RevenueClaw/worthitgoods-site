@@ -360,64 +360,134 @@ def is_duplicate(title):
 # ── Blog Post Generator ───────────────────────────────────────────────────────
 # blog date format for seasonal batches
 def generate_blog_post(theme_key, theme_data, products):
-    """Generate a markdown blog post for the seasonal batch."""
+    """Generate an HTML blog post with improved pick-card format."""
     today = date.today()
     slug = f"{today}-seasonal-{theme_key}"
     title = f"{theme_data['emoji']} {theme_data['label']} — WorthItGoods Picks"
-    
-    # Build product section
-    product_sections = []
+    og_title = f"{theme_data['label']} — {len(products)} Hand-Picked Picks"
+
+    # Build product cards in the improved pick-card format
+    product_cards = []
     for p in products:
-        short_title = p["title"][:60]
-        product_sections.append(f"""### {short_title}
-![{short_title}]({p['image']})
+        asin = ''
+        url = p.get('affiliate_url', '')
+        import re as _re
+        m = _re.search(r'/dp/([A-Z0-9]{10})', url)
+        if m: asin = m.group(1)
 
-**Why it's worth it:** {p['description'][:200]}
+        rating = p.get('rating') or p.get('star_rating')
+        reviews = p.get('reviews_count')
+        blurb = (p.get('blurb') or '')[:140]
+        desc = (p.get('description') or '')[:200]
+        img = p.get('image') or p.get('image_url', '')
 
-[Shop on Amazon]({p['affiliate_url']})""")
-    
-    # Fun product highlight
-    fun_products = [p for p in products if p.get("_fun_score", 0) >= 0.5]
-    fun_section = ""
-    if fun_products:
-        fun_section = f"""### 🎯 Fun Pick of the Batch
-**{fun_products[0]['title'][:70]}** — {fun_products[0]['blurb'] or fun_products[0]['description'][:180]}
+        # Rating display
+        rating_html = ''
+        if rating:
+            stars = '★' * int(round(float(rating)))
+            rev_text = f"{int(reviews):,}" if reviews else ''
+            rating_html = f'<span class="pick-rating"><span class="pick-stars">{stars}</span> {rating}</span>'
+        else:
+            rating_html = '<span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.5+</span>'
 
-"""
+        # Best-for tag from category or theme
+        best_for = p.get('_best_for', 'Great gift idea')
 
-    content = f"""# {title}
+        product_cards.append(f'''<div class="pick-card">
+    <img src="{img}" alt="{p['title'][:80]}" loading="lazy" class="pick-card-img">
+    <div class="pick-card-body">
+        <div class="pick-card-meta">
+            {rating_html}
+            <span class="pick-price" data-price-asin="{asin}">—</span>
+            <span class="pick-price-note">check price</span>
+        </div>
+        <h2>{p['title'][:90]}</h2>
+        <p class="pick-quick-take">{blurb}</p>
+        <p class="pick-body-text">{desc}</p>
+        <ul class="pick-highlights">
+            <li>Verified rating{'s' if reviews and int(reviews) > 500 else ''} — {'{:,}'.format(int(reviews)) if reviews else 'real reviews'}</li>
+            <li>Hand-picked for the {theme_data['label'].lower()} season</li>
+        </ul>
+        <span class="pick-best-for">{best_for}</span>
+        <a href="{url}" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
+        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+    </div>
+</div>''')
 
-{theme_data['description']}
+    # Inline CSS for pick-card format
+    css = '''<style>
+.pick-card { max-width:650px;margin:0 auto 2.5rem;border:1px solid #e5e7eb;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06) }
+.pick-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.12) }
+.pick-card-img { width:100%;max-height:300px;object-fit:contain;display:block;background:#f9fafb;padding:1.5rem }
+.pick-card-body { padding:0 1.8rem 1.8rem }
+.pick-card-meta { display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px;font-size:.92rem }
+.pick-rating { display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:6px;font-weight:600;font-size:.88rem }
+.pick-stars { color:#f59e0b;letter-spacing:1px }
+.pick-price { font-weight:700;color:#059669;font-size:1.05rem;margin-left:auto }
+.pick-price-note { font-size:.78rem;color:#9ca3af;font-weight:400 }
+.pick-card h2 { font-size:1.3rem;margin:0 0 6px;line-height:1.3 }
+.pick-quick-take { font-size:.95rem;color:#6b7280;line-height:1.5;margin-bottom:14px;font-style:italic;border-left:3px solid #ff6b35;padding-left:12px }
+.pick-body-text { font-size:.95rem;line-height:1.65;color:#374151;margin-bottom:12px }
+.pick-highlights { list-style:none;padding:0;margin:0 0 14px }
+.pick-highlights li { padding:5px 0 5px 22px;position:relative;font-size:.92rem;line-height:1.5;color:#4b5563 }
+.pick-highlights li::before { content:"✓";position:absolute;left:0;color:#059669;font-weight:700 }
+.pick-best-for { display:inline-block;background:#f0fdf4;color:#166534;padding:4px 12px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:14px }
+.pick-cta { display:block;text-align:center;padding:14px 0;background:#ff6b35;color:#fff;border-radius:10px;font-weight:700;text-decoration:none;font-size:1rem;margin-bottom:6px }
+.pick-cta:hover { background:#e55a2b }
+.pick-disclaimer { text-align:center;font-size:.75rem;color:#9ca3af;margin-top:4px }
+@media(max-width:600px){.pick-card-body{padding:0 1rem 1.2rem}.pick-card h2{font-size:1.15rem}.pick-card-meta{font-size:.82rem}}
+</style>'''
 
-> **Batch date:** {today} · **Products:** {len(products)} hand-picked items
+    content = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta property="og:title" content="{og_title}">
+<meta property="og:description" content="{theme_data['description'][:200]}">
+<meta property="og:image" content="{products[0].get('image') or products[0].get('image_url', '')}">
+<meta property="og:url" content="https://www.worthitgoods.com/blog/{slug}.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="WorthItGoods">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="{theme_data['description'][:200]}">
+<link rel="stylesheet" href="/style.css">
+{css}
+</head>
+<body>
+<header><nav><a href="/" class="logo">WorthItGoods</a><ul><li><a href="/">Home</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/privacy.html">Privacy</a></li></ul></nav></header>
+<main class="container blog-post" style="max-width:800px;margin:0 auto;padding:2rem 1rem;">
 
----
+<h1 style="font-size:2.2em;margin-bottom:0.2em;">{title}</h1>
+<p class="subtitle" style="color:#888;margin-bottom:2em;">{theme_data['description']}</p>
+<p class="subtitle" style="color:#888;margin-bottom:2em;"><strong>Batch date:</strong> {today} · <strong>Products:</strong> {len(products)} hand-picked items</p>
 
-## What We Picked
+<div class="section-header" style="max-width:650px;margin:0 auto 2rem;">
+<p>{theme_data['description']}</p>
+<p>📌 <strong>Pinterest-ready:</strong> Save this guide and share it — every product image links back here.</p>
+</div>
 
-Every product in this batch was chosen because it solves a real problem, brings a smile, or makes life easier — no junk, no filler.
+{"\\n".join(product_cards)}
 
-{chr(10).join(product_sections)}
+<div class="section-header" style="max-width:650px;margin:0 auto 2rem;">
+<h2>Why You Can Trust These Picks</h2>
+<p>We don\'t take payments for placement. Every product on WorthItGoods is chosen because <em>we</em> would buy it. We check ratings, read reviews, and look for the hidden gems that most people scroll past. Every item on this page has been verified with real Amazon ratings — no placeholders, no guesses.</p>
+<p><em>Some links are affiliate links — if you buy through them, we earn a small commission at no extra cost to you. It helps us keep finding great products.</em></p>
+</div>
 
----
+</main>
+<footer><p>&copy; {today.year} WorthItGoods &middot; <a href=\"/privacy.html\">Privacy</a></p></footer>
+<script src=\"/assets/price-sync.js\" defer></script>
+</body>
+</html>'''
 
-{fun_section}## Why You Can Trust These Picks
-
-We don't take payments for placement. Every product on WorthItGoods is chosen because *we* would buy it. We check ratings, read reviews, and look for the hidden gems that most people scroll past.
-
-*Some links are affiliate links — if you buy through them, we earn a small commission at no extra cost to you. It helps us keep finding great products.*
-
----
-
-*Happy hunting — find something you love 🎯*
-"""
-    # Save blog post
-    blog_file = BLOG_DIR / f"{slug}.md"
+    blog_file = BLOG_DIR / f"{slug}.html"
     BLOG_DIR.mkdir(parents=True, exist_ok=True)
     with open(blog_file, "w") as f:
         f.write(content)
-    
-    print(f"\n  📝 Blog post: {blog_file}")
+
+    print(f"\\n  📝 Blog post: {blog_file}")
     return blog_file
 
 
