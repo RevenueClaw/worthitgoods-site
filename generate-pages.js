@@ -115,7 +115,7 @@ function generateProductSchema(products) {
             "@context": "https://schema.org",
             "@type": "Product",
             "name": p.title,
-            "image": p.image,
+            "image": p.image || p.image_url,
             "description": (p.blurb || p.description || "").substring(0, 300),
             "sku": asin,
             "mpn": asin,
@@ -203,7 +203,7 @@ function renderProduct(p) {
     return `
                 <div class="product-card${p.badge ? ' has-badge' : ''}">
                     <div class="image-wrapper">
-                        <img src="${thumbnailUrl(p.image)}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy" width="400" height="400" decoding="async">
+                        <img src="${thumbnailUrl(p.image || p.image_url)}" alt="${cleanTitle(p.title)} — WorthItGoods worth-buying pick" loading="lazy" width="400" height="400" decoding="async">
                         ${badge}
                     </div>
                     <div class="content">
@@ -948,7 +948,7 @@ for (const product of products) {
     <meta property="og:description" content="${desc}">
     <meta property="og:type" content="product">
     <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:image" content="${product.image}">
+    <meta property="og:image" content="${product.image || product.image_url}">
     <link rel="canonical" href="${canonicalUrl}">
     <script type="application/ld+json">
     {
@@ -956,7 +956,7 @@ for (const product of products) {
         "@type": "Product",
         "name": "${title.replace(/"/g, '\\"')}",
         "description": "${desc.replace(/"/g, '\\"')}",
-        "image": "${product.image}",
+        "image": "${product.image || product.image_url}",
         "offers": {
             "@type": "Offer",
             "price": "${product.price || '0'}",
@@ -988,7 +988,7 @@ for (const product of products) {
         <div class="product-detail">
             <span class="category">${category}</span>
             <h1>${title}</h1>
-            <img src="${thumbnailUrl(product.image)}" alt="${title}" loading="eager" width="400" height="400">
+            <img src="${thumbnailUrl(product.image || product.image_url)}" alt="${title}" loading="eager" width="400" height="400">
             <div class="price">${price}</div>
             <div class="description">${product.description || product.blurb || ''}</div>
             <a href="/go/asin/${asinFromUrl(product.affiliate_url)}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
