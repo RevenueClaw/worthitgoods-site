@@ -21,16 +21,26 @@ if [[ -z "$THEME" && -f .seasonal-active ]]; then
     THEME_FILE=".seasonal-active"
     THEME_TIMESTAMP=$(cat "$THEME_FILE")
     NOW=$(date +%s)
-    AGE=$((NOW - THEME_TIMESTAMP))
-    MAX_AGE=$((5 * 86400))
-    if [[ $AGE -lt $MAX_AGE ]]; then
-        # Theme is still active — read theme name from curate_seasonal.py or default
-        if [[ -f .seasonal-theme-name ]]; then
-            THEME=$(cat .seasonal-theme-name)
-        else
-            THEME="back_to_school"
+    # Check explicit expiry first, then fall back to 5-day window
+    if [[ -f .seasonal-expires ]]; then
+        EXPIRES=$(cat .seasonal-expires)
+        if [[ $NOW -lt $EXPIRES ]]; then
+            if [[ -f .seasonal-theme-name ]]; then
+                THEME=$(cat .seasonal-theme-name)
+            fi
+            echo "🎨 Seasonal theme active: $THEME (expires $(date -d @$EXPIRES '+%b %d'))"
         fi
-        echo "🎨 Seasonal theme active: $THEME"
+    else
+        AGE=$((NOW - THEME_TIMESTAMP))
+        MAX_AGE=$((5 * 86400))
+        if [[ $AGE -lt $MAX_AGE ]]; then
+            if [[ -f .seasonal-theme-name ]]; then
+                THEME=$(cat .seasonal-theme-name)
+            else
+                THEME="back_to_school"
+            fi
+            echo "🎨 Seasonal theme active: $THEME"
+        fi
     fi
 fi
 
