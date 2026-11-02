@@ -73,7 +73,7 @@ function cleanTitle(title) {
 
 // Shrink Amazon image URLs for grid thumbnails: SL500->SL400, AC_SL1500->SL400
 function thumbnailUrl(url) {
-    if (!url) return '';
+    if (!url) return 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22><rect fill=%22%23f3f4f6%22 width=%22400%22 height=%22400%22/><text fill=%22%239ca3af%22 font-family=%22sans-serif%22 font-size=%2220%22 text-anchor=%22middle%22 x=%22200%22 y=%22210%22>Image</text></svg>';
     return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL400_');
 }
 
