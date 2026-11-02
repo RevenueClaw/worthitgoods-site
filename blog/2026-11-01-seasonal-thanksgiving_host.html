@@ -16,15 +16,15 @@
 <meta name="description" content="10 hand-picked Thanksgiving hosting essentials — roasting pans, baking dishes, pie pans, a wine decanter, and clever kitchen tools that actually earn their place. Every product verified with real ratings and reviews.">
 <link rel="stylesheet" href="/style.css">
 <style>
-/* ── Improved blog product card ── */
+/* ── Product pick card ── */
 .pick-card {
     max-width: 650px; margin: 0 auto 2.5rem;
-    border: 1px solid #e5e7eb; border-radius: 14px;
+    border: 1px solid #d1d5db; border-radius: 14px;
     background: #fff; overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
     transition: box-shadow 0.2s;
 }
-.pick-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+.pick-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.12); }
 .pick-card-img {
     width: 100%; max-height: 300px; object-fit: contain;
     display: block; background: #f9fafb;
@@ -33,64 +33,59 @@
 .pick-card-body { padding: 0 1.8rem 1.8rem; }
 .pick-card-meta {
     display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-    margin-bottom: 12px; font-size: 0.92rem;
+    margin-bottom: 14px; font-size: 0.95rem;
 }
 .pick-rating {
-    display: inline-flex; align-items: center; gap: 4px;
+    display: inline-flex; align-items: center; gap: 5px;
     background: #fef3c7; color: #92400e;
-    padding: 3px 10px; border-radius: 6px;
-    font-weight: 600; font-size: 0.88rem;
+    padding: 4px 12px; border-radius: 6px;
+    font-weight: 600; font-size: 0.9rem;
 }
-.pick-stars { color: #f59e0b; letter-spacing: 1px; }
-.pick-price {
-    font-weight: 700; color: #059669; font-size: 1.05rem;
-    margin-left: auto;
-}
-.pick-price-note { font-size: 0.78rem; color: #9ca3af; font-weight: 400; }
+.pick-stars { color: #f59e0b; letter-spacing: 1.5px; }
 .pick-card h2 {
-    font-size: 1.3rem; margin: 0 0 6px 0; line-height: 1.3;
+    font-size: 1.4rem; margin: 0 0 8px 0; line-height: 1.3; color: #111827;
 }
 .pick-quick-take {
-    font-size: 0.95rem; color: #6b7280; line-height: 1.5;
-    margin-bottom: 14px; font-style: italic;
-    border-left: 3px solid #ff6b35; padding-left: 12px;
+    font-size: 1.0rem; color: #4b5563; line-height: 1.55;
+    margin-bottom: 16px; font-style: italic;
+    border-left: 3px solid #ff6b35; padding-left: 14px;
 }
 .pick-body-text {
-    font-size: 0.95rem; line-height: 1.65; color: #374151;
-    margin-bottom: 12px;
+    font-size: 1.05rem; line-height: 1.7; color: #1f2937;
+    margin-bottom: 14px;
 }
 .pick-highlights {
-    list-style: none; padding: 0; margin: 0 0 14px 0;
+    list-style: none; padding: 0; margin: 0 0 16px 0;
 }
 .pick-highlights li {
-    padding: 5px 0 5px 22px; position: relative;
-    font-size: 0.92rem; line-height: 1.5; color: #4b5563;
+    padding: 6px 0 6px 24px; position: relative;
+    font-size: 1.0rem; line-height: 1.55; color: #374151;
 }
 .pick-highlights li::before {
     content: "✓"; position: absolute; left: 0;
-    color: #059669; font-weight: 700;
+    color: #059669; font-weight: 700; font-size: 1.05rem;
 }
 .pick-best-for {
     display: inline-block;
-    background: #f0fdf4; color: #166534;
-    padding: 4px 12px; border-radius: 20px;
-    font-size: 0.82rem; font-weight: 600; margin-bottom: 14px;
+    background: #ecfdf5; color: #065f46;
+    padding: 5px 14px; border-radius: 20px;
+    font-size: 0.9rem; font-weight: 600; margin-bottom: 16px;
 }
 .pick-cta {
     display: block; text-align: center;
-    padding: 14px 0; background: #ff6b35; color: #fff;
+    padding: 15px 0; background: #ff6b35; color: #fff;
     border-radius: 10px; font-weight: 700; text-decoration: none;
-    font-size: 1rem; transition: background 0.2s; margin-bottom: 6px;
+    font-size: 1.05rem; transition: background 0.2s;
 }
 .pick-cta:hover { background: #e55a2b; }
 .pick-disclaimer {
-    text-align: center; font-size: 0.75rem; color: #9ca3af;
-    margin-top: 4px;
+    text-align: center; font-size: 0.78rem; color: #9ca3af; margin: 8px 0 0;
 }
 @media (max-width: 600px) {
     .pick-card-body { padding: 0 1rem 1.2rem; }
-    .pick-card h2 { font-size: 1.15rem; }
-    .pick-card-meta { font-size: 0.82rem; }
+    .pick-card h2 { font-size: 1.2rem; }
+    .pick-body-text { font-size: 0.98rem; }
+    .pick-highlights li { font-size: 0.92rem; }
 }
 </style>
 </head>
@@ -113,8 +108,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.5+</span>
-            <span class="pick-price" data-price-asin="B0DDHQXQS4">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🦃 Turkey Roasting Pan With Lid — 18in Enamel Carbon Steel</h2>
         <p class="pick-quick-take">The 18-inch enamel roaster that fits an 18-pound bird, locks in moisture, and earns its place at every Thanksgiving table.</p>
@@ -125,8 +118,8 @@
             <li>High-temp safe for crispy skin finish</li>
         </ul>
         <span class="pick-best-for">🦃 Best for: The Thanksgiving host</span>
-        <a href="https://www.amazon.com/dp/B0DDHQXQS4?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B0DDHQXQS4?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -136,8 +129,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.5+</span>
-            <span class="pick-price" data-price-asin="B003YLJZ6M">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🔪 Cuisinart Chef's Classic 16" Roasting Pan with Rack</h2>
         <p class="pick-quick-take">Cuisinart's even-heat stainless roaster with rack — the pan your Thanksgiving turkey has been waiting for.</p>
@@ -148,8 +139,8 @@
             <li>The pan you'll pull out for every holiday for 20 years</li>
         </ul>
         <span class="pick-best-for">🔪 Best for: Serious home cooks</span>
-        <a href="https://www.amazon.com/dp/B003YLJZ6M?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B003YLJZ6M?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -159,8 +150,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.8</span>
-            <span class="pick-price" data-price-asin="B00S93EQUK">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🌡️ Alpha Grillers Instant-Read Meat Thermometer</h2>
         <p class="pick-quick-take">A true 1-second read that saves every turkey from the curse of dry breast.</p>
@@ -171,8 +160,8 @@
             <li>93,000+ reviews, 4.8 stars — the most proven thermometer on this list</li>
         </ul>
         <span class="pick-best-for">🌡️ Best for: First-time turkey cooks</span>
-        <a href="https://www.amazon.com/dp/B00S93EQUK?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B00S93EQUK?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -182,8 +171,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.8</span>
-            <span class="pick-price" data-price-asin="B09QD593GF">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🥄 Le Creuset Heritage Stoneware Gravy Boat</h2>
         <p class="pick-quick-take">Le Creuset craftsmanship meets holiday tradition — the gravy boat your table deserves.</p>
@@ -194,8 +181,8 @@
             <li>French craftsmanship that outlasts trends</li>
         </ul>
         <span class="pick-best-for">🥄 Best for: The gravy perfectionist</span>
-        <a href="https://www.amazon.com/dp/B09QD593GF?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B09QD593GF?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -205,8 +192,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.7</span>
-            <span class="pick-price" data-price-asin="B09ZLT4FZJ">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🍲 Pyrex Deep 9x13" Glass Baking Dish with Lid</h2>
         <p class="pick-quick-take">The deep Pyrex dish that handles every Thanksgiving side without bubbling over.</p>
@@ -217,8 +202,8 @@
             <li>4.7 stars across 9,200+ reviews</li>
         </ul>
         <span class="pick-best-for">🍲 Best for: The side-dish MVP</span>
-        <a href="https://www.amazon.com/dp/B09ZLT4FZJ?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B09ZLT4FZJ?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -228,8 +213,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★</span> 4.0+</span>
-            <span class="pick-price" data-price-asin="B0FSZ61H24">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🍰 Multi-Tiered Dessert Display Set with Fabric Backdrop</h2>
         <p class="pick-quick-take">Three-tier ceramic dessert display with fabric backdrop — turn your Thanksgiving sweets table into a bakery window.</p>
@@ -240,8 +223,8 @@
             <li>Guests will think you hired a caterer</li>
         </ul>
         <span class="pick-best-for">🍰 Best for: Dessert table show-offs</span>
-        <a href="https://www.amazon.com/dp/B0FSZ61H24?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B0FSZ61H24?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -251,8 +234,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.8</span>
-            <span class="pick-price" data-price-asin="B083Q8ZPL2">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🥧 LE TAUCI Ceramic Pie Pans — Set of 2</h2>
         <p class="pick-quick-take">Two ceramic pie pans so pumpkin and pecan don't have to compete for oven time.</p>
@@ -263,8 +244,8 @@
             <li>4.8 stars across 2,200+ reviews</li>
         </ul>
         <span class="pick-best-for">🥧 Best for: Pie bakers</span>
-        <a href="https://www.amazon.com/dp/B083Q8ZPL2?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B083Q8ZPL2?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -274,8 +255,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.8</span>
-            <span class="pick-price" data-price-asin="B01AVTQ1D4">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🍷 Le Chateau Hand-Blown Crystal Wine Decanter</h2>
         <p class="pick-quick-take">Hand-blown crystal decanter that aerates on the pour — the host gift that steals the table.</p>
@@ -285,9 +264,9 @@
             <li>100% lead-free crystal with a stable, wide base</li>
             <li>4.8 stars across 5,600+ reviews — unforgettable host gift</li>
         </ul>
-        <span class="pick-best-for">🍷 Best for: Wine lovers & host gifts</span>
-        <a href="https://www.amazon.com/dp/B01AVTQ1D4?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <span class="pick-best-for">🍷 Best for: Wine lovers &amp; host gifts</span>
+        <a href="https://www.amazon.com/dp/B01AVTQ1D4?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -297,10 +276,8 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.6</span>
-            <span class="pick-price" data-price-asin="B0FJQM8VTG">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
-        <h2>🧂 Rechargeable Electric Salt & Pepper Grinder Set</h2>
+        <h2>🧂 Rechargeable Electric Salt &amp; Pepper Grinder Set</h2>
         <p class="pick-quick-take">One-button electric grinders that make reaching for salt and pepper effortless at the table.</p>
         <p class="pick-body-text">One button, one hand, perfectly ground salt and pepper every time. The adjustable coarseness goes from fine powder for baking to coarse flakes for steak.</p>
         <ul class="pick-highlights">
@@ -309,8 +286,8 @@
             <li>4.6 stars across 5,300+ reviews</li>
         </ul>
         <span class="pick-best-for">🧂 Best for: The dinner table upgrade</span>
-        <a href="https://www.amazon.com/dp/B0FJQM8VTG?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B0FJQM8VTG?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
@@ -320,8 +297,6 @@
     <div class="pick-card-body">
         <div class="pick-card-meta">
             <span class="pick-rating"><span class="pick-stars">★★★★★</span> 4.7</span>
-            <span class="pick-price" data-price-asin="B08JLB2PQ2">—</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>🔥 Walfos Silicone Trivet Mats — 4-Pack</h2>
         <p class="pick-quick-take">Four-pack of heat-proof trivet mats that protect every surface during the holiday rush.</p>
@@ -332,8 +307,8 @@
             <li>4.7 stars across 3,100+ reviews — dishwasher safe</li>
         </ul>
         <span class="pick-best-for">🔥 Best for: Protecting every surface</span>
-        <a href="https://www.amazon.com/dp/B08JLB2PQ2?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <a href="https://www.amazon.com/dp/B08JLB2PQ2?tag=worthitgoods-20" target="_blank" rel="nofollow" class="pick-cta">View on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases</p>
     </div>
 </div>
 
