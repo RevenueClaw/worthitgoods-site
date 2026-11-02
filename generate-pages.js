@@ -43,7 +43,7 @@ const THEMES = {
     },
     thanksgiving_host: {
         badge: '🦃 Thanksgiving Hosting',
-        tagline: 'Everything you need to host a memorable Thanksgiving without the stress',
+        tagline: 'Roasting pans, serving pieces & clever host gifts for the big day',
     },
     holiday_gifts: {
         badge: '🎁 Holiday Gift Guide',
@@ -73,6 +73,7 @@ function cleanTitle(title) {
 
 // Shrink Amazon image URLs for grid thumbnails: SL500->SL400, AC_SL1500->SL400
 function thumbnailUrl(url) {
+    if (!url) return '';
     return url.replace(/_(SL|AC_SL|US)\d{3,4}_/g, '_SL400_');
 }
 
