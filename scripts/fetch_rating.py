@@ -58,7 +58,13 @@ def save_cache(cache):
 def _get_paapi():
     """Lazy-import PAAPI. Returns AmazonCreatorsAPI instance or None."""
     try:
-        sys.path.insert(0, str(Path.home() / 'workspace' / 'chipradar'))
+        for p in (str(Path.home() / 'workspace' / 'chipradar'),
+                  str(Path.home() / 'chipradar'),
+                  '/home/pi/chipradar',
+                  '/home/rock/.openclaw/workspace/chipradar',
+                  '/home/rock/workspace/chipradar'):
+            if Path(p).is_dir() and p not in sys.path:
+                sys.path.insert(0, p)
         from amazon_creators_api_v3 import AmazonCreatorsAPI
         return AmazonCreatorsAPI()
     except Exception as e:
@@ -241,12 +247,12 @@ def main():
         curl_requests += 1
         results.append(result)
 
-    # Print per-ASIN results
+    # Print per-ASIN results (stderr so --batch stdout stays valid JSON)
     for result in results:
         status = '✅' if (result.get('star_rating') or 0) >= 4.5 and (result.get('review_count') or 0) >= 100 else '⚠️'
-        print(f"{status} {result['asin']}: {result.get('star_rating', '?')}★ / {result.get('review_count', '?')} reviews")
+        print(f"{status} {result['asin']}: {result.get('star_rating', '?')}★ / {result.get('review_count', '?')} reviews", file=sys.stderr)
         if result.get('error'):
-            print(f"   ERROR: {result['error']}")
+            print(f"   ERROR: {result['error']}", file=sys.stderr)
 
     if batch_mode:
         print(json.dumps(results, indent=2))

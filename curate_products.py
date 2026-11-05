@@ -25,7 +25,13 @@ import json, os, random, sys, re, time
 from pathlib import Path
 from datetime import date
 
-sys.path.insert(0, "/home/rock/.openclaw/workspace/chipradar")
+for _cp in ("/home/pi/chipradar",
+            "/home/rock/.openclaw/workspace/chipradar",
+            "/home/rock/workspace/chipradar",
+            str(Path.home() / "chipradar"),
+            str(Path.home() / "workspace" / "chipradar")):
+    if os.path.isdir(_cp):
+        sys.path.insert(0, _cp)
 from amazon_creators_api_v3 import AmazonCreatorsAPI
 
 PARTNER_TAG = "worthitgoods-20"
@@ -371,7 +377,7 @@ def scrape_batch(candidates, label, fetcher_path):
         scrape_asins = [p["asin"] for p in chunk]
         result = subprocess.run(
             [sys.executable, fetcher_path, '--batch'] + scrape_asins,
-            capture_output=True, text=True, timeout=300
+            capture_output=True, text=True, timeout=900
         )
         if result.stdout.strip():
             try:
@@ -841,13 +847,11 @@ def save(products):
     print(f"  GENERATING DESCRIPTIONS via LLM ({len(products)} products)")
     print(f"{'='*60}")
     
-    llm_api_key = os.environ.get("LLM_API_KEY") or ""
+    llm_api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("LLM_API_KEY") or ""
     headers = {"Content-Type": "application/json"}
+    llm_url = "https://openrouter.ai/api/v1/chat/completions"
     if llm_api_key:
-        llm_url = "https://openrouter.ai/api/v1/chat/completions"
         headers["Authorization"] = f"Bearer {llm_api_key}"
-    else:
-        llm_url = "http://192.168.4.131:18792/infer"
     
     product_info = "\n".join(
         f"PRODUCT {i}: ${p.get('price','?')} — {p['title']}\n  ASIN: {asin_from_url(p.get('affiliate_url',''))}\n  Image: {p.get('image','')}"
@@ -870,11 +874,12 @@ DESCRIPTION: <2-4 sentences>
 {product_info}
 """
     
+    updated = 0
     try:
         data_bytes = json.dumps({
             "model": "deepseek/deepseek-v4.1-flash",
             "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": min(500 * len(products), 4000)
+            "max_tokens": min(1500 * len(products), 8000)
         }).encode()
         import urllib.request
         req = urllib.request.Request(llm_url, data=data_bytes, headers=headers, method="POST")

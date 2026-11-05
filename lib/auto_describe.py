@@ -68,7 +68,7 @@ Product: {title}
 Price: {price_str}
 Category: {category_hint}
 """
-    result = call_llm(prompt, max_tokens=80, temperature=0.6)
+    result = call_llm(prompt, max_tokens=400, temperature=0.6)
     if result:
         # Strip quotes if present
         result = result.strip('"').strip("'")
@@ -86,7 +86,7 @@ Category: {category_hint}
 
 Format: plain text, no markdown, no leading prefix.
 """
-    result = call_llm(prompt, max_tokens=150, temperature=0.6)
+    result = call_llm(prompt, max_tokens=800, temperature=0.6)
     if result:
         result = result.strip('"').strip("'")
         # Remove common prefixes
