@@ -217,7 +217,7 @@ function renderProduct(p) {
                     <div class="content">
                         <h3>${cleanTitle(p.title)}</h3>
                         
-                        <div class="price-tag">Check current price on Amazon</div>
+                        
                         
                         <!-- Short preview: blurb -->
                         <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
@@ -870,7 +870,7 @@ for (const product of products) {
     const slug = slugify(product.title);
     const title = cleanTitle(product.title);
     const desc = (product.description || product.blurb || '').replace(/<[^>]+>/g, '').substring(0, 160);
-    const price = 'Check current price on Amazon';
+    const price = '';
     const category = product.category || 'Deals';
     const canonicalUrl = 'https://www.worthitgoods.com/product/' + slug + '.html';
 
