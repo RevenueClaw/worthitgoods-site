@@ -234,7 +234,7 @@ ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" style="max-wid
 <p style="text-align:center;margin:3rem 0;"><a href="/blog.html" class="cta-button" style="display:inline-block;padding:1rem 2rem;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;text-decoration:none;border-radius:8px;font-weight:bold;">More Blog Posts</a></p>
 </article>
 <footer style="margin-top:4rem;padding:2rem;background:#333;color:white;text-align:center;">
-<p>© 2026 WorthIt Goods. Amazon affiliate disclosure: We earn from qualifying purchases.</p>
+<p>© 2026 WorthIt Goods. Amazon affiliate disclosure: We earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
 </footer>
 </body>
 </html>`;

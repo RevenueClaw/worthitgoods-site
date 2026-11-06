@@ -165,7 +165,7 @@ for cat_key, products in sorted(categories.items(), key=lambda x: -len(x[1])):
 {cards}
         </div>
         <div class="footer">
-            <p>🛒 As an Amazon Associate and eBay Partner, we earn from qualifying purchases. Product data updated daily.</p>
+            <p>🛒 As an Amazon Associate and eBay Partner, we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
             <p style="margin-top:8px"><a href="/">← Back to WorthIt Goods</a></p>
         </div>
     </div>
@@ -251,7 +251,7 @@ index_html = f"""<!DOCTYPE html>
         <div class="cat-grid">
 {cat_links}
         </div>
-        <div class="footer"><p>&#x1f6d2; As an Amazon Associate and eBay Partner, we earn from qualifying purchases.</p><p style="margin-top:8px"><a href="/">&#8592; Back to WorthIt Goods</a></p></div>
+        <div class="footer"><p>&#x1f6d2; As an Amazon Associate and eBay Partner, we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p><p style="margin-top:8px"><a href="/">&#8592; Back to WorthIt Goods</a></p></div>
     </div>
 </body>
 </html>"""

@@ -62,7 +62,7 @@
     </div>
     <div class="container">
         <div class="intro">
-            <p>If you've been scrolling through Amazon looking for the perfect set of ceramic bowls, you've probably run into two strong contenders: the <strong>Mora Ceramic Artisan Matte Bowls</strong> and the <strong>KooK 40oz Pasta Bowl Set</strong>. Both come in sets of four, both are made of quality ceramic, and both are priced around $35. But they take very different approaches to what a bowl should be.</p>
+            <p>If you've been scrolling through Amazon looking for the perfect set of ceramic bowls, you've probably run into two strong contenders: the <strong>Mora Ceramic Artisan Matte Bowls</strong> and the <strong>KooK 40oz Pasta Bowl Set</strong>. Both come in sets of four, both are made of quality ceramic, and both are priced around the current price on Amazon. But they take very different approaches to what a bowl should be.</p>
             <p>We put them side by side — testing durability, capacity, design, and real-world usability — to help you decide which one is right for your kitchen (and your eating habits).</p>
             <div class="disclosure">Disclosure: We earn a small commission if you purchase through our links at no extra cost to you. We only recommend products we genuinely believe in.</div>
         </div>
@@ -73,7 +73,7 @@
                 <img src="https://m.media-amazon.com/images/I/612SnhkVWwL._AC_SL1500_.jpg" alt="Mora Ceramic Artisan Matte Bowls" loading="lazy">
                 <h2>Mora Ceramic Artisan Matte Bowls</h2>
                 <div class="rating">★★★★★ (4.6/5)</div>
-                <div class="price">$34.99</div>
+                <div class="price">the current price on Amazon</div>
                 <ul>
                     <li>28oz capacity — ideal for cereal, salad, pasta, soup</li>
                     <li>Lead-free, all-natural crystallized matte glaze</li>
@@ -82,13 +82,13 @@
                     <li>Microwave, oven, freezer, and dishwasher safe</li>
                     <li>Designed to stack neatly in cabinets</li>
                 </ul>
-                <a class="cta-button" href="https://www.amazon.com/dp/B0CJCXJLYJ?tag=worthitgoods-20" target="_blank" rel="noopener">Check Price on Amazon →</a>
+                <a class="cta-button" href="https://www.amazon.com/dp/B0CJCXJLYJ?tag=worthitgoods-20" target="_blank" rel="noopener">Check Price on Amazon →</a><br><span class="amazon-disclaimer" style="font-size:12px;color:#6b7280;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</span>
             </div>
             <div class="product-card">
                 <img src="https://m.media-amazon.com/images/I/71G7hJ1KYPL._AC_SL1500_.jpg" alt="KooK 40oz Pasta Bowl Set" loading="lazy">
                 <h2>KooK 40oz Pasta Bowl Set</h2>
                 <div class="rating">★★★★☆ (4.5/5)</div>
-                <div class="price">$36.99</div>
+                <div class="price">the current price on Amazon</div>
                 <ul>
                     <li>Large 40oz capacity — generous for pasta, salads, stews</li>
                     <li>Classic ceramic stoneware construction</li>
@@ -179,8 +179,8 @@
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td class="winner-cell">$34.99 🏆</td>
-                        <td>$36.99</td>
+                        <td class="winner-cell">the current price on Amazon 🏆</td>
+                        <td>Check on Amazon</td>
                     </tr>
                 </tbody>
             </table>
@@ -194,12 +194,12 @@
                 <li><strong>Superior durability:</strong> The Paladin Clay is 20% stronger than standard ceramic, and the crystallized matte glaze is tested to resist scratches under 1000g of pressure. These bowls will look new years from now.</li>
                 <li><strong>Lead-free peace of mind:</strong> Many ceramic glazes still contain lead — even in the US, there's no regulation for adult products. Mora uses an all-natural, lead-free glaze so you never have to worry.</li>
                 <li><strong>More versatile:</strong> Oven-safe up to 350°F means you can bake and serve in the same dish. KooK doesn't confirm oven safety.</li>
-                <li><strong>Better value:</strong> At $34.99, you're paying less for a bowl that's objectively stronger, safer, and more scratch-resistant.</li>
+                <li><strong>Better value:</strong> at the current price on Amazon, you're paying less for a bowl that's objectively stronger, safer, and more scratch-resistant.</li>
                 <li><strong>Thoughtful design:</strong> The "Mora" philosophy — Latin for "pause" — is a reminder to slow down and eat mindfully. It sounds cheesy until you realize how much better meals feel when you're not rushing. The bowls nestle and stack beautifully in cabinets too.</li>
             </ul>
             <div class="pick">
                 <h4>🏆 Our Pick: Mora Ceramic Artisan Matte Bowls</h4>
-                <p>Stronger clay, safer glaze, better warranty, oven-safe, and $2 less. The smarter buy for your kitchen.</p>
+                <p>Stronger clay, safer glaze, better warranty, oven-safe, and the current price on Amazon less. The smarter buy for your kitchen.</p>
                 <a class="cta-button" href="https://www.amazon.com/dp/B0CJCXJLYJ?tag=worthitgoods-20" target="_blank" rel="noopener" style="background: white; color: #ff6b35!important;">Buy on Amazon →</a>
             </div>
         </div>
@@ -234,55 +234,6 @@
     </div>
 
 <script>
-function paOpen(asin, title) {
-  var m = document.getElementById('paModal');
-  if (!m) return;
-  m.style.display = 'flex';
-  document.getElementById('paAsin').value = asin;
-  document.getElementById('paTitle').value = title;
-  document.getElementById('paMsg').textContent = '';
-}
-function paClose() { document.getElementById('paModal').style.display = 'none'; }
-document.addEventListener('DOMContentLoaded', function() {
-  var f = document.getElementById('paForm');
-  if (!f) return;
-  f.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var email = document.getElementById('paEmail').value.trim();
-    var asin = document.getElementById('paAsin').value;
-    var title = document.getElementById('paTitle').value;
-    var msg = document.getElementById('paMsg');
-    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
-    msg.textContent = 'Subscribing...'; msg.style.color='#666';
-    try {
-      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, asin: asin, product_title: title})
-      });
-      var d = await res.json();
-      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
-      msg.style.color = d.success ? 'green' : 'red';
-      if (d.success) document.getElementById('paEmail').value = '';
-    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
-  });
-});
-</script>
-<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
-    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
-    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
-    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
-    <form id="paForm">
-      <input type="hidden" id="paAsin">
-      <input type="hidden" id="paTitle">
-      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
-      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
-    </form>
-  </div>
-</div>
-<script src="/assets/price-sync.js" defer></script>
-<script>
 (function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
 if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);
 if(!t||t.length<5)return;var u='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(t)+'&campid='+c+'&mkcid=1&mkevt=1&mkrid=711-53200-19255-0&siteid=0';
@@ -291,5 +242,5 @@ a.style.cssText='display:inline-block;font-size:0.7rem;color:#9ca3af;text-decora
 a.textContent='📦 eBay';h.appendChild(a);});})();
 </script>
 
-</body>
+<p style="font-size:0.8rem;color:#6b7280;margin:12px 0 0;">As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p></body>
 </html>

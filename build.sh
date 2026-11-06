@@ -72,11 +72,8 @@ node generate-blogs.js
 # Generate RSS feed
 node generate-rss.js
 
-# Generate Google Shopping product feed
-python3 scripts/generate_google_shopping_feed.py
-
-# Copy Google Shopping feed to _site
-cp google_shopping_products.xml _site/
+# AMZ-COMPLIANCE 2026-11-05: Google Shopping Amazon price feed disabled.
+# (Amazon Associates policy prohibits caching/republishing Amazon pricing.)
 
 # Copy assets (css, images, etc.)
 cp -r assets _site/

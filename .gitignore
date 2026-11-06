@@ -7,3 +7,6 @@ __pycache__/
 *.pyo
 data/
 
+
+# Price-alert service discontinued 2026-11-05 (Amazon Associates compliance)
+price-alerts/

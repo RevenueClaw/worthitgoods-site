@@ -156,7 +156,7 @@ def gen_post_html(theme, products, intro_html, conclusion_html):
 <a href="/blog.html" style="color:#ff9a56;text-decoration:none;margin:0 10px;">Blog</a>
 <a href="/#products" style="color:#ff9a56;text-decoration:none;margin:0 10px;">All Products</a>
 <a href="/privacy.html" style="color:#ff9a56;text-decoration:none;margin:0 10px;">Privacy</a>
-</div><p>© 2026 WorthIt Goods.</p><p>As an Amazon Associate, we earn from qualifying purchases.</p></footer>
+</div><p>© 2026 WorthIt Goods.</p><p>As an Amazon Associate, we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p></footer>
 </body>
 </body>
 </html>"""

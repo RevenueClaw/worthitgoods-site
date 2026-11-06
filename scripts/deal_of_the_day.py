@@ -112,10 +112,9 @@ def format_deal_text(product):
     lines = []
     lines.append(f"💎 Deal of the Day — {title[:80]}")
 
-    parts = [f"💰 {price}"]
-    if saving and saving > 0:
-        parts.append(f"({pct}% off)")
-    lines.append("  ".join(parts))
+    # AMAZON COMPLIANCE: no Amazon price/savings values in outbound posts.
+    # Price may only be shown on-site with a timestamp + accuracy disclaimer.
+    lines.append("🔥 Today's featured find — tap through for current price & availability")
 
     if rating and reviews:
         lines.append(f"⭐ {rating} from {reviews:,} ratings")

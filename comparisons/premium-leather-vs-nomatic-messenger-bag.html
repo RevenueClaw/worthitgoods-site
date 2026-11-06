@@ -74,9 +74,9 @@
             <img src="https://m.media-amazon.com/images/I/81tKjz1LLXL._AC_SL1500_.jpg" alt="Premium Leather Messenger Bag" loading="lazy">
             <div class="card-body">
                 <h2>Premium Leather 18" Messenger Bag</h2>
-                <div class="price">$94.99</div>
+                <div class="price">the current price on Amazon</div>
                 <p>Top-grain water buffalo leather with YKK metal zippers. Fits up to 18" laptops. Trolley-compatible. Multiple internal sections with pen slots &amp; zipper compartments.</p>
-                <a href="https://www.amazon.com/dp/B01KS9OYTK?coliid=I345SQ8X09DN6Y&colid=300RVEMPRMDH&th=1&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=b99d6fbbbbefc03daa870cdba8b3cf83&language=en_US&ref_=as_li_ss_tl" class="cta" target="_blank" rel="nofollow sponsored">View on Amazon →</a>
+                <a href="https://www.amazon.com/dp/B01KS9OYTK?coliid=I345SQ8X09DN6Y&colid=300RVEMPRMDH&th=1&psc=1&linkCode=ll2&tag=worthitgoods-20&linkId=b99d6fbbbbefc03daa870cdba8b3cf83&language=en_US&ref_=as_li_ss_tl" class="cta" target="_blank" rel="nofollow sponsored">View on Amazon →</a><br><span class="amazon-disclaimer" style="font-size:12px;color:#6b7280;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</span>
             </div>
         </div>
         <!-- Competitor -->
@@ -84,7 +84,7 @@
             <img src="https://m.media-amazon.com/images/I/81eQ0m1Z3UL._AC_SL1500_.jpg" alt="NOMATIC Navigator Messenger Bag" loading="lazy">
             <div class="card-body">
                 <h2>NOMATIC Navigator Messenger Bag</h2>
-                <div class="price">$139.99</div>
+                <div class="price">the current price on Amazon</div>
                 <p>Modern weather-resistant synthetic with a dedicated padded laptop compartment. RFID-blocking pockets, hidden passport slot, and integrated organization system. 15" laptop fit.</p>
                 <a href="https://www.amazon.com/dp/B07VCRR6X4?tag=worthitgoods-20" class="cta" target="_blank" rel="nofollow sponsored">View on Amazon →</a>
             </div>
@@ -108,7 +108,7 @@
                 <tr><td><strong>Trolley Strap</strong></td><td class="winner">✅ Included</td><td>❌ Not included</td></tr>
                 <tr><td><strong>Weight</strong></td><td>~2.8 lbs</td><td class="winner">~1.9 lbs</td></tr>
                 <tr><td><strong>Aging / Patina</strong></td><td class="winner">Develops beautiful character</td><td>Looks the same for years</td></tr>
-                <tr><td><strong>Price</strong></td><td class="winner">$94.99</td><td>$139.99</td></tr>
+                <tr><td><strong>Price</strong></td><td class="winner">Check on Amazon</td><td>Check on Amazon</td></tr>
             </tbody>
         </table>
     </div>
@@ -154,7 +154,7 @@
 <section class="section">
     <div class="container">
         <h2>💰 Price &amp; Value</h2>
-        <p>The leather messenger is <strong>$94.99</strong> — for genuine top-grain buffalo leather with YKK hardware, that's exceptional value. A comparable bag from a heritage brand like Filson or Saddleback would cost $250–$400. The NOMATIC runs <strong>$139.99</strong>, which is fair for its build and organization features, but you're paying for design and branding rather than premium materials.</p>
+        <p>The leather messenger is <strong>the current price on Amazon</strong> — for genuine top-grain buffalo leather with YKK hardware, that's exceptional value. A comparable bag from a heritage brand like Filson or Saddleback would cost the current price on Amazon. The NOMATIC runs <strong>the current price on Amazon</strong>, which is fair for its build and organization features, but you're paying for design and branding rather than premium materials.</p>
         <p>Consider longevity: a well-maintained leather bag can last <strong>decades</strong> and looks better with age. A synthetic bag will start showing wear in 2–4 years and doesn't improve with use. Over a 10-year horizon, the leather bag is dramatically cheaper per year.</p>
         <p><strong>Winner:</strong> Premium Leather Messenger — more durable, cheaper, and gains character over time.</p>
     </div>
@@ -187,61 +187,12 @@
 
 <footer>
     <div class="container">
-        <p>WorthItGoods — real reviews, real value. As an Amazon Associate we earn from qualifying purchases.</p>
+        <p>WorthItGoods — real reviews, real value. As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
         <p><a href="https://worthitgoods.com">Home</a> · <a href="https://worthitgoods.com/comparisons">Comparisons</a> · <a href="https://worthitgoods.com/privacy">Privacy</a></p>
     </div>
-</footer>
+<p style="font-size:0.8rem;color:#6b7280;margin:12px 0 0;">As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p></footer>
 
 
-<script>
-function paOpen(asin, title) {
-  var m = document.getElementById('paModal');
-  if (!m) return;
-  m.style.display = 'flex';
-  document.getElementById('paAsin').value = asin;
-  document.getElementById('paTitle').value = title;
-  document.getElementById('paMsg').textContent = '';
-}
-function paClose() { document.getElementById('paModal').style.display = 'none'; }
-document.addEventListener('DOMContentLoaded', function() {
-  var f = document.getElementById('paForm');
-  if (!f) return;
-  f.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var email = document.getElementById('paEmail').value.trim();
-    var asin = document.getElementById('paAsin').value;
-    var title = document.getElementById('paTitle').value;
-    var msg = document.getElementById('paMsg');
-    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
-    msg.textContent = 'Subscribing...'; msg.style.color='#666';
-    try {
-      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, asin: asin, product_title: title})
-      });
-      var d = await res.json();
-      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
-      msg.style.color = d.success ? 'green' : 'red';
-      if (d.success) document.getElementById('paEmail').value = '';
-    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
-  });
-});
-</script>
-<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
-    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
-    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
-    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
-    <form id="paForm">
-      <input type="hidden" id="paAsin">
-      <input type="hidden" id="paTitle">
-      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
-      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
-    </form>
-  </div>
-</div>
-<script src="/assets/price-sync.js" defer></script>
 <script>
 (function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
 if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);

@@ -398,7 +398,7 @@ def generate_blog_post(theme_key, theme_data, products):
     <div class="pick-card-body">
         <div class="pick-card-meta">
             {rating_html}
-            <span class="pick-price" data-price-asin="{asin}">—</span>
+            <span class="pick-price" >Check on Amazon</span>
             <span class="pick-price-note">check price</span>
         </div>
         <h2>{p['title'][:90]}</h2>
@@ -410,7 +410,7 @@ def generate_blog_post(theme_key, theme_data, products):
         </ul>
         <span class="pick-best-for">{best_for}</span>
         <a href="{url}" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases</p>
+        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
     </div>
 </div>''')
 
@@ -478,7 +478,7 @@ def generate_blog_post(theme_key, theme_data, products):
 
 </main>
 <footer><p>&copy; {today.year} WorthItGoods &middot; <a href=\"/privacy.html\">Privacy</a></p></footer>
-<script src=\"/assets/price-sync.js\" defer></script>
+
 </body>
 </html>'''
 

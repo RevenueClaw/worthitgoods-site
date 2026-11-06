@@ -136,7 +136,7 @@ detail_template = '''<!DOCTYPE html>
         <div class="badges">{badges_html}</div>
         <div class="price-large">{currency} {price}</div>
         <a href="{affiliate_url}" class="buy-btn" target="_blank" rel="nofollow noopener">Buy Now</a>
-        <p class="disclosure">As an Amazon Associate we earn from qualifying purchases.</p>
+        <p class="disclosure">As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
       </div>
     </div>
     <section class="product-content">

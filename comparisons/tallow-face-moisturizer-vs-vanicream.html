@@ -83,9 +83,9 @@
             <img src="https://m.media-amazon.com/images/I/61S+DgBHCjL._SL500_.jpg" alt="Whipped Beef Tallow for Skin & Face" loading="lazy">
             <div class="info">
                 <h2>Whipped Beef Tallow for Skin & Face</h2>
-                <div class="price">$49.99 (8 oz)</div>
+                <div class="price">the current price on Amazon (8 oz)</div>
                 <p>100% grass-fed beef tallow whipped into a silky balm. Single ingredient, no additives, no water — just pure rendered fat from pasture-raised cattle. Rich in vitamins A, D, E, and K.</p>
-                <a class="cta-btn" href="https://www.amazon.com/dp/B0CMC8F9XJ?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon →</a>
+                <a class="cta-btn" href="https://www.amazon.com/dp/B0CMC8F9XJ?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon →</a><br><span class="amazon-disclaimer" style="font-size:12px;color:#6b7280;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</span>
             </div>
         </div>
 
@@ -93,7 +93,7 @@
             <img src="https://m.media-amazon.com/images/I/51GdTfK-6iL._SL500_.jpg" alt="Vanicream Daily Facial Moisturizer" loading="lazy">
             <div class="info">
                 <h2>Vanicream Daily Facial Moisturizer</h2>
-                <div class="price">$15.99 (3 oz)</div>
+                <div class="price">the current price on Amazon (3 oz)</div>
                 <p>Dermatologist-tested, free of dyes, fragrance, parabens, formaldehyde, and lanolin. Formulated specifically for sensitive, eczema-prone, and reactive skin. Non-comedogenic.</p>
                 <a class="cta-btn" href="https://www.amazon.com/dp/B07PNMXLMX?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon →</a>
             </div>
@@ -110,8 +110,8 @@
             </tr>
             <tr>
                 <td>Price</td>
-                <td class="winner-cell">$49.99 / 8 oz ($6.25/oz)</td>
-                <td>$15.99 / 3 oz ($5.33/oz)</td>
+                <td class="winner-cell">the current price on Amazon / 8 oz (the current price on Amazon/oz)</td>
+                <td>the current price on Amazon / 3 oz (the current price on Amazon/oz)</td>
             </tr>
             <tr>
                 <td>Ingredients</td>
@@ -170,7 +170,7 @@
                 <li>Heavier texture — feels greasy until fully absorbed</li>
                 <li>Can clog pores for some acne-prone skin types</li>
                 <li>Shorter shelf life without preservatives</li>
-                <li>Higher upfront cost per container ($49.99)</li>
+                <li>Higher upfront cost per container (the current price on Amazon)</li>
                 <li>Not vegan-friendly</li>
             </ul>
         </div>
@@ -182,7 +182,7 @@
                 <li>Clinically tested non-comedogenic — won't clog pores</li>
                 <li>Lightweight, fast-absorbing texture works under makeup</li>
                 <li>Widely available at drugstores and online</li>
-                <li>More affordable per ounce ($5.33/oz)</li>
+                <li>More affordable per ounce (the current price on Amazon/oz)</li>
             </ul>
         </div>
         <div class="box cons">
@@ -265,61 +265,12 @@
     </div>
 
     <div class="footer">
-        <p><em>Prices and availability accurate as of August 2026. As an Amazon Associate, we earn from qualifying purchases.</em></p>
+        <p><em>Prices and availability accurate as of August 2026. As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</em></p>
         <p><a href="https://worthitgoods.com/">WorthItGoods</a> — Honest comparisons for smarter shopping.</p>
     </div>
 
 </div>
 
-<script>
-function paOpen(asin, title) {
-  var m = document.getElementById('paModal');
-  if (!m) return;
-  m.style.display = 'flex';
-  document.getElementById('paAsin').value = asin;
-  document.getElementById('paTitle').value = title;
-  document.getElementById('paMsg').textContent = '';
-}
-function paClose() { document.getElementById('paModal').style.display = 'none'; }
-document.addEventListener('DOMContentLoaded', function() {
-  var f = document.getElementById('paForm');
-  if (!f) return;
-  f.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var email = document.getElementById('paEmail').value.trim();
-    var asin = document.getElementById('paAsin').value;
-    var title = document.getElementById('paTitle').value;
-    var msg = document.getElementById('paMsg');
-    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
-    msg.textContent = 'Subscribing...'; msg.style.color='#666';
-    try {
-      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, asin: asin, product_title: title})
-      });
-      var d = await res.json();
-      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
-      msg.style.color = d.success ? 'green' : 'red';
-      if (d.success) document.getElementById('paEmail').value = '';
-    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
-  });
-});
-</script>
-<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
-    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
-    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
-    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
-    <form id="paForm">
-      <input type="hidden" id="paAsin">
-      <input type="hidden" id="paTitle">
-      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
-      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
-    </form>
-  </div>
-</div>
-<script src="/assets/price-sync.js" defer></script>
 <script>
 (function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
 if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);
@@ -329,5 +280,5 @@ a.style.cssText='display:inline-block;font-size:0.7rem;color:#9ca3af;text-decora
 a.textContent='📦 eBay';h.appendChild(a);});})();
 </script>
 
-</body>
+<p style="font-size:0.8rem;color:#6b7280;margin:12px 0 0;">As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p></body>
 </html>

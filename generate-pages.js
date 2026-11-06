@@ -59,6 +59,18 @@ if (!fs.existsSync(siteDir)) {
 
 const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
+// AMZ-COMPLIANCE 2026-11-05: never display or cache Amazon prices.
+// Replace baked dollar figures in product copy with neutral guidance.
+function sanitizePriceText(v) {
+    return String(v == null ? '' : v)
+        .replace(/under\s*\$\s?\d[\d,]*(?:\.\d{2})?/gi, 'at a budget-friendly price')
+        .replace(/\$\s?\d[\d,]*(?:\.\d{2})?/g, 'the current price on Amazon');
+}
+products.forEach(function (p) {
+    if (p.description) p.description = sanitizePriceText(p.description);
+    if (p.blurb) p.blurb = sanitizePriceText(p.blurb);
+});
+
 
 function cleanTitle(title) {
     if (title.length <= 55) return title;
@@ -92,20 +104,16 @@ function generateProductSchema(products) {
     // Reference: https://developers.google.com/search/docs/appearance/structured-data/product
     const productSchemas = products.map((p, i) => {
         // Build offer with price if available
+        // AMZ-COMPLIANCE: no cached Amazon price/availability in structured data.
         const offer = {
             "@type": "Offer",
             "url": p.affiliate_url,
-            "availability": p.price ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "itemCondition": "https://schema.org/NewCondition",
             "seller": {
                 "@type": "Organization",
                 "name": "Amazon.com"
             }
         };
-        if (p.price && p.price > 0) {
-            offer.price = p.price;
-            offer.priceCurrency = "USD";
-        }
         
         // Extract ASIN from affiliate URL (format: /dp/B0XXXXX?tag=...)
         const asinMatch = (p.affiliate_url || '').match(/\/dp\/([A-Z0-9]{10})(?:\?|$)/);
@@ -209,7 +217,7 @@ function renderProduct(p) {
                     <div class="content">
                         <h3>${cleanTitle(p.title)}</h3>
                         
-                        ${p.price ? `<div class="price-tag">$${p.price.toFixed(2)}</div>` : ''}
+                        <div class="price-tag">Check current price on Amazon</div>
                         
                         <!-- Short preview: blurb -->
                         <p class="short-desc">${(p.blurb || p.description.substring(0, 180)).replace(/\n/g, ' ').trim()}${p.blurb ? '' : '...'}</p>
@@ -220,10 +228,8 @@ function renderProduct(p) {
                         <button class="toggle-btn" type="button">Why It\u2019s Worth It \u2192</button>
                         
                         <a href="/go/asin/${asinFromUrl(p.affiliate_url)}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                        <div class="amazon-disclaimer" style="font-size:11px;color:#6b7280;margin-top:4px;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</div>
                         <div style="text-align:center;margin-top:8px;">
-                            <a href="#" class="price-alert-link" onclick="openPriceAlert('${p.asin}', '${cleanTitle(p.title).replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, ' ')}');return false;" style="font-size:0.8rem;color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
-                                <span style="font-size:0.85rem;">🔔</span> Get Price Alert
-                            </a>
                             <div style="margin-top:6px;">
                                 <a href="https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(p.title)}&campid=5339174383&mkcid=1&mkevt=1&mkrid=711-53200-19255-0&siteid=0" target="_blank" rel="nofollow" style="font-size:0.75rem;color:#9ca3af;text-decoration:none;">
                                     📦 or find on eBay
@@ -735,60 +741,7 @@ const indexHTML = `<!DOCTYPE html>
         });
     })();
 
-    /* ── Price Alert Modal ── */
-    function openPriceAlert(asin, title) {
-        var m = document.getElementById('paModal');
-        if (!m) return;
-        m.style.display = 'flex';
-        document.getElementById('paAsin').value = asin;
-        document.getElementById('paProduct').value = title;
-        var msg = document.getElementById('paMsg');
-        if (msg) { msg.textContent = ''; msg.className = 'newsletter-msg'; }
-    }
-    function closePriceAlert() {
-        var m = document.getElementById('paModal');
-        if (m) m.style.display = 'none';
-    }
-    (function() {
-        var paForm = document.getElementById('paForm');
-        if (!paForm) return;
-        paForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const email = document.getElementById('paEmail').value.trim();
-            const asin = document.getElementById('paAsin').value;
-            const title = document.getElementById('paProduct').value;
-            const msg = document.getElementById('paMsg');
-            if (!msg) return;
-            msg.className = 'newsletter-msg';
-            msg.textContent = 'Subscribing...';
-            try {
-                const res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({email, asin, product_title: title})
-                });
-                const data = await res.json();
-                if (data.success) {
-                    msg.className = 'newsletter-msg success';
-                    msg.textContent = data.message || "You're subscribed!";
-                    document.getElementById('paEmail').value = '';
-                } else {
-                    msg.className = 'newsletter-msg error';
-                    msg.textContent = data.message || 'Something went wrong.';
-                }
-            } catch(err) {
-                msg.className = 'newsletter-msg error';
-                msg.textContent = 'Service unavailable.';
-            }
-        });
-    })();
-    (function() {
-        var modal = document.getElementById('paModal');
-        if (!modal) return;
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) closePriceAlert();
-        });
-    })();
+    /* Alert signup UI removed 2026-11-05 (Amazon Associates compliance). */
 
     /* ── Product Suggestion Modal ── */
     function openSuggestion() {
@@ -815,7 +768,7 @@ const indexHTML = `<!DOCTYPE html>
             msg.className = 'newsletter-msg';
             msg.textContent = 'Submitting...';
             try {
-                const res = await fetch('https://price-alert.worthitgoods.com/suggest', {
+                const res = await fetch('https://chipradar.io/api/worthitgoods/suggest', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({email, product, notes})
@@ -849,7 +802,7 @@ const indexHTML = `<!DOCTYPE html>
     document.addEventListener('click', function(e) {
         var card = e.target.closest('.product-card');
         if (!card) return;
-        if (e.target.closest('.cta') || e.target.closest('.price-alert-link')) return;
+        if (e.target.closest('.cta')) return;
         var content = card.querySelector('.content');
         if (!content) return;
         var short = content.querySelector('.short-desc');
@@ -882,22 +835,6 @@ const indexHTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- ── Price Alert Modal ── -->
-    <div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-      <div style="background:white;border-radius:16px;padding:32px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
-        <button onclick="closePriceAlert()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;">×</button>
-        <h3 style="margin-top:0;margin-bottom:8px;font-size:1.3rem;">🔔 Price Alert</h3>
-        <p style="color:#6b7280;font-size:0.9rem;margin-bottom:16px;">We'll email you when this product's price drops. No spam, unsubscribe anytime.</p>
-        <form id="paForm">
-          <input type="hidden" id="paAsin">
-          <input type="hidden" id="paProduct">
-          <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:8px;font-size:1rem;margin-bottom:12px;box-sizing:border-box;">
-          <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-          <div id="paMsg" class="newsletter-msg" style="margin-top:8px;"></div>
-        </form>
-      </div>
-    </div>
-
     <footer>
         <div class="footer-links" style="margin-bottom: 20px;">
             <a href="/" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Home</a>
@@ -908,7 +845,7 @@ const indexHTML = `<!DOCTYPE html>
             <a href="#" onclick="openSuggestion();return false;" style="color: #ff9a56; text-decoration: none; margin: 0 12px;">Suggest a Product</a>
         </div>
         <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
-        <p>As an Amazon Associate, I earn from qualifying purchases. Prices may vary.</p>
+        <p>As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p>
     </footer>
 
 </body>
@@ -933,7 +870,7 @@ for (const product of products) {
     const slug = slugify(product.title);
     const title = cleanTitle(product.title);
     const desc = (product.description || product.blurb || '').replace(/<[^>]+>/g, '').substring(0, 160);
-    const price = product.price ? '$' + parseFloat(product.price).toFixed(2) : 'Check price';
+    const price = 'Check current price on Amazon';
     const category = product.category || 'Deals';
     const canonicalUrl = 'https://www.worthitgoods.com/product/' + slug + '.html';
 
@@ -959,8 +896,6 @@ for (const product of products) {
         "image": "${product.image || product.image_url}",
         "offers": {
             "@type": "Offer",
-            "price": "${product.price || '0'}",
-            "priceCurrency": "USD",
             "url": "${product.affiliate_url || '#'}"
         }
     }
@@ -992,11 +927,12 @@ for (const product of products) {
             <div class="price">${price}</div>
             <div class="description">${product.description || product.blurb || ''}</div>
             <a href="/go/asin/${asinFromUrl(product.affiliate_url)}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
+            <p style="font-size:0.75rem;color:#6b7280;margin-top:8px;">As an Amazon Associate we earn from qualifying purchases.</p>
         </div>
     </div>
     <footer>
         <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
-        <p>As an Amazon Associate, I earn from qualifying purchases.</p>
+        <p>As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p>
     </footer>
 </body>
 </html>`;

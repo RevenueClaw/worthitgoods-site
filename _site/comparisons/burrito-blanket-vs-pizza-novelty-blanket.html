@@ -145,7 +145,7 @@
             </div>
             <div class="info">
                 <h3>CASOFU Burrito Tortilla Throw Blanket</h3>
-                <div class="price">$20.99</div>
+                <div class="price">the current price on Amazon</div>
                 <div class="rating">★★★★★ 4.7 (4,200+)</div>
                 <ul>
                     <li>285 GSM super-soft flannel fabric</li>
@@ -155,7 +155,7 @@
                     <li>Machine washable, stays soft</li>
                     <li>Great gag gift for taco lovers</li>
                 </ul>
-                <a class="cta-btn" href="https://www.amazon.com/dp/B07QTHK8K9?tag=worthitgoods-20" target="_blank" rel="noopener">Check Price on Amazon →</a>
+                <a class="cta-btn" href="https://www.amazon.com/dp/B07QTHK8K9?tag=worthitgoods-20" target="_blank" rel="noopener">Check Price on Amazon →</a><br><span class="amazon-disclaimer" style="font-size:12px;color:#6b7280;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</span>
             </div>
         </div>
 
@@ -166,7 +166,7 @@
             </div>
             <div class="info">
                 <h3>Calhoun Ultra-Realistic Pizza Blanket</h3>
-                <div class="price">$19.99</div>
+                <div class="price">the current price on Amazon</div>
                 <div class="rating">★★★★★ 4.5 (3,800+)</div>
                 <ul>
                     <li>100% polyester fleece fabric</li>
@@ -197,8 +197,8 @@
             <tbody>
                 <tr>
                     <td>Price</td>
-                    <td>$20.99</td>
-                    <td>$19.99</td>
+                    <td>Check on Amazon</td>
+                    <td>Check on Amazon</td>
                 </tr>
                 <tr>
                     <td>Material</td>
@@ -317,7 +317,7 @@
 <div class="content-section">
     <div class="container">
         <h2>💡 Quick Summary</h2>
-        <p>Both the CASOFU Burrito Tortilla Throw Blanket ($20.99) and the Calhoun Pizza Throw Blanket ($19.99) are excellent novelty gifts at nearly identical price points. The difference comes down to how you plan to use it:</p>
+        <p>Both the CASOFU Burrito Tortilla Throw Blanket (the current price on Amazon) and the Calhoun Pizza Throw Blanket (the current price on Amazon) are excellent novelty gifts at nearly identical price points. The difference comes down to how you plan to use it:</p>
         <ul>
             <li><strong>Best Overall Blanket:</strong> CASOFU Burrito — thicker, softer, square shape, more versatile</li>
             <li><strong>Best Decorative Piece:</strong> Calhoun Pizza — more photogenic, ultra-realistic print</li>
@@ -344,55 +344,6 @@
 
 
 <script>
-function paOpen(asin, title) {
-  var m = document.getElementById('paModal');
-  if (!m) return;
-  m.style.display = 'flex';
-  document.getElementById('paAsin').value = asin;
-  document.getElementById('paTitle').value = title;
-  document.getElementById('paMsg').textContent = '';
-}
-function paClose() { document.getElementById('paModal').style.display = 'none'; }
-document.addEventListener('DOMContentLoaded', function() {
-  var f = document.getElementById('paForm');
-  if (!f) return;
-  f.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var email = document.getElementById('paEmail').value.trim();
-    var asin = document.getElementById('paAsin').value;
-    var title = document.getElementById('paTitle').value;
-    var msg = document.getElementById('paMsg');
-    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
-    msg.textContent = 'Subscribing...'; msg.style.color='#666';
-    try {
-      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, asin: asin, product_title: title})
-      });
-      var d = await res.json();
-      msg.textContent = d.success ? '✓ Alert set!' : (d.error || 'Error');
-      msg.style.color = d.success ? 'green' : 'red';
-      if (d.success) document.getElementById('paEmail').value = '';
-    } catch(err) { msg.textContent = 'Network error'; msg.style.color='red'; }
-  });
-});
-</script>
-<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
-    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">×</button>
-    <h3 style="margin:0 0 12px;font-size:1.1rem;">🔔 Price Drop Alert</h3>
-    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
-    <form id="paForm">
-      <input type="hidden" id="paAsin">
-      <input type="hidden" id="paTitle">
-      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
-      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
-    </form>
-  </div>
-</div>
-<script src="/assets/price-sync.js" defer></script>
-<script>
 (function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
 if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);
 if(!t||t.length<5)return;var u='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(t)+'&campid='+c+'&mkcid=1&mkevt=1&mkrid=711-53200-19255-0&siteid=0';
@@ -401,6 +352,5 @@ a.style.cssText='display:inline-block;font-size:0.7rem;color:#9ca3af;text-decora
 a.textContent='📦 eBay';h.appendChild(a);});})();
 </script>
 
-<script src="/assets/exit-capture.js" defer></script>
-</body>
+<p style="font-size:0.8rem;color:#6b7280;margin:12px 0 0;">As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p></body>
 </html>

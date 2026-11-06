@@ -22,7 +22,7 @@ function generateBlog(batchFile) {
     const snippet = p.description.split('.')[0];
     md += `| ${p.title} | ${snippet} | Check Amazon | ⭐⭐⭐⭐ |\n`;
   });
-  md += `> *Prices fluctuate; see Amazon for current deals.*\n\n`;
+  md += `> *Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.*\n\n`;
 
   // In-depth reviews
   md += `## In-Depth Reviews\n\n`;

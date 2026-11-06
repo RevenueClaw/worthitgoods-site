@@ -82,9 +82,9 @@
             <img src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;ASIN=B0DZ15FJ6B&amp;Format=_SL500_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1" alt="Novelty Can Mustache Clip" loading="lazy">
             <div class="info">
                 <h2>Novelty Can Mustache Clip</h2>
-                <div class="price">$17.99</div>
+                <div class="price">the current price on Amazon</div>
                 <p>A rigid clip-on handlebar mustache that snaps onto any standard beer or soda can. Instantly transforms the drinker into a distinguished Victorian gentleman — at least until the third beer. Made of durable hard plastic, lightweight, and endlessly reusable.</p>
-                <a class="cta-btn" href="https://www.amazon.com/dp/B0DZ15FJ6B?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon</a>
+                <a class="cta-btn" href="https://www.amazon.com/dp/B0DZ15FJ6B?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon</a><br><span class="amazon-disclaimer" style="font-size:12px;color:#6b7280;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</span>
             </div>
         </div>
 
@@ -92,7 +92,7 @@
             <img src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;ASIN=B07PFDS2JW&amp;Format=_SL500_&amp;ID=AsinImage&amp;MarketPlace=US&amp;ServiceVersion=20070822&amp;WS=1" alt="Hiccup Mustache Straws" loading="lazy">
             <div class="info">
                 <h2>Hiccup Mustache Straws</h2>
-                <div class="price">$9.99 (4-pack)</div>
+                <div class="price">the current price on Amazon (4-pack)</div>
                 <p>Silicone mustache-shaped can covers with built-in straws. Slip over any standard can tab for a hygienic barrier against dust, dirt, and grubby fingers. Flexible, dishwasher-safe, and comes in 4 mustache styles per pack.</p>
                 <a class="cta-btn" href="https://www.amazon.com/dp/B07PFDS2JW?tag=worthitgoods-20" target="_blank" rel="nofollow noopener">Check Price on Amazon</a>
             </div>
@@ -109,8 +109,8 @@
             </tr>
             <tr>
                 <td>Price</td>
-                <td class="winner-cell">$17.99 (single piece)</td>
-                <td>$9.99 (pack of 4)</td>
+                <td class="winner-cell">the current price on Amazon (single piece)</td>
+                <td>the current price on Amazon (pack of 4)</td>
             </tr>
             <tr>
                 <td>Material</td>
@@ -168,7 +168,7 @@
                 <li>Single-use joke territory — once the novelty wears off, it collects dust</li>
                 <li>Hard plastic — not dishwasher-safe; stubborn grime in crevices</li>
                 <li>Only fits 12oz cans — won't work on skinny cans, glass bottles, or tallboys</li>
-                <li>$17.99 for a single clip is steep compared to multi-pack alternatives</li>
+                <li>the current price on Amazon for a single clip is steep compared to multi-pack alternatives</li>
                 <li>Doesn't provide any hygiene function — purely decorative</li>
                 <li>Can snap off if dropped or bumped — not great for tailgates</li>
             </ul>
@@ -181,7 +181,7 @@
                 <li>Creates a hygienic barrier over the can tab — great for garage, workshop, or dusty festivals</li>
                 <li>Built-in straw makes drinking smoother and cleaner</li>
                 <li>Fits more can sizes including tallboys</li>
-                <li>At $9.99 for 4, way more value per unit</li>
+                <li>at the current price on Amazon for 4, way more value per unit</li>
             </ul>
         </div>
         <div class="box cons">
@@ -249,8 +249,8 @@
             </tr>
             <tr>
                 <td>Budget per Unit</td>
-                <td>$17.99 for 1 piece</td>
-                <td class="winner-cell">$2.50 per straw ($9.99 / 4-pack)</td>
+                <td>the current price on Amazon for 1 piece</td>
+                <td class="winner-cell">the current price on Amazon per straw (the current price on Amazon / 4-pack)</td>
                 <td class="winner-cell">Mustache Straws</td>
             </tr>
         </table>
@@ -264,61 +264,12 @@
     </div>
 
     <div class="footer">
-        <p><em>Prices and availability accurate as of October 2026. As an Amazon Associate, we earn from qualifying purchases.</em></p>
+        <p><em>Prices and availability accurate as of October 2026. As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</em></p>
         <p><a href="https://worthitgoods.com/">WorthItGoods</a> — Honest comparisons for smarter shopping.</p>
     </div>
 
 </div>
 
-<script>
-function paOpen(asin, title) {
-  var m = document.getElementById('paModal');
-  if (!m) return;
-  m.style.display = 'flex';
-  document.getElementById('paAsin').value = asin;
-  document.getElementById('paTitle').value = title;
-  document.getElementById('paMsg').textContent = '';
-}
-function paClose() { document.getElementById('paModal').style.display = 'none'; }
-document.addEventListener('DOMContentLoaded', function() {
-  var f = document.getElementById('paForm');
-  if (!f) return;
-  f.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var email = document.getElementById('paEmail').value.trim();
-    var asin = document.getElementById('paAsin').value;
-    var title = document.getElementById('paTitle').value;
-    var msg = document.getElementById('paMsg');
-    if (!email.includes('@')) { msg.textContent = 'Enter a valid email'; msg.style.color='red'; return; }
-    msg.textContent = 'Subscribing...'; msg.style.color='#666';
-    try {
-      var res = await fetch('https://price-alert.worthitgoods.com/subscribe', {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: email, asin: asin, product_title: title})
-      });
-      var d = await res.json();
-      msg.textContent = d.success ? 'Alert set!' : (d.error || 'Error');
-      msg.style.color = d.success ? 'green' : 'red';
-      if (d.success) document.getElementById('paEmail').value = '';
-    } catch(err) { msg.textContent = 'Network error'; msg.style.color = 'red'; }
-  });
-});
-</script>
-<div id="paModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#fff;padding:24px;border-radius:12px;max-width:320px;width:90%;position:relative;">
-    <button onclick="paClose()" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;">x</button>
-    <h3 style="margin:0 0 12px;font-size:1.1rem;">Price Drop Alert</h3>
-    <p id="paProduct" style="margin:0 0 12px;color:#666;font-size:0.9rem;"></p>
-    <form id="paForm">
-      <input type="hidden" id="paAsin">
-      <input type="hidden" id="paTitle">
-      <input type="email" id="paEmail" placeholder="your@email.com" required style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;box-sizing:border-box;">
-      <button type="submit" style="width:100%;padding:12px;background:linear-gradient(135deg,#ff9a56,#ff6b6b);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Notify Me When Price Drops</button>
-      <p id="paMsg" style="margin:8px 0 0;font-size:0.85rem;text-align:center;"></p>
-    </form>
-  </div>
-</div>
-<script src="/assets/price-sync.js" defer></script>
 <script>
 (function(){var c='5339174383';document.querySelectorAll('h3:not(.no-ebay)').forEach(function(h){
 if(h.querySelector('.ebay-mini-link'))return;var t=h.textContent.replace(/[^\w\s-]/g,'').trim().substring(0,100);
@@ -328,5 +279,5 @@ a.style.cssText='display:inline-block;font-size:0.7rem;color:#9ca3af;text-decora
 a.textContent='eBay';h.appendChild(a);});})();
 </script>
 
-</body>
+<p style="font-size:0.8rem;color:#6b7280;margin:12px 0 0;">As an Amazon Associate we earn from qualifying purchases. Amazon pricing is not included in price tracking/graph. We do not issue alerts for any products through Amazon.</p></body>
 </html>

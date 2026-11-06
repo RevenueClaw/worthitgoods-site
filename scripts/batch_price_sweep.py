@@ -14,6 +14,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path.home() / 'workspace' / 'chipradar'))
 from amazon_creators_api_v1 import AmazonCreatorsAPI
 
+# AMZ-COMPLIANCE 2026-11-05: disabled.
+# Amazon Associates policy prohibits caching Amazon pricing >24h and using it in
+# price tracking/graphs/alerts. Do not fetch or store Amazon prices here.
+print("DISABLED: Amazon price sweep disabled for Amazon Associates compliance (2026-11-05).")
+raise SystemExit(0)
+
 REPO_DIR = Path.home() / '.openclaw' / 'workspace' / 'worthitgoods-repo'
 PRODUCTS_FILE = REPO_DIR / 'worthitgoods_products.json'
 SAMPLE_FILE = REPO_DIR / 'data' / 'sample_products.json'
@@ -154,19 +160,8 @@ def main():
             print(f"    Removed {d}")
     print(f"  Cleaned up {removed} duplicate files")
 
-    # ── Publish slim price JSON for browser-side price sync ──
-    # Comparison pages bake prices into text at build time; this JSON lets
-    # price-sync.js keep the displayed figure honest between rebuilds.
-    try:
-        emit = __import__('subprocess').run(
-            ['python3', 'scripts/emit_live_prices.py'],
-            cwd=str(REPO_DIR),
-            capture_output=True, text=True, timeout=90
-        )
-        line = (emit.stdout.strip() or emit.stderr.strip()).splitlines()
-        print(f"    Price JSON: {line[-1][:160] if line else 'no output'}")
-    except Exception as e:
-        print(f"    WARNING: price JSON emit failed: {e}")
+    # ── AMZ-COMPLIANCE 2026-11-05: price JSON publishing disabled (page price display removed). ──
+    pass
 
     # ── Rebuild site with fresh prices ──
     print(f"\n  Rebuilding site with fresh prices...")
