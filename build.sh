@@ -141,6 +141,9 @@ cp pinterest/callback/index.html _site/pinterest/callback/
 # Google Search Console verification
 cp googlef652381e8198d3b7.html _site/
 
+# IndexNow key file (32-hex name in repo root) — served at site root for instant re-index pings
+ls ./*.txt 2>/dev/null | grep -E '^\./[0-9a-f]{32}\.txt$' | while read -r kf; do cp "$kf" _site/; done
+
 # Bing Webmaster Tools verification
 cp BingSiteAuth.xml _site/
 
