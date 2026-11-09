@@ -133,6 +133,11 @@ cp blog/custom-2026-10-25-gift-ideas.html _site/blog/2026-10-25-gift-ideas.html
 cp unsubscribe.html _site/
 cp privacy.html _site/
 
+# Pinterest OAuth callback pages
+cp pinterest-callback.html _site/
+mkdir -p _site/pinterest/callback
+cp pinterest/callback/index.html _site/pinterest/callback/
+
 # Google Search Console verification
 cp googlef652381e8198d3b7.html _site/
 
