@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Pinterest OAuth Callback — WorthItGoods</title>
-<style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:600px;margin:4rem auto;padding:1rem;text-align:center;background:#f9fafb}h1{color:#111827}.code{background:#1f2937;color:#10b981;padding:1.2rem;border-radius:10px;font-family:monospace;font-size:1.1rem;word-break:break-all;margin:1.5rem 0;user-select:all}.note{color:#6b7280;font-size:.9rem;margin-top:2rem}</style></head><body>
+<style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:600px;margin:4rem auto;padding:1rem;text-align:center;background:#f9fafb}h1{color:#111827}.code{background:#1f2937;color:#10b981;padding:1.2rem;border-radius:10px;font-family:monospace;font-size:1.1rem;word-break:break-all;margin:1.5rem 0;user-select:all}.status{margin-top:1.5rem;padding:1rem;border-radius:10px;font-size:.95rem}.success{background:#ecfdf5;color:#065f46}.warn{background:#fffbeb;color:#d97706}.note{color:#6b7280;font-size:.9rem;margin-top:2rem}</style></head><body>
 <script>
 (function(){
   const p = new URLSearchParams(window.location.search);
@@ -8,13 +8,31 @@
   const error = p.get('error');
   const errDesc = p.get('error_description');
   
-  if (error) { document.body.innerHTML = '<h1>❌ Authorization Failed</h1><p style="color:#c41e3a">'+error+'</p><p>'+ (errDesc||'') +'</p>'; return; }
-  if (code) {
-    document.body.innerHTML = '<h1>✅ Authorization Successful</h1><p>Copy the code below and share it with your assistant:</p><div class="code">'+code+'</div><p class="note">This page does not store any data. The code is a one-time use credential.</p>';
-    // Also try to POST to local server if available
-    try{ fetch('http://192.168.4.131:8080/callback?code='+encodeURIComponent(code)) }catch(e){}
+  if (error) {
+    document.body.innerHTML = '<h1>X Authorization Failed</h1><p style="color:#c41e3a">'+error+'</p><p>'+ (errDesc||'') +'</p>';
     return;
   }
-  document.body.innerHTML = '<h1>Pinterest OAuth Callback</h1><p>No authorization code received. This page expects a <code>?code=</code> parameter from Pinterest.</p>';
+  if (!code) {
+    document.body.innerHTML = '<h1>Pinterest OAuth Callback</h1><p>No authorization code received.</p><p class="note">This page expects a <code>?code=..</code> parameter from Pinterest.</p>';
+    return;
+  }
+
+  document.body.innerHTML = '<h1>Authorization Successful</h1><p>Code received. Relaying to exchange server...</p><div class="code">'+code+'</div><div id="status" class="status"></div>';
+
+  // Relay to Rock 5B server in real-time for instant token exchange
+  var status = document.getElementById('status');
+  status.className = 'status warn';
+  status.textContent = 'Contacting exchange server...';
+
+  fetch('http://192.168.4.131:8080/callback?code=' + encodeURIComponent(code))
+    .then(function(r) { return r.text(); })
+    .then(function(t) {
+      status.className = 'status success';
+      status.textContent = t;
+    })
+    .catch(function() {
+      status.className = 'status warn';
+      status.textContent = 'Local server not reachable. Paste the code above to your assistant.';
+    });
 })();
 </script></body></html>
