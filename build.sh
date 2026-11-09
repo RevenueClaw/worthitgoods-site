@@ -196,5 +196,7 @@ python3 scripts/submit_sitemap.py 2>&1 | tail -5
 
 # Inject exit-intent capture script tag into every built page (idempotent).
 python3 scripts/inject_exit_capture.py || echo "exit-capture injection skipped"
+# Inject newsletter signup block into blog/comparison/category pages (idempotent).
+python3 scripts/inject_blog_signup.py || echo "blog-signup injection skipped"
 
 find _site -name '*.html' | wc -l | xargs -I{} echo "{} HTML pages built."
