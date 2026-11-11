@@ -49,7 +49,11 @@ def call_llm(prompt, max_tokens=300, temperature=0.7):
     try:
         resp = urllib.request.urlopen(req, timeout=60)
         result = json.loads(resp.read())
-        return result["choices"][0]["message"]["content"].strip()
+        content = result["choices"][0]["message"].get("content")
+        if not content:
+            print(f"  LLM returned empty content", file=sys.stderr)
+            return None
+        return content.strip()
     except Exception as e:
         print(f"  LLM call failed: {e}", file=sys.stderr)
         return None
