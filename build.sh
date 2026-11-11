@@ -59,9 +59,12 @@ if [ -d "_site/comparisons" ]; then
     done
 fi
 
-# Generate site from data/sample_products.json
+# ── Preflight validation gate: invalid products are dropped and logged.
+python3 scripts/filter_valid_products.py data/sample_products.json data/sample_products.valid.json
+
+# Generate site from validated products
 rm -rf _site
-SEASONAL_THEME="$THEME" node generate-pages.js
+SEASONAL_THEME="$THEME" PRODUCTS_FILE="data/sample_products.valid.json" node generate-pages.js
 
 # Copy style
 cp style.css _site/

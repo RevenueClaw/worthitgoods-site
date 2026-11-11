@@ -34,7 +34,23 @@ except Exception as e:
     sys.exit(1)
 PY
 
-# 🔍 AUTO-DEDUP: Check each new product against existing products
+# 🔍 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Validation gate: each record must describe the same product it links to.
+VALIDATE_SCRIPT="$SCRIPT_DIR/scripts/validate_product_record.py"
+FILTER_SCRIPT="$SCRIPT_DIR/scripts/filter_valid_products.py"
+VALID_BATCH="${NEW_BATCH}.valid"
+if [[ -f "$VALIDATE_SCRIPT" && -f "$FILTER_SCRIPT" ]]; then
+  echo "Running validation gate..."
+  python3 "$FILTER_SCRIPT" "$NEW_BATCH" "$VALID_BATCH"
+  if [[ ! -s "$VALID_BATCH" ]]; then
+    echo "Validation gate rejected every product in this batch — nothing to add"
+    exit 1
+  fi
+  NEW_BATCH="$VALID_BATCH"
+fi
+
+AUTO-DEDUP: Check each new product against existing products
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEDUP_SCRIPT="$SCRIPT_DIR/check_dedup.py"
 if [[ -f "$DEDUP_SCRIPT" ]]; then

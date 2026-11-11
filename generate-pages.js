@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const productsDataPath = 'data/sample_products.json';
+const productsDataPath = process.env.PRODUCTS_FILE || 'data/sample_products.json';
 const siteDir = '_site';
 
 // ── Seasonal Theme Configuration ──────────────────────────────────────────────
@@ -70,6 +70,57 @@ products.forEach(function (p) {
     if (p.description) p.description = sanitizePriceText(p.description);
     if (p.blurb) p.blurb = sanitizePriceText(p.blurb);
 });
+
+// ── Category & seasonal routing ──
+const SEASONAL_RE = {
+  holiday: /\bhalloween|christmas|xmas|santa|holiday|stocking|festive|thanksgiving|easter\b/i,
+  patriotic: /\bpatriotic|american flag|usa|4th of july|memorial day|independence|bunting|windsock|porch goose\b/i,
+  ghillie: /\bghillie\b/i,
+  crochet: /\bcrochet|handmade coaster|knit hand\b/i,
+  gag_novelty: /\bfunny|gag|novelty|joke|prank|white elephant|burrito|tortilla|pickle|sasquatch|gnome|monica['\u2019\u2018]s door\b/i,
+};
+function classifySeasonal(p) {
+  const t = (p.title || '') + ' ' + (p.blurb || '');
+  for (const [cat, re] of Object.entries(SEASONAL_RE)) if (re.test(t)) return cat;
+  return null;
+}
+
+const EVERGREEN_CATS = [
+  { key: 'kitchen-cooking', label: 'Kitchen & Cooking', color: '#9a3412', re: /\bkitchen|cook|bake|blender|knife|spoon|spatula|bowl|egg|dish|food|grater|peeler|cutting board|mixing|soup|utensil|plate|cup|mug|coffee|brew|skillet|pan|pot|rice|cooker|soap|sponge\b/i },
+  { key: 'outdoor-travel', label: 'Outdoor & Travel', color: '#166534', re: /\bbackpack|bag|tote|luggage|travel|camping|outdoor|tent|hiking|cooler|hammock|flashlight|lantern|survival|paddle|suitcase|camp|travelling\b/i },
+  { key: 'desk-tech', label: 'Desk & Tech', color: '#1e40af', re: /\bdesk|lamp|speaker|charger|cable|usb|camera|keyboard|monitor|phone|laptop|webcam|headphone|earbud|mouse|tech|gadget|bluetooth|wifi|adapter|hub|ssd|power bank|earbuds|e-reader\b/i },
+  { key: 'tools-diy', label: 'Tools & DIY', color: '#6b21a8', re: /\btool|screwdriver|drill|tape|multitool|wrench|level|clamp|saw|plier|scissors|hardware|measur|repair|sander|driver|hex|socket|fastener|knife\b/i },
+  { key: 'home-lifestyle', label: 'Home & Lifestyle', color: '#155e75', re: /\bhome|organizer|shelf|drawer|room|office|fan|air purifier|towel|blanket|pillow|mirror|clean|laundry|shoe|trash|sweeper|mattress|curtain|rug|sofa|closet|storage|box|bin|stool\b/i },
+  { key: 'health-fitness', label: 'Health & Fitness', color: '#9f123b', re: /\bfitness|massage|posture|exercise|yoga|workout|gym|resistance|health|pain|relief|muscle|recovery|walking|running|balance|stretch|foam roller|tens\b/i },
+];
+function evergreenCategory(p) {
+  const t = p.title || '';
+  for (const c of EVERGREEN_CATS) if (c.re.test(t)) return c;
+  return null;
+}
+
+const evergreenProducts = products.filter(p => !classifySeasonal(p));
+const seasonalProducts = products.filter(classifySeasonal);
+const catCounts = {};
+for (const p of evergreenProducts) {
+  const c = evergreenCategory(p);
+  if (c) catCounts[c.key] = (catCounts[c.key] || 0) + 1;
+}
+const topCategories = Object.entries(catCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 4)
+  .map(([key]) => EVERGREEN_CATS.find(c => c.key === key));
+const categoryMap = {};
+for (const p of products) {
+  const s = classifySeasonal(p);
+  if (s === 'holiday' || s === 'patriotic') { categoryMap[s] = categoryMap[s] || []; categoryMap[s].push(p); }
+  else if (s) { categoryMap['seasonal-novelty'] = categoryMap['seasonal-novelty'] || []; categoryMap['seasonal-novelty'].push(p); }
+  else {
+    const c = evergreenCategory(p);
+    const key = c ? c.key : 'other';
+    categoryMap[key] = categoryMap[key] || []; categoryMap[key].push(p);
+  }
+}
 
 
 function cleanTitle(title) {
@@ -675,8 +726,14 @@ const indexHTML = `<!DOCTYPE html>
 
         <section id="products" class="products-section" style="padding-top: 20px;">
         <h2 class="section-title">Our Latest Worth-It Picks</h2>
+
+        <div class="category-bar" style="text-align:center;margin:0 auto 36px;max-width:1200px;">
+          ${topCategories.map(c => `<a href="/${c.key}.html" class="category-pill" style="background:${c.color};color:#fff;border-radius:999px;padding:12px 22px;margin:6px 6px;display:inline-block;font-weight:700;text-decoration:none;font-size:0.95rem;box-shadow:0 2px 6px rgba(0,0,0,0.15);">${c.label}</a>`).join('')}
+          <a href="/seasonal.html" class="category-pill" style="background:#581c87;color:#fff;border-radius:999px;padding:12px 22px;margin:6px 6px;display:inline-block;font-weight:700;text-decoration:none;font-size:0.95rem;box-shadow:0 2px 6px rgba(0,0,0,0.15);">🎉 Seasonal &amp; Gifts</a>
+          <a href="/patriotic.html" class="category-pill" style="background:#0f172a;color:#fff;border-radius:999px;padding:12px 22px;margin:6px 6px;display:inline-block;font-weight:700;text-decoration:none;font-size:0.95rem;box-shadow:0 2px 6px rgba(0,0,0,0.15);">🇺🇸 Patriotic</a>
+        </div>
         <div class="products-grid">
-            ${products.slice(0, 9).map(p => renderProduct(p)).join('')}
+            ${evergreenProducts.slice(0, 9).map(p => renderProduct(p)).join('')}
 
         <div class="newsletter-section" style="grid-column: 1 / -1; max-width: none; margin: 40px 0;">
             <div class="nl-icon">✉</div>
@@ -700,7 +757,7 @@ const indexHTML = `<!DOCTYPE html>
             <div class="nl-guarantee">No spam · Unsubscribe with 1 click · Hand-picked only</div>
         </div>
 
-            ${products.slice(9).map(p => renderProduct(p)).join('')}
+            ${evergreenProducts.slice(9).map(p => renderProduct(p)).join('')}
         </div>
     </section>
 
@@ -942,3 +999,56 @@ for (const product of products) {
 }
 
 console.log('Generated ' + productPageCount + ' product detail pages for SEO');
+
+// ── Category landing pages (static, no backend) ──
+function renderCategoryPage(title, slug, items) {
+  const cards = items.map(p => renderProduct(p)).join('');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title} · WorthItGoods</title>
+  <meta name="description" content="${title} hand-picked at WorthItGoods.">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body{ font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; line-height:1.6; color:#333; background:#f8fafc; margin:0; }
+    header{ background:#1f2937; padding:1rem 1.5rem; }
+    header nav{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; }
+    header a{ color:#fff; text-decoration:none; font-weight:700; }
+    .category-hero{ background:#1f2937; color:#fff; padding:3rem 1rem; text-align:center; }
+    .category-hero h1{ margin:0 0 .5rem; }
+    .products-section{ padding:40px 20px; }
+    .products-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(285px,1fr)); gap:32px; max-width:1320px; margin:0 auto; }
+    .product-card{ background:white; border-radius:16px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.1); display:flex; flex-direction:column; height:100%; }
+    .product-card .image-wrapper{ height:260px; display:flex; align-items:center; justify-content:center; padding:15px; }
+    .product-card img{ max-width:100%; max-height:100%; object-fit:contain; }
+    .content{ padding:22px; flex-grow:1; display:flex; flex-direction:column; }
+    .content h3{ font-size:1.2rem; margin-bottom:8px; }
+    .cta{ background:#16a34a; color:#fff; text-align:center; padding:12px 20px; border-radius:10px; text-decoration:none; font-weight:600; margin-top:auto; display:block; }
+    footer{ background:#1f2937; color:#aaa; text-align:center; padding:40px 20px; }
+    @media(max-width:640px){ .products-grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header><nav><a href="/">WorthItGoods</a><a href="/">← Home</a></nav></header>
+  <div class="category-hero"><h1>${title}</h1><p>${items.length} hand-picked products</p></div>
+  <section id="products" class="products-section">
+    <div class="products-grid">${cards || '<p style="text-align:center;width:100%;">No products here yet.</p>'}</div>
+  </section>
+  <footer><p>© 2026 WorthIt Goods. Honest picks, no hype.</p></footer>
+</body>
+</html>`;
+}
+
+const CATEGORY_PAGES = [
+  ...topCategories.map(c => ({ slug: c.key, title: c.label, items: categoryMap[c.key] || [] })),
+  { slug: 'seasonal', title: 'Seasonal & Novelty Gifts', items: (categoryMap['seasonal-novelty'] || []).concat(categoryMap['holiday'] || []) },
+  { slug: 'patriotic', title: 'Patriotic Decor', items: categoryMap['patriotic'] || [] },
+];
+for (const cat of CATEGORY_PAGES) {
+  if (cat.items && cat.items.length) {
+    fs.writeFileSync(path.join(siteDir, cat.slug + '.html'), renderCategoryPage(cat.title, cat.slug, cat.items));
+    console.log('Generated category page: ' + cat.slug + '.html (' + cat.items.length + ' products)');
+  }
+}

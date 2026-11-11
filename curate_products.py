@@ -839,7 +839,17 @@ def asin_from_url(url):
 
 def save(products):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
+
+    # ── Validation gate: reject records that fail integrity rules.
+    # Drop invalid products from the batch and append reject reasons to
+    # logs/validation_rejects.log so bad data never reaches the site.
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "scripts"))
+    from validate_product_record import validate_products
+    vres = validate_products(products, rejects_log=Path("logs/validation_rejects.log"))
+    if vres["invalid"]:
+        print(f"  Validation gate: dropped {len(vres['invalid'])} invalid product(s); see logs/validation_rejects.log")
+        products = vres["valid"]
+
     # STEP 1: Auto-generate descriptions via LLM before saving
     # The pipeline previously relied on manual editing, which often got skipped.
     # Now we auto-generate so every curated product ships with real descriptions.
