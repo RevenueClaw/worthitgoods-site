@@ -328,7 +328,8 @@ def main():
         return 0
 
     print("\nPosting...")
-    mastodon_ok = post_to_mastodon(text, img_bytes, img_mime)
+    # WIG Mastodon retired 2026-11-16 (2nd mastodon.social suspension; login disabled).
+    mastodon_ok = None  # post_to_mastodon() kept for possible revival after a manual appeal
     telegram_ok = post_to_telegram(text, img_bytes, img_mime)
     moltbook_ok = post_to_moltbook(text)
 
@@ -353,8 +354,8 @@ def main():
         "moltbook": moltbook_ok,
     })
 
-    results = [ok for ok in (mastodon_ok, telegram_ok, moltbook_ok) if ok]
-    print(f"\nPosted to {len(results)}/3 channels.")
+    results = [ok for ok in (telegram_ok, moltbook_ok) if ok]
+    print(f"\nPosted to {len(results)}/2 active channels (telegram, moltbook).")
     print("✅ Done")
     return 0
 
