@@ -331,7 +331,11 @@ def main():
     # WIG Mastodon retired 2026-11-16 (2nd mastodon.social suspension; login disabled).
     mastodon_ok = None  # post_to_mastodon() kept for possible revival after a manual appeal
     telegram_ok = post_to_telegram(text, img_bytes, img_mime)
-    moltbook_ok = post_to_moltbook(text)
+    # WIG Moltbook DEAL posts retired 2026-11-16 (owner re-eval): rockclaw's promo posts were
+    # AI-flagged is_spam (pitch titles + links/pricing + unsolved verification pending).
+    # Deal-of-day is ad content by construction -> no Moltbook posting. scripts/moltbook.py
+    # module KEPT (challenge solver) for value/engagement content the engagement job posts.
+    moltbook_ok = None
 
     # Record state (mark as posted)
     if idx not in state.setdefault("posted_indices", []):
@@ -354,8 +358,8 @@ def main():
         "moltbook": moltbook_ok,
     })
 
-    results = [ok for ok in (telegram_ok, moltbook_ok) if ok]
-    print(f"\nPosted to {len(results)}/2 active channels (telegram, moltbook).")
+    results = [ok for ok in (telegram_ok,) if ok]
+    print(f"\nPosted to {len(results)}/1 active channel (telegram).")
     print("✅ Done")
     return 0
 
