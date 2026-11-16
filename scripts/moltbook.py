@@ -104,7 +104,7 @@ def _extract_numbers(text):
                 break
             joined = "".join(toks[i:i + w])
             for word, v in WORD_NUM.items():
-                if word in joined or (len(word) >= 5 and _subseq_pos(joined, word) >= 0):
+                if word in joined or (w == 1 and len(word) >= 5 and _subseq_pos(joined, word) >= 0):
                     cands.append((i, i + w, len(word), word, v))
     cands.sort(key=lambda c: (c[0], -c[2]))
     picked, end = [], -1
