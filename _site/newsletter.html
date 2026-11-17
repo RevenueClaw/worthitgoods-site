@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter • WorthIt Goods</title>
+    <meta name="description" content="The WorthIt Goods newsletter: a short weekly email of verified price drops on software, VPNs, and gear — real retailer data, one-click unsubscribe.">
+    <link rel="canonical" href="https://www.worthitgoods.com/newsletter">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .privacy-content { max-width: 720px; margin: 3rem auto; padding: 0 1.5rem; line-height: 1.7; }
+        .privacy-content h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .privacy-content h2 { font-size: 1.3rem; margin: 2rem 0 0.5rem; }
+        .privacy-content p { margin-bottom: 1rem; color: #444; }
+        .privacy-content ul { margin: 0.5rem 0 1rem 1.5rem; color: #444; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">WorthItGoods</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero" style="min-height: 200px; padding: 2rem;">
+        <div class="hero-content">
+            <h1>The WorthIt Goods Newsletter</h1>
+            <p>One short email a week. Verified price drops only — real retailer data, no hype.</p>
+        </div>
+    </div>
+
+    <div class="privacy-content">
+        <h2>What you get</h2>
+        <ul>
+            <li><strong>Verified deals of the week</strong> — only drops our daily price tracker actually confirmed against retailer listings</li>
+            <li><strong>Category deep-dives</strong> — VPNs, software, and gear worth buying at the right price, with honest "skip it" calls</li>
+            <li><strong>One-click unsubscribe</strong>, always. We keep only your email address (see <a href="/privacy">privacy policy</a>)</li>
+        </ul>
+
+        <h2>Subscribe</h2>
+        <form id="wigSignupForm" style="display:flex;gap:.5rem;justify-content:flex-start;flex-wrap:wrap;margin-bottom:1rem" onsubmit="return false">
+            <input id="wigSignupEmail" type="email" placeholder="your@email.com" required style="padding:.7rem 1rem;border:1.5px solid #e5e7eb;border-radius:8px;font-size:1rem;min-width:230px">
+            <button type="submit" style="padding:.7rem 1.4rem;background:#c41e3a;color:#fff;border:0;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">Subscribe</button>
+        </form>
+        <p id="wigSignupMsg" style="margin:.2rem 0 1rem;font-size:.9rem;color:#059669"></p>
+
+        <h2>Transparency</h2>
+        <p>Some product links in the newsletter are affiliate links; commissions never decide what we send — see the <a href="/affiliate-disclosure">affiliate disclosure</a>. Numbers cited in emails come from the same daily-tracked listings you can browse on this site.</p>
+    </div>
+
+    <footer style="text-align:center;">
+        <div style="margin-bottom: 18px;">
+            <a href="/" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Home</a>
+            <a href="/about" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">About</a>
+            <a href="/contact" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Contact</a>
+            <a href="/newsletter" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Newsletter</a>
+            <a href="/press" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Press</a>
+            <a href="/affiliate-disclosure" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Affiliate Disclosure</a>
+            <a href="/terms" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Terms</a>
+            <a href="/privacy" style="color: #ff9a56; text-decoration: none; margin: 0 10px;">Privacy</a>
+        </div>
+        <p>© 2026 WorthIt Goods. Honest picks, no hype.</p>
+    </footer>
+
+    <script>
+    (function(){
+      var f=document.getElementById('wigSignupForm'); if(!f) return;
+      f.addEventListener('submit', async function(){
+        var el=document.getElementById('wigSignupEmail'), m=document.getElementById('wigSignupMsg');
+        if(!el.value){return;}
+        m.textContent='Subscribing...'; m.style.color='#6b7280';
+        try{
+          var res=await fetch('https://chipradar.io/api/worthitgoods/subscribe',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'email='+encodeURIComponent(el.value)});
+          var d=await res.json();
+          m.textContent=d.message||"You're on the list!"; m.style.color=d.success?'#059669':'#dc2626';
+          if(d.success){el.value='';}
+        }catch(e){m.textContent='Network hiccup — try again in a sec';m.style.color='#dc2626';}
+      });
+    })();
+    </script>
+<script src="/assets/exit-capture.js" defer></script>
+</body>
+</html>
