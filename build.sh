@@ -140,6 +140,7 @@ cp about.html _site/
 cp contact.html _site/
 cp affiliate-disclosure.html _site/
 cp terms.html _site/
+cp press.html _site/
 
 # Pinterest OAuth callback pages
 cp pinterest-callback.html _site/
@@ -173,6 +174,7 @@ cat > _site/sitemap.xml << 'XML_EOF'
   <url><loc>https://www.worthitgoods.com/contact</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/affiliate-disclosure</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/terms</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/press</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority><lastmod>XML_TODAY</lastmod></url>
 XML_EOF
 
