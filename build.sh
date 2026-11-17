@@ -61,6 +61,7 @@ fi
 
 # ── Preflight validation gate: invalid products are dropped and logged.
 python3 scripts/filter_valid_products.py data/sample_products.json data/sample_products.valid.json
+python3 scripts/sync_products_snapshot.py || echo 'products snapshot sync skipped'
 
 # Generate site from validated products
 rm -rf _site
@@ -141,6 +142,7 @@ cp contact.html _site/
 cp affiliate-disclosure.html _site/
 cp terms.html _site/
 cp press.html _site/
+python3 scripts/press_live_stats.py || echo 'press live stats skipped'
 cp newsletter.html _site/
 
 # Pinterest OAuth callback pages
