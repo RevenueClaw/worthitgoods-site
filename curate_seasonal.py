@@ -689,6 +689,29 @@ def _alert(msg):
         print(f"  alert delivery failed: {e}")
 
 
+def _add_blog_card(theme_key, theme_data, products):
+    """Insert the blog.html card automatically (idempotent)."""
+    slug = f"{date.today():%Y-%m-%d}-seasonal-{theme_key}.html"
+    blog_html = REPO_DIR / "blog.html"
+    if blog_html.exists() and slug in blog_html.read_text():
+        print("  blog card already present"); return
+    img = next((x.get("image") for x in products if x.get("image")), "")
+    label = f"{theme_data.get('emoji','')} {theme_data.get('label','Seasonal')}".strip()
+    card = f"""<div class="product-card blog-card">
+        <div class="image-wrapper"><img src="{img}" alt="{label} picks" loading="lazy" width="200" height="200"></div>
+        <h3><a href="blog/{slug}" style="text-decoration: none; color: inherit;">{label} — {len(products)} Hand-Picked Worth-It Picks</a></h3>
+        <p>{theme_data.get('tagline','Seasonal gear worth your money and time.')}</p>
+        <a href="blog/{slug}" class="cta" style="margin-top: auto;">Read More →</a>
+    </div>
+    """
+    txt = blog_html.read_text()
+    i = txt.find('<div class="product-card blog-card">')
+    if i == -1:
+        print("  blog-card anchor missing; skipped"); return
+    blog_html.write_text(txt[:i] + card + txt[i:])
+    print(f"  blog card inserted: blog/{slug}")
+
+
 def _describe(products):
     """Generate blurb+description via LLM in-place (manual 'edit me' step was the
     silent-failure surface: the Nov-1 batch shipped only because an agent hand-edited)."""
@@ -788,6 +811,7 @@ def main():
     if args.deploy:
         import subprocess
         batch = DATA_DIR / f"seasonal_{args.theme}_{date.today()}.json"
+        _add_blog_card(args.theme, theme_data, products)
         cmds = [["./add_batch.sh", str(batch)], ["bash", "build.sh"],
                 ["git", "add", "-A"],
                 ["git", "commit", "-m", f"seasonal: {args.theme} batch + blog + theme (auto-deploy)"],
@@ -798,6 +822,22 @@ def main():
             if r.returncode != 0:
                 _alert(f"⚠️ Seasonal {args.theme} DEPLOY failed at {' '.join(c)[:60]}: {(r.stderr or r.stdout)[-200:]}")
                 return 1
+        # seasonal state: theme + explicit expiry (event + 1 day) so the banner/shelf
+        # survive until the buying window closes, not just the default 5-day window
+        try:
+            if args.event_date:
+                from datetime import datetime as _dt2, timedelta as _td2
+                ev = _dt2.strptime(args.event_date, "%Y-%m-%d").date()
+                (REPO_DIR / ".seasonal-theme-name").write_text(args.theme + "\n")
+                (REPO_DIR / ".seasonal-theme-label").write_text(f"{theme_data.get('emoji','')} {theme_data.get('label','')}".strip() + "\n")
+                (REPO_DIR / ".seasonal-active").write_text(str(int(_dt2.now().timestamp())) + "\n")
+                (REPO_DIR / ".seasonal-expires").write_text(str(int(_dt2.combine(ev + _td2(days=1), _dt2.min.time()).timestamp())) + "\n")
+                subprocess.run(["git", "add", ".seasonal-theme-name", ".seasonal-theme-label", ".seasonal-active", ".seasonal-expires"], cwd=REPO_DIR)
+                subprocess.run(["git", "commit", "-m", f"seasonal: {args.theme} state files, expires {args.event_date}+1"], cwd=REPO_DIR, capture_output=True)
+                subprocess.run(["git", "push", "-q", "origin", "master"], cwd=REPO_DIR, capture_output=True)
+                print("  seasonal state committed (theme active through event+1)")
+        except Exception as se:
+            print(f"  seasonal state write skipped: {se}")
         print("  ✅ deployed (add_batch → build → push)")
     return 0
 
