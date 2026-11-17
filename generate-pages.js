@@ -16,7 +16,11 @@ const SEASONAL_THEME = process.env.SEASONAL_THEME || (() => {
             const ts = parseInt(fs.readFileSync(activePath, 'utf8').trim(), 10);
             const now = Math.floor(Date.now() / 1000);
             const maxAge = 5 * 86400; // 5 days
-            if (now - ts < maxAge) {
+            // Honor explicit expiry (commit 032877a added .seasonal-expires in build.sh
+            // but this fallback ignored it — theme banner vanished mid-season on CF builds).
+            const expPath = '.seasonal-expires';
+            const explicitLive = fs.existsSync(expPath) && now < parseInt(fs.readFileSync(expPath, 'utf8').trim(), 10);
+            if (now - ts < maxAge || explicitLive) {
                 const theme = fs.readFileSync(namePath, 'utf8').trim();
                 console.log('🎨 Seasonal theme detected:', theme);
                 return theme;
@@ -100,6 +104,24 @@ function evergreenCategory(p) {
 }
 
 const evergreenProducts = products.filter(p => !classifySeasonal(p));
+// Homepage seasonal shelf: curated seasonal products were invisible on the main page
+// (scattered in evergreen categories), which read as "the holiday batch vanished".
+function seasonalShelfHtml() {
+  if (!activeTheme) return '';
+  const picks = products.filter(p => p.theme === SEASONAL_THEME).slice(0, 12);
+  if (!picks.length) return '';
+  const cards = picks.map(p => `
+    <div class="product-card" style="border:1px solid #eee;border-radius:12px;padding:14px;text-align:center;background:#fff;">
+      <img src="${thumbnailUrl(p.image || p.image_url)}" alt="${p.title.replace(/"/g,'&quot;')}" loading="lazy" width="150" height="150" style="max-height:130px;object-fit:contain;">
+      <h3 style="font-size:0.92rem;min-height:3em;margin:8px 0;">${p.title}</h3>
+      <a href="/go/asin/${asinFromUrl(p.affiliate_url)}" class="cta" rel="nofollow sponsored" target="_blank">See if it's worth it →</a>
+    </div>`).join('');
+  return `<section id="seasonal-shelf" style="max-width:1150px;margin:18px auto 30px;padding:0 16px;">
+    <h2 style="text-align:center;margin:6px 0 16px;">${activeTheme.badge} — limited-time picks</h2>
+    <p style="text-align:center;color:#6b7280;margin:-8px 0 16px;">${activeTheme.tagline}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;">${cards}</div>
+  </section>`;
+}
 const seasonalProducts = products.filter(classifySeasonal);
 const catCounts = {};
 for (const p of evergreenProducts) {
@@ -687,6 +709,7 @@ const indexHTML = `<!DOCTYPE html>
             <p style="font-size:0.85rem;opacity:0.92;margin-top:6px;">Free · Hand-picked only · Unsubscribe in 1 click</p>
         </div>
     </div>
+    ${seasonalShelfHtml()}
     <script>
     (function(){
       var f=document.getElementById('heroWigForm');

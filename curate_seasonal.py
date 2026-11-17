@@ -552,6 +552,7 @@ def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
                 "description": "(edit me)",
                 "blurb": "(edit me)",
                 "affiliate_url": f"https://www.amazon.com/dp/{asin}?tag={PARTNER_TAG}",
+                    "theme": theme_key,
                 "_fun_score": round(score, 2),
             })
             seen_asins.add(asin)
@@ -647,6 +648,7 @@ def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
                     "description": "(edit me — write genuine why-it-is-worth-it description)",
                     "blurb": "(edit me — one-line hook)",
                     "affiliate_url": f"https://www.amazon.com/dp/{asin}?tag={PARTNER_TAG}",
+                    "theme": theme_key,
                 }
                 curated.append(product)
                 seen_asins.add(asin)
@@ -666,6 +668,61 @@ def curate_seasonal(theme_key, products_per_subcat=1, require_fun=1):
     
     return curated
 
+
+def _alert(msg):
+    """Loud-zero: never let a seasonal run fail silently (weekly-pipeline parity)."""
+    print(f"ALERT: {msg}")
+    try:
+        import requests as _rq
+        tok = os.environ.get("TELEGRAM_WIG_BOT_TOKEN", "")
+        if not tok:
+            envf = REPO_DIR / ".env"
+            if envf.exists():
+                for line in envf.read_text().splitlines():
+                    if line.strip().startswith("export TELEGRAM_WIG_BOT_TOKEN="):
+                        tok = line.split("=", 1)[1].strip().strip('\"\'')
+        if tok:
+            _rq.post(f"https://api.telegram.org/bot{tok}/sendMessage",
+                     json={"chat_id": os.environ.get("WIG_ALERT_CHAT_ID", "8645083973"),
+                           "text": msg}, timeout=10)
+    except Exception as e:
+        print(f"  alert delivery failed: {e}")
+
+
+def _describe(products):
+    """Generate blurb+description via LLM in-place (manual 'edit me' step was the
+    silent-failure surface: the Nov-1 batch shipped only because an agent hand-edited)."""
+    import json as _j
+    key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("LLM_API_KEY") or ""
+    if not key or not products:
+        _alert(f"WIG seasonal: descriptions skipped (no API key) — validator will reject placeholders")
+        return
+    info = "\n".join(f"PRODUCT {i}: {p['title'][:90]}" for i, p in enumerate(products))
+    prompt = ("You are writing product copy for WorthItGoods.com, an honest curation site. "
+              "Voice: direct, slightly irreverent, no hype, contractions. For each product return "
+              "BLURB (under 15 words) and DESCRIPTION (2-4 sentences, under 60 words, why it's worth it). "
+              "Format EXACTLY:\nPRODUCT [i]:\nBLURB: ...\nDESCRIPTION: ...\n---\n" + info)
+    try:
+        import urllib.request
+        req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",
+            data=_j.dumps({"model": "deepseek/deepseek-v4.1-flash",
+                           "messages": [{"role": "user", "content": prompt}],
+                           "max_tokens": min(1500 * len(products), 8000)}).encode(),
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"}, method="POST")
+        txt = _j.loads(urllib.request.urlopen(req, timeout=180).read())["choices"][0]["message"]["content"]
+        idx = None
+        for line in txt.splitlines():
+            import re as _re
+            m = _re.match(r"PRODUCT\s+(\d+):", line)
+            if m: idx = int(m.group(1)); continue
+            m = _re.match(r"BLURB:\s*(.+)", line)
+            if m and idx is not None and idx < len(products): products[idx]["blurb"] = m.group(1).strip(); continue
+            m = _re.match(r"DESCRIPTION:\s*(.+)", line)
+            if m and idx is not None and idx < len(products): products[idx]["description"] = m.group(1).strip()
+        n = sum(1 for p in products if "(edit me" not in str(p.get("description", "")))
+        print(f"  auto-described {n}/{len(products)} products")
+    except Exception as e:
+        print(f"  description generation failed: {e}")
 
 def save_and_report(theme_key, theme_data, products):
     """Save batch, generate blog, print summary."""
@@ -699,18 +756,49 @@ def save_and_report(theme_key, theme_data, products):
 def main():
     parser = argparse.ArgumentParser(description="Seasonal WorthItGoods curation")
     parser.add_argument("--theme", required=True, help="Seasonal theme key")
-    parser.add_argument("--count", type=int, default=2, help="Products per subcategory")
+    parser.add_argument("--count", type=int, default=3, help="Products per subcategory (3 ≈ 15-18 total)")
     parser.add_argument("--fun", type=int, default=1, help="Minimum fun products")
     parser.add_argument("--craft", action="store_true", help="Also write blog post")
+    parser.add_argument("--event-date", default=None, help="YYYY-MM-DD of the holiday; refuses late runs (seasonal content must land BEFORE the event)")
+    parser.add_argument("--deploy", action="store_true", help="Auto-merge (add_batch.sh) + build + git commit/push")
     args = parser.parse_args()
-    
+
+    from datetime import datetime as _dt, timedelta as _td
+    if args.event_date:
+        ev = _dt.strptime(args.event_date, "%Y-%m-%d").date()
+        lead = (ev - date.today()).days
+        if lead < 3:
+            _alert(f"⚠️ Seasonal run refused: only {lead} days before {ev} ({args.theme}). Seasonal content must land BEFORE the event. Aborting.")
+            print("Too late for this event — aborting.")
+            return 1
+        print(f"  Lead-time OK: {lead} days before event {ev}")
+
     products = curate_seasonal(args.theme, args.count, args.fun)
+    # keep only records the builder/validator can actually use
+    products = [x for x in products if x.get("title") and x.get("affiliate_url")]
     if not products:
+        _alert(f"⚠️ WIG seasonal curation '{args.theme}': 0 products found — site NOT updated. Check PAAPI/queries.")
         print("No products found.")
         return 1
-    
+
+    _describe(products)
     theme_data = SEASONAL_THEMES.get(args.theme, {})
     save_and_report(args.theme, theme_data, products)
+
+    if args.deploy:
+        import subprocess
+        batch = DATA_DIR / f"seasonal_{args.theme}_{date.today()}.json"
+        cmds = [["./add_batch.sh", str(batch)], ["bash", "build.sh"],
+                ["git", "add", "-A"],
+                ["git", "commit", "-m", f"seasonal: {args.theme} batch + blog + theme (auto-deploy)"],
+                ["git", "push", "origin", "master"]]
+        for c in cmds:
+            r = subprocess.run(c, cwd=REPO_DIR, capture_output=True, text=True, timeout=1200)
+            print(f"  $ {' '.join(c)} -> rc={r.returncode}")
+            if r.returncode != 0:
+                _alert(f"⚠️ Seasonal {args.theme} DEPLOY failed at {' '.join(c)[:60]}: {(r.stderr or r.stdout)[-200:]}")
+                return 1
+        print("  ✅ deployed (add_batch → build → push)")
     return 0
 
 
