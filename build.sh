@@ -158,6 +158,7 @@ cp BingSiteAuth.xml _site/
 
 # 404 page, robots.txt
 cp 404.html _site/
+cp _redirects _site/
 cp robots.txt _site/
 
 # Generate sitemap
