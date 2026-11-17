@@ -914,6 +914,7 @@ DESCRIPTION: <2-4 sentences>
     # silently zeroed since the gate was introduced.)
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "scripts"))
     from validate_product_record import validate_products
+    from curation_policy import fun_gate
     vres = validate_products(products, rejects_log=Path("logs/validation_rejects.log"))
     if vres["invalid"]:
         print(f"  Validation gate: dropped {len(vres['invalid'])} invalid product(s); see logs/validation_rejects.log")
@@ -932,6 +933,10 @@ DESCRIPTION: <2-4 sentences>
                 print("  empty-batch Telegram alert sent")
         except Exception as _e:
             print(f"  empty-batch alert failed: {_e}")
+
+    # ── Taste gate (2026-11-17): hard restock-block + LLM browse-appeal review.
+    # Keyword boring lists alone shipped tongue-phones and battery 2-packs.
+    products = fun_gate(products)
 
     # STEP 2: Assign badges (Hidden Gem / Under $10) based on fun_score + price
     try:

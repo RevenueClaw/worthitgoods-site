@@ -125,7 +125,10 @@ def _review(products, theme=None):
     base = {
         "messages": [{"role": "user", "content": rubric + "\n".join(lines)}],
         "temperature": 0,
-        "max_tokens": min(80 * len(products), 4000),
+        "max_tokens": min(120 * len(products), 6000),
+        # flash models here are reasoning-by-default; hidden tokens ate the budget
+        # and left content empty (finish_reason=length). Explicitly disable thinking.
+        "reasoning": {"effort": "none"},
     }
     models = [_MODEL]
     if _MODEL != "deepseek/deepseek-v4.1-flash":

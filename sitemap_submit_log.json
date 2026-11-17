@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-17 17:45 UTC",
+  "date": "2026-11-17 18:32 UTC",
   "results": [
     {
       "name": "IndexNow",
@@ -8,8 +8,8 @@
     },
     {
       "name": "Yandex",
-      "status": 502,
-      "reason": "Bad Gateway"
+      "status": 200,
+      "reason": "ok"
     },
     {
       "name": "Seznam (Czech)",

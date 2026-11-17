@@ -805,7 +805,14 @@ def main():
         return 1
 
     _describe(products)
-    theme_data = SEASONAL_THEMES.get(args.theme, {})
+    sys.path.insert(0, str(REPO_DIR / "scripts"))
+    from curation_policy import fun_gate
+    _td = SEASONAL_THEMES.get(args.theme, {})
+    products = fun_gate(products, theme=f"{_td.get('label', args.theme)}: {_td.get('tagline', '')}")
+    if not products:
+        _alert(f"WIG seasonal {args.theme}: taste gate dropped every candidate — nothing shipped (see logs/fun_gate_rejects.log)")
+        return 1
+    theme_data = _td
     save_and_report(args.theme, theme_data, products)
 
     if args.deploy:
