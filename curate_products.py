@@ -957,7 +957,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=2)
-    parser.add_argument("--min-target", type=int, default=8,
+    parser.add_argument("--min-target", type=int, default=14,
                         help="Keep iterating until we have at least this many products (default 8)")
     args = parser.parse_args()
 
@@ -965,7 +965,7 @@ def main():
     # categories with a slightly deeper per-category target (2 -> 3 -> 4).
     # Rating/review thresholds NEVER relax — we only dig for more candidates
     # that still clear the same 4.5*/100 (standard) / 4.3*/100 (fun) bars.
-    max_passes = 3
+    max_passes = 4
     all_products = []
     all_asins = set()
 
