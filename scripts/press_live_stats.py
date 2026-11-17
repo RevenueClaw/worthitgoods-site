@@ -19,7 +19,19 @@ CATALOG = ROOT / "data" / "sample_products.valid.json"
 ARCHIVE_GLOB = os.path.expanduser("~/.openclaw/workspace/data/press_stats_*.json")
 
 
+REPO_STATS = ROOT / "data" / "site_stats.json"
+
 def latest_traffic():
+    # 1) committed repo stats (present on CF Pages builders too)
+    if REPO_STATS.exists():
+        try:
+            d = json.loads(REPO_STATS.read_text())
+            u = (d.get("sites", {}).get("worthitgoods") or {}).get("uniques_30d")
+            if u:
+                return int(u), d.get("asof") or ""
+        except Exception:
+            pass
+    # 2) fallback: latest gateway archive (local builds)
     best = None
     for f in sorted(glob.glob(ARCHIVE_GLOB)):
         try:

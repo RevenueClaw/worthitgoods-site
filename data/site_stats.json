@@ -1,0 +1,19 @@
+{
+ "asof": "2026-11-17",
+ "window_days": 30,
+ "source": "cloudflare_edge_analytics",
+ "sites": {
+  "chipradar": {
+   "uniques_30d": 19913,
+   "views_30d": 19395,
+   "days": 30,
+   "domain": "chipradar.io"
+  },
+  "worthitgoods": {
+   "uniques_30d": 13529,
+   "views_30d": 11423,
+   "days": 30,
+   "domain": "worthitgoods.com"
+  }
+ }
+}
