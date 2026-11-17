@@ -359,11 +359,19 @@ def is_duplicate(title):
 
 # ── Blog Post Generator ───────────────────────────────────────────────────────
 # blog date format for seasonal batches
+def _noprice(s):
+    """Strip dollar figures from rendered prose — site doctrine: no cached/unstamped
+    prices in content (Amazon Associates timestamp rules + our own compliance pass)."""
+    import re as _re
+    return _re.sub(r"\$\s?\d[\d,.]*\s?", "", str(s or ""))
+
+
 def generate_blog_post(theme_key, theme_data, products):
     """Generate an HTML blog post with improved pick-card format."""
     today = date.today()
     slug = f"{today}-seasonal-{theme_key}"
     title = f"{theme_data['emoji']} {theme_data['label']} — WorthItGoods Picks"
+    h1_title = f"{theme_data['emoji']} {theme_data['label']} Picks"
     og_title = f"{theme_data['label']} — {len(products)} Hand-Picked Picks"
 
     # Build product cards in the improved pick-card format
@@ -377,8 +385,8 @@ def generate_blog_post(theme_key, theme_data, products):
 
         rating = p.get('rating') or p.get('star_rating')
         reviews = p.get('reviews_count')
-        blurb = (p.get('blurb') or '')[:140]
-        desc = (p.get('description') or '')[:200]
+        blurb = _noprice((p.get('blurb') or '')[:140])
+        desc = _noprice((p.get('description') or '')[:200])
         img = p.get('image') or p.get('image_url', '')
 
         # Rating display
@@ -398,8 +406,6 @@ def generate_blog_post(theme_key, theme_data, products):
     <div class="pick-card-body">
         <div class="pick-card-meta">
             {rating_html}
-            <span class="pick-price" >Check on Amazon</span>
-            <span class="pick-price-note">check price</span>
         </div>
         <h2>{p['title'][:90]}</h2>
         <p class="pick-quick-take">{blurb}</p>
@@ -409,8 +415,8 @@ def generate_blog_post(theme_key, theme_data, products):
             <li>Hand-picked for the {theme_data['label'].lower()} season</li>
         </ul>
         <span class="pick-best-for">{best_for}</span>
-        <a href="{url}" target="_blank" rel="nofollow" class="pick-cta">Shop on Amazon</a>
-        <p class="pick-disclaimer">Prices updated daily · As an Amazon Associate we earn from qualifying purchases. Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon at the time of purchase will apply to the purchase of the product.</p>
+        <a href="{url}" target="_blank" rel="nofollow sponsored" class="pick-cta">Shop on Amazon →</a>
+        <p class="pick-disclaimer">As an Amazon Associate we earn from qualifying purchases. Prices and availability are set by Amazon and change often — whatever shows on click is the real one.</p>
     </div>
 </div>''')
 
@@ -459,14 +465,9 @@ def generate_blog_post(theme_key, theme_data, products):
 <header><nav><a href="/" class="logo">WorthItGoods</a><ul><li><a href="/">Home</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/privacy.html">Privacy</a></li></ul></nav></header>
 <main class="container blog-post" style="max-width:800px;margin:0 auto;padding:2rem 1rem;">
 
-<h1 style="font-size:2.2em;margin-bottom:0.2em;">{title}</h1>
-<p class="subtitle" style="color:#888;margin-bottom:2em;">{theme_data['description']}</p>
-<p class="subtitle" style="color:#888;margin-bottom:2em;"><strong>Batch date:</strong> {today} · <strong>Products:</strong> {len(products)} hand-picked items</p>
-
-<div class="section-header" style="max-width:650px;margin:0 auto 2rem;">
-<p>{theme_data['description']}</p>
-<p>📌 <strong>Pinterest-ready:</strong> Save this guide and share it — every product image links back here.</p>
-</div>
+<h1 style="font-size:1.7em;margin:0 0 0.2em;line-height:1.2;">{h1_title}</h1>
+<p class="subtitle" style="color:#666;margin:0.5em 0 1.3em;line-height:1.55;">{theme_data['description']} — <strong>{len(products)} picks</strong>, curated {today.strftime('%b %d, %Y')}.</p>
+<p style="font-size:.92rem;color:#888;margin:0 0 2rem;line-height:1.5;">📌 <strong>Pinterest-ready:</strong> save this guide and share it — every product image links back here.</p>
 
 {"\\n".join(product_cards)}
 
