@@ -840,16 +840,6 @@ def asin_from_url(url):
 def save(products):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # ── Validation gate: reject records that fail integrity rules.
-    # Drop invalid products from the batch and append reject reasons to
-    # logs/validation_rejects.log so bad data never reaches the site.
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "scripts"))
-    from validate_product_record import validate_products
-    vres = validate_products(products, rejects_log=Path("logs/validation_rejects.log"))
-    if vres["invalid"]:
-        print(f"  Validation gate: dropped {len(vres['invalid'])} invalid product(s); see logs/validation_rejects.log")
-        products = vres["valid"]
-
     # STEP 1: Auto-generate descriptions via LLM before saving
     # The pipeline previously relied on manual editing, which often got skipped.
     # Now we auto-generate so every curated product ships with real descriptions.
@@ -918,6 +908,31 @@ DESCRIPTION: <2-4 sentences>
     except Exception as e:
         print(f"  LLM description generation failed (will save with placeholders): {e}")
     
+    # ── Validation gate: runs AFTER description generation. (2026-11-17 fix:
+    # it previously ran BEFORE, so every product still carrying the "edit me"
+    # placeholder failed on title/description overlap and the weekly batch was
+    # silently zeroed since the gate was introduced.)
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "scripts"))
+    from validate_product_record import validate_products
+    vres = validate_products(products, rejects_log=Path("logs/validation_rejects.log"))
+    if vres["invalid"]:
+        print(f"  Validation gate: dropped {len(vres['invalid'])} invalid product(s); see logs/validation_rejects.log")
+        products = vres["valid"]
+    if not products:
+        try:
+            import requests as _rq
+            _tok = os.environ.get("TELEGRAM_WIG_BOT_TOKEN", "")
+            if _tok:
+                _rq.post(f"https://api.telegram.org/bot{_tok}/sendMessage",
+                         json={"chat_id": os.environ.get("WIG_ALERT_CHAT_ID", "8645083973"),
+                               "text": f"\u26a0\ufe0f WIG curation {date.today():%Y-%m-%d}: validation gate "
+                                       f"dropped ALL candidates post-description \u2014 batch saved empty. "
+                                       f"See logs/validation_rejects.log."},
+                         timeout=10)
+                print("  empty-batch Telegram alert sent")
+        except Exception as _e:
+            print(f"  empty-batch alert failed: {_e}")
+
     # STEP 2: Assign badges (Hidden Gem / Under $10) based on fun_score + price
     try:
         import importlib.util
@@ -997,6 +1012,20 @@ def main():
         print(f"\N{check mark} Curation complete: {len(all_products)} products")
         return 0
     print("\N{cross mark} No products found after all passes.")
+    try:
+        import requests as _rq
+        _tok = os.environ.get("TELEGRAM_WIG_BOT_TOKEN", "")
+        if _tok:
+            _rq.post(f"https://api.telegram.org/bot{_tok}/sendMessage",
+                     json={"chat_id": os.environ.get("WIG_ALERT_CHAT_ID", "8645083973"),
+                           "text": f"\u26a0\ufe0f WIG weekly curation {date.today():%Y-%m-%d}: 0 new products "
+                                   f"after all passes (min-target {getattr(args, 'min_target', '?')}). Site NOT "
+                                   f"updated \u2014 check PAAPI/gates. (loud-zero alert added 2026-11-17 so "
+                                   f"silent no-op weeks can't recur)",
+                           "disable_web_page_preview": True}, timeout=10)
+            print("  loud-zero Telegram alert sent")
+    except Exception as _e:
+        print(f"  loud-zero alert failed: {_e}")
     return 1
 
 if __name__ == "__main__":
