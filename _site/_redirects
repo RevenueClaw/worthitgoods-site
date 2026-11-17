@@ -1,3 +1,4 @@
 # Redirect bare domain to www
 worthitgoods.com/*  https://www.worthitgoods.com/:splat  301
 /media /press 301
+/rss.xml /feed.xml 301
