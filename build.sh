@@ -135,6 +135,10 @@ cp blog/custom-2026-10-25-gift-ideas.html _site/blog/2026-10-25-gift-ideas.html
 # Copy privacy page
 cp unsubscribe.html _site/
 cp privacy.html _site/
+# Reviewer-readiness compliance pages (network applications check About/Contact/Disclosure)
+cp about.html _site/
+cp contact.html _site/
+cp affiliate-disclosure.html _site/
 
 # Pinterest OAuth callback pages
 cp pinterest-callback.html _site/
@@ -164,6 +168,9 @@ cat > _site/sitemap.xml << 'XML_EOF'
   <url><loc>https://www.worthitgoods.com/blog</loc><priority>0.9</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/feed.xml</loc><priority>0.8</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/privacy</loc><priority>0.3</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/about</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/contact</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
+  <url><loc>https://www.worthitgoods.com/affiliate-disclosure</loc><priority>0.4</priority><lastmod>XML_TODAY</lastmod></url>
   <url><loc>https://www.worthitgoods.com/unsubscribe</loc><priority>0.1</priority><lastmod>XML_TODAY</lastmod></url>
 XML_EOF
 
