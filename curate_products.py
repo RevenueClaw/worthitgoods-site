@@ -965,6 +965,10 @@ def main():
     # categories with a slightly deeper per-category target (2 -> 3 -> 4).
     # Rating/review thresholds NEVER relax — we only dig for more candidates
     # that still clear the same 4.5*/100 (standard) / 4.3*/100 (fun) bars.
+    # Weekly floor: net ~10-12 products land after dedup/variety/validation
+    # trims (~20-30% raw loss), so raw target floors at 14 regardless of the
+    # CLI arg — callers can ask for MORE, never less. Gates never relax.
+    args.min_target = max(args.min_target, 14)
     max_passes = 4
     all_products = []
     all_asins = set()
