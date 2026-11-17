@@ -62,8 +62,9 @@ _PROMPT = """You are the taste gate for WorthItGoods.com, a curated shop of inte
 
 Rubric (follow exactly):
 - Consumable / restock / refill / replacement part (batteries, tape refills, filters) = 1-2
-- Shock-value gag that isn't genuinely fun to own (tongue-shape telephone, vomit-shaped gadget) = 2-3. WEIRD IS NOT INTERESTING.
-- Boring utility commodity or generic phone accessory (plain organizer, plain tape, case, protector) = 3-4
+- AMUSING GIFT with a recipient and an occasion (funny apron for Dad, gag birthday card, cheeky stocking stuffer, "Emergency Shart Kit") = 5-7. Humor with a person to give it to IS the point of this site (thisiswhyimbroke/dudeiwantthat lineage) — do NOT penalize gag gifts that someone would actually buy as a joke present.
+- Shock/novelty with no gift angle and no practical joy (a desk telephone shaped like a tongue) = 2-3. Weird without giftable-ness is not interesting.
+- Boring utility commodity or generic phone accessory (plain organizer, plain tape, phone case, screen protector) = 3-4
 - Useful with a clever angle or good design (motion-activated light, gooseneck mount, vacuum food container) = 5-7
 - Genuine hidden gem / conversation starter / premium gift = 8-10
 
@@ -97,6 +98,24 @@ def _log_drop(p, why, how):
         pass
 
 
+def _fewshot():
+    """Owner-calibration examples from data/taste_reference.json (git-tracked).
+    This file IS the mechanism for 'I keep curating, you learn the feel': every
+    hand-fed pick should be appended here and the gate starts mirroring it."""
+    ref = Path(__file__).resolve().parent.parent / "data" / "taste_reference.json"
+    if not ref.exists():
+        return ""
+    try:
+        r = json.loads(ref.read_text())
+        pos = "; ".join(str(x)[:70] for x in r.get("positive", [])[:8])
+        neg = "; ".join(str(x)[:70] for x in r.get("negative", [])[:8])
+        return (f"\nOWNER-CALIBRATED EXAMPLES (mirror this feel):\n"
+                f"- Exactly the vibe the owner wants: {pos}\n"
+                f"- Explicitly rejected by the owner: {neg}\n")
+    except Exception:
+        return ""
+
+
 def _hard_pass(products):
     kept = []
     for p in products:
@@ -117,7 +136,7 @@ def _review(products, theme=None):
         print("  fun-gate: no API key — LLM taste pass skipped (hard-block only)")
         return None
     import urllib.request
-    rubric = _PROMPT + (_THEME_BLOCK.format(theme=theme) if theme else _PLAIN_BLOCK)
+    rubric = _PROMPT + _fewshot() + (_THEME_BLOCK.format(theme=theme) if theme else _PLAIN_BLOCK)
     lines = []
     for i, p in enumerate(products):
         blurb = str(p.get("blurb") or "")[:70]

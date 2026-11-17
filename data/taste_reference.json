@@ -1,0 +1,22 @@
+{
+ "_comment": "Calibration examples for the taste gate. POSITIVE = owner's own curated picks (gag gifts WITH a recipient/occasion are the site's essence \u2014 thisiswhyimbroke/dudeiwantthat lineage). NEGATIVE = products the owner explicitly rejected. Update POSITIVE whenever the owner hand-feeds new curation; the LLM rubric reads this file on every gate call.",
+ "positive": [
+  "Walfos Silicone Trivet Mats - 4 Heat Resistant Pot Holders, Multipurpose Non-Slip Hot Pads for Kitchen Potholders, Hot Dishers, Jar Opener, Spoon Holder, Food Grade Silicone & BPA Free (Black)",
+  "Funny Fathers Day Leather Can Holder",
+  "Dad is Not Sleeping Blanket",
+  "Solinder Creative Lip Shape Landline, Eyecatching Telephone | Durable ABS material, Unique design, Ideal for gifts, Attractive home accessory",
+  "Gifts for dad Ice Cream Spoon Scoop for Ice Cream",
+  "Funny Apron for Dad",
+  "Emergency Shart Kit",
+  "Funny Thinking of You Cards",
+  "T Rex Dinosaur Birthday Card",
+  "Emotional Pickle Small Mother\u2019s Day Gift"
+ ],
+ "negative": [
+  "Corded Phone, Home Phone Multifunctional Large Tongue Shape Telephone Desk Phone",
+  "[2-PACK] CR2032 Digital Meat Thermometer Battery Compatible with KIZEN",
+  "Label Maker Tape Refills, 3 Rolls Continuous Waterproof Labels Tape",
+  "Decant It Properly Wine Decanter Lover Gift Case for iPhone 15",
+  "CHULEAG Charging Case Cover for Apple Airpods Pro 3"
+ ]
+}
