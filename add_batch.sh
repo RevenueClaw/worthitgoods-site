@@ -34,7 +34,7 @@ except Exception as e:
     sys.exit(1)
 PY
 
-# 🔍 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Validation gate: each record must describe the same product it links to.
 VALIDATE_SCRIPT="$SCRIPT_DIR/scripts/validate_product_record.py"
@@ -50,9 +50,9 @@ if [[ -f "$VALIDATE_SCRIPT" && -f "$FILTER_SCRIPT" ]]; then
   NEW_BATCH="$VALID_BATCH"
 fi
 
-AUTO-DEDUP: Check each new product against existing products
+# AUTO-DEDUP: Check each new product against existing products
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEDUP_SCRIPT="$SCRIPT_DIR/check_dedup.py"
+DEDUP_SCRIPT="$SCRIPT_DIR/scripts/check_dedup.py"
 if [[ -f "$DEDUP_SCRIPT" ]]; then
   echo "🔍 Checking new batch for duplicates..."
   set +e
