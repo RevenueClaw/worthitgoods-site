@@ -287,7 +287,16 @@ def fun_score(title, brand=""):
     if re.search(r"\b(shark tank|dragon's den|as seen on tv|kickstarter|indiegogo|funded)\b", t, re.I): score += 0.20
     return max(0.0, min(1.0, score))
 
-EXCLUDE_TITLE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+",r"Windows\s+11",r"Microsoft\s+Office",r"TurboTax",r"QuickBooks"]
+# ALWAYS hard-banned: Amazon's own devices (literal self-preference), software/
+# services (not shippable gifts), and overplayed commodity staples.
+HARD_EXCLUDE_PATTERNS = [r"^Amazon\s+(Echo|Fire|Kindle|Smart)",r"Windows\s+11",r"Microsoft\s+Office",r"TurboTax",r"QuickBooks"]
+# FRONT-PAGE GIANTS: banned from the STANDARD fill path by default so a batch can
+# never mirror Amazon's suggested page. Owner ruling 2026-11-17: giants MAY appear
+# in some batches when they surface through the FUN/hidden-gem path (genuinely
+# novel items that clear fun_score + the taste gate) and in deal-driven posts.
+FRONT_PAGE_PATTERNS = [r"^Apple\s+",r"^Samsung\s+",r"^Sony\s+",r"^Google\s+(Nest|Pixel|Home)",r"^Microsoft\s+(Surface|Xbox)",r"iPhone\s+\d+",r"AirPods",r"iPad",r"MacBook",r"iMac",r"Apple\s+Watch",r"^Nintendo\s+Switch",r"^PlayStation",r"Fitbit\s+",r"^Dyson\s+",r"^KitchenAid\s+(Stand\s+Mixer|Artisan)",r"Vitamin\s*ix\s+",r"Yeti\s+",r"Ninja\s+(Foodi|Professional|\d)",r"iRobot\s+"]
+EXCLUDE_TITLE_PATTERNS = FRONT_PAGE_PATTERNS + HARD_EXCLUDE_PATTERNS
+_GIANT_ALLOWANCE = {"n": 0}   # reset per run; cap so giants stay rare, not the page
 BORING_KEYWORDS = ["batteries","light bulb","paper towel","toilet paper","trash bag","cleaning supply","laundry","diaper","baby wipe","dog food","cat food","vitamin","supplement","ink cartridge","toner","filter replacement","tape refill","label tape refill"]
 
 EXISTING_CACHE = None
@@ -334,10 +343,18 @@ def is_duplicate_by_content(title, check_asins=None):
         if len(meaningful) >= 4: return True
     return False
 
-def is_excluded(title, brand=""):
+def is_excluded(title, brand="", allow_giants=False):
     t = title.lower()
-    for pat in EXCLUDE_TITLE_PATTERNS:
+    for pat in HARD_EXCLUDE_PATTERNS:
         if re.search(pat, title): return True
+    if any(re.search(pat, title) for pat in FRONT_PAGE_PATTERNS):
+        # owner ruling 2026-11-17: up to 2 giant-brand items may ride the FUN path
+        # per run (they still must clear fun_score + taste gate); standard path stays clean
+        if allow_giants and _GIANT_ALLOWANCE["n"] < 2:
+            _GIANT_ALLOWANCE["n"] += 1
+            print(f"  [giant-allowance {_GIANT_ALLOWANCE['n']}/2] {title[:50]}")
+        else:
+            return True
     for kw in BORING_KEYWORDS:
         if kw in t: return True
     return False
@@ -525,7 +542,7 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=30):
                 if not asin or asin in seen_asins: continue
                 title = r.get("title","") or ""
                 brand = r.get("brand","") or ""
-                if is_excluded(title,brand): continue
+                if is_excluded(title,brand,allow_giants=True): continue
                 if is_duplicate_by_content(title, [asin]): continue
                 images = r.get("images",{})
                 primary = (images.get("primary",{}) if isinstance(images,dict) else {})
@@ -553,6 +570,7 @@ def search_fun_tier(api, seen_asins, tier_queries, fun_target=5, item_count=30):
 
 
 def curate_products(count_per_category=2, exclude_asins=None):
+    _GIANT_ALLOWANCE["n"] = 0
     api = AmazonCreatorsAPI(partner_tag=PARTNER_TAG)
     fun_candidates = []
     standard_candidates = []
