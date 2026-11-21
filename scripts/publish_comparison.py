@@ -55,10 +55,21 @@ def main():
     with open(article_path) as f:
         article_html = f.read()
 
-    # Check the article has actual prices (not $N/A)
-    na_count = article_html.count("$N/A")
-    if na_count > 0:
-        print(f"WARNING: Article contains {na_count} '$N/A' price placeholders. Proceeding anyway.")
+    # AMZ COMPLIANCE GUARD 2026-11-20: Amazon price content may not be stored in
+    # static pages (>24h cache = Operating Agreement violation, master storeID
+    # vhicklegar011-20 covers this account). Scrub, then refuse if anything remains.
+    import importlib.util as _iu
+    _spec = _iu.spec_from_file_location("amz_price_scrub", os.path.join(os.path.dirname(os.path.abspath(__file__)), "amz_price_scrub.py"))
+    _scrub = _iu.module_from_spec(_spec); _spec.loader.exec_module(_scrub)
+    _clean = _scrub.scrub_text(article_html)
+    if _clean != article_html:
+        with open(article_path, "w") as _f:
+            _f.write(_clean)
+        article_html = _clean
+        print(f"AMZ compliance: stripped stored price content from {slug}")
+    _left = _scrub.remaining(article_html)
+    if _left:
+        raise SystemExit(f"COMPLIANCE GUARD: {slug} still carries {_left} - NOT publishing.")
 
     # === PRE-PUBLISH VALIDATION ===
     # === IDEMPOTENCY CHECK: Don't add a duplicate card ===

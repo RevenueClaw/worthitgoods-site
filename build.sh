@@ -95,6 +95,11 @@ cp blog/custom-5-kitchen-tools.html _site/blog/2026-07-08-5-kitchen-tools.html
 
 # Copy comparison pages
 cp -r comparisons _site/comparisons/
+# AMZ compliance 2026-11-20: never ship stored Amazon price content (>24h cache violates
+# Associates Operating Agreement; master storeID vhicklegar011-20 covers this site).
+# Idempotent scrub of both trees; a nonzero exit means leftovers -> loud warning.
+python3 scripts/amz_price_scrub.py comparisons _site/comparisons >/dev/null 2>&1 \
+  || echo "WARN: amz_price_scrub reported leftovers - investigate before promoting"
 
 # Copy category pages
 if [ -d categories ]; then
