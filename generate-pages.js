@@ -103,6 +103,8 @@ function sanitizePriceText(v) {
     s = s.replace(/\b([Tt]he)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/g, '$1');
     s = s.replace(/\b([Aa]n?)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/g,
         (m, art) => (art.charAt(0) === 'A' ? 'An affordable' : 'an affordable'));
+    // Demonstrative + price: "this $28 gadget" -> "this budget-friendly gadget".
+    s = s.replace(/\b([Tt]his|[Tt]hese|[Tt]hat|[Tt]hose)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?(?=\s+[a-z])/g, '$1 budget-friendly');
     // Remaining bare prices (incl. "/mo" forms): neutral in-context phrase.
     s = s.replace(/\$\s?\d[\d,]*(?:\.\d{1,2})?(?:\s*\/\s*(?:mo|month|yr|year))?/g,
         'the current price on Amazon');

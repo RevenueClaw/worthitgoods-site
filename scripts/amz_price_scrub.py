@@ -30,6 +30,15 @@ PATTERNS = [
     ("as-of span", re.compile(r'\s*<span class="price-as-of"[^>]*>.*?</span>', re.S), "", 0),
     ("as-of inline span",
      re.compile(r'\s*<span[^>]*>\s*\((?:price\s+)?as of [A-Za-z]+ \d{1,2}, \d{4}\s*\)\s*</span>'), "", 0),
+    # sentence form baked by older comparison templates:
+    # "Prices shown are as of July 19, 2026. Amazon prices change frequently — ..."
+    ("as-of sentence",
+     re.compile(r'Prices shown are as of [A-Za-z]+ \d{1,2}, \d{4}\.\s*'), "", 0),
+    # literal two-char "backslash-n" sequences a bad template left in prose
+    ("literal-newline before tag", re.compile(r'\\n(?=</?(?:p|div|ul|h[1-4])\b)'), "\n", 0),
+    # literal "\n" escape sequences left in rendered footers by a bad insert
+    ("literal-newline before CTA para", re.compile(r'purchases\. \\n<p>'), 'purchases. <p>', 0),
+    ("literal-newline after para", re.compile(r'</p>\\n(Amazon pricing)'), r'</p><p>\1', 0),
     ("price-tag value",
      re.compile(r'(<span class="price-tag"[^>]*>)\s*' + DOLLAR + r'(?:\s*(?:-|to|&ndash;|–)\s*' + DOLLAR + r')?\s*(</span>)', re.S),
      r"\1Check current price\2", 0),
@@ -102,7 +111,7 @@ def remaining(h: str):
     if re.search(r'<span class="price-tag"[^>]*>[^<]*\$', h) or \
        re.search(r'<span class="price-tag"[^>]*>\s*<a[^>]*>[^<]*\$', h):
         hits.append("price-tag")
-    if re.search(r'price-as-of|\((?:price\s+)?as of [A-Za-z]+ \d{1,2}, 20\d\d\)', h):
+    if re.search(r'price-as-of|\((?:price\s+)?as of [A-Za-z]+ \d{1,2}, \d{4}\)|Prices shown are as of [A-Za-z]+ \d{1,2},', h):
         hits.append("as-of")
     for m in LD_BLOCK.finditer(h):
         if re.search(r'"(?:price|priceRange)"\s*:', m.group(2)):
@@ -130,7 +139,9 @@ def main():
         for f in sorted(glob.glob(os.path.join(d, "**", "*.html"), recursive=True)):
             total += 1
             src = open(f, encoding="utf-8", errors="ignore").read()
-            if "price-tag" not in src and "price-as-of" not in src and '"price' not in src and DOLLAR.replace("\\", "") not in src:
+            if ("price-tag" not in src and "price-as-of" not in src and '"price' not in src
+                    and "Prices shown are as of" not in src
+                    and DOLLAR.replace("\\", "") not in src):
                 continue
             out = scrub_text(src)
             if out != src:
