@@ -26,8 +26,10 @@ DOLLAR = r"\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?"
 
 PATTERNS = [
     # (name, regex, replacement, flags)
-    ("as-of stamp", re.compile(r"\(\s*as of [A-Za-z]+ \d{1,2}, \d{4}\s*\)"), "", 0),
+    ("as-of stamp", re.compile(r"\(\s*(?:price\s+)?as of [A-Za-z]+ \d{1,2}, \d{4}\s*\)"), "", 0),
     ("as-of span", re.compile(r'\s*<span class="price-as-of"[^>]*>.*?</span>', re.S), "", 0),
+    ("as-of inline span",
+     re.compile(r'\s*<span[^>]*>\s*\((?:price\s+)?as of [A-Za-z]+ \d{1,2}, \d{4}\s*\)\s*</span>'), "", 0),
     ("price-tag value",
      re.compile(r'(<span class="price-tag"[^>]*>)\s*' + DOLLAR + r'(?:\s*(?:-|to|&ndash;|–)\s*' + DOLLAR + r')?\s*(</span>)', re.S),
      r"\1Check current price\2", 0),
@@ -100,7 +102,7 @@ def remaining(h: str):
     if re.search(r'<span class="price-tag"[^>]*>[^<]*\$', h) or \
        re.search(r'<span class="price-tag"[^>]*>\s*<a[^>]*>[^<]*\$', h):
         hits.append("price-tag")
-    if re.search(r'price-as-of|\(as of [A-Za-z]+ \d{1,2}, 20\d\d\)', h):
+    if re.search(r'price-as-of|\((?:price\s+)?as of [A-Za-z]+ \d{1,2}, 20\d\d\)', h):
         hits.append("as-of")
     for m in LD_BLOCK.finditer(h):
         if re.search(r'"(?:price|priceRange)"\s*:', m.group(2)):

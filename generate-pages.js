@@ -65,10 +65,48 @@ const products = JSON.parse(fs.readFileSync(productsDataPath, 'utf8'));
 
 // AMZ-COMPLIANCE 2026-11-05: never display or cache Amazon prices.
 // Replace baked dollar figures in product copy with neutral guidance.
+// 2026-11-22 rewrite: context-aware substitutions so the neutral phrasing
+// never lands mid-noun-phrase (no "a the current price…", "the the …",
+// "At at a budget-friendly price", or stranded "K" from "$200K").
 function sanitizePriceText(v) {
-    return String(v == null ? '' : v)
-        .replace(/under\s*\$\s?\d[\d,]*(?:\.\d{2})?/gi, 'at a budget-friendly price')
-        .replace(/\$\s?\d[\d,]*(?:\.\d{2})?/g, 'the current price on Amazon');
+    let s = String(v == null ? '' : v);
+    // Grammar repairs run ALWAYS: earlier scrub artifacts are already baked
+    // into stored copy with no $ left to trigger the substitutions.
+    const repair = (t) => t
+        .replace(/\bthe current price on Amazon\s*[KkMm]\+?(?![A-Za-z0-9])/gi, 'high-value')
+        .replace(/\bat the current price on Amazon\b/gi, 'at a budget-friendly price')
+        .replace(/\b([Tt]he) the current price on Amazon\b/g, '$1 listed')
+        .replace(/\b([Aa]) the current price on Amazon\b/g,
+            (m) => (m.charAt(0) === 'A' ? 'An affordable' : 'an affordable'))
+        .replace(/\b(your|our|his|her|their|my) a the\b/gi, '$1')
+        .replace(/\b([Aa]) the (high-value|budget-friendly|affordable|listed)\b/g,
+            (m) => m.replace(/\ba the\b/i, 'a'))
+        .replace(/\bThe current price on Amazon (?=[A-Z])/g, 'The ')
+        .replace(/\bthe current price on Amazon (?=[A-Z])/g, 'the ')
+        .replace(/\bprice on Amazon\s+price\b/gi, 'price on Amazon')
+        .replace(/\b([Aa]t)\s+at\b/g, '$1')
+        .replace(/\b([Tt]he) the\b/g, '$1')
+        .replace(/\b([Aa]) the\b(?= [a-z$])/g, '$1')
+        .replace(/\b([Aa]) a\b/g, '$1')
+        .replace(/ {2,}/g, ' ');
+    if (!/\$\s?\d/.test(s)) return repair(s);
+    // K/M magnitude tokens ($200K warranty) — consume the suffix so it can never strand.
+    s = s.replace(/\$\s?\d[\d,]*(?:\.\d{1,2})?\s*[KkMm]\+?/g, 'high-value');
+    // "under $X": reuse an existing at/for preposition instead of doubling it.
+    s = s.replace(/\b((?:at|for)\s+)?under\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/gi,
+        (m, pre) => (pre ? pre : 'for ') + 'a budget-friendly price');
+    // at/for + price: predicate slot -> budget phrasing. The product-record
+    // validator rejects "at the current price on Amazon", so never emit it.
+    s = s.replace(/\b([Aa]t|[Ff]or)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/g,
+        (m, p) => p + ' a budget-friendly price');
+    // Determiner + price: "the $30 upgrade" -> "the upgrade"; "a $10 kit" -> "an affordable kit".
+    s = s.replace(/\b([Tt]he)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/g, '$1');
+    s = s.replace(/\b([Aa]n?)\s+\$\s?\d[\d,]*(?:\.\d{1,2})?\b/g,
+        (m, art) => (art.charAt(0) === 'A' ? 'An affordable' : 'an affordable'));
+    // Remaining bare prices (incl. "/mo" forms): neutral in-context phrase.
+    s = s.replace(/\$\s?\d[\d,]*(?:\.\d{1,2})?(?:\s*\/\s*(?:mo|month|yr|year))?/g,
+        'the current price on Amazon');
+    return repair(s);
 }
 products.forEach(function (p) {
     if (p.description) p.description = sanitizePriceText(p.description);
