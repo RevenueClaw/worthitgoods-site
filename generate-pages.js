@@ -154,7 +154,7 @@ function seasonalShelfHtml() {
     <div class="product-card" style="border:1px solid #eee;border-radius:12px;padding:14px;text-align:center;background:#fff;">
       <img src="${thumbnailUrl(p.image || p.image_url)}" alt="${p.title.replace(/"/g,'&quot;')}" loading="lazy" width="150" height="150" style="max-height:130px;object-fit:contain;">
       <h3 style="font-size:0.92rem;min-height:3em;margin:8px 0;">${p.title}</h3>
-      <a href="/go/asin/${asinFromUrl(p.affiliate_url)}" class="cta" rel="nofollow sponsored" target="_blank">See if it's worth it →</a>
+      <a href="${amzHref(p.affiliate_url, p.title)}" class="cta" rel="nofollow sponsored" target="_blank">See if it's worth it →</a>
     </div>`).join('');
   return `<section id="seasonal-shelf" style="max-width:1150px;margin:18px auto 30px;padding:0 16px;">
     <h2 style="text-align:center;margin:6px 0 16px;">${activeTheme.badge} — limited-time picks</h2>
@@ -207,6 +207,15 @@ function asinFromUrl(url) {
     if (!url) return '';
     const m = url.match(/\/dp\/([A-Z0-9]{10})(?:\?|$)/);
     return m ? m[1] : '';
+}
+
+// v2026-11-23: direct tagged Amazon links (bypasses the legacy /go/* Worker
+// route, which only understood ?asin= query URLs and 400'd the path scheme).
+function amzHref(u, name) {
+    if (!u) return "https://www.amazon.com/s?k=" + encodeURIComponent(name || "gifts") + "&tag=worthitgoods-20";
+    const a = asinFromUrl(u);
+    if (a) return `https://www.amazon.com/dp/${a}?tag=worthitgoods-20&linkCode=ll1&language=en_US&ref_=as_li_ss_tl`;
+    return u;
 }
 
 // ── SEO: JSON-LD Structured Data ────────────────────────────────────────────
@@ -340,7 +349,7 @@ function renderProduct(p) {
                         
                         <button class="toggle-btn" type="button">Why It\u2019s Worth It \u2192</button>
                         
-                        <a href="/go/asin/${asinFromUrl(p.affiliate_url)}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
+                        <a href="${amzHref(p.affiliate_url, p.title)}" class="cta" target="_blank" rel="nofollow">Shop on Amazon</a>
                         <div class="amazon-disclaimer" style="font-size:11px;color:#6b7280;margin-top:4px;line-height:1.4;">As an Amazon Associate we earn from qualifying purchases.</div>
                         <div style="text-align:center;margin-top:8px;">
                             <div style="margin-top:6px;">
@@ -1052,7 +1061,7 @@ for (const product of products) {
             <img src="${thumbnailUrl(product.image || product.image_url)}" alt="${title}" loading="eager" width="400" height="400">
             <div class="price">${price}</div>
             <div class="description">${product.description || product.blurb || ''}</div>
-            <a href="/go/asin/${asinFromUrl(product.affiliate_url)}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
+            <a href="${amzHref(product.affiliate_url, product.title)}" class="cta-button" rel="nofollow sponsored" target="_blank">Check Price on Amazon →</a>
             <p style="font-size:0.75rem;color:#6b7280;margin-top:8px;">As an Amazon Associate we earn from qualifying purchases.</p>
         </div>
     </div>
