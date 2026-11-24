@@ -15,28 +15,13 @@ export async function onRequest(context) {
 
   const redirectUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
 
-  // Fire-and-forget Plausible event (don't block the redirect)
-  const eventCtx = new URL(request.url);
+  // Log click to chipradar (internal analytics — zero external deps)
   context.waitUntil(
-    fetch("https://plausible.io/api/event", {
+    fetch("https://chipradar.io/api/worthitgoods/click", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent": ua,
-        "X-Forwarded-For": ip,
-      },
-      body: JSON.stringify({
-        name: "Amazon Click",
-        url: eventCtx.href,
-        domain: "worthitgoods.com",
-        referrer: referrer,
-        props: {
-          asin: asin,
-        },
-      }),
-    }).catch(() => {
-      // Silently ignore Plausible failures — never block the redirect
-    })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ asin: asin, referrer: referrer }),
+    }).catch(() => {})
   );
 
   return Response.redirect(redirectUrl, 301);

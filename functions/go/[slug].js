@@ -15,17 +15,10 @@ export async function onRequest(context) {
     target = `https://www.amazon.com/dp/${asin}?tag=${tag}&linkCode=ll1&language=en_US&ref_=as_li_ss_tl`;
     status = 301;
     context.waitUntil(
-      fetch("https://plausible.io/api/event", {
+      fetch("https://chipradar.io/api/worthitgoods/click", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "User-Agent": request.headers.get("User-Agent") || "",
-          "X-Forwarded-For": request.headers.get("CF-Connecting-IP") || "",
-        },
-        body: JSON.stringify({
-          name: "Amazon Click", url: url.href, domain: "worthitgoods.com",
-          referrer: request.headers.get("Referer") || "", props: { asin },
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ asin: asin, referrer: request.headers.get("Referer") || "" }),
       }).catch(() => {})
     );
   }
