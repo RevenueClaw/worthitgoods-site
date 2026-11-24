@@ -228,8 +228,25 @@ def main():
         f.write(html)
     print(f"✅ blog.html updated with card for '{title}'")
 
-    # Build the site
+    # v2026-11-23 guard: sync before building so a diverged/stale clone can never
+    # rebuild + publish a retired link scheme (the /go shadowing bug class).
     os.chdir(str(REPO_ROOT))
+    rc_sync, _, err_sync = run_cmd("git pull --ff-only origin master")
+    if rc_sync != 0:
+        print(f"FATAL: git pull --ff-only failed (clone diverged): {err_sync[:200]}")
+        print("  Resolve manually — refusing to publish from a stale checkout.")
+        sys.exit(1)
+    gen_path = os.path.join(str(REPO_ROOT), "generate-pages.js")
+    try:
+        gen_src = open(gen_path, encoding="utf-8", errors="ignore").read()
+    except Exception as e:
+        print(f"FATAL: cannot read generate-pages.js: {e}")
+        sys.exit(1)
+    if "/go/asin/" in gen_src:
+        print("FATAL: generate-pages.js still emits retired /go/asin links; refusing to build/publish")
+        sys.exit(1)
+
+    # Build the site
     rc, out, err = run_cmd("bash build.sh")
     if rc != 0:
         print(f"WARNING: Build returned exit code {rc}")
@@ -237,6 +254,17 @@ def main():
             print(f"  Stderr: {err[:200]}")
     else:
         print(f"✅ Site built successfully")
+
+    # v2026-11-23 post-build gate: never push a build containing dead link schemes
+    idx_path = os.path.join(str(REPO_ROOT), "_site", "index.html")
+    try:
+        idx_html = open(idx_path, encoding="utf-8", errors="ignore").read()
+    except Exception as e:
+        print(f"FATAL: _site/index.html unreadable after build: {e}")
+        sys.exit(1)
+    if "/go/asin" in idx_html:
+        print("FATAL: built _site contains retired /go/asin links; aborting before push")
+        sys.exit(1)
 
     # Git: add, commit, push
     rc1, _, _ = run_cmd("git add -A")
