@@ -214,7 +214,7 @@ function asinFromUrl(url) {
 function amzHref(u, name) {
     if (!u) return "https://www.amazon.com/s?k=" + encodeURIComponent(name || "gifts") + "&tag=worthitgoods-20";
     const a = asinFromUrl(u);
-    if (a) return `https://www.amazon.com/dp/${a}?tag=worthitgoods-20&linkCode=ll1&language=en_US&ref_=as_li_ss_tl`;
+    if (a) return `/go/asin/${a}`;
     return u;
 }
 
