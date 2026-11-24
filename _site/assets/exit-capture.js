@@ -3,6 +3,7 @@
    Posts to the WorthItGoods subscribe endpoint (Listmonk bridge). */
 (function () {
   try { if (sessionStorage.getItem('wig_exit_seen')) return; } catch (e) {}
+  if (document.cookie.indexOf('wig_subscribed=') > -1 || document.cookie.indexOf('wig_exit_dismissed=') > -1) return;
   if (!window.matchMedia || !window.matchMedia('(min-width: 900px)').matches) return;
 
   var shown = false;
@@ -36,7 +37,7 @@
       '</div>';
     document.body.appendChild(wrap);
 
-    document.getElementById('wig-exit-x').addEventListener('click', function () { wrap.style.display = 'none'; });
+    document.getElementById('wig-exit-x').addEventListener('click', function () { wrap.style.display = 'none'; document.cookie = 'wig_exit_dismissed=true; max-age=2592000; path=/; SameSite=Lax'; });
 
     document.getElementById('wig-exit-form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -53,7 +54,7 @@
         .then(function (d) {
           msg.textContent = d.success ? '\u2705 You are on the list!' : '\u274C Please try again.';
           msg.style.color = d.success ? '#065f46' : '#991b1b';
-          if (d.success) el.value = '';
+          if (d.success) { el.value = ''; document.cookie = 'wig_subscribed=true; max-age=31536000; path=/; SameSite=Lax'; }
         })
         .catch(function () { msg.textContent = '\u2705 You are on the list!'; msg.style.color = '#065f46'; el.value = ''; });
     });

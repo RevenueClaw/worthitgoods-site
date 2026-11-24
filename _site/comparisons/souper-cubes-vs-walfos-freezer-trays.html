@@ -256,6 +256,9 @@ body { background: #f8f9fa; }
 </div>
 <script>
 (function(){
+  if(document.cookie.indexOf('wig_subscribed=')>-1||document.cookie.indexOf('wig_exit_dismissed=')>-1){
+    var b=document.getElementById('wigSignupBlock');if(b)b.style.display='none';return;
+  }
   var f=document.getElementById('wigSignupForm'); if(!f) return;
   f.addEventListener('submit', async function(){
     var el=document.getElementById('wigSignupEmail'), m=document.getElementById('wigSignupMsg');
@@ -265,7 +268,7 @@ body { background: #f8f9fa; }
       var res=await fetch('https://chipradar.io/api/worthitgoods/subscribe',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'email='+encodeURIComponent(el.value)});
       var d=await res.json();
       m.textContent=d.message||"You're on the list!"; m.style.color=d.success?'#059669':'#dc2626';
-      if(d.success){el.value='';}
+      if(d.success){el.value='';document.cookie='wig_subscribed=true; max-age=31536000; path=/; SameSite=Lax';}
     }catch(e){m.textContent="Network hiccup \u2014 try again in a sec";m.style.color='#dc2626';}
   });
 })();
